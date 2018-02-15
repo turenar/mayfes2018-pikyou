@@ -1,0 +1,22 @@
+{
+  "name": "mayfes2018-pikyou",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/turenar/mayfes2018-pikyou.git",
+  "author": "eeic2017",
+  "license": "MIT",
+  "dependencies": {
+    "blockly": "^1.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.5.0",
+    "tsify": "^3.0.3",
+    "typescript": "^2.7.1",
+    "watchify": "^3.9.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "bash ./watch.sh"
+  }
+}
