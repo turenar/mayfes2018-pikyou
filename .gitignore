@@ -1,5 +1,6 @@
 node_modules
 dest/*
 nohup.out
+united/
 
 !.gitkeep

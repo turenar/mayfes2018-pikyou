@@ -25,6 +25,9 @@
   "scripts": {
     "build": "tsc",
     "format": "prettier-eslint 'src/**/*.ts' --write",
+    "format-check": "prettier-eslint 'src/**/*.ts' --list-different",
+    "lint": "eslint -c .eslintrc.json 'src/**/*.ts'",
+    "unite": "mkdir -p united && browserify -o united/main.js dest/main.js",
     "watch": "bash ./watch.sh"
   }
 }
