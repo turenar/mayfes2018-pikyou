@@ -5,7 +5,18 @@
         <title>Hello pikyo</title>
     </head>
     <body>
+        <script src="../node_modules/blockly/blockly_compressed.js"></script>
+        <script src="../node_modules/blockly/blocks_compressed.js"></script>            
+        <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+        <xml id="toolbox" style="display: none">
+                <block type="controls_if"></block>
+                <block type="controls_repeat_ext"></block>
+                <block type="hoge"></block>
+        </xml>
         <script src="../dest/main.js"></script>
-        <p>hoge</p>
+        <!-- <script>
+            var workspacePlayground = Blockly.inject('blocklyDiv',
+                {toolbox: document.getElementById('toolbox')});
+        </script> -->
     </body>
 </html>

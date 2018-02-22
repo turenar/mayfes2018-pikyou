@@ -20,7 +20,8 @@
     "tsify": "^3.0.3",
     "typescript": "^2.7.1",
     "typescript-eslint-parser": "^13.0.0",
-    "watchify": "^3.9.0"
+    "watchify": "^3.9.0",
+    "@types/": "https://github.com/aqla114/blockly-types.git"
   },
   "scripts": {
     "build": "tsc",
