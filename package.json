@@ -10,6 +10,7 @@
     "enchantjs": "https://github.com/uei/enchant.js-builds"
   },
   "devDependencies": {
+    "@types/": "https://github.com/aqla114/blockly-types.git",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
     "eslint": "^4.18.1",
@@ -21,8 +22,7 @@
     "tsify": "^3.0.3",
     "typescript": "^2.7.1",
     "typescript-eslint-parser": "^13.0.0",
-    "watchify": "^3.9.0",
-    "@types/": "https://github.com/aqla114/blockly-types.git"
+    "watchify": "^3.9.0"
   },
   "scripts": {
     "build": "tsc",

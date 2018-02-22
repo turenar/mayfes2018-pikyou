@@ -1,2 +1,1 @@
-
-var workspacePlayground = Blockly.inject('blocklyDiv', { toolbox: document.getElementById('toolbox') });
+//mainを他に分けたので空です。

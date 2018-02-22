@@ -20,22 +20,13 @@
 
         <!-- blocklyメイン部分 -->
         <div id="blocklyDiv"></div>
-        <script src="../dest/main.js"></script>
+        <script src="../dest/blockly-main.js"></script>
 
         <!-- enchantjsのセットアップ用ファイルを読み込む。-->
         <script src="../node_modules/enchantjs/build/enchant.js"></script>
         <script>
-            enchant();
-            var core = new Core(320, 320);
-            core.preload('../node_modules/enchantjs/images/chara1.png');
-            core.onload = function() {
-                var bear = new Sprite(32, 32);
-                bear.image = core.assets['../node_modules/enchantjs/images/chara1.png'];
-                bear.x = 0;
-                bear.y = 0;
-                core.rootScene.addChild(bear);
-            };
-            core.start();
+            enchant()
         </script>
+        <script src="../dest/enchant-main.js"></script>
     </body>
 </html>
