@@ -19,7 +19,7 @@ module.exports = {
             'port': 8080
         }
     },
-    'files': ['assets/*.html', 'dest/*.js'],
+    'files': ['assets/*.html', 'assets/*.css', 'dest/*.js'],
     'watchEvents': [
         'change'
     ],
@@ -36,7 +36,7 @@ module.exports = {
     'proxy': false,
     'port': 3000,
     'middleware': false,
-    'serveStatic': [],
+    'serveStatic': ['.', './assets/'],
     'ghostMode': {
         'clicks': true,
         'scroll': true,

@@ -6,7 +6,8 @@
   "author": "eeic2017",
   "license": "MIT",
   "dependencies": {
-    "blockly": "^1.0.0"
+    "blockly": "^1.0.0",
+    "enchantjs": "https://github.com/uei/enchant.js-builds"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",

@@ -3,17 +3,39 @@
     <head>
         <meta charset="utf-8">
         <title>Hello pikyo</title>
+        <link rel="stylesheet" type="text/css" href="./main.css">
     </head>
     <body>
+        <!-- blocklyのセットアップ用のjsファイルを読み込む。 -->
         <script src="../node_modules/blockly/blockly_compressed.js"></script>
         <script src="../node_modules/blockly/blocks_compressed.js"></script> 
-        <script src="../node_modules/blockly/msg/js/ja.js"></script>    
-        <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+        <script src="../node_modules/blockly/msg/js/ja.js"></script>
+        
+        <!-- blocklyで使うblockの種類。TODO:外部ファイルにして読みだすようにする。 -->
         <xml id="toolbox" style="display: none">
             <block type="controls_if"></block>
             <block type="controls_repeat"></block>
             <block type="controls_repeat"></block>
         </xml>
+
+        <!-- blocklyメイン部分 -->
+        <div id="blocklyDiv"></div>
         <script src="../dest/main.js"></script>
+
+        <!-- enchantjsのセットアップ用ファイルを読み込む。-->
+        <script src="../node_modules/enchantjs/build/enchant.js"></script>
+        <script>
+            enchant();
+            var core = new Core(320, 320);
+            core.preload('../node_modules/enchantjs/images/chara1.png');
+            core.onload = function() {
+                var bear = new Sprite(32, 32);
+                bear.image = core.assets['../node_modules/enchantjs/images/chara1.png'];
+                bear.x = 0;
+                bear.y = 0;
+                core.rootScene.addChild(bear);
+            };
+            core.start();
+        </script>
     </body>
 </html>
