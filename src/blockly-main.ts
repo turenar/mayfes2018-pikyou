@@ -1,2 +1,3 @@
-
-var workspacePlayground = Blockly.inject('blocklyDiv', { toolbox: document.getElementById('toolbox') });
+var workspacePlayground = Blockly.inject('blocklyDiv', {
+	toolbox: document.getElementById('toolbox')
+});
