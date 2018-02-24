@@ -6,8 +6,8 @@
   "author": "eeic2017",
   "license": "MIT",
   "dependencies": {
-    "blockly": "^1.0.0",
-    "enchantjs": "https://github.com/uei/enchant.js-builds"
+    "enchantjs": "https://github.com/uei/enchant.js-builds",
+    "node-blockly": "^1.0.32"
   },
   "devDependencies": {
     "@types/": "https://github.com/aqla114/blockly-types.git",
