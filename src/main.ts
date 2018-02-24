@@ -1,1 +1,1 @@
-console.log('hello world!');
+//mainを他に分けたので空です。

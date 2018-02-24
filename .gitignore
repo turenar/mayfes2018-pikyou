@@ -2,5 +2,6 @@ node_modules
 dest/*
 nohup.out
 united/
+.DS_STORE
 
 !.gitkeep

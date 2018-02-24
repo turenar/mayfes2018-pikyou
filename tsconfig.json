@@ -4,9 +4,6 @@
         "module": "commonjs",
         "sourceMap": true,
         "outDir": "./dest",
-        "removeComments": false,
-    },
-    "include": [
-        "src/**/*"
-    ]
+        "removeComments": false
+    }
 }

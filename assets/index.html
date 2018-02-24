@@ -3,9 +3,30 @@
     <head>
         <meta charset="utf-8">
         <title>Hello pikyo</title>
+        <link rel="stylesheet" type="text/css" href="./main.css">
     </head>
     <body>
-        <script src="../dest/main.js"></script>
-        <p>hoge</p>
+        <!-- blocklyのセットアップ用のjsファイルを読み込む。 -->
+        <script src="../node_modules/blockly/blockly_compressed.js"></script>
+        <script src="../node_modules/blockly/blocks_compressed.js"></script> 
+        <script src="../node_modules/blockly/msg/js/ja.js"></script>
+        
+        <!-- blocklyで使うblockの種類。TODO:外部ファイルにして読みだすようにする。 -->
+        <xml id="toolbox" style="display: none">
+            <block type="controls_if"></block>
+            <block type="controls_repeat"></block>
+            <block type="controls_repeat"></block>
+        </xml>
+
+        <!-- blocklyメイン部分 -->
+        <div id="blocklyDiv"></div>
+        <script src="../dest/blockly-main.js"></script>
+
+        <!-- enchantjsのセットアップ用ファイルを読み込む。-->
+        <script src="../node_modules/enchantjs/build/enchant.js"></script>
+        <script>
+            enchant()
+        </script>
+        <script src="../dest/enchant-main.js"></script>
     </body>
 </html>

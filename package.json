@@ -6,9 +6,11 @@
   "author": "eeic2017",
   "license": "MIT",
   "dependencies": {
-    "blockly": "^1.0.0"
+    "blockly": "^1.0.0",
+    "enchantjs": "https://github.com/uei/enchant.js-builds"
   },
   "devDependencies": {
+    "@types/": "https://github.com/aqla114/blockly-types.git",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
     "eslint": "^4.18.1",
