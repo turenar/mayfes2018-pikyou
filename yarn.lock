@@ -2505,6 +2505,10 @@ node-blockly@^1.0.32:
     jsdom "^11.3.0"
     xmlshim "^0.2.1"
 
+"node-enchantjs@https://github.com/turenar/node-enchantjs.git":
+  version "0.8.3"
+  resolved "https://github.com/turenar/node-enchantjs.git#5b3ed03903cbbb302639706a05a4c0daae1525d9"
+
 node-pre-gyp@^0.6.39:
   version "0.6.39"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.39.tgz#c00e96860b23c0e1420ac7befc5044e1d78d8649"
