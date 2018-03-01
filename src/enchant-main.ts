@@ -1,3 +1,7 @@
+import * as enchant from 'node-enchantjs';
+
+enchant();
+
 var core = new enchant.Core(320, 320);
 core.preload('../node_modules/enchantjs/images/chara1.png');
 core.onload = function() {

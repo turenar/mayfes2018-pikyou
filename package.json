@@ -7,7 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "enchantjs": "https://github.com/uei/enchant.js-builds",
-    "node-blockly": "^1.0.32"
+    "node-blockly": "^1.0.32",
+    "node-enchantjs": "https://github.com/turenar/node-enchantjs.git"
   },
   "devDependencies": {
     "@types/": "https://github.com/aqla114/blockly-types.git",
