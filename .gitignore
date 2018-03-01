@@ -1,5 +1,6 @@
 .DS_STORE
 .python-version
+assets/img/mapchip.png
 dest/*
 node_modules
 nohup.out

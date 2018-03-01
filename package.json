@@ -28,8 +28,9 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "build": "tsc ./tools/xmlparser.ts && yarn build:xml && yarn build:src",
+    "build": "yarn build:mapchip && tsc ./tools/xmlparser.ts && yarn build:xml && yarn build:src",
     "build:src": "tsc",
+    "build:mapchip": "bash ./concat-mapchips.sh",
     "build:xml": "node ./tools/xmlparser.js && tsc ./src/blocks.ts --outDir ./dest",
     "format": "prettier-eslint '**/*.ts' --write",
     "format-check": "prettier-eslint '**/*.ts' --list-different",

@@ -1,6 +1,10 @@
 # mayfes2018-pikyou
 
 ## Developement
+### Required application/libraries
+* yarn
+* imagemagick
+
 ### Setup
 ```console
 $ yarn
