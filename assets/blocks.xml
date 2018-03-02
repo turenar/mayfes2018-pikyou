@@ -1,0 +1,17 @@
+<xml id="toolbox" style="display: none"> 
+    <block type="controls_if"></block> 
+    <block type="controls_repeat"></block> 
+    <block type="controls_repeat"></block> 
+</xml>;
+
+<xml id="toolbox2" style="display: none"> 
+    <block type="controls_if"></block> 
+    <block type="controls_repeat"></block> 
+    <block type="controls_repeat"></block> 
+</xml>;
+
+<xml id="toolbox3" style="display: none"> 
+    <block type="controls_if"></block> 
+    <block type="controls_repeat"></block> 
+    <block type="controls_repeat"></block> 
+</xml>;

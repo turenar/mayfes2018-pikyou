@@ -10,7 +10,8 @@ $ yarn build
 で、index.htmlをブラウザで表示すればいけます。  
 
 ### Scripts
-`yarn build`:tscが走る。  
+`yarn build`:tsファイルとxmlファイルをビルドする。  
+`yarn build:tsc`:`xml`ファイルをビルドする。  
 `yarn watch`:browserで動作確認できる。  
 
 ### Commit
