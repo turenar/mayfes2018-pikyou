@@ -12,11 +12,13 @@
   },
   "devDependencies": {
     "@types/": "https://github.com/aqla114/blockly-types.git",
+    "@types/node": "^9.4.6",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
     "eslint": "^4.18.1",
     "eslint-config-typescript": "^1.0.2",
     "eslint-plugin-typescript": "^0.8.1",
+    "node": "^9.5.0",
     "prettier": "^1.10.2",
     "prettier-eslint": "^8.8.1",
     "prettier-eslint-cli": "^4.7.1",
@@ -26,11 +28,12 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc ./tools/xmlparser.ts && yarn build:xml",
+    "build:xml": "node ./tools/xmlparser.js && tsc ./src/blocks.ts --outDir ./dest",
     "format": "prettier-eslint 'src/**/*.ts' --write",
     "format-check": "prettier-eslint 'src/**/*.ts' --list-different",
     "lint": "eslint -c .eslintrc.json 'src/**/*.ts'",
     "unite": "mkdir -p united && browserify -o united/main.js dest/main.js",
-    "watch": "bash ./watch.sh"
+    "watch": "bash ./tools/watch.sh && bash ./tools/watch_xml.sh ./assets/blocks.xml 'yarn build:xml'"
   }
 }

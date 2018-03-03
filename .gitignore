@@ -3,5 +3,7 @@ dest/*
 nohup.out
 united/
 .DS_STORE
+.python-version
+yarn-error.log
 
 !.gitkeep
