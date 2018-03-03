@@ -7,7 +7,7 @@ fs.readFile('./assets/blocks.xml', 'utf-8', function(err, data) {
 	} else {
 		var arr = data.match(/<xml(.|\n)+?\/xml>/g);
 
-		fs.writeFileSync('./src/blocks.ts', '');
+		fs.writeFileSync('./src/blocks.ts', '/* this file is auto generated. */\n');
 
 		for (var i = 0; i < arr.length; i++) {
 			fs.appendFileSync(
