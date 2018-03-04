@@ -1,9 +1,9 @@
 # mayfes2018-pikyou
 
 ## Developement
-### Required application/libraries
+### Required environments
+* \*nix OS/environment
 * yarn
-* imagemagick
 
 ### Setup
 ```console
