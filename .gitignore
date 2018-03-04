@@ -1,9 +1,11 @@
-node_modules
-dest/*
-nohup.out
-united/
 .DS_STORE
 .python-version
+dest/*
+node_modules
+nohup.out
+src/blocks.ts
+tools/xmlparser.js
+united/
 yarn-error.log
 
 !.gitkeep
