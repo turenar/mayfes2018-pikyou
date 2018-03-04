@@ -8,7 +8,7 @@
   dependencies:
     acorn "^5.2.1"
 
-"@types/@https://github.com/aqla114/blockly-types.git#1255ec25ff213f4bdc218d6bb80857f1cbec233e":
+"@types/@https://github.com/aqla114/blockly-types.git":
   version "0.0.0"
   resolved "https://github.com/aqla114/blockly-types.git#1255ec25ff213f4bdc218d6bb80857f1cbec233e"
 
