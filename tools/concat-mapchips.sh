@@ -27,5 +27,6 @@ echo '</svg>' >&9
 
 exec 9>&-
 cd ..
+test -d assets/img || mkdir assets/img
 test -e assets/img/mapchip.png && rm assets/img/mapchip.png
 yarn svg2png mapchips/.mapchip.svg.tmp -o assets/img/mapchip.png
