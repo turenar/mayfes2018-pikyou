@@ -28,7 +28,8 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "build": "tsc && tsc ./tools/xmlparser.ts && yarn build:xml",
+    "build": "tsc ./tools/xmlparser.ts && yarn build:xml && yarn build:src",
+    "build:src": "tsc",
     "build:xml": "node ./tools/xmlparser.js && tsc ./src/blocks.ts --outDir ./dest",
     "format": "prettier-eslint '**/*.ts' --write",
     "format-check": "prettier-eslint '**/*.ts' --list-different",
