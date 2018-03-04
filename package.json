@@ -30,9 +30,9 @@
   "scripts": {
     "build": "tsc && tsc ./tools/xmlparser.ts && yarn build:xml",
     "build:xml": "node ./tools/xmlparser.js && tsc ./src/blocks.ts --outDir ./dest",
-    "format": "prettier-eslint 'src/**/*.ts' --write",
-    "format-check": "prettier-eslint 'src/**/*.ts' --list-different",
-    "lint": "eslint -c .eslintrc.json 'src/**/*.ts'",
+    "format": "prettier-eslint '**/*.ts' --write",
+    "format-check": "prettier-eslint '**/*.ts' --list-different",
+    "lint": "eslint -c .eslintrc.json '**/*.ts'",
     "unite": "mkdir -p united && browserify -o united/main.js dest/main.js",
     "watch": "bash ./tools/watch.sh && bash ./tools/watch_xml.sh ./assets/blocks.xml 'yarn build:xml'"
   }
