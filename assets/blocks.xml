@@ -1,17 +1,17 @@
-<xml id="toolbox" style="display: none"> 
-    <block type="controls_if"></block> 
-    <block type="controls_repeat"></block> 
-    <block type="controls_repeat"></block> 
-</xml>;
-
-<xml id="toolbox2" style="display: none"> 
-    <block type="controls_if"></block> 
-    <block type="controls_repeat"></block> 
-    <block type="controls_repeat"></block> 
-</xml>;
-
-<xml id="toolbox3" style="display: none"> 
-    <block type="controls_if"></block> 
-    <block type="controls_repeat"></block> 
-    <block type="controls_repeat"></block> 
+<xml id="toolbox" style="display: none">
+    <block type="controls_if"></block>
+    <block type="logic_operation"></block>
+    <block type="controls_repeat"></block>
+    <block type="set_direction"></block>
+    <block type="move_start"></block>
+    <block type="move_stop"></block>
+    <block type="act_pick"></block>
+    <block type="act_use"></block>
+    <block type="act_jump"></block>
+    <block type="check_movable"></block>
+    <block type="check_wall_front"></block>
+    <block type="check_obstacle"></block>
+    <block type="check_item"></block>
+    <block type="check_possession"></block>
+    <block type="check_mark"></block>
 </xml>;
