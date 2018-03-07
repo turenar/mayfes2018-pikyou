@@ -28,9 +28,6 @@ module.exports = {
 	},
 	'server': {
 		baseDir: '.',
-		// serveStaticOptions: {
-		//     extensions: ['html']
-		// }
 		index: 'assets/index.html'
 	},
 	'proxy': false,
