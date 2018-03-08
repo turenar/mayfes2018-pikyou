@@ -6,7 +6,6 @@
   "author": "eeic2017",
   "license": "MIT",
   "dependencies": {
-    "enchantjs": "https://github.com/uei/enchant.js-builds",
     "node-blockly": "^1.0.32",
     "node-enchantjs": "https://github.com/turenar/node-enchantjs.git"
   },

@@ -16,8 +16,7 @@ export function init() {
 		map.addInto(core.rootScene);
 
 		var character = new Character(32, 32);
-		character.image =
-			core.assets['../node_modules/enchantjs/images/chara1.png'];
+		character.image = core.assets['img/chara1.png'];
 		character.x = init_x;
 		character.y = init_y;
 		core.rootScene.addChild(character);

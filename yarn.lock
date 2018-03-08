@@ -1178,10 +1178,6 @@ emitter-steward@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/emitter-steward/-/emitter-steward-1.0.0.tgz#f3411ade9758a7565df848b2da0cbbd1b46cbd64"
 
-"enchantjs@https://github.com/uei/enchant.js-builds":
-  version "0.8.3"
-  resolved "https://github.com/uei/enchant.js-builds#d283979501bfd5346672eca30cd5a5e0bdc6fbc6"
-
 encodeurl@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
