@@ -9,7 +9,7 @@ Blockly.setLocale(Ja);
 const toolbox = blockset0;
 
 const workspacePlayground = Blockly.inject('blocklyDiv', {
-	toolbox: toolbox
+	toolbox: toolbox,
 });
 
 export var code = '';
