@@ -2,9 +2,9 @@ import MapChip from './mapchip';
 import core from './core';
 
 export default class Map {
-	map: enchant.Map;
+	private map: enchant.Map;
 
-	constructor(mapData: MapChip[][]) {
+	public constructor(mapData: MapChip[][]) {
 		const map = new enchant.Map(32, 32);
 		map.image = core.assets['img/mapchip.png'];
 		map.loadData(mapData);
@@ -12,7 +12,7 @@ export default class Map {
 		this.map = map;
 	}
 
-	addInto(scene: enchant.Scene) {
+	public addInto(scene: enchant.Scene) {
 		scene.addChild(this.map);
 	}
 }

@@ -7,6 +7,10 @@ import EnchantMap from './enchant/map';
 const init_x: number = 128;
 const init_y: number = 128;
 
+/**
+ * enchant関連初期化
+ * @return {void}
+ */
 export function init() {
 	core.preload('img/mapchip.png');
 	core.preload('img/chara1.png');
@@ -36,6 +40,10 @@ export function init() {
 	};
 }
 
+/**
+ * start()
+ * @returns {void}
+ */
 export function start() {
 	core.start();
 }
