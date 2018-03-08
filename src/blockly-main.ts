@@ -1,12 +1,20 @@
 import * as Blockly from 'node-blockly/browser';
 import * as Ja from 'node-blockly/lib/i18n/ja';
 import './block-definitions';
+import './code-generators';
 import { blockset0 } from './blocks';
 
 Blockly.setLocale(Ja);
 
-var toolbox = blockset0;
+const toolbox = blockset0;
 
-var workspacePlayground = Blockly.inject('blocklyDiv', {
+const workspacePlayground = Blockly.inject('blocklyDiv', {
 	toolbox: toolbox
+});
+
+export var code = '';
+
+Blockly.addChangeListener(function(event) {
+	code = Blockly.JavaScript.workspaceToCode(workspacePlayground);
+	console.log(code);
 });

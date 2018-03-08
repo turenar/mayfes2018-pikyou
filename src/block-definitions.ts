@@ -1,49 +1,7 @@
 import * as Blockly from 'node-blockly/browser';
 
-//move_forward
-/*
+//move forward
 Blockly.Blocks['move_forward'] = {
-	init: function() {
-		this.appendDummyInput().appendField('前に進む');
-		this.setNextStatement(true);
-		this.setPreviousStatement(true);
-		this.setOutput(false);
-		this.setColour(160);
-		this.setTooltip('キャラクターが前に進みます。');
-	}
-};
-*/
-
-//set direction
-Blockly.Blocks['set_direction'] = {
-	init: function() {
-		this.setOutput(false);
-		this.jsonInit({
-			type: 'Move',
-			message0: '%1 を 向く',
-			args0: [
-				{
-					type: 'field_dropdown',
-					name: 'DIRECTION',
-					options: [
-						['東', 'EAST'],
-						['西', 'WEST'],
-						['南', 'SOUTH'],
-						['北', 'NORTH']
-					]
-				}
-			]
-		});
-		this.setNextStatement(true);
-		this.setPreviousStatement(true);
-		this.setOutput(false);
-		this.setColour(180);
-		this.setTooltip('キャラクターの向きを変更します');
-	}
-};
-
-//move start
-Blockly.Blocks['move_start'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Move',
@@ -57,8 +15,36 @@ Blockly.Blocks['move_start'] = {
 	}
 };
 
+//set direction
+Blockly.Blocks['set_direction'] = {
+	init: function() {
+		this.setOutput(false);
+		this.jsonInit({
+			type: 'Move',
+			message0: '%1 を 向く',
+			args0: [
+				{
+					type: 'field_dropdown',
+					name: 'DIRECTION',
+					options: [
+						['東', 'east'],
+						['西', 'west'],
+						['南', 'south'],
+						['北', 'north']
+					]
+				}
+			]
+		});
+		this.setNextStatement(true);
+		this.setPreviousStatement(true);
+		this.setOutput(false);
+		this.setColour(180);
+		this.setTooltip('キャラクターの向きを変更します');
+	}
+};
+
 //move stop
-Blockly.Blocks['move_stop'] = {
+Blockly.Blocks['stop'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Move',
