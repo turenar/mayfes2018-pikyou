@@ -4,8 +4,8 @@ import { code } from './blockly-main';
 import stages from './stages';
 import EnchantMap from './enchant/map';
 
-const init_x: number = 100;
-const init_y: number = 100;
+const init_x: number = 128;
+const init_y: number = 128;
 
 export function init() {
 	core.preload('img/mapchip.png');
@@ -25,9 +25,9 @@ export function init() {
 			eval(code);
 			if (
 				character.x < 0 ||
-				character.x > 200 ||
+				character.x > 256 ||
 				character.y < 0 ||
-				character.y > 200
+				character.y > 256
 			) {
 				character.x = init_x;
 				character.y = init_y;
