@@ -1,6 +1,10 @@
 # mayfes2018-pikyou
 
 ## Developement
+### Required environments
+* \*nix OS/environment
+* yarn
+
 ### Setup
 ```console
 $ yarn

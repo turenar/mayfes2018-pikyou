@@ -6,7 +6,6 @@
   "author": "eeic2017",
   "license": "MIT",
   "dependencies": {
-    "enchantjs": "https://github.com/uei/enchant.js-builds",
     "node-blockly": "^1.0.32",
     "node-enchantjs": "https://github.com/turenar/node-enchantjs.git"
   },
@@ -22,14 +21,16 @@
     "prettier": "^1.10.2",
     "prettier-eslint": "^8.8.1",
     "prettier-eslint-cli": "^4.7.1",
+    "svg2png": "^4.1.1",
     "tsify": "^3.0.3",
     "typescript": "^2.7.1",
     "typescript-eslint-parser": "^14.0.0",
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "build": "tsc ./tools/xmlparser.ts && yarn build:xml && yarn build:src",
+    "build": "yarn build:mapchip && tsc ./tools/xmlparser.ts && yarn build:xml && yarn build:src",
     "build:src": "tsc",
+    "build:mapchip": "bash tools/concat-mapchips.sh",
     "build:xml": "node ./tools/xmlparser.js && tsc ./src/blocks.ts --outDir ./dest",
     "format": "prettier-eslint '**/*.ts' --write",
     "format-check": "prettier-eslint '**/*.ts' --list-different",

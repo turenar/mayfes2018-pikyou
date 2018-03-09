@@ -1,11 +1,13 @@
+*.log
+*.tmp
 .DS_STORE
 .python-version
+assets/img/mapchip.png
 dest/*
 node_modules
 nohup.out
 src/blocks.ts
 tools/xmlparser.js
 united/
-yarn-error.log
 
 !.gitkeep
