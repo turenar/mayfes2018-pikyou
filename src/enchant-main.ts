@@ -1,5 +1,7 @@
 import core from './enchant/core';
-import { Character } from './character';
+import * as enchant from 'node-enchantjs';
+import { Direction, Character } from './character';
+import { Scene, SceneKind } from './scene';
 import { code } from './blockly-main';
 import stages from './stages';
 import EnchantMap from './enchant/map';
