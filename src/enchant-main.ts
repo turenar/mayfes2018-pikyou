@@ -4,9 +4,6 @@ import { Character } from './character';
 import { changeScene, sceneInit } from './scenes';
 import { code } from './blockly-main';
 
-const init_x: number = 128;
-const init_y: number = 128;
-
 /**
  * enchant関連初期化
  * @return {void}
@@ -17,11 +14,8 @@ export function init() {
 
 	core.onload = () => {
 		sceneInit();
+		const character = new Character(32, 32);
 
-		var character = new Character(32, 32);
-		character.image = core.assets['img/chara1.png'];
-		character.x = init_x;
-		character.y = init_y;
 		core.currentScene.addChild(character);
 
 		character.on('enterframe', function() {
@@ -32,8 +26,7 @@ export function init() {
 				character.y < 0 ||
 				character.y > 256
 			) {
-				character.x = init_x;
-				character.y = init_y;
+				character.Initialization();
 			}
 		});
 	};
