@@ -3,6 +3,7 @@ import core from './enchant/core';
 import EnchantMap from './enchant/map';
 import stages from './stages';
 import { Character } from './character';
+import { Button } from './button';
 
 export type SceneKind =
 	| 'Top'
@@ -32,11 +33,13 @@ const scenes = {
  * Scene に関する初期化を行う（仮置き）
  * @return {void}
  * @param {Character} character - キャラクターを渡す。
+ * @param {Button} button - スタート（ストップ）ボタンを渡す。
  */
-export function initScene(character: Character) {
+export function initScene(character: Character, button: Button) {
 	const map = new EnchantMap(stages[0].map);
 	map.addInto(scenes.Playing);
 	scenes.Playing.addChild(character);
+	scenes.Playing.addChild(button);
 	core.pushScene(scenes.Top);
 }
 

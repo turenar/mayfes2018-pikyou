@@ -10,8 +10,8 @@ export class Character extends enchant.Sprite {
 	private direction: Direction;
 	private velocity: number;
 
-	public constructor(size_x: number, size_y: number) {
-		super(size_x, size_y);
+	public constructor(width: number, height: number) {
+		super(width, height);
 		this.direction = 'east';
 		this.x = this.init_x;
 		this.y = this.init_y;
