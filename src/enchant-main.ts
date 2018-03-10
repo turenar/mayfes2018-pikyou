@@ -1,7 +1,7 @@
 import core from './enchant/core';
 import * as enchant from 'node-enchantjs';
 import { Character } from './character';
-import { changeScene, sceneInit } from './scenes';
+import { changeScene, initScene } from './scenes';
 import { code } from './blockly-main';
 
 /**
@@ -13,10 +13,10 @@ export function init() {
 	core.preload('img/chara1.png');
 
 	core.onload = () => {
-		sceneInit();
 		const character = new Character(32, 32);
-
-		core.currentScene.addChild(character);
+		initScene(character);
+		changeScene('StageSelecting');
+		changeScene('Playing');
 
 		character.on('enterframe', function() {
 			eval(code);

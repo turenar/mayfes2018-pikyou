@@ -2,6 +2,7 @@ import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import EnchantMap from './enchant/map';
 import stages from './stages';
+import { Character } from './character';
 
 export type SceneKind =
 	| 'Top'
@@ -30,11 +31,13 @@ const scenes = {
 /**
  * Scene に関する初期化を行う（仮置き）
  * @return {void}
+ * @param {Character} character - キャラクターを渡す。
  */
-export function sceneInit() {
+export function initScene(character: Character) {
 	const map = new EnchantMap(stages[0].map);
 	map.addInto(scenes.Playing);
-	core.pushScene(scenes.Playing);
+	scenes.Playing.addChild(character);
+	core.pushScene(scenes.Top);
 }
 
 /**
