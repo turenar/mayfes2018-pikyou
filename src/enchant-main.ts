@@ -26,7 +26,7 @@ export function init() {
 				character.y < 0 ||
 				character.y > 256
 			) {
-				character.Initialization();
+				character.reset();
 			}
 		});
 	};

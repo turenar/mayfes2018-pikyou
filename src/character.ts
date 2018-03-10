@@ -20,7 +20,7 @@ export class Character extends enchant.Sprite {
 	}
 
 	//初期位置に戻す
-	public Initialization() {
+	public reset() {
 		this.direction = 'east';
 		this.x = this.init_x;
 		this.y = this.init_y;
