@@ -1,12 +1,12 @@
 import core from './enchant/core';
 import * as enchant from 'node-enchantjs';
 
-export class Button extends enchant.Sprite {
+export default class StartButton extends enchant.Sprite {
 	public constructor(width: number, height: number) {
 		super(width, height);
 		this.x = 20;
-		this.y = 320;
-		this.image = core.assets['img/startbutton.png'];
+        this.y = 320;
+        this.image = core.assets['img/startbutton.png'];
 	}
 
 	public reloadButton(isRunning: boolean): boolean {

@@ -3,7 +3,7 @@ import * as enchant from 'node-enchantjs';
 import { Character } from './character';
 import { changeScene, initScene } from './scenes';
 import { code } from './blockly-main';
-import { Button } from './button';
+import StartButton from './button';
 
 /**
  * enchant関連初期化
@@ -18,15 +18,15 @@ export function init() {
 	core.onload = () => {
 		let isRunning = false;
 		const character = new Character(32, 32);
-		const button = new Button(320, 140);
-		initScene(character, button);
+		const startButton = new StartButton(320, 140);
+		initScene(character, startButton);
 		changeScene('StageSelecting');
 		changeScene('Playing');
 
 		core.pause();
 
-		button.addEventListener('touchstart', function() {
-			isRunning = button.reloadButton(isRunning);
+		startButton.addEventListener('touchstart', function() {
+			isRunning = startButton.reloadButton(isRunning);
 			character.reset();
 		});
 
