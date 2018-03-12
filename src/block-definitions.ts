@@ -207,7 +207,12 @@ Blockly.Blocks['check_mark'] = {
 				{
 					type: 'field_dropdown',
 					name: 'MARKCOLOR',
-					options: [['赤', 'RED'], ['青', 'BLUE'], ['緑', 'GREEN'], ['黄', 'YELLOW']],
+					options: [
+						['赤', 'RED'],
+						['青', 'BLUE'],
+						['緑', 'GREEN'],
+						['黄', 'YELLOW'],
+					],
 				},
 			],
 		});

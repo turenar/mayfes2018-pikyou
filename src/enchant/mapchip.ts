@@ -10,7 +10,7 @@ const enum MapChip {
 	Pitfall,
 	Key,
 	Door,
-	Chest
+	Chest,
 }
 
 export default MapChip;
