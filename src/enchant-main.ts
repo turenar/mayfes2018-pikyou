@@ -1,9 +1,9 @@
 import core from './enchant/core';
 import * as enchant from 'node-enchantjs';
 import { Character } from './character';
-import { changeScene, initScene } from './scenes';
 import { code } from './blockly-main';
 import StartButton from './button';
+import { SceneManager } from './scene-manager';
 
 /**
  * enchant関連初期化
@@ -16,19 +16,11 @@ export function init() {
 	core.preload('img/stopbutton.png');
 
 	core.onload = () => {
-		let isRunning = false;
+		const sceneManager = new SceneManager();
 		const character = new Character(32, 32);
-		const startButton = new StartButton(320, 140);
-		initScene(character, startButton);
-		changeScene('StageSelecting');
-		changeScene('Playing');
+		const button = new StartButton(320, 140, character, sceneManager);
 
-		core.pause();
-
-		startButton.addEventListener('touchstart', function() {
-			isRunning = startButton.reloadButton(isRunning);
-			character.reset();
-		});
+		sceneManager.initScene(character, button);
 
 		character.on('enterframe', function() {
 			eval(code);
