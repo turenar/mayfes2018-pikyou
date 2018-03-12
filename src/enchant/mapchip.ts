@@ -8,6 +8,9 @@ const enum MapChip {
 	MarkGreen,
 	MarkYellow,
 	Pitfall,
+	Key,
+	Door,
+	Chest
 }
 
 export default MapChip;
