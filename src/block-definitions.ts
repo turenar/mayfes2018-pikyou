@@ -154,7 +154,7 @@ Blockly.Blocks['check_obstacle'] = {
 			args0: [
 				{
 					type: 'field_dropdown',
-					name: 'DIRECTION',
+					name: 'OBSTACLE',
 					options: [['落とし穴', 'PITFALL'], ['その他', 'OTHER']],
 				},
 			],
@@ -206,8 +206,8 @@ Blockly.Blocks['check_mark'] = {
 			args0: [
 				{
 					type: 'field_dropdown',
-					name: 'DIRECTION',
-					options: [['赤', 'RED'], ['青', 'BLUE']],
+					name: 'MARKCOLOR',
+					options: [['赤', 'RED'], ['青', 'BLUE'], ['緑', 'GREEN'], ['黄', 'YELLOW']],
 				},
 			],
 		});
