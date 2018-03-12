@@ -2,7 +2,7 @@ import core from './enchant/core';
 import * as enchant from 'node-enchantjs';
 import { Character } from './character';
 import { code } from './blockly-main';
-import StartButton from './button';
+import { StartStopButton } from './button';
 import { SceneManager } from './scene-manager';
 
 /**
@@ -18,7 +18,7 @@ export function init() {
 	core.onload = () => {
 		const sceneManager = new SceneManager();
 		const character = new Character(32, 32);
-		const button = new StartButton(320, 140, character, sceneManager);
+		const button = new StartStopButton(320, 140, character, sceneManager);
 
 		sceneManager.initScene(character, button);
 

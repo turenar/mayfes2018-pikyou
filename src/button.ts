@@ -3,7 +3,7 @@ import * as enchant from 'node-enchantjs';
 import { Character } from './character';
 import { SceneManager } from './scene-manager';
 
-export default class StartStopButton extends enchant.Sprite {
+export class StartStopButton extends enchant.Sprite {
 	public constructor(
 		width: number,
 		height: number,

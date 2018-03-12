@@ -2,8 +2,6 @@ import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import EnchantMap from './enchant/map';
 import stages from './stages';
-import { Character } from './character';
-import StartButton from './button';
 
 export type SceneKind =
 	| 'Top'

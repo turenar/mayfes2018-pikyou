@@ -1,7 +1,7 @@
 import core from './enchant/core';
 import { Scenes, Scene, SceneKind } from './scenes';
 import { Character } from './character';
-import StartStopButton from './button';
+import { StartStopButton } from './button';
 import EnchantMap from './enchant/map';
 import stages from './stages';
 
