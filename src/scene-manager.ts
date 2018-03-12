@@ -94,4 +94,8 @@ export class SceneManager {
 
 		console.log('Error! Transition of scenes is invalid!');
 	}
+
+	public resetScene(character: Character) {
+		character.reset();
+	}
 }

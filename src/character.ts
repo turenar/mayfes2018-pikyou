@@ -23,12 +23,7 @@ export class Character extends enchant.Sprite {
 	public listenCharacter() {
 		this.on('enterframe', function() {
 			eval(code);
-			if (
-				this.x < 0 ||
-				this.x > 256 ||
-				this.y < 0 ||
-				this.y > 256
-			) {
+			if (this.x < 0 || this.x > 256 || this.y < 0 || this.y > 256) {
 				this.reset();
 			}
 		});
