@@ -1,9 +1,7 @@
 import core from './enchant/core';
-import * as enchant from 'node-enchantjs';
-import { Character } from './character';
-import { code } from './blockly-main';
-import { StartStopButton } from './button';
 import { SceneManager } from './scene-manager';
+import { Character } from './character';
+import { StartStopButton } from './button';
 
 /**
  * enchant関連初期化
@@ -21,18 +19,6 @@ export function init() {
 		const button = new StartStopButton(320, 140, character, sceneManager);
 
 		sceneManager.initScene(character, button);
-
-		character.on('enterframe', function() {
-			eval(code);
-			if (
-				character.x < 0 ||
-				character.x > 256 ||
-				character.y < 0 ||
-				character.y > 256
-			) {
-				character.reset();
-			}
-		});
 	};
 }
 

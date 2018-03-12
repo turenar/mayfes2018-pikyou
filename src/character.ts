@@ -1,5 +1,6 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
+import { code } from './blockly-main';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -17,6 +18,20 @@ export class Character extends enchant.Sprite {
 		this.y = this.init_y;
 		this.velocity = this.defaultVelocity;
 		this.image = core.assets['img/chara1.png'];
+	}
+
+	public listenCharacter() {
+		this.on('enterframe', function() {
+			eval(code);
+			if (
+				this.x < 0 ||
+				this.x > 256 ||
+				this.y < 0 ||
+				this.y > 256
+			) {
+				this.reset();
+			}
+		});
 	}
 
 	//初期位置に戻す

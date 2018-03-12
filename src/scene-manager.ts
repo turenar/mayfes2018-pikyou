@@ -4,6 +4,7 @@ import { Character } from './character';
 import { StartStopButton } from './button';
 import EnchantMap from './enchant/map';
 import stages from './stages';
+import { code } from './blockly-main';
 
 export class SceneManager {
 	public scenes: Scenes;
@@ -30,6 +31,9 @@ export class SceneManager {
 		core.pushScene(this.scenes.Top);
 		this.changeScene('StageSelecting');
 		this.changeScene('Playing');
+
+		character.listenCharacter();
+		button.listenButton(this, character);
 
 		core.pause();
 	}

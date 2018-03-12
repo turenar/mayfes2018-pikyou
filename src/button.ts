@@ -14,7 +14,9 @@ export class StartStopButton extends enchant.Sprite {
 		this.x = 20;
 		this.y = 320;
 		this.image = core.assets['img/startbutton.png'];
+	}
 
+	public listenButton(sceneManager: SceneManager, character: Character) {
 		this.addEventListener('touchstart', function() {
 			sceneManager.isRunning = this.reloadButton(sceneManager.isRunning);
 			character.reset();
