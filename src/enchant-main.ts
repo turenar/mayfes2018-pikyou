@@ -15,10 +15,6 @@ export function init() {
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();
-		const character = new Character(32, 32);
-		const button = new StartStopButton(320, 140, character, sceneManager);
-
-		sceneManager.initScene(character, button);
 	};
 }
 

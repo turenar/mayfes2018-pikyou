@@ -18,15 +18,8 @@ export class Character extends enchant.Sprite {
 		this.y = this.init_y;
 		this.velocity = this.defaultVelocity;
 		this.image = core.assets['img/chara1.png'];
-	}
 
-	public listenCharacter() {
-		this.on('enterframe', function() {
-			eval(code);
-			if (this.x < 0 || this.x > 256 || this.y < 0 || this.y > 256) {
-				this.reset();
-			}
-		});
+		this.initCharacter();
 	}
 
 	//初期位置に戻す
@@ -54,5 +47,14 @@ export class Character extends enchant.Sprite {
 	//停止
 	public stop() {
 		this.velocity = 0;
+	}
+
+	private initCharacter() {
+		this.on('enterframe', function() {
+			eval(code);
+			if (this.x < 0 || this.x > 256 || this.y < 0 || this.y > 256) {
+				this.reset();
+			}
+		});
 	}
 }

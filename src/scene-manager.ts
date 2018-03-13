@@ -7,8 +7,7 @@ import stages from './stages';
 import { code } from './blockly-main';
 
 export class SceneManager {
-	public scenes: Scenes;
-	public isRunning: boolean;
+	private scenes: Scenes;
 
 	public constructor() {
 		this.scenes = {
@@ -19,23 +18,7 @@ export class SceneManager {
 			Result: new Scene('Result'),
 		};
 
-		this.isRunning = false;
-	}
-
-	public initScene(character: Character, button: StartStopButton) {
-		const map = new EnchantMap(stages[0].map);
-		map.addInto(this.scenes.Playing);
-		this.scenes.Playing.addChild(character);
-		this.scenes.Playing.addChild(button);
-
-		core.pushScene(this.scenes.Top);
-		this.changeScene('StageSelecting');
-		this.changeScene('Playing');
-
-		character.listenCharacter();
-		button.listenButton(this, character);
-
-		core.pause();
+		this.initScene();
 	}
 
 	/**
@@ -95,7 +78,9 @@ export class SceneManager {
 		console.log('Error! Transition of scenes is invalid!');
 	}
 
-	public resetScene(character: Character) {
-		character.reset();
+	private initScene() {
+		core.pushScene(this.scenes.Top);
+		this.changeScene('StageSelecting');
+		this.changeScene('Playing');
 	}
 }

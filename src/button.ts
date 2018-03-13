@@ -1,26 +1,16 @@
 import core from './enchant/core';
 import * as enchant from 'node-enchantjs';
 import { Character } from './character';
-import { SceneManager } from './scene-manager';
+import { Scene } from './scenes';
 
 export class StartStopButton extends enchant.Sprite {
-	public constructor(
-		width: number,
-		height: number,
-		character: Character,
-		sceneManager: SceneManager
-	) {
+	public constructor(width: number, height: number, playingScene: Scene) {
 		super(width, height);
 		this.x = 20;
 		this.y = 320;
 		this.image = core.assets['img/startbutton.png'];
-	}
 
-	public listenButton(sceneManager: SceneManager, character: Character) {
-		this.addEventListener('touchstart', function() {
-			sceneManager.isRunning = this.reloadButton(sceneManager.isRunning);
-			sceneManager.resetScene(character);
-		});
+		this.initButton(playingScene);
 	}
 
 	public reloadButton(isRunning: boolean): boolean {
@@ -34,5 +24,12 @@ export class StartStopButton extends enchant.Sprite {
 			core.resume();
 		}
 		return !isRunning;
+	}
+
+	private initButton(scene: Scene) {
+		this.addEventListener('touchstart', function() {
+			scene.isRunning = this.reloadButton(scene.isRunning);
+			scene.resetScene();
+		});
 	}
 }
