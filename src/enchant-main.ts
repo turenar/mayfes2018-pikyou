@@ -1,8 +1,7 @@
 import core from './enchant/core';
-import * as enchant from 'node-enchantjs';
+import { SceneManager } from './scene-manager';
 import { Character } from './character';
-import { changeScene, initScene } from './scenes';
-import { code } from './blockly-main';
+import { StartStopButton } from './button';
 
 /**
  * enchant関連初期化
@@ -11,24 +10,11 @@ import { code } from './blockly-main';
 export function init() {
 	core.preload('img/mapchip.png');
 	core.preload('img/chara1.png');
+	core.preload('img/startbutton.png');
+	core.preload('img/stopbutton.png');
 
 	core.onload = () => {
-		const character = new Character(32, 32);
-		initScene(character);
-		changeScene('StageSelecting');
-		changeScene('Playing');
-
-		character.on('enterframe', function() {
-			eval(code);
-			if (
-				character.x < 0 ||
-				character.x > 256 ||
-				character.y < 0 ||
-				character.y > 256
-			) {
-				character.reset();
-			}
-		});
+		const sceneManager = new SceneManager();
 	};
 }
 
