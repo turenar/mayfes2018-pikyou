@@ -14,34 +14,35 @@ export type SceneKind =
 
 export class Scene extends enchant.Scene {
 	public kind: SceneKind;
+
+	public constructor(kind: SceneKind) {
+		super();
+		this.kind = kind;
+	}
+}
+
+export class PlayingScene extends Scene {
 	public isRunning: boolean;
 	public character: Character;
 	public button: StartStopButton;
 
-	public constructor(
-		kind: SceneKind,
-		character?: Character,
-		button?: StartStopButton
-	) {
-		super();
-		this.kind = kind;
+	public constructor() {
+		super('Playing');
 		this.isRunning = false;
 
-		if (kind === 'Playing') {
-			this.character = new Character(32, 32);
-			this.button = new StartStopButton(320, 140, this);
+		this.character = new Character(32, 32);
+		this.button = new StartStopButton(320, 140, this);
 
-			this.initPlayingScene();
+		this.initScene();
 
-			core.pause();
-		}
+		core.pause();
 	}
 
 	public resetScene() {
 		this.character.reset();
 	}
 
-	private initPlayingScene() {
+	private initScene() {
 		const map = new EnchantMap(stages[0].map);
 		map.addInto(this);
 		this.addChild(this.character);

@@ -1,5 +1,5 @@
 import core from './enchant/core';
-import { Scenes, Scene, SceneKind } from './scenes';
+import { Scenes, Scene, PlayingScene, SceneKind } from './scenes';
 import { Character } from './character';
 import { StartStopButton } from './button';
 import EnchantMap from './enchant/map';
@@ -13,7 +13,7 @@ export class SceneManager {
 		this.scenes = {
 			Top: new Scene('Top'),
 			StageSelecting: new Scene('StageSelecting'),
-			Playing: new Scene('Playing'),
+			Playing: new PlayingScene(),
 			GameOver: new Scene('GameOver'),
 			Result: new Scene('Result'),
 		};
