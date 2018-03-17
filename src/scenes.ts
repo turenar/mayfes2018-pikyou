@@ -43,6 +43,17 @@ export class PlayingScene extends Scene {
 		this.character.reset();
 	}
 
+	public canMoveCharacterNext() {
+		var next_x: number = this.character.x;
+		var next_y: number = this.character.y;
+		if (this.character.direction === 'north') next_y -= 32;
+		if (this.character.direction === 'east') next_x += 32;
+		if (this.character.direction === 'south') next_y += 32;
+		if (this.character.direction === 'west') next_x -= 32;
+
+		return this.map.canEnter(next_x, next_y);
+	}
+
 	private initScene() {
 		this.map = new EnchantMap(stages[0].map);
 		this.map.addInto(this);
