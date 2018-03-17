@@ -1,11 +1,13 @@
 import MapChip from './mapchip';
 import core from './core';
 
+export const mapchipSize = 32;
+
 export default class Map {
 	private map: enchant.Map;
 
 	public constructor(mapData: MapChip[][]) {
-		const map = new enchant.Map(32, 32);
+		const map = new enchant.Map(mapchipSize, mapchipSize);
 		map.image = core.assets['img/mapchip.png'];
 		map.loadData(mapData);
 

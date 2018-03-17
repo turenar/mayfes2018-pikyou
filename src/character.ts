@@ -1,15 +1,16 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import { code } from './blockly-main';
+import { mapchipSize } from './enchant/map'
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
 export class Character extends enchant.Sprite {
 	private point_x: number;
 	private point_y: number;
-	private init_x: number = 128;
-	private init_y: number = 128;
-	private defaultVelocity: number = 32;
+	private init_x: number = 5;
+	private init_y: number = 5;
+	private defaultVelocity: number = mapchipSize;
 	private direction: Direction;
 	private velocity: number;
 	private count: number;
@@ -17,7 +18,6 @@ export class Character extends enchant.Sprite {
 	public constructor(width: number, height: number) {
 		super(width, height);
 		this.image = core.assets['img/chara1.png'];
-		
 		this.reset();
 		this.initCharacter();
 	}
@@ -25,8 +25,8 @@ export class Character extends enchant.Sprite {
 	//初期位置に戻す
 	public reset() {
 		this.direction = 'east';
-		this.x = this.init_x;
-		this.y = this.init_y;
+		this.x = this.getPoint(this.init_x);
+		this.y = this.getPoint(this.init_y);
 		this.velocity = this.defaultVelocity;
 		this.count = 0;
 	}
@@ -66,5 +66,9 @@ export class Character extends enchant.Sprite {
 				this.reset();
 			}
 		});
+	}
+
+	private getPoint(point: number): number {
+		return (point - 1) * mapchipSize;
 	}
 }
