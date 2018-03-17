@@ -15,4 +15,12 @@ export default class Map {
 	public addInto(scene: enchant.Scene) {
 		scene.addChild(this.map);
 	}
+
+	public canEnter(x: number, y: number){
+		if(this.map.checkTile(x, y) == MapChip.Wall){
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
