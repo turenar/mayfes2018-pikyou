@@ -25,6 +25,7 @@ export class PlayingScene extends Scene {
 	public isRunning: boolean;
 	public character: Character;
 	public button: StartStopButton;
+	public map: EnchantMap;
 
 	public constructor() {
 		super('Playing');
@@ -43,8 +44,8 @@ export class PlayingScene extends Scene {
 	}
 
 	private initScene() {
-		const map = new EnchantMap(stages[0].map);
-		map.addInto(this);
+		this.map = new EnchantMap(stages[0].map);
+		this.map.addInto(this);
 		this.addChild(this.character);
 		this.addChild(this.button);
 	}
