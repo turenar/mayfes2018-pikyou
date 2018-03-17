@@ -9,7 +9,7 @@ export class Character extends enchant.Sprite {
 	private init_y: number = 128;
 	private defaultVelocity: number = 10;
 	public direction: Direction;
-	public velocity: number;
+	private velocity: number;
 
 	public constructor(width: number, height: number) {
 		super(width, height);
