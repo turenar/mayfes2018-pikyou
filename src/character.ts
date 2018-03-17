@@ -10,16 +10,22 @@ export class Character extends enchant.Sprite {
 	//実際のピクセル座標は、getCoordinateで得る。
 	private point_x: number;
 	private point_y: number;
-	private init_x: number = 5;
-	private init_y: number = 5;
-	private defaultVelocity: number = mapchipSize;
-	private direction: Direction;
+	private init_x: number;
+	private init_y: number;
+	private countRate: number;
+	private defaultVelocity: number;
 	private velocity: number;
+	private direction: Direction;
 	private count: number;
 
 	public constructor(width: number, height: number) {
 		super(width, height);
 		this.image = core.assets['img/chara1.png'];
+		this.init_x = 5;
+		this.init_y = 5;
+		this.countRate = 4;
+		this.defaultVelocity = mapchipSize / this.countRate;
+
 		this.reset();
 		this.initCharacter();
 	}
@@ -28,18 +34,36 @@ export class Character extends enchant.Sprite {
 	public reset() {
 		this.point_x = this.init_x;
 		this.point_y = this.init_y;
+		this.velocity = this.defaultVelocity;
 		this.direction = 'east';
 		this.x = this.getCoordinate(this.point_x);
 		this.y = this.getCoordinate(this.point_y);
-		this.velocity = this.defaultVelocity;
 		this.count = 0;
 	}
 
 	//向いている方向に進む
 	public moveForward() {
-		if (this.count > 5) {
+		if (this.count < this.countRate) {
 			this.velocity = this.defaultVelocity;
 
+			if (this.direction === 'north') {
+				this.moveBy(0, -this.velocity);
+			}
+
+			if (this.direction === 'east') {
+				this.moveBy(this.velocity, 0);
+			}
+
+			if (this.direction === 'south') {
+				this.moveBy(0, this.velocity);
+			}
+
+			if (this.direction === 'west') {
+				this.moveBy(-this.velocity, 0);
+			}
+
+			this.count += 1;
+		} else if (this.count === this.countRate) {
 			if (this.direction === 'north') {
 				this.point_y -= 1;
 			}
@@ -55,9 +79,6 @@ export class Character extends enchant.Sprite {
 			if (this.direction === 'west') {
 				this.point_x -= 1;
 			}
-
-			this.x = this.getCoordinate(this.point_x);
-			this.y = this.getCoordinate(this.point_y);
 
 			this.count = 0;
 
@@ -76,6 +97,9 @@ export class Character extends enchant.Sprite {
 	public stop() {
 		this.velocity = 0;
 		this.count = 0;
+
+		this.x = this.getCoordinate(this.point_x);
+		this.y = this.getCoordinate(this.point_y);
 	}
 
 	private initCharacter() {
