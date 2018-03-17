@@ -16,10 +16,10 @@ export default class Map {
 		scene.addChild(this.map);
 	}
 
-	public canEnter(x: number, y: number){
-		if(this.map.checkTile(x, y) == MapChip.Wall){
+	public canEnter(x: number, y: number) {
+		if (this.map.checkTile(x, y) == MapChip.Wall) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
