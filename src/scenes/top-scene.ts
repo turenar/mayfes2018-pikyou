@@ -11,8 +11,8 @@ export default class TopScene extends Scene {
 	public constructor(manager: SceneManager) {
 		super('Top', manager);
 
-		this.startInitButton = new StartInitButton(320, 140, this);
-		this.startContinueButton = new StartContinueButton(320, 140, this);
+		this.startInitButton = new StartInitButton(20, 130, this);
+		this.startContinueButton = new StartContinueButton(20, 320, this);
 		this.initScene();
 		core.pause();
 	}
