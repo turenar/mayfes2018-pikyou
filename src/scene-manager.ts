@@ -78,7 +78,7 @@ export class SceneManager {
 
 	private initScene() {
 		core.pushScene(this.scenes.Top);
-		// this.changeScene('StageSelecting');
-		// this.changeScene('Playing');
+		this.changeScene('StageSelecting');
+		this.changeScene('Playing');
 	}
 }
