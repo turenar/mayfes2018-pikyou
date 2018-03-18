@@ -1,7 +1,7 @@
 import core from './enchant/core';
 import * as enchant from 'node-enchantjs';
 import { Character } from './character';
-import { PlayingScene } from './scenes';
+import { PlayingScene, TopScene } from './scenes';
 
 export class StartStopButton extends enchant.Sprite {
 	public constructor(width: number, height: number, scene: PlayingScene) {
@@ -32,4 +32,17 @@ export class StartStopButton extends enchant.Sprite {
 			scene.resetScene();
 		});
 	}
+}
+
+export class StartInitButton extends enchant.Sprite {
+	public constructor(width: number, height: number, scene: TopScene) {
+		super(width, height);
+		this.x = 20;
+		this.y = 320;
+		this.image = core.assets['img/startbutton.png'];
+
+		this.initButton(scene);
+	}
+
+	private initButton(scene: TopScene) {}
 }

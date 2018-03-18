@@ -3,7 +3,8 @@ import core from './enchant/core';
 import EnchantMap from './enchant/map';
 import stages from './stages';
 import { Character } from './character';
-import { StartStopButton } from './button';
+import { StartStopButton, StartInitButton } from './button';
+import { SceneManager } from './scene-manager';
 
 export type SceneKind =
 	| 'Top'
@@ -14,10 +15,38 @@ export type SceneKind =
 
 export class Scene extends enchant.Scene {
 	public kind: SceneKind;
+	private manager: SceneManager;
 
-	public constructor(kind: SceneKind) {
+	public constructor(kind: SceneKind, manager: SceneManager) {
 		super();
 		this.kind = kind;
+		this.manager = manager;
+	}
+
+	public moveNextScene(nextkind: SceneKind) {
+		this.manager.changeScene(nextkind);
+	}
+}
+
+export class TopScene extends Scene {
+	public startInitButton: StartInitButton;
+	// public button: startContinueButton;
+
+	public constructor(manager: SceneManager) {
+		super('Top', manager);
+
+		this.startInitButton = new StartInitButton(320, 140, this);
+		this.initScene();
+		core.pause();
+	}
+
+	private initScene() {
+		this.startInitButton.addEventListener('touchstart', () => {
+			console.log("StageSelecting");
+			this.moveNextScene('StageSelecting');
+		});
+
+		this.addChild(this.startInitButton);
 	}
 }
 
@@ -27,8 +56,8 @@ export class PlayingScene extends Scene {
 	public button: StartStopButton;
 	public map: EnchantMap;
 
-	public constructor() {
-		super('Playing');
+	public constructor(manager: SceneManager) {
+		super('Playing', manager);
 		this.isRunning = false;
 
 		this.character = new Character(32, 32);
