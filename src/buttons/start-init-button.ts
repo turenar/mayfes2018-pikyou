@@ -1,5 +1,5 @@
-import core from '../enchant/core'
-import TopScene from '../scenes/top-scene'
+import core from '../enchant/core';
+import TopScene from '../scenes/top-scene';
 
 export default class StartInitButton extends enchant.Sprite {
 	public constructor(x: number, y: number, scene: TopScene) {

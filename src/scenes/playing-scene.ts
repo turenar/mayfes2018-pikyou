@@ -1,10 +1,10 @@
 import core from '../enchant/core';
-import EnchantMap from '../enchant/map'
-import { Scene } from '../scenes'
-import { SceneManager } from '../scene-manager'
-import StartStopButton from '../buttons/start-stop-button'
-import { Character } from '../character'
-import stages from '../stages'
+import EnchantMap from '../enchant/map';
+import { Scene } from '../scenes';
+import { SceneManager } from '../scene-manager';
+import StartStopButton from '../buttons/start-stop-button';
+import { Character } from '../character';
+import stages from '../stages';
 
 export default class PlayingScene extends Scene {
 	public isRunning: boolean;
