@@ -30,23 +30,25 @@ export class Scene extends enchant.Scene {
 
 export class TopScene extends Scene {
 	public startInitButton: StartInitButton;
-	// public button: startContinueButton;
+	public startContinueButton: StartContinueButton;
 
 	public constructor(manager: SceneManager) {
 		super('Top', manager);
 
 		this.startInitButton = new StartInitButton(320, 140, this);
+		this.startContinueButton = new StartContinueButton(320, 140, this);
 		this.initScene();
 		core.pause();
 	}
 
 	private initScene() {
 		this.startInitButton.addEventListener('touchstart', () => {
-			console.log("StageSelecting");
+			console.log('StageSelecting');
 			this.moveNextScene('StageSelecting');
 		});
 
 		this.addChild(this.startInitButton);
+		this.addChild(this.startContinueButton);
 	}
 }
 

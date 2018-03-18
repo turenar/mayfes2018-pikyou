@@ -38,8 +38,21 @@ export class StartInitButton extends enchant.Sprite {
 	public constructor(width: number, height: number, scene: TopScene) {
 		super(width, height);
 		this.x = 20;
+		this.y = 130;
+		this.image = core.assets['img/startinit.png'];
+
+		this.initButton(scene);
+	}
+
+	private initButton(scene: TopScene) {}
+}
+
+export class StartContinueButton extends enchant.Sprite {
+	public constructor(width: number, height: number, scene: TopScene) {
+		super(width, height);
+		this.x = 20;
 		this.y = 320;
-		this.image = core.assets['img/startbutton.png'];
+		this.image = core.assets['img/startcontinue.png'];
 
 		this.initButton(scene);
 	}
