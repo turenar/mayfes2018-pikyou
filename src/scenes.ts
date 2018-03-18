@@ -3,7 +3,11 @@ import core from './enchant/core';
 import EnchantMap from './enchant/map';
 import stages from './stages';
 import { Character } from './character';
-import { StartStopButton, StartInitButton } from './button';
+import {
+	StartStopButton,
+	StartContinueButton,
+	StartInitButton,
+} from './button';
 import { SceneManager } from './scene-manager';
 
 export type SceneKind =
@@ -14,8 +18,8 @@ export type SceneKind =
 	| 'Result';
 
 export class Scene extends enchant.Scene {
-	public kind: SceneKind;
 	private manager: SceneManager;
+	public kind: SceneKind;
 
 	public constructor(kind: SceneKind, manager: SceneManager) {
 		super();
