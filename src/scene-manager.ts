@@ -1,9 +1,7 @@
 import core from './enchant/core';
-import { Scenes, Scene, PlayingScene, SceneKind, TopScene } from './scenes';
-import { Character } from './character';
-import { StartStopButton } from './button';
-import EnchantMap from './enchant/map';
-import stages from './stages';
+import { Scenes, Scene, SceneKind } from './scenes';
+import TopScene from './scenes/top-scene'
+import PlayingScene from './scenes/playing-scene'
 import { code } from './blockly-main';
 
 export class SceneManager {

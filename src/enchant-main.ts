@@ -1,7 +1,6 @@
 import core from './enchant/core';
 import { SceneManager } from './scene-manager';
 import { Character } from './character';
-import { StartStopButton } from './button';
 
 /**
  * enchant関連初期化
