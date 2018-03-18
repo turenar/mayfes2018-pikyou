@@ -3,7 +3,7 @@ import core from './enchant/core';
 import EnchantMap from './enchant/map';
 import stages from './stages';
 import { Character } from './character';
-import { StartStopButton } from './button';
+import { SceneManager } from './scene-manager';
 
 export type SceneKind =
 	| 'Top'
@@ -13,41 +13,17 @@ export type SceneKind =
 	| 'Result';
 
 export class Scene extends enchant.Scene {
+	private manager: SceneManager;
 	public kind: SceneKind;
 
-	public constructor(kind: SceneKind) {
+	public constructor(kind: SceneKind, manager: SceneManager) {
 		super();
 		this.kind = kind;
-	}
-}
-
-export class PlayingScene extends Scene {
-	public isRunning: boolean;
-	public character: Character;
-	public button: StartStopButton;
-	public map: EnchantMap;
-
-	public constructor() {
-		super('Playing');
-		this.isRunning = false;
-
-		this.character = new Character(32, 32);
-		this.button = new StartStopButton(320, 140, this);
-
-		this.initScene();
-
-		core.pause();
+		this.manager = manager;
 	}
 
-	public resetScene() {
-		this.character.reset();
-	}
-
-	private initScene() {
-		this.map = new EnchantMap(stages[0].map);
-		this.map.addInto(this);
-		this.addChild(this.character);
-		this.addChild(this.button);
+	public moveNextScene(nextkind: SceneKind) {
+		this.manager.changeScene(nextkind);
 	}
 }
 
