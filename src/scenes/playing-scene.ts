@@ -12,14 +12,14 @@ export default class PlayingScene extends Scene {
 	public button: StartStopButton;
 	public map: EnchantMap;
 
-	public constructor(manager: SceneManager) {
+	public constructor(manager: SceneManager, stageNum: number) {
 		super('Playing', manager);
 		this.isRunning = false;
 
 		this.character = new Character(32, 32);
 		this.button = new StartStopButton(320, 140, this);
 
-		this.initScene();
+		this.initScene(stageNum);
 
 		core.pause();
 	}
@@ -28,8 +28,8 @@ export default class PlayingScene extends Scene {
 		this.character.reset();
 	}
 
-	private initScene() {
-		this.map = new EnchantMap(stages[0].map);
+	private initScene(stageNum: number) {
+		this.map = new EnchantMap(stages[stageNum].map);
 		this.map.addInto(this);
 		this.addChild(this.character);
 		this.addChild(this.button);
