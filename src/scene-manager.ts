@@ -2,7 +2,7 @@ import core from './enchant/core';
 import { Scenes, Scene, SceneKind } from './scenes';
 import TopScene from './scenes/top-scene';
 import PlayingScene from './scenes/playing-scene';
-import StageSelectingScene from "./scenes/stage-selecting-scene";
+import StageSelectingScene from './scenes/stage-selecting-scene';
 import { code } from './blockly-main';
 
 export class SceneManager {
@@ -16,7 +16,7 @@ export class SceneManager {
 	 * Scene 遷移を行う。適切な遷移でないと死ぬ。
 	 * @return {void}
 	 * @param {SceneKind} sceneKind - 遷移先のシーン種類。
-	 * @param {stageNum} number - 繊維先がPlayingの時のステージ番号
+	 * @param {number} stageNum - 繊維先がPlayingの時のステージ番号
 	 */
 	public changeScene(sceneKind: SceneKind, stageNum?: number) {
 		if (this.currentScene === 'Top') {
@@ -47,7 +47,7 @@ export class SceneManager {
 				return;
 			}
 
-			if (sceneKind == 'StageSelecting'){
+			if (sceneKind == 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
 				core.replaceScene(new StageSelectingScene(this));
 				return;
@@ -65,10 +65,7 @@ export class SceneManager {
 			}
 		}
 
-		if (
-			this.currentScene === 'GameOver' ||
-			this.currentScene === 'Result'
-		) {
+		if (this.currentScene === 'GameOver' || this.currentScene === 'Result') {
 			if (sceneKind === 'Playing') {
 				this.currentScene = 'Playing';
 				core.popScene();

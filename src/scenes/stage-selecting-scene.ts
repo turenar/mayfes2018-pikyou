@@ -14,7 +14,7 @@ export default class StageSelectingScene extends Scene {
 	}
 
 	private initScene() {
-		var sky = new Sprite(320,640);
+		var sky = new Sprite(320, 640);
 		sky.image = core.assets['img/haikei.png'];
 		sky.x = 0;
 		sky.y = 0;
@@ -23,16 +23,16 @@ export default class StageSelectingScene extends Scene {
 		this.stageNum = 0;
 		console.log(`stageNum: ${this.stageNum}`);
 		this.addEventListener(Event.UP_BUTTON_DOWN, () => {
-            this.stageNum += 1;
+			this.stageNum += 1;
 			console.log(`stageNum: ${this.stageNum}`);
-        });
+		});
 		this.addEventListener(Event.DOWN_BUTTON_DOWN, () => {
 			this.stageNum -= 1;
 			console.log(`stagenum: ${this.stageNum}`);
 		});
 		this.addEventListener(Event.A_BUTTON_DOWN, () => {
-			console.log("enter pressed");
+			console.log('enter pressed');
 			this.manager.changeScene('Playing', this.stageNum);
 		});
-    }
+	}
 }
