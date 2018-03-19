@@ -13,7 +13,7 @@ export type SceneKind =
 	| 'Result';
 
 export class Scene extends enchant.Scene {
-	private manager: SceneManager;
+	public manager: SceneManager;
 	public kind: SceneKind;
 
 	public constructor(kind: SceneKind, manager: SceneManager) {
