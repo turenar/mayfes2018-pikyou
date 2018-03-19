@@ -2,20 +2,13 @@ import core from './enchant/core';
 import { Scenes, Scene, SceneKind } from './scenes';
 import TopScene from './scenes/top-scene';
 import PlayingScene from './scenes/playing-scene';
+import StageSelectingScene from "./scenes/stage-selecting-scene";
 import { code } from './blockly-main';
 
 export class SceneManager {
-	private scenes: Scenes;
+	public currentScene: SceneKind;
 
 	public constructor() {
-		this.scenes = {
-			Top: new TopScene(this),
-			StageSelecting: new Scene('StageSelecting', this),
-			Playing: new PlayingScene(this),
-			GameOver: new Scene('GameOver', this),
-			Result: new Scene('Result', this),
-		};
-
 		this.initScene();
 	}
 
@@ -23,52 +16,68 @@ export class SceneManager {
 	 * Scene 遷移を行う。適切な遷移でないと死ぬ。
 	 * @return {void}
 	 * @param {SceneKind} sceneKind - 遷移先のシーン種類。
+	 * @param {stageNum} number - 繊維先がPlayingの時のステージ番号
 	 */
-	public changeScene(sceneKind: SceneKind) {
-		if (core.currentScene === this.scenes.Top) {
+	public changeScene(sceneKind: SceneKind, stageNum?: number) {
+		if (this.currentScene === 'Top') {
 			if (sceneKind === 'StageSelecting') {
-				core.replaceScene(this.scenes.StageSelecting);
+				this.currentScene = 'StageSelecting';
+				core.replaceScene(new StageSelectingScene(this));
 				return;
 			}
 		}
 
-		if (core.currentScene === this.scenes.StageSelecting) {
+		if (this.currentScene === 'StageSelecting') {
 			if (sceneKind === 'Top') {
-				core.replaceScene(this.scenes.Top);
+				this.currentScene = 'Top';
+				core.replaceScene(new TopScene(this));
 				return;
 			}
 			if (sceneKind === 'Playing') {
-				core.replaceScene(this.scenes.Playing);
+				this.currentScene = 'Playing';
+				core.pushScene(new PlayingScene(this, stageNum));
 				return;
 			}
 		}
 
-		if (core.currentScene === this.scenes.Playing) {
-			if (sceneKind === 'Top' || sceneKind === 'StageSelecting') {
-				core.replaceScene(this.scenes[sceneKind]);
+		if (this.currentScene === 'Playing') {
+			if (sceneKind === 'Top') {
+				this.currentScene = 'Top';
+				core.replaceScene(new TopScene(this));
 				return;
 			}
+
+			if (sceneKind == 'StageSelecting'){
+				this.currentScene = 'StageSelecting';
+				core.replaceScene(new StageSelectingScene(this));
+				return;
+			}
+
 			if (sceneKind === 'GameOver') {
-				core.pushScene(this.scenes.GameOver);
+				this.currentScene = 'GameOver';
+				core.pushScene(new Scene('GameOver', this));
 				return;
 			}
 			if (sceneKind === 'Result') {
-				core.pushScene(this.scenes.Result);
+				this.currentScene = 'Result';
+				core.pushScene(new Scene('Result', this));
 				return;
 			}
 		}
 
 		if (
-			core.currentScene === this.scenes.GameOver ||
-			core.currentScene === this.scenes.Result
+			this.currentScene === 'GameOver' ||
+			this.currentScene === 'Result'
 		) {
 			if (sceneKind === 'Playing') {
+				this.currentScene = 'Playing';
 				core.popScene();
 				return;
 			}
 			if (sceneKind === 'StageSelecting') {
+				this.currentScene = 'StageSelecting';
 				core.popScene();
-				core.replaceScene(this.scenes.StageSelecting);
+				core.replaceScene(new StageSelectingScene(this));
 				return;
 			}
 		}
@@ -77,8 +86,10 @@ export class SceneManager {
 	}
 
 	private initScene() {
-		core.pushScene(this.scenes.Top);
-		this.changeScene('StageSelecting');
-		this.changeScene('Playing');
+		this.currentScene = 'Top';
+		core.pushScene(new TopScene(this));
+
+		// this.changeScene('StageSelecting');
+		// this.changeScene('Playing');
 	}
 }
