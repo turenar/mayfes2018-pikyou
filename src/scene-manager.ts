@@ -35,7 +35,7 @@ export class SceneManager {
 			}
 			if (sceneKind === 'Playing') {
 				this.currentScene = 'Playing';
-				core.pushScene(new PlayingScene(this, stageNum));
+				core.replaceScene(new PlayingScene(this, stageNum));
 				return;
 			}
 		}
