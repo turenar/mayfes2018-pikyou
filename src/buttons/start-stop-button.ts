@@ -1,9 +1,9 @@
-import core from './enchant/core';
+import core from '../enchant/core';
 import * as enchant from 'node-enchantjs';
-import { Character } from './character';
-import { PlayingScene } from './scenes';
+import { Character } from '../character';
+import PlayingScene from '../scenes/playing-scene';
 
-export class StartStopButton extends enchant.Sprite {
+export default class StartStopButton extends enchant.Sprite {
 	public constructor(width: number, height: number, scene: PlayingScene) {
 		super(width, height);
 		this.x = 20;
