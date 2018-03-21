@@ -1,6 +1,5 @@
 import core from '../enchant/core';
 import * as enchant from 'node-enchantjs';
-import { Character } from '../character';
 import PlayingScene from '../scenes/playing-scene';
 
 export default class StartStopButton extends enchant.Sprite {

@@ -1,6 +1,6 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
-import EnchantMap from './enchant/map';
+import { Map as EnchantMap } from './enchant/map';
 import stages from './stages';
 import { Character } from './character';
 import { SceneManager } from './scene-manager';

@@ -1,10 +1,8 @@
 import core from './enchant/core';
-import { Scenes, Scene, SceneKind } from './scenes';
-import TopScene from './scenes/top-scene';
 import PlayingScene from './scenes/playing-scene';
 import { code } from './blockly-main';
 import { Character } from './character';
-import Map, { getCoordinateFromPoint } from './enchant/map';
+import { Map, getCoordinateFromPoint } from './enchant/map';
 import stages from './stages';
 
 export class World {

@@ -1,9 +1,9 @@
-import MapChip from './mapchip';
 import core from './core';
+import MapChip from './mapchip';
 
 export const mapchipSize = 32;
 
-export default class Map {
+export class Map {
 	private map: enchant.Map;
 
 	public constructor(mapData: MapChip[][]) {
