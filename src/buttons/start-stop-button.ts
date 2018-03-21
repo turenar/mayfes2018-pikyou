@@ -31,17 +31,13 @@ export default class StartStopButton extends enchant.Sprite {
 		return !isRunning;
 	}
 
-	public reset() {
-		this.scene.isRunning = false;
-		console.log('stop game');
-		this.image = core.assets['img/startbutton.png'];
-		core.pause();
-	}
+	public reset() {}
 
 	private initButton() {
+		const scene = this.scene;
 		this.addEventListener('touchstart', function() {
-			this.scene.isRunning = this.reloadButton(this.scene.isRunning);
-			this.scene.resetScene();
+			scene.isRunning = this.reloadButton(this.scene.isRunning);
+			scene.reset();
 		});
 	}
 }

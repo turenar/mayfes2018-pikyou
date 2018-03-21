@@ -18,9 +18,7 @@ export default class Map {
 		scene.addChild(this.map);
 	}
 
-	public reset() {
-		
-	}
+	public reset() {}
 
 	public canEnter(x: number, y: number) {
 		if (this.map.checkTile(x, y) == MapChip.Wall) {
@@ -31,10 +29,20 @@ export default class Map {
 	}
 }
 
+/**
+ * マップ座標からピクセル座標を得る。
+ * @param {number} point - マップ座標(1~10)
+ * @returns {number} - ピクセル画像
+ */
 export function getCoordinateFromPoint(point: number): number {
 	return (point - 1) * mapchipSize;
 }
 
+/**
+ * ピクセル座標からマップ座標を得る。
+ * @param {number} coordinate - ピクセル座標
+ * @returns {number} - マップ座標
+ */
 export function getPointFromCoordinate(coordinate: number): number {
 	return Math.floor(coordinate / mapchipSize);
 }

@@ -6,10 +6,10 @@ import { mapchipSize, getCoordinateFromPoint } from './enchant/map';
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
 export type Position = {
-	point_x: number,
-	point_y: number,
-	direction: Direction,
-}
+	point_x: number;
+	point_y: number;
+	direction: Direction;
+};
 
 export class Character extends enchant.Sprite {
 	//point_*, init_* はマス目の座標を入れる。
@@ -110,41 +110,41 @@ export class Character extends enchant.Sprite {
 		this.y = getCoordinateFromPoint(this.point_y);
 	}
 
-	private initCharacter() {
-		this.on('enterframe', function() {
-			eval(code);
-			if (
-				this.point_x < 0 ||
-				this.point_x > 9 ||
-				this.point_y < 0 ||
-				this.point_y > 9
-			) {
-				this.reset();
-			}
-		});
-	}
-
 	public getPointAndDirection(): Position {
 		const point_x = this.point_x;
 		const point_y = this.point_y;
-		const direction  = this.direction;
+		const direction = this.direction;
 
 		return {
 			point_x,
 			point_y,
 			direction,
-		}
+		};
 	}
 
 	public getCoordinateAndDirection(): Position {
 		const point_x = getCoordinateFromPoint(this.point_x);
 		const point_y = getCoordinateFromPoint(this.point_y);
-		const direction  = this.direction;
+		const direction = this.direction;
 
 		return {
 			point_x,
 			point_y,
 			direction,
-		}
+		};
+	}
+
+	private initCharacter() {
+		this.on('enterframe', function() {
+			eval(code);
+			if (
+				this.point_x < 2 ||
+				this.point_x > 9 ||
+				this.point_y < 2 ||
+				this.point_y > 9
+			) {
+				this.reset();
+			}
+		});
 	}
 }
