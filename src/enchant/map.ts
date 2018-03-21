@@ -27,22 +27,23 @@ export class Map {
 			return true;
 		}
 	}
+
+	/**
+	 * マップ座標からピクセル座標を得る。
+	 * @param {number} point - マップ座標(1~10)
+	 * @returns {number} - ピクセル座標
+	 */
+	public static getCoordinateFromPoint(point: number): number {
+		return (point - 1) * mapchipSize;
+	}
+
+	/**
+	 * ピクセル座標からマップ座標を得る。
+	 * @param {number} coordinate - ピクセル座標
+	 * @returns {number} - マップ座標
+	 */
+	public static getPointFromCoordinate(coordinate: number): number {
+		return Math.floor(coordinate / mapchipSize);
+	}
 }
 
-/**
- * マップ座標からピクセル座標を得る。
- * @param {number} point - マップ座標(1~10)
- * @returns {number} - ピクセル画像
- */
-export function getCoordinateFromPoint(point: number): number {
-	return (point - 1) * mapchipSize;
-}
-
-/**
- * ピクセル座標からマップ座標を得る。
- * @param {number} coordinate - ピクセル座標
- * @returns {number} - マップ座標
- */
-export function getPointFromCoordinate(coordinate: number): number {
-	return Math.floor(coordinate / mapchipSize);
-}

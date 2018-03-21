@@ -1,7 +1,7 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import { code } from './blockly-main';
-import { mapchipSize, getCoordinateFromPoint } from './enchant/map';
+import { mapchipSize, Map } from './enchant/map';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -44,8 +44,8 @@ export class Character extends enchant.Sprite {
 		this.point_y = this.init_y;
 		this.velocity = this.defaultVelocity;
 		this.direction = 'east';
-		this.x = getCoordinateFromPoint(this.point_x);
-		this.y = getCoordinateFromPoint(this.point_y);
+		this.x = Map.getCoordinateFromPoint(this.point_x);
+		this.y = Map.getCoordinateFromPoint(this.point_y);
 		this.count = 0;
 	}
 
@@ -106,8 +106,8 @@ export class Character extends enchant.Sprite {
 		this.velocity = 0;
 		this.count = 0;
 
-		this.x = getCoordinateFromPoint(this.point_x);
-		this.y = getCoordinateFromPoint(this.point_y);
+		this.x = Map.getCoordinateFromPoint(this.point_x);
+		this.y = Map.getCoordinateFromPoint(this.point_y);
 	}
 
 	public getPointAndDirection(): CharacterPosition {
@@ -123,8 +123,8 @@ export class Character extends enchant.Sprite {
 	}
 
 	public getCoordinateAndDirection(): CharacterPosition {
-		const point_x = getCoordinateFromPoint(this.point_x);
-		const point_y = getCoordinateFromPoint(this.point_y);
+		const point_x = Map.getCoordinateFromPoint(this.point_x);
+		const point_y = Map.getCoordinateFromPoint(this.point_y);
 		const direction = this.direction;
 
 		return {
