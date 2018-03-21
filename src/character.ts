@@ -5,7 +5,7 @@ import { mapchipSize, getCoordinateFromPoint } from './enchant/map';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
-export type Position = {
+export type CharacterPosition = {
 	point_x: number;
 	point_y: number;
 	direction: Direction;
@@ -110,7 +110,7 @@ export class Character extends enchant.Sprite {
 		this.y = getCoordinateFromPoint(this.point_y);
 	}
 
-	public getPointAndDirection(): Position {
+	public getPointAndDirection(): CharacterPosition {
 		const point_x = this.point_x;
 		const point_y = this.point_y;
 		const direction = this.direction;
@@ -122,7 +122,7 @@ export class Character extends enchant.Sprite {
 		};
 	}
 
-	public getCoordinateAndDirection(): Position {
+	public getCoordinateAndDirection(): CharacterPosition {
 		const point_x = getCoordinateFromPoint(this.point_x);
 		const point_y = getCoordinateFromPoint(this.point_y);
 		const direction = this.direction;

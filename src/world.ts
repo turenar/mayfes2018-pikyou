@@ -1,7 +1,7 @@
 import core from './enchant/core';
 import PlayingScene from './scenes/playing-scene';
 import { code } from './blockly-main';
-import { Character } from './character';
+import { Character, CharacterPosition } from './character';
 import { Map, getCoordinateFromPoint } from './enchant/map';
 import stages from './stages';
 
@@ -24,19 +24,18 @@ export class World {
 		this.map.reset();
 	}
 
-	public canMoveCharacterNext() {
-		const pad = this.character.getPointAndDirection();
+	public canMoveCharacterNext(position: CharacterPosition) {
 		let next_x;
 		let next_y;
 
-		if (pad.direction === 'north')
-			next_y = getCoordinateFromPoint(pad.point_y - 1);
-		if (pad.direction === 'east')
-			next_x = getCoordinateFromPoint(pad.point_x + 1);
-		if (pad.direction === 'south')
-			next_y = getCoordinateFromPoint(pad.point_y + 1);
-		if (pad.direction === 'west')
-			next_x = getCoordinateFromPoint(pad.point_x - 1);
+		if (position.direction === 'north')
+			next_y = getCoordinateFromPoint(position.point_y - 1);
+		if (position.direction === 'east')
+			next_x = getCoordinateFromPoint(position.point_x + 1);
+		if (position.direction === 'south')
+			next_y = getCoordinateFromPoint(position.point_y + 1);
+		if (position.direction === 'west')
+			next_x = getCoordinateFromPoint(position.point_x - 1);
 
 		return this.map.canEnter(next_x, next_y);
 	}
