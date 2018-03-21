@@ -2,6 +2,7 @@ import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import { code } from './blockly-main';
 import { mapchipSize, Map } from './enchant/map';
+import { World } from './world';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -14,6 +15,7 @@ export type CharacterPosition = {
 export class Character extends enchant.Sprite {
 	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
+	private world: World;
 	private mapPoint_x: number;
 	private mapPoint_y: number;
 	private initMapPoint_x: number;
@@ -24,7 +26,7 @@ export class Character extends enchant.Sprite {
 	private direction: Direction;
 	private count: number;
 
-	public constructor() {
+	public constructor(world: World) {
 		const width = 32;
 		const height = 32;
 		super(width, height);
@@ -33,6 +35,7 @@ export class Character extends enchant.Sprite {
 		this.initMapPoint_y = 5;
 		this.countRate = 4;
 		this.defaultVelocity = mapchipSize / this.countRate;
+		this.world = world;
 
 		this.reset();
 		this.initCharacter();
@@ -91,6 +94,7 @@ export class Character extends enchant.Sprite {
 			this.count = 0;
 
 			console.log(this.mapPoint_x, this.mapPoint_y);
+			console.log(this.getFeetTile());
 		} else {
 			this.count += 1;
 		}
@@ -132,6 +136,22 @@ export class Character extends enchant.Sprite {
 			mapPoint_y,
 			direction,
 		};
+	}
+
+	private getFeetTile(): number {
+		return this.world.checkCharacterFeetTile(this.mapPoint_x, this.mapPoint_y)
+	}
+
+	private canMoveNext(): boolean {
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
+		const direction = this.direction;
+
+		return this.world.canMoveCharacterNext({
+			mapPoint_x,
+			mapPoint_y,
+			direction,
+		});
 	}
 
 	private initCharacter() {

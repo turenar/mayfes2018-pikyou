@@ -20,8 +20,12 @@ export class Map {
 
 	public reset() {}
 
+	public checkTile(x: number, y: number) {
+		return this.map.checkTile(x, y);
+	}
+
 	public canEnter(x: number, y: number) {
-		if (this.map.checkTile(x, y) == MapChip.Wall) {
+		if (this.map.checkTile(x, y) === MapChip.Wall) {
 			return false;
 		} else {
 			return true;

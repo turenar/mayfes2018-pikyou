@@ -12,7 +12,7 @@ export class World {
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
-		this.character = new Character();
+		this.character = new Character(this);
 		this.map = new Map(stages[stageNumber].map);
 
 		this.map.addInto(this.scene);
@@ -23,6 +23,17 @@ export class World {
 		this.character.reset();
 		this.map.reset();
 	}
+	
+    /**
+	 * マップ座標をわたす。
+	 * @param point_x 
+	 * @param point_y 
+	 */
+    public checkCharacterFeetTile(point_x: number, point_y: number) {
+		const x = Map.getCoordinateFromMapPoint(point_x);
+		const y = Map.getCoordinateFromMapPoint(point_y);
+        return this.map.checkTile(x, y);
+    }
 
 	public canMoveCharacterNext(position: CharacterPosition) {
 		let next_x;
@@ -38,5 +49,5 @@ export class World {
 			next_x = Map.getCoordinateFromMapPoint(position.mapPoint_x - 1);
 
 		return this.map.canEnter(next_x, next_y);
-	}
+    }
 }
