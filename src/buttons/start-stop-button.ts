@@ -4,13 +4,18 @@ import { Character } from '../character';
 import PlayingScene from '../scenes/playing-scene';
 
 export default class StartStopButton extends enchant.Sprite {
-	public constructor(width: number, height: number, scene: PlayingScene) {
+	public scene: PlayingScene;
+
+	public constructor(scene: PlayingScene) {
+		const width = 320;
+		const height = 140;
 		super(width, height);
+		this.scene = scene;
 		this.x = 20;
 		this.y = 320;
 		this.image = core.assets['img/startbutton.png'];
 
-		this.initButton(scene);
+		this.initButton();
 	}
 
 	public reloadButton(isRunning: boolean): boolean {
@@ -26,10 +31,17 @@ export default class StartStopButton extends enchant.Sprite {
 		return !isRunning;
 	}
 
-	private initButton(scene: PlayingScene) {
+	public reset() {
+		this.scene.isRunning = false;
+		console.log('stop game');
+		this.image = core.assets['img/startbutton.png'];
+		core.pause();
+	}
+
+	private initButton() {
 		this.addEventListener('touchstart', function() {
-			scene.isRunning = this.reloadButton(scene.isRunning);
-			scene.resetScene();
+			this.scene.isRunning = this.reloadButton(this.scene.isRunning);
+			this.scene.resetScene();
 		});
 	}
 }

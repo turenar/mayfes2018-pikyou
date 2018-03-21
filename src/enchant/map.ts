@@ -18,6 +18,10 @@ export default class Map {
 		scene.addChild(this.map);
 	}
 
+	public reset() {
+		
+	}
+
 	public canEnter(x: number, y: number) {
 		if (this.map.checkTile(x, y) == MapChip.Wall) {
 			return false;
@@ -25,4 +29,12 @@ export default class Map {
 			return true;
 		}
 	}
+}
+
+export function getCoordinateFromPoint(point: number): number {
+	return (point - 1) * mapchipSize;
+}
+
+export function getPointFromCoordinate(coordinate: number): number {
+	return Math.floor(coordinate / mapchipSize);
 }

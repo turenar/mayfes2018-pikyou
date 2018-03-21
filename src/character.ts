@@ -1,9 +1,15 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import { code } from './blockly-main';
-import { mapchipSize } from './enchant/map';
+import { mapchipSize, getCoordinateFromPoint } from './enchant/map';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
+
+export type Position = {
+	point_x: number,
+	point_y: number,
+	direction: Direction,
+}
 
 export class Character extends enchant.Sprite {
 	//point_*, init_* はマス目の座標を入れる。
@@ -18,7 +24,9 @@ export class Character extends enchant.Sprite {
 	private direction: Direction;
 	private count: number;
 
-	public constructor(width: number, height: number) {
+	public constructor() {
+		const width = 32;
+		const height = 32;
 		super(width, height);
 		this.image = core.assets['img/chara1.png'];
 		this.init_x = 5;
@@ -36,8 +44,8 @@ export class Character extends enchant.Sprite {
 		this.point_y = this.init_y;
 		this.velocity = this.defaultVelocity;
 		this.direction = 'east';
-		this.x = this.getCoordinate(this.point_x);
-		this.y = this.getCoordinate(this.point_y);
+		this.x = getCoordinateFromPoint(this.point_x);
+		this.y = getCoordinateFromPoint(this.point_y);
 		this.count = 0;
 	}
 
@@ -98,8 +106,8 @@ export class Character extends enchant.Sprite {
 		this.velocity = 0;
 		this.count = 0;
 
-		this.x = this.getCoordinate(this.point_x);
-		this.y = this.getCoordinate(this.point_y);
+		this.x = getCoordinateFromPoint(this.point_x);
+		this.y = getCoordinateFromPoint(this.point_y);
 	}
 
 	private initCharacter() {
@@ -116,7 +124,27 @@ export class Character extends enchant.Sprite {
 		});
 	}
 
-	private getCoordinate(point: number): number {
-		return (point - 1) * mapchipSize;
+	public getPointAndDirection(): Position {
+		const point_x = this.point_x;
+		const point_y = this.point_y;
+		const direction  = this.direction;
+
+		return {
+			point_x,
+			point_y,
+			direction,
+		}
+	}
+
+	public getCoordinateAndDirection(): Position {
+		const point_x = getCoordinateFromPoint(this.point_x);
+		const point_y = getCoordinateFromPoint(this.point_y);
+		const direction  = this.direction;
+
+		return {
+			point_x,
+			point_y,
+			direction,
+		}
 	}
 }
