@@ -13,7 +13,7 @@ export class World {
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
 		this.character = new Character();
-		this.map = new Map(stages[0].map);
+		this.map = new Map(stages[stageNumber].map);
 
 		this.map.addInto(this.scene);
 		this.scene.addChild(this.character);
