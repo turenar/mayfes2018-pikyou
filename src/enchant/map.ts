@@ -33,7 +33,7 @@ export class Map {
 	 * @param {number} point - マップ座標(1~10)
 	 * @returns {number} - ピクセル座標
 	 */
-	public static getCoordinateFromPoint(point: number): number {
+	public static getCoordinateFromMapPoint(point: number): number {
 		return (point - 1) * mapchipSize;
 	}
 
@@ -42,8 +42,7 @@ export class Map {
 	 * @param {number} coordinate - ピクセル座標
 	 * @returns {number} - マップ座標
 	 */
-	public static getPointFromCoordinate(coordinate: number): number {
+	public static getMapPointFromCoordinate(coordinate: number): number {
 		return Math.floor(coordinate / mapchipSize);
 	}
 }
-

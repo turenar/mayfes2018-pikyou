@@ -29,13 +29,13 @@ export class World {
 		let next_y;
 
 		if (position.direction === 'north')
-			next_y = Map.getCoordinateFromPoint(position.point_y - 1);
+			next_y = Map.getCoordinateFromMapPoint(position.mapPoint_y - 1);
 		if (position.direction === 'east')
-			next_x = Map.getCoordinateFromPoint(position.point_x + 1);
+			next_x = Map.getCoordinateFromMapPoint(position.mapPoint_x + 1);
 		if (position.direction === 'south')
-			next_y = Map.getCoordinateFromPoint(position.point_y + 1);
+			next_y = Map.getCoordinateFromMapPoint(position.mapPoint_y + 1);
 		if (position.direction === 'west')
-			next_x = Map.getCoordinateFromPoint(position.point_x - 1);
+			next_x = Map.getCoordinateFromMapPoint(position.mapPoint_x - 1);
 
 		return this.map.canEnter(next_x, next_y);
 	}
