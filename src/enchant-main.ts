@@ -1,6 +1,5 @@
 import core from './enchant/core';
 import { SceneManager } from './scene-manager';
-import { Character } from './character';
 
 /**
  * enchant関連初期化

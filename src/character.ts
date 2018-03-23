@@ -1,28 +1,36 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import { code } from './blockly-main';
-import { mapchipSize } from './enchant/map';
+import { mapchipSize, Map } from './enchant/map';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
+export type CharacterPosition = {
+	mapPoint_x: number;
+	mapPoint_y: number;
+	direction: Direction;
+};
+
 export class Character extends enchant.Sprite {
-	//point_*, init_* はマス目の座標を入れる。
+	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
-	private point_x: number;
-	private point_y: number;
-	private init_x: number;
-	private init_y: number;
+	private mapPoint_x: number;
+	private mapPoint_y: number;
+	private initMapPoint_x: number;
+	private initMapPoint_y: number;
 	private countRate: number;
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
 	private count: number;
 
-	public constructor(width: number, height: number) {
+	public constructor() {
+		const width = 32;
+		const height = 32;
 		super(width, height);
 		this.image = core.assets['img/chara1.png'];
-		this.init_x = 5;
-		this.init_y = 5;
+		this.initMapPoint_x = 5;
+		this.initMapPoint_y = 5;
 		this.countRate = 4;
 		this.defaultVelocity = mapchipSize / this.countRate;
 
@@ -32,12 +40,12 @@ export class Character extends enchant.Sprite {
 
 	//初期位置に戻す
 	public reset() {
-		this.point_x = this.init_x;
-		this.point_y = this.init_y;
+		this.mapPoint_x = this.initMapPoint_x;
+		this.mapPoint_y = this.initMapPoint_y;
 		this.velocity = this.defaultVelocity;
 		this.direction = 'east';
-		this.x = this.getCoordinate(this.point_x);
-		this.y = this.getCoordinate(this.point_y);
+		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
+		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 		this.count = 0;
 	}
 
@@ -65,24 +73,24 @@ export class Character extends enchant.Sprite {
 			this.count += 1;
 		} else if (this.count === this.countRate) {
 			if (this.direction === 'north') {
-				this.point_y -= 1;
+				this.mapPoint_y -= 1;
 			}
 
 			if (this.direction === 'east') {
-				this.point_x += 1;
+				this.mapPoint_x += 1;
 			}
 
 			if (this.direction === 'south') {
-				this.point_y += 1;
+				this.mapPoint_y += 1;
 			}
 
 			if (this.direction === 'west') {
-				this.point_x -= 1;
+				this.mapPoint_x -= 1;
 			}
 
 			this.count = 0;
 
-			console.log(this.point_x, this.point_y);
+			console.log(this.mapPoint_x, this.mapPoint_y);
 		} else {
 			this.count += 1;
 		}
@@ -98,25 +106,45 @@ export class Character extends enchant.Sprite {
 		this.velocity = 0;
 		this.count = 0;
 
-		this.x = this.getCoordinate(this.point_x);
-		this.y = this.getCoordinate(this.point_y);
+		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
+		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
+	}
+
+	public getPointAndDirection(): CharacterPosition {
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
+		const direction = this.direction;
+
+		return {
+			mapPoint_x,
+			mapPoint_y,
+			direction,
+		};
+	}
+
+	public getCoordinateAndDirection(): CharacterPosition {
+		const mapPoint_x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
+		const mapPoint_y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
+		const direction = this.direction;
+
+		return {
+			mapPoint_x,
+			mapPoint_y,
+			direction,
+		};
 	}
 
 	private initCharacter() {
 		this.on('enterframe', function() {
 			eval(code);
 			if (
-				this.point_x < 0 ||
-				this.point_x > 9 ||
-				this.point_y < 0 ||
-				this.point_y > 9
+				this.mapPoint_x < 2 ||
+				this.mapPoint_x > 9 ||
+				this.mapPoint_y < 2 ||
+				this.mapPoint_y > 9
 			) {
 				this.reset();
 			}
 		});
-	}
-
-	private getCoordinate(point: number): number {
-		return (point - 1) * mapchipSize;
 	}
 }
