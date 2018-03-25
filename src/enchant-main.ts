@@ -15,6 +15,7 @@ export function init() {
 	core.preload('img/haikei.png');
 	core.preload('img/up_arrow.png');
 	core.preload('img/down_arrow.png');
+	core.preload('img/start_to_playscene.png');
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();

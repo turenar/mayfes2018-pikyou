@@ -3,14 +3,17 @@ import core from '../enchant/core';
 import { SceneManager } from '../scene-manager';
 import stages from '../stages';
 import ArrowButton from '../buttons/arrow_button'
+import StartToPlaySceneButton from '../buttons/start-to-playscene-button'
 import { Event } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
+import { Label } from 'node-enchantjs';
 
 export default class StageSelectingScene extends Scene {
 	private stageNum: number;
 	private maxStageNum: number;
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
+	public startButton: StartToPlaySceneButton;
 
 	public constructor(manager: SceneManager) {
 		super('StageSelecting', manager);
@@ -27,8 +30,13 @@ export default class StageSelectingScene extends Scene {
 
 		this.upButton = new ArrowButton(120, 10, 'up', this);
 		this.addChild(this.upButton);
-		this.downButton = new ArrowButton(120, 400, 'down', this);
+		this.downButton = new ArrowButton(120, 330, 'down', this);
 		this.addChild(this.downButton);
+		this.startButton = new StartToPlaySceneButton(80, 400);
+		this.addChild(this.startButton);
+
+		this.maxStageNum = stages.length - 1;
+		this.stageNum = 0;
 
 		this.upButton.addEventListener('touchstart', () => {
 			this.upNumber();
@@ -36,10 +44,10 @@ export default class StageSelectingScene extends Scene {
 		this.downButton.addEventListener('touchstart', () => {
 			this.downNumber();
 		});
+		this.startButton.addEventListener('touchstart', () => {
+			this.manager.changeScene('Playing', this.stageNum);
+		});
 
-		this.maxStageNum = stages.length - 1;
-
-		this.stageNum = 0;
 		console.log(`stageNum: ${this.stageNum}`);
 		this.addEventListener(Event.UP_BUTTON_DOWN, () => {
 			this.upNumber();
