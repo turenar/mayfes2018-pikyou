@@ -48,16 +48,6 @@ export default class StageSelectingScene extends Scene {
 		});
 
 		console.log(`stageNum: ${this.stageNum}`);
-		this.addEventListener(Event.UP_BUTTON_DOWN, () => {
-			this.upNumber();
-		});
-		this.addEventListener(Event.DOWN_BUTTON_DOWN, () => {
-			this.downNumber();
-		});
-		this.addEventListener(Event.A_BUTTON_DOWN, () => {
-			console.log('enter pressed');
-			this.manager.changeScene('Playing', this.stageNum);
-		});
 	}
 
 	private upNumber() {
