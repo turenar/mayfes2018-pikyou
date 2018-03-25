@@ -5,6 +5,6 @@ export default class StartToPlaysceneButton extends enchant.Sprite {
 		super(130, 60); // 画像サイズに応じて決める
 		this.x = x;
 		this.y = y;
-        this.image = core.assets['img/start_to_playscene.png'];
+		this.image = core.assets['img/start_to_playscene.png'];
 	}
 }

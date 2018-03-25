@@ -2,8 +2,8 @@ import { Scene } from '../scenes';
 import core from '../enchant/core';
 import { SceneManager } from '../scene-manager';
 import stages from '../stages';
-import ArrowButton from '../buttons/arrow_button'
-import StartToPlaySceneButton from '../buttons/start-to-playscene-button'
+import ArrowButton from '../buttons/arrow_button';
+import StartToPlaySceneButton from '../buttons/start-to-playscene-button';
 import { Event } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
 import { Label } from 'node-enchantjs';
@@ -61,19 +61,19 @@ export default class StageSelectingScene extends Scene {
 		});
 	}
 
-	private upNumber(){
-		if (this.stageNum == this.maxStageNum){
+	private upNumber() {
+		if (this.stageNum == this.maxStageNum) {
 			this.stageNum = 0;
-		}else{
+		} else {
 			this.stageNum += 1;
 		}
 		console.log(`stageNum: ${this.stageNum}`);
 	}
 
-	private downNumber(){
-		if(this.stageNum == 0){
+	private downNumber() {
+		if (this.stageNum == 0) {
 			this.stageNum = this.maxStageNum;
-		}else{
+		} else {
 			this.stageNum -= 1;
 		}
 		console.log(`stagenum: ${this.stageNum}`);
