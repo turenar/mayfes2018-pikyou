@@ -12,7 +12,7 @@ export class World {
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
-		this.character = new Character();
+		this.character = new Character(this);
 		this.map = new Map(stages[stageNumber].map);
 
 		this.map.addInto(this.scene);
@@ -24,7 +24,27 @@ export class World {
 		this.map.reset();
 	}
 
-	public canMoveCharacterNext(position: CharacterPosition) {
+	/**
+	 * マップ座標をわたすとcharacterの足元のマップチップを返す。
+	 * @param {number} mapPoint_x -mapPoint_x
+	 * @param {number} mapPoint_y -mapPoint_y
+	 * @returns {number} -タイル番号
+	 */
+	public checkCharacterFeetTile(
+		mapPoint_x: number,
+		mapPoint_y: number
+	): number {
+		const x = Map.getCoordinateFromMapPoint(mapPoint_x);
+		const y = Map.getCoordinateFromMapPoint(mapPoint_y);
+		return this.map.checkTile(x, y);
+	}
+
+	/**
+	 * CharacterPositionを渡すとキャラクターが目の前のマスに進めるかを返す。
+	 * @param {CharacterPosition} position -CharacterPosition
+	 * @returns {boolean} -進めるならtrue
+	 */
+	public canMoveCharacterNext(position: CharacterPosition): boolean {
 		let next_x;
 		let next_y;
 

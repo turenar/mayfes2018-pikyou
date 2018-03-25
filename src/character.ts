@@ -2,6 +2,7 @@ import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import { code } from './blockly-main';
 import { mapchipSize, Map } from './enchant/map';
+import { World } from './world';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -14,6 +15,7 @@ export type CharacterPosition = {
 export class Character extends enchant.Sprite {
 	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
+	private world: World;
 	private mapPoint_x: number;
 	private mapPoint_y: number;
 	private initMapPoint_x: number;
@@ -24,7 +26,7 @@ export class Character extends enchant.Sprite {
 	private direction: Direction;
 	private count: number;
 
-	public constructor() {
+	public constructor(world: World) {
 		const width = 32;
 		const height = 32;
 		super(width, height);
@@ -33,6 +35,7 @@ export class Character extends enchant.Sprite {
 		this.initMapPoint_y = 5;
 		this.countRate = 4;
 		this.defaultVelocity = mapchipSize / this.countRate;
+		this.world = world;
 
 		this.reset();
 		this.initCharacter();
@@ -91,6 +94,7 @@ export class Character extends enchant.Sprite {
 			this.count = 0;
 
 			console.log(this.mapPoint_x, this.mapPoint_y);
+			console.log(this.getFeetTile());
 		} else {
 			this.count += 1;
 		}
@@ -101,7 +105,7 @@ export class Character extends enchant.Sprite {
 		this.direction = direction;
 	}
 
-	//停止
+	//ストップ
 	public stop() {
 		this.velocity = 0;
 		this.count = 0;
@@ -110,7 +114,11 @@ export class Character extends enchant.Sprite {
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 	}
 
-	public getPointAndDirection(): CharacterPosition {
+	/**
+	 * CharacterPositionをマップ座標で返す
+	 * @returns {CharacterPosition} -charcaterのマップ座標と向きを返す。
+	 */
+	public getMapPointAndDirection(): CharacterPosition {
 		const mapPoint_x = this.mapPoint_x;
 		const mapPoint_y = this.mapPoint_y;
 		const direction = this.direction;
@@ -122,16 +130,28 @@ export class Character extends enchant.Sprite {
 		};
 	}
 
-	public getCoordinateAndDirection(): CharacterPosition {
-		const mapPoint_x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
-		const mapPoint_y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
+	/**
+	 * 足元のマップチップの種類を取得する。
+	 * @returns {number} -足元のマップチップの種類
+	 */
+	private getFeetTile(): number {
+		return this.world.checkCharacterFeetTile(this.mapPoint_x, this.mapPoint_y);
+	}
+
+	/**
+	 * 目の前のマスに進めるかどうか。
+	 * @returns {boolean} -進めればtrue
+	 */
+	private canMoveNext(): boolean {
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
 		const direction = this.direction;
 
-		return {
+		return this.world.canMoveCharacterNext({
 			mapPoint_x,
 			mapPoint_y,
 			direction,
-		};
+		});
 	}
 
 	private initCharacter() {
