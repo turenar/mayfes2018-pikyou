@@ -7,8 +7,8 @@ import { World } from './world';
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
 export type CharacterPosition = {
-	point_x: number;
-	point_y: number;
+	mapPoint_x: number;
+	mapPoint_y: number;
 	direction: Direction;
 };
 
@@ -100,16 +100,12 @@ export class Character extends enchant.Sprite {
 		}
 	}
 
-	/**
-	 * 方向転換 
-	 */
+	//方向転換
 	public setDirection(direction: Direction) {
 		this.direction = direction;
 	}
 
-	/**
-	 * ストップ
-	 */
+	//ストップ
 	public stop() {
 		this.velocity = 0;
 		this.count = 0;
@@ -120,52 +116,40 @@ export class Character extends enchant.Sprite {
 
 	/**
 	 * CharacterPositionをマップ座標で返す
+	 * @returns {CharacterPosition} -charcaterのマップ座標と向きを返す。
 	 */
 	public getMapPointAndDirection(): CharacterPosition {
-		const point_x = this.mapPoint_x;
-		const point_y = this.mapPoint_y;
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
 		const direction = this.direction;
 
 		return {
-			point_x,
-			point_y,
-			direction,
-		};
-	}
-
-	/**
-	 * CharacterPositionをピクセル座標で返す
-	 */
-	public getCoordinateAndDirection(): CharacterPosition {
-		const point_x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
-		const point_y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
-		const direction = this.direction;
-
-		return {
-			point_x,
-			point_y,
+			mapPoint_x,
+			mapPoint_y,
 			direction,
 		};
 	}
 
 	/**
 	 * 足元のマップチップの種類を取得する。
+	 * @returns {number} -足元のマップチップの種類
 	 */
 	private getFeetTile(): number {
-		return this.world.checkCharacterFeetTile(this.mapPoint_x, this.mapPoint_y)
+		return this.world.checkCharacterFeetTile(this.mapPoint_x, this.mapPoint_y);
 	}
 
 	/**
 	 * 目の前のマスに進めるかどうか。
+	 * @returns {boolean} -進めればtrue
 	 */
 	private canMoveNext(): boolean {
-		const point_x = this.mapPoint_x;
-		const point_y = this.mapPoint_y;
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
 		const direction = this.direction;
 
 		return this.world.canMoveCharacterNext({
-			point_x,
-			point_y,
+			mapPoint_x,
+			mapPoint_y,
 			direction,
 		});
 	}

@@ -23,35 +23,40 @@ export class World {
 		this.character.reset();
 		this.map.reset();
 	}
-	
-    /**
+
+	/**
 	 * マップ座標をわたすとcharacterの足元のマップチップを返す。
-	 * @param mapPoint_x 
-	 * @param mapPoint_y 
+	 * @param {number} mapPoint_x -mapPoint_x
+	 * @param {number} mapPoint_y -mapPoint_y
+	 * @returns {number} -タイル番号
 	 */
-    public checkCharacterFeetTile(mapPoint_x: number, mapPoint_y: number) {
+	public checkCharacterFeetTile(
+		mapPoint_x: number,
+		mapPoint_y: number
+	): number {
 		const x = Map.getCoordinateFromMapPoint(mapPoint_x);
 		const y = Map.getCoordinateFromMapPoint(mapPoint_y);
-        return this.map.checkTile(x, y);
-    }
+		return this.map.checkTile(x, y);
+	}
 
 	/**
 	 * CharacterPositionを渡すとキャラクターが目の前のマスに進めるかを返す。
-	 * @param position 
+	 * @param {CharacterPosition} position -CharacterPosition
+	 * @returns {boolean} -進めるならtrue
 	 */
-	public canMoveCharacterNext(position: CharacterPosition) {
+	public canMoveCharacterNext(position: CharacterPosition): boolean {
 		let next_x;
 		let next_y;
 
 		if (position.direction === 'north')
-			next_y = Map.getCoordinateFromMapPoint(position.point_y - 1);
+			next_y = Map.getCoordinateFromMapPoint(position.mapPoint_y - 1);
 		if (position.direction === 'east')
-			next_x = Map.getCoordinateFromMapPoint(position.point_x + 1);
+			next_x = Map.getCoordinateFromMapPoint(position.mapPoint_x + 1);
 		if (position.direction === 'south')
-			next_y = Map.getCoordinateFromMapPoint(position.point_y + 1);
+			next_y = Map.getCoordinateFromMapPoint(position.mapPoint_y + 1);
 		if (position.direction === 'west')
-			next_x = Map.getCoordinateFromMapPoint(position.point_x - 1);
+			next_x = Map.getCoordinateFromMapPoint(position.mapPoint_x - 1);
 
 		return this.map.canEnter(next_x, next_y);
-    }
+	}
 }
