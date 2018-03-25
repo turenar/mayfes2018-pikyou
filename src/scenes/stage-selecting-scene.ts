@@ -6,7 +6,6 @@ import ArrowButton from '../buttons/arrow_button';
 import StartToPlaySceneButton from '../buttons/start-to-playscene-button';
 import { Event } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
-import { Label } from 'node-enchantjs';
 
 export default class StageSelectingScene extends Scene {
 	private stageNum: number;
