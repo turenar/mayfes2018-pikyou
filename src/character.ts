@@ -7,8 +7,8 @@ import { World } from './world';
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
 export type CharacterPosition = {
-	mapPoint_x: number;
-	mapPoint_y: number;
+	point_x: number;
+	point_y: number;
 	direction: Direction;
 };
 
@@ -100,12 +100,16 @@ export class Character extends enchant.Sprite {
 		}
 	}
 
-	//方向転換
+	/**
+	 * 方向転換 
+	 */
 	public setDirection(direction: Direction) {
 		this.direction = direction;
 	}
 
-	//停止
+	/**
+	 * ストップ
+	 */
 	public stop() {
 		this.velocity = 0;
 		this.count = 0;
@@ -114,42 +118,54 @@ export class Character extends enchant.Sprite {
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 	}
 
-	public getPointAndDirection(): CharacterPosition {
-		const mapPoint_x = this.mapPoint_x;
-		const mapPoint_y = this.mapPoint_y;
+	/**
+	 * CharacterPositionをマップ座標で返す
+	 */
+	public getMapPointAndDirection(): CharacterPosition {
+		const point_x = this.mapPoint_x;
+		const point_y = this.mapPoint_y;
 		const direction = this.direction;
 
 		return {
-			mapPoint_x,
-			mapPoint_y,
+			point_x,
+			point_y,
 			direction,
 		};
 	}
 
+	/**
+	 * CharacterPositionをピクセル座標で返す
+	 */
 	public getCoordinateAndDirection(): CharacterPosition {
-		const mapPoint_x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
-		const mapPoint_y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
+		const point_x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
+		const point_y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 		const direction = this.direction;
 
 		return {
-			mapPoint_x,
-			mapPoint_y,
+			point_x,
+			point_y,
 			direction,
 		};
 	}
 
+	/**
+	 * 足元のマップチップの種類を取得する。
+	 */
 	private getFeetTile(): number {
 		return this.world.checkCharacterFeetTile(this.mapPoint_x, this.mapPoint_y)
 	}
 
+	/**
+	 * 目の前のマスに進めるかどうか。
+	 */
 	private canMoveNext(): boolean {
-		const mapPoint_x = this.mapPoint_x;
-		const mapPoint_y = this.mapPoint_y;
+		const point_x = this.mapPoint_x;
+		const point_y = this.mapPoint_y;
 		const direction = this.direction;
 
 		return this.world.canMoveCharacterNext({
-			mapPoint_x,
-			mapPoint_y,
+			point_x,
+			point_y,
 			direction,
 		});
 	}
