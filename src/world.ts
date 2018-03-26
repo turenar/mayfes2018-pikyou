@@ -59,4 +59,12 @@ export class World {
 
 		return this.map.canEnter(next_x, next_y);
 	}
+
+	public goal() {
+		this.scene.moveNextScene('Result');
+
+		//debug用コード（Result画面ができたら消す)
+		console.log(core.currentScene);
+		this.scene.moveNextScene('Playing');
+	}
 }

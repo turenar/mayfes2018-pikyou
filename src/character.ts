@@ -3,6 +3,7 @@ import core from './enchant/core';
 import { code } from './blockly-main';
 import { mapchipSize, Map } from './enchant/map';
 import { World } from './world';
+import MapChip from './enchant/mapchip';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -157,6 +158,12 @@ export class Character extends enchant.Sprite {
 	private initCharacter() {
 		this.on('enterframe', function() {
 			eval(code);
+
+			if (this.getFeetTile() === MapChip.Goal) {
+				this.world.goal();
+			}
+
+			//debug用コード
 			if (
 				this.mapPoint_x < 2 ||
 				this.mapPoint_x > 9 ||
