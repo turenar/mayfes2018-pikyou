@@ -1,5 +1,21 @@
 import * as Blockly from 'node-blockly/browser';
 
+//execute:最初から置いておくブロック
+Blockly.Blocks['execute'] = {
+	init: function() {
+		this.jsonInit({
+			type: 'Execution',
+			message0: 'この下につながっている処理を実行します',
+		});
+		this.setNextStatement(true);
+		this.moveBy(20, 20);
+		this.setMovable(false);
+		this.setColour(300);
+		this.setTooltip('この下に連なる処理が実行されます');
+	}
+}
+
+
 //move forward
 Blockly.Blocks['move_forward'] = {
 	init: function() {
