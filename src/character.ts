@@ -157,6 +157,16 @@ export class Character extends enchant.Sprite {
 	private initCharacter() {
 		this.on('enterframe', function() {
 			eval(code);
+
+			if (this.getFeetTile() === 3) {
+				this.world.scene.moveNextScene('Result');
+
+				//debug用コード（Result画面ができたら消す
+				console.log(core.currentScene);
+				this.world.scene.moveNextScene('Playing');
+			}
+
+			//debug用コード
 			if (
 				this.mapPoint_x < 2 ||
 				this.mapPoint_x > 9 ||
