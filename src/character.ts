@@ -160,11 +160,7 @@ export class Character extends enchant.Sprite {
 			eval(code);
 
 			if (this.getFeetTile() === MapChip.Goal) {
-				this.world.scene.moveNextScene('Result');
-
-				//debug用コード（Result画面ができたら消す
-				console.log(core.currentScene);
-				this.world.scene.moveNextScene('Playing');
+				this.world.goal();
 			}
 
 			//debug用コード
