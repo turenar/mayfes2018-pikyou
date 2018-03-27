@@ -12,9 +12,8 @@ Blockly.Blocks['execute'] = {
 		this.setMovable(false);
 		this.setColour(300);
 		this.setTooltip('この下に連なる処理が実行されます');
-	}
-}
-
+	},
+};
 
 //move forward
 Blockly.Blocks['move_forward'] = {

@@ -16,9 +16,11 @@ const initBlock = workspacePlayground.newBlock('execute', 'initialBlock');
 (initBlock as Blockly.BlockSvg).initSvg();
 (workspacePlayground as Blockly.WorkspaceSvg).render();
 
-export var code = '';
+export var code: string = '';
 
 Blockly.addChangeListener(function(event) {
-	code = Blockly.JavaScript.workspaceToCode(workspacePlayground);
+	code = Blockly.JavaScript.blockToCode(
+		workspacePlayground.getBlockById('initialBlock')
+	) as string;
 	console.log(code);
 });
