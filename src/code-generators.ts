@@ -1,5 +1,10 @@
 import * as Blockly from 'node-blockly/browser';
 
+Blockly.JavaScript['execute'] = function(block: Blockly.Block) {
+	const code = '1 === 1;'
+	return code;
+};
+
 Blockly.JavaScript['move_forward'] = function(block: Blockly.Block) {
 	const code = 'this.moveForward();';
 	return code;
