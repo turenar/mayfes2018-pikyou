@@ -19,6 +19,18 @@ const initBlock = workspacePlayground.newBlock('execute', 'initialBlock');
 export var code: string = '';
 
 Blockly.addChangeListener(function(event) {
+	let allBlocks = workspacePlayground.getAllBlocks();
+
+	allBlocks.map(block => {
+		if (block !== null && block.id !== 'initialBlock') {
+			if (block.getRootBlock().id !== 'initialBlock') {
+				block.setColour('#646665');
+			} else {
+				block.setColour(Blockly.Blocks[block.type].color);
+			}
+		}
+	});
+
 	code = Blockly.JavaScript.blockToCode(
 		workspacePlayground.getBlockById('initialBlock')
 	) as string;
