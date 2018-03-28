@@ -1,5 +1,39 @@
 import * as Blockly from 'node-blockly/browser';
 
+//execute:最初から置いておくブロック
+Blockly.Blocks['execute'] = {
+	init: function() {
+		this.jsonInit({
+			type: 'Execution',
+			message0: 'この下につながっている処理を実行します',
+		});
+		this.setNextStatement(true);
+		this.moveBy(20, 20);
+		this.setMovable(false);
+		this.setColour(this.color);
+		this.setTooltip('この下に連なる処理が実行されます');
+	},
+	color: 300,
+};
+
+//controls_if
+Blockly.Blocks['controls_if'] = {
+	...Blockly.Blocks['controls_if'],
+	color: '#5b80a5',
+};
+
+//controls_repeat
+Blockly.Blocks['controls_repeat'] = {
+	...Blockly.Blocks['controls_repeat'],
+	color: '#5ba55b',
+};
+
+//logic_operation
+Blockly.Blocks['logic_operation'] = {
+	...Blockly.Blocks['logic_operation'],
+	color: '#5b80a5',
+};
+
 //move forward
 Blockly.Blocks['move_forward'] = {
 	init: function() {
@@ -10,9 +44,10 @@ Blockly.Blocks['move_forward'] = {
 		this.setNextStatement(true);
 		this.setPreviousStatement(true);
 		this.setOutput(false);
-		this.setColour(180);
+		this.setColour(this.color);
 		this.setTooltip('キャラクターが移動を始めます');
 	},
+	color: 180,
 };
 
 //set direction
@@ -38,9 +73,10 @@ Blockly.Blocks['set_direction'] = {
 		this.setNextStatement(true);
 		this.setPreviousStatement(true);
 		this.setOutput(false);
-		this.setColour(180);
+		this.setColour(this.color);
 		this.setTooltip('キャラクターの向きを変更します');
 	},
+	color: 180,
 };
 
 //move stop
@@ -53,9 +89,10 @@ Blockly.Blocks['stop'] = {
 		this.setNextStatement(true);
 		this.setPreviousStatement(true);
 		this.setOutput(false);
-		this.setColour(180);
+		this.setColour(this.color);
 		this.setTooltip('キャラクターが停止します');
 	},
+	color: 180,
 };
 
 //act pick
@@ -68,9 +105,10 @@ Blockly.Blocks['act_pick'] = {
 		this.setNextStatement(true);
 		this.setPreviousStatement(true);
 		this.setOutput(false);
-		this.setColour(120);
+		this.setColour(this.color);
 		this.setTooltip('足元にあるアイテムを拾います');
 	},
+	color: 120,
 };
 
 //act use
@@ -83,9 +121,10 @@ Blockly.Blocks['act_use'] = {
 		this.setNextStatement(true);
 		this.setPreviousStatement(true);
 		this.setOutput(false);
-		this.setColour(120);
+		this.setColour(this.color);
 		this.setTooltip('所持しているアイテムを使います');
 	},
+	color: 120,
 };
 
 //act jump
@@ -98,9 +137,10 @@ Blockly.Blocks['act_jump'] = {
 		this.setNextStatement(true);
 		this.setPreviousStatement(true);
 		this.setOutput(false);
-		this.setColour(120);
+		this.setColour(this.color);
 		this.setTooltip('ジャンプして1マス飛び越えます');
 	},
+	color: 120,
 };
 
 //check movable
@@ -125,9 +165,10 @@ Blockly.Blocks['check_movable'] = {
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
-		this.setColour(80);
+		this.setColour(this.color);
 		this.setTooltip('特定の方向に進むことができるかを返します');
 	},
+	color: 80,
 };
 
 //check wall
@@ -140,9 +181,10 @@ Blockly.Blocks['check_wall_front'] = {
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
-		this.setColour(80);
+		this.setColour(this.color);
 		this.setTooltip('正面に壁があるかを返します');
 	},
+	color: 80,
 };
 
 //check obstacle
@@ -162,9 +204,10 @@ Blockly.Blocks['check_obstacle'] = {
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
-		this.setColour(80);
+		this.setColour(this.color);
 		this.setTooltip('正面に障害物があるかを返します');
 	},
+	color: 80,
 };
 
 //check item
@@ -177,9 +220,10 @@ Blockly.Blocks['check_item'] = {
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
-		this.setColour(80);
+		this.setColour(this.color);
 		this.setTooltip('足元にアイテムがあるかを返します');
 	},
+	color: 80,
 };
 
 //check possession
@@ -192,9 +236,10 @@ Blockly.Blocks['check_possession'] = {
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
-		this.setColour(80);
+		this.setColour(this.color);
 		this.setTooltip('アイテムを持っているかを返します');
 	},
+	color: 80,
 };
 
 //check mark
@@ -219,7 +264,8 @@ Blockly.Blocks['check_mark'] = {
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
-		this.setColour(80);
+		this.setColour(this.color);
 		this.setTooltip('足元に特定のマーカーがあるかを返します');
 	},
+	color: 80,
 };
