@@ -1,5 +1,6 @@
 import { Scene } from '../scenes';
 import core from '../enchant/core';
+import MapMini from '../enchant/map_mini';
 import { SceneManager } from '../scene-manager';
 import stages from '../stages';
 import ArrowButton from '../buttons/arrow_button';
@@ -13,6 +14,7 @@ export default class StageSelectingScene extends Scene {
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
 	public startButton: StartToPlaySceneButton;
+	public stageImage: MapMini;
 
 	public constructor(manager: SceneManager) {
 		super('StageSelecting', manager);
@@ -48,6 +50,11 @@ export default class StageSelectingScene extends Scene {
 		});
 
 		console.log(`stageNum: ${this.stageNum}`);
+
+		// this.stageImage = new MapMini(stages[this.stageNum].map, 0.6)
+		// console.log(this.stageImage)
+		// this.stageImage.addInto(this)
+		this.updateStageImage();
 	}
 
 	private upNumber() {
@@ -57,6 +64,7 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum += 1;
 		}
 		console.log(`stageNum: ${this.stageNum}`);
+		this.updateStageImage();
 	}
 
 	private downNumber() {
@@ -66,5 +74,11 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum -= 1;
 		}
 		console.log(`stagenum: ${this.stageNum}`);
+		this.updateStageImage();
+	}
+
+	private updateStageImage() {
+		this.stageImage = new MapMini(stages[this.stageNum].map, 0.6);
+		this.stageImage.addInto(this);
 	}
 }
