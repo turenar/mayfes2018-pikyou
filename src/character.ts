@@ -16,16 +16,16 @@ export type CharacterPosition = {
 export class Character extends enchant.Sprite {
 	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
+	public isAnimating: boolean;
 	private world: World;
 	private mapPoint_x: number;
 	private mapPoint_y: number;
 	private initMapPoint_x: number;
 	private initMapPoint_y: number;
-	private countRate: number;
+	private animationRate: number;
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
-	private isAnimation: boolean;
 
 	public constructor(world: World) {
 		const width = 32;
@@ -34,8 +34,8 @@ export class Character extends enchant.Sprite {
 		this.image = core.assets['img/chara1.png'];
 		this.initMapPoint_x = 5;
 		this.initMapPoint_y = 5;
-		this.countRate = 4;
-		this.defaultVelocity = mapchipSize / this.countRate;
+		this.animationRate = 4;
+		this.defaultVelocity = mapchipSize / this.animationRate;
 		this.world = world;
 
 		this.reset();
@@ -47,15 +47,18 @@ export class Character extends enchant.Sprite {
 		this.mapPoint_x = this.initMapPoint_x;
 		this.mapPoint_y = this.initMapPoint_y;
 		this.velocity = this.defaultVelocity;
-		this.direction = 'east';
+		this.direction = 'south';
 		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
-		this.isAnimation = false;
+		this.isAnimating = false;
+		this.tl.clear();
 	}
 
 	//向いている方向に進む
 	public moveForward() {
-		if (!this.isAnimation) {
+		console.log(this.isAnimating);
+		if (!this.isAnimating) {
+			this.velocity = this.defaultVelocity;
 			if (this.direction === 'north') {
 				this.mapPoint_y -= 1;
 			}
@@ -71,26 +74,24 @@ export class Character extends enchant.Sprite {
 			if (this.direction === 'west') {
 				this.mapPoint_x -= 1;
 			}
-
 			this.tl.action(this.mkMovingAction(this.direction));
 		}
 
-			console.log(`x = ${this.mapPoint_x}, y = ${this.mapPoint_y}, tile = ${this.getFeetTile()}`);
+		console.log(`x = ${this.mapPoint_x}, y = ${this.mapPoint_y}, tile = ${this.getFeetTile()}, direction = ${this.direction}`);
 	}
 
 	//方向転換
 	public setDirection(direction: Direction) {
-		if (!this.isAnimation) {
+		if (!this.isAnimating) {
 			this.direction = direction;
 		}
 	}
 
 	//ストップ
 	public stop() {
-		this.velocity = 0;
-
-		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
-		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
+		if (!this.isAnimating) {
+			this.velocity = 0;
+		}
 	}
 
 	/**
@@ -134,41 +135,41 @@ export class Character extends enchant.Sprite {
 	}
 
 	private mkMovingAction(direction: Direction) {
-		const timer: number = 4;
+		const velocity = this.velocity;
 		let actiontick;
 
 		if (direction === 'north') {
 			actiontick = function() {
-				this.moveBy(0, -this.velocity);
+				this.moveBy(0, -velocity);
 			}
 		}
 		
 		if (direction === 'east') {
 			actiontick = function() {
-				this.moveBy(this.velocity, 0);
+				this.moveBy(velocity, 0);
 			}
 		}
 
 		if (direction === 'south') {
 			actiontick = function() {
-				this.moveBy(0, this.velocity);
+				this.moveBy(0, velocity);
 			}
 		}
 
 		if (direction === 'west') {
 			actiontick = function() {
-				this.moveBy(-this.velocity, 0);
+				this.moveBy(-velocity, 0);
 			}
 		}
 
 		const action = {
-			time: timer,
+			time: this.animationRate,
 			onactionstart: function() {
-				this.isAnimation = true;
+				this.isAnimating = true;
 				console.log('action start');
 			},
 			onactionend: function() {
-				this.isAnimation = false;
+				this.isAnimating = false;
 				console.log('action end');
 			},
 			onactiontick: actiontick

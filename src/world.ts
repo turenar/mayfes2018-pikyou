@@ -9,6 +9,7 @@ export class World {
 	public scene: PlayingScene;
 	public character: Character;
 	public map: Map;
+	public isAnimating: boolean;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
@@ -17,6 +18,8 @@ export class World {
 
 		this.map.addInto(this.scene);
 		this.scene.addChild(this.character);
+
+		this.isAnimating = this.character.isAnimating;
 	}
 
 	public reset() {
