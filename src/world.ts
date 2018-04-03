@@ -45,8 +45,8 @@ export class World {
 	 * @returns {boolean} -進めるならtrue
 	 */
 	public canMoveCharacterNext(position: CharacterPosition): boolean {
-		let next_x;
-		let next_y;
+		let next_x = Map.getCoordinateFromMapPoint(position.mapPoint_x);
+		let next_y = Map.getCoordinateFromMapPoint(position.mapPoint_y);
 
 		if (position.direction === 'north')
 			next_y = Map.getCoordinateFromMapPoint(position.mapPoint_y - 1);
