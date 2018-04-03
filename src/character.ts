@@ -16,7 +16,6 @@ export type CharacterPosition = {
 export class Character extends enchant.Sprite {
 	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
-	public isAnimating: boolean;
 	private world: World;
 	private mapPoint_x: number;
 	private mapPoint_y: number;
@@ -26,6 +25,7 @@ export class Character extends enchant.Sprite {
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
+	public isAnimating: boolean;
 
 	public constructor(world: World) {
 		const width = 32;
@@ -56,8 +56,7 @@ export class Character extends enchant.Sprite {
 
 	//向いている方向に進む
 	public moveForward() {
-		console.log(this.isAnimating);
-		if (!this.isAnimating) {
+		if (!this.isAnimating && this.canMoveNext()) {
 			this.velocity = this.defaultVelocity;
 			if (this.direction === 'north') {
 				this.mapPoint_y -= 1;
@@ -74,10 +73,16 @@ export class Character extends enchant.Sprite {
 			if (this.direction === 'west') {
 				this.mapPoint_x -= 1;
 			}
+			this.isAnimating = true;
 			this.tl.action(this.mkMovingAction(this.direction));
 		}
 
-		console.log(`x = ${this.mapPoint_x}, y = ${this.mapPoint_y}, tile = ${this.getFeetTile()}, direction = ${this.direction}`);
+		console.log({
+			x: this.mapPoint_x,
+			y: this.mapPoint_y,
+			tile: this.getFeetTile(),
+			direction: this.direction,
+		});
 	}
 
 	//方向転換
@@ -141,25 +146,25 @@ export class Character extends enchant.Sprite {
 		if (direction === 'north') {
 			actiontick = function() {
 				this.moveBy(0, -velocity);
-			}
+			};
 		}
-		
+
 		if (direction === 'east') {
 			actiontick = function() {
 				this.moveBy(velocity, 0);
-			}
+			};
 		}
 
 		if (direction === 'south') {
 			actiontick = function() {
 				this.moveBy(0, velocity);
-			}
+			};
 		}
 
 		if (direction === 'west') {
 			actiontick = function() {
 				this.moveBy(-velocity, 0);
-			}
+			};
 		}
 
 		const action = {
@@ -172,8 +177,8 @@ export class Character extends enchant.Sprite {
 				this.isAnimating = false;
 				console.log('action end');
 			},
-			onactiontick: actiontick
-		}
+			onactiontick: actiontick,
+		};
 
 		return action;
 	}
@@ -182,7 +187,7 @@ export class Character extends enchant.Sprite {
 		this.on('enterframe', function() {
 			eval(code);
 
-			if (this.getFeetTile() === MapChip.Goal) {
+			if (this.getFeetTile() === MapChip.Goal && !this.isAnimating) {
 				this.world.goal();
 			}
 
