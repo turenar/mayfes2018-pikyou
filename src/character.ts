@@ -25,7 +25,7 @@ export class Character extends enchant.Sprite {
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
-	private count: number;
+	private isAnimation: boolean;
 
 	public constructor(world: World) {
 		const width = 32;
@@ -50,32 +50,12 @@ export class Character extends enchant.Sprite {
 		this.direction = 'east';
 		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
-		this.count = 0;
+		this.isAnimation = false;
 	}
 
 	//向いている方向に進む
 	public moveForward() {
-		if (this.count < this.countRate) {
-			this.velocity = this.defaultVelocity;
-
-			if (this.direction === 'north') {
-				this.moveBy(0, -this.velocity);
-			}
-
-			if (this.direction === 'east') {
-				this.moveBy(this.velocity, 0);
-			}
-
-			if (this.direction === 'south') {
-				this.moveBy(0, this.velocity);
-			}
-
-			if (this.direction === 'west') {
-				this.moveBy(-this.velocity, 0);
-			}
-
-			this.count += 1;
-		} else if (this.count === this.countRate) {
+		if (!this.isAnimation) {
 			if (this.direction === 'north') {
 				this.mapPoint_y -= 1;
 			}
@@ -92,24 +72,22 @@ export class Character extends enchant.Sprite {
 				this.mapPoint_x -= 1;
 			}
 
-			this.count = 0;
-
-			console.log(this.mapPoint_x, this.mapPoint_y);
-			console.log(this.getFeetTile());
-		} else {
-			this.count += 1;
+			this.tl.action(this.mkMovingAction(this.direction));
 		}
+
+			console.log(`x = ${this.mapPoint_x}, y = ${this.mapPoint_y}, tile = ${this.getFeetTile()}`);
 	}
 
 	//方向転換
 	public setDirection(direction: Direction) {
-		this.direction = direction;
+		if (!this.isAnimation) {
+			this.direction = direction;
+		}
 	}
 
 	//ストップ
 	public stop() {
 		this.velocity = 0;
-		this.count = 0;
 
 		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
@@ -153,6 +131,50 @@ export class Character extends enchant.Sprite {
 			mapPoint_y,
 			direction,
 		});
+	}
+
+	private mkMovingAction(direction: Direction) {
+		const timer: number = 4;
+		let actiontick;
+
+		if (direction === 'north') {
+			actiontick = function() {
+				this.moveBy(0, -this.velocity);
+			}
+		}
+		
+		if (direction === 'east') {
+			actiontick = function() {
+				this.moveBy(this.velocity, 0);
+			}
+		}
+
+		if (direction === 'south') {
+			actiontick = function() {
+				this.moveBy(0, this.velocity);
+			}
+		}
+
+		if (direction === 'west') {
+			actiontick = function() {
+				this.moveBy(-this.velocity, 0);
+			}
+		}
+
+		const action = {
+			time: timer,
+			onactionstart: function() {
+				this.isAnimation = true;
+				console.log('action start');
+			},
+			onactionend: function() {
+				this.isAnimation = false;
+				console.log('action end');
+			},
+			onactiontick: actiontick
+		}
+
+		return action;
 	}
 
 	private initCharacter() {
