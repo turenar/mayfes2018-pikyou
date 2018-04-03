@@ -4,6 +4,8 @@ import { Map as EnchantMap } from './enchant/map';
 import stages from './stages';
 import { Character } from './character';
 import { SceneManager } from './scene-manager';
+import PlayingScene from './scenes/playing-scene';
+import TopScene from './scenes/top-scene';
 
 export type SceneKind =
 	| 'Top'
@@ -28,9 +30,9 @@ export class Scene extends enchant.Scene {
 }
 
 export type Scenes = {
-	Top: Scene;
+	Top: TopScene;
 	StageSelecting: Scene;
-	Playing: Scene;
+	Playing: PlayingScene;
 	GameOver: Scene;
 	Result: Scene;
 };
