@@ -2,6 +2,7 @@ import core from './enchant/core';
 import PlayingScene from './scenes/playing-scene';
 import { code } from './blockly-main';
 import { Character, CharacterPosition } from './character';
+import { AnimationQueue } from './animation-queue';
 import { Map } from './enchant/map';
 import stages from './stages';
 
@@ -9,12 +10,14 @@ export class World {
 	public scene: PlayingScene;
 	public character: Character;
 	public map: Map;
+	public animationQueue: AnimationQueue;
 	public isAnimating: boolean;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
 		this.character = new Character(this);
 		this.map = new Map(stages[stageNumber].map);
+		this.animationQueue = new AnimationQueue();
 
 		this.map.addInto(this.scene);
 		this.scene.addChild(this.character);
@@ -25,6 +28,7 @@ export class World {
 	public reset() {
 		this.character.reset();
 		this.map.reset();
+		this.animationQueue.clear();
 	}
 
 	/**
@@ -69,5 +73,6 @@ export class World {
 		//debug用コード（Result画面ができたら消す)
 		console.log(core.currentScene);
 		this.scene.moveNextScene('Playing');
+		this.reset();
 	}
 }

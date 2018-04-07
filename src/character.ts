@@ -56,8 +56,9 @@ export class Character extends enchant.Sprite {
 
 	//向いている方向に進む
 	public moveForward() {
-		if (!this.isAnimating && this.canMoveNext()) {
+		if (this.canMoveNext()) {
 			this.velocity = this.defaultVelocity;
+
 			if (this.direction === 'north') {
 				this.mapPoint_y -= 1;
 			}
@@ -73,23 +74,21 @@ export class Character extends enchant.Sprite {
 			if (this.direction === 'west') {
 				this.mapPoint_x -= 1;
 			}
-			this.isAnimating = true;
-			this.tl.action(this.mkMovingAction(this.direction));
-		}
 
-		console.log({
-			x: this.mapPoint_x,
-			y: this.mapPoint_y,
-			tile: this.getFeetTile(),
-			direction: this.direction,
-		});
+			console.log({
+				x: this.mapPoint_x,
+				y: this.mapPoint_y,
+				tile: this.getFeetTile(),
+				direction: this.direction,
+			});
+
+			this.world.animationQueue.push(this.mkMovingAction(this.direction));
+		}
 	}
 
 	//方向転換
 	public setDirection(direction: Direction) {
-		if (!this.isAnimating) {
-			this.direction = direction;
-		}
+		this.direction = direction;
 	}
 
 	//ストップ
@@ -185,10 +184,19 @@ export class Character extends enchant.Sprite {
 
 	private initCharacter() {
 		this.on('enterframe', function() {
-			eval(code);
-
-			if (this.getFeetTile() === MapChip.Goal && !this.isAnimating) {
+			if (
+				this.getFeetTile() === MapChip.Goal &&
+				!this.isAnimating &&
+				this.world.animationQueue.length() === 0
+			) {
 				this.world.goal();
+			} else {
+				eval(code);
+			}
+
+			if (!this.isAnimating) {
+				this.isAnimating = true;
+				this.tl.action(this.world.animationQueue.pop());
 			}
 
 			//debug用コード
@@ -198,7 +206,7 @@ export class Character extends enchant.Sprite {
 				this.mapPoint_y < 2 ||
 				this.mapPoint_y > 9
 			) {
-				this.reset();
+				this.world.reset();
 			}
 		});
 	}
