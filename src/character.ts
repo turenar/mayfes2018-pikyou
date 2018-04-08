@@ -21,11 +21,11 @@ export class Character extends enchant.Sprite {
 	private mapPoint_y: number;
 	private initMapPoint_x: number;
 	private initMapPoint_y: number;
-	private countRate: number;
+	private animationRate: number;
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
-	private count: number;
+	public isAnimating: boolean;
 
 	public constructor(world: World) {
 		const width = 32;
@@ -34,8 +34,8 @@ export class Character extends enchant.Sprite {
 		this.image = core.assets['img/chara1.png'];
 		this.initMapPoint_x = 5;
 		this.initMapPoint_y = 5;
-		this.countRate = 4;
-		this.defaultVelocity = mapchipSize / this.countRate;
+		this.animationRate = 4;
+		this.defaultVelocity = mapchipSize / this.animationRate;
 		this.world = world;
 
 		this.reset();
@@ -47,35 +47,18 @@ export class Character extends enchant.Sprite {
 		this.mapPoint_x = this.initMapPoint_x;
 		this.mapPoint_y = this.initMapPoint_y;
 		this.velocity = this.defaultVelocity;
-		this.direction = 'east';
+		this.direction = 'south';
 		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
-		this.count = 0;
+		this.isAnimating = false;
+		this.tl.clear();
 	}
 
 	//向いている方向に進む
 	public moveForward() {
-		if (this.count < this.countRate) {
+		if (this.canMoveNext()) {
 			this.velocity = this.defaultVelocity;
 
-			if (this.direction === 'north') {
-				this.moveBy(0, -this.velocity);
-			}
-
-			if (this.direction === 'east') {
-				this.moveBy(this.velocity, 0);
-			}
-
-			if (this.direction === 'south') {
-				this.moveBy(0, this.velocity);
-			}
-
-			if (this.direction === 'west') {
-				this.moveBy(-this.velocity, 0);
-			}
-
-			this.count += 1;
-		} else if (this.count === this.countRate) {
 			if (this.direction === 'north') {
 				this.mapPoint_y -= 1;
 			}
@@ -92,12 +75,14 @@ export class Character extends enchant.Sprite {
 				this.mapPoint_x -= 1;
 			}
 
-			this.count = 0;
+			console.log({
+				x: this.mapPoint_x,
+				y: this.mapPoint_y,
+				tile: this.getFeetTile(),
+				direction: this.direction,
+			});
 
-			console.log(this.mapPoint_x, this.mapPoint_y);
-			console.log(this.getFeetTile());
-		} else {
-			this.count += 1;
+			this.world.animationQueue.push(this.mkMovingAction(this.direction));
 		}
 	}
 
@@ -108,11 +93,9 @@ export class Character extends enchant.Sprite {
 
 	//ストップ
 	public stop() {
-		this.velocity = 0;
-		this.count = 0;
-
-		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
-		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
+		if (!this.isAnimating) {
+			this.velocity = 0;
+		}
 	}
 
 	/**
@@ -155,12 +138,65 @@ export class Character extends enchant.Sprite {
 		});
 	}
 
+	private mkMovingAction(direction: Direction) {
+		const velocity = this.velocity;
+		let actiontick;
+
+		if (direction === 'north') {
+			actiontick = function() {
+				this.moveBy(0, -velocity);
+			};
+		}
+
+		if (direction === 'east') {
+			actiontick = function() {
+				this.moveBy(velocity, 0);
+			};
+		}
+
+		if (direction === 'south') {
+			actiontick = function() {
+				this.moveBy(0, velocity);
+			};
+		}
+
+		if (direction === 'west') {
+			actiontick = function() {
+				this.moveBy(-velocity, 0);
+			};
+		}
+
+		const action = {
+			time: this.animationRate,
+			onactionstart: function() {
+				this.isAnimating = true;
+				console.log('action start');
+			},
+			onactionend: function() {
+				this.isAnimating = false;
+				console.log('action end');
+			},
+			onactiontick: actiontick,
+		};
+
+		return action;
+	}
+
 	private initCharacter() {
 		this.on('enterframe', function() {
-			eval(code);
-
-			if (this.getFeetTile() === MapChip.Goal) {
+			if (
+				this.getFeetTile() === MapChip.Goal &&
+				!this.isAnimating &&
+				this.world.animationQueue.length() === 0
+			) {
 				this.world.goal();
+			} else {
+				eval(code);
+			}
+
+			if (!this.isAnimating) {
+				this.isAnimating = true;
+				this.tl.action(this.world.animationQueue.pop());
 			}
 
 			//debug用コード
@@ -170,7 +206,7 @@ export class Character extends enchant.Sprite {
 				this.mapPoint_y < 2 ||
 				this.mapPoint_y > 9
 			) {
-				this.reset();
+				this.world.reset();
 			}
 		});
 	}

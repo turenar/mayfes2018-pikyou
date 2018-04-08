@@ -4,7 +4,7 @@
 
 "@types/@https://github.com/aqla114/blockly-types.git":
   version "0.0.0"
-  resolved "https://github.com/aqla114/blockly-types.git#0d61a2f571cd971304ef13991453a8b52e910825"
+  resolved "https://github.com/aqla114/blockly-types.git#2d01b2685e81ee9a74cb9825a92abad1563cc275"
 
 "@types/node@^9.4.6":
   version "9.4.7"
