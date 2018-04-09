@@ -18,12 +18,18 @@ export default class PlayingScene extends Scene {
 
 		this.initScene();
 
-		core.pause();
+		this.reset();
 	}
 
 	public reset() {
+		core.pause();
+		this.isRunning = false;
 		this.world.reset();
 		this.button.reset();
+	}
+
+	public resetWorld() {
+		this.world.reset();
 	}
 
 	public moveNextScene(nextkind: SceneKind) {

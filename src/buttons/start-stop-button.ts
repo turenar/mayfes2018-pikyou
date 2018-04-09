@@ -38,7 +38,7 @@ export default class StartStopButton extends enchant.Sprite {
 	private initButton() {
 		this.addEventListener('touchstart', () => {
 			this.scene.isRunning = this.reloadButton(this.scene.isRunning);
-			this.scene.reset();
+			this.scene.resetWorld();
 		});
 	}
 }
