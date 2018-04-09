@@ -5,33 +5,37 @@ import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 
 export default class GameOverScene extends Scene {
-    private retryButton: RetryButton;
-    private backToStageSelectingButton: BackToStageSelectingButton;
+	private retryButton: RetryButton;
+	private backToStageSelectingButton: BackToStageSelectingButton;
 
-    public constructor(manager: SceneManager) {
-        super('GameOver', manager);
+	public constructor(manager: SceneManager) {
+		super('GameOver', manager);
 
-        const offset_x = 40;
-        const offset_y = 10;
+		const offset_x = 40;
+		const offset_y = 10;
 
-        const background = new enchant.Sprite(240, 300);
-        background.backgroundColor = 'yellow';
-        background.x = offset_x;
-        background.y = offset_y;
+		const background = new enchant.Sprite(240, 300);
+		background.backgroundColor = 'yellow';
+		background.x = offset_x;
+		background.y = offset_y;
 
-        const gameOverLabel = new enchant.Label('GameOver');
-        gameOverLabel.color = 'red';
-        gameOverLabel.x = offset_x + 200;
-        gameOverLabel.y = offset_y + 30;
-        gameOverLabel.scale(2, 2);
+		const gameOverLabel = new enchant.Label('GameOver');
+		gameOverLabel.color = 'red';
+		gameOverLabel.x = offset_x + 200;
+		gameOverLabel.y = offset_y + 30;
+		gameOverLabel.scale(2, 2);
 
-        this.retryButton = new RetryButton(offset_x, offset_y, this);
+		this.retryButton = new RetryButton(offset_x, offset_y, this);
 
-        this.backToStageSelectingButton = new BackToStageSelectingButton(offset_x, offset_y, this);
+		this.backToStageSelectingButton = new BackToStageSelectingButton(
+			offset_x,
+			offset_y,
+			this
+		);
 
-        this.addChild(background);
-        this.addChild(gameOverLabel);
-        this.addChild(this.retryButton);
-        this.addChild(this.backToStageSelectingButton);
-    }
+		this.addChild(background);
+		this.addChild(gameOverLabel);
+		this.addChild(this.retryButton);
+		this.addChild(this.backToStageSelectingButton);
+	}
 }
