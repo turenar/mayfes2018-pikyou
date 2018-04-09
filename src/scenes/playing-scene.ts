@@ -23,6 +23,7 @@ export default class PlayingScene extends Scene {
 
 	public reset() {
 		this.world.reset();
+		this.button.reset();
 	}
 
 	public moveNextScene(nextkind: SceneKind) {

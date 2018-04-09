@@ -30,7 +30,10 @@ export default class StartStopButton extends enchant.Sprite {
 		return !isRunning;
 	}
 
-	public reset() {}
+	public reset() {
+		console.log('stop game');
+		this.image = core.assets['img/startbutton.png'];
+	}
 
 	private initButton() {
 		this.addEventListener('touchstart', () => {
