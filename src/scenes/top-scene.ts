@@ -1,4 +1,4 @@
-import { Scene } from '../scenes';
+import { Scene } from './scenes';
 import core from '../enchant/core';
 import { SceneManager } from '../scene-manager';
 import StartInitButton from '../buttons/start-init-button';

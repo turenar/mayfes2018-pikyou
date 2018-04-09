@@ -1,5 +1,5 @@
 import core from '../enchant/core';
-import { Scene, SceneKind } from '../scenes';
+import { Scene, SceneKind } from './scenes';
 import { SceneManager } from '../scene-manager';
 import StartStopButton from '../buttons/start-stop-button';
 import { World } from '../world';
