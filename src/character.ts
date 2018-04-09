@@ -198,8 +198,15 @@ export class Character extends enchant.Sprite {
 		return action;
 	}
 
+	private die() {
+		this.world.die();
+	}
+
 	private initCharacter() {
 		this.on('enterframe', function() {
+			if (this.getFeetTile() === MapChip.Pitfall && !this.isAnimating && this.world.animationQueue.length() === 0) {
+				this.die();
+			}
 			if (
 				this.getFeetTile() === MapChip.Goal &&
 				!this.isAnimating &&

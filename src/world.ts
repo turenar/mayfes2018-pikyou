@@ -72,4 +72,13 @@ export class World {
 		this.scene.moveNextScene('Playing');
 		this.reset();
 	}
+
+	public die() {
+		this.scene.moveNextScene('GameOver');
+
+		//debug用コード（GameOver画面ができたら消す）
+		console.log(core.currentScene);
+		this.scene.moveNextScene('Playing');
+		this.reset();
+	}
 }
