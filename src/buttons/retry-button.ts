@@ -4,8 +4,8 @@ export default class RetryButton extends enchant.Sprite {
 	public constructor(x: number, y: number, scene: GameOverScene) {
 		super(200, 40);
 		this.backgroundColor = 'green';
-		this.x = x + 20;
-		this.y = y + 180;
+		this.x = x;
+		this.y = y;
 
 		this.listenButton(scene);
 	}

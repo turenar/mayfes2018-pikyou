@@ -25,11 +25,11 @@ export default class GameOverScene extends Scene {
 		gameOverLabel.y = offset_y + 30;
 		gameOverLabel.scale(2, 2);
 
-		this.retryButton = new RetryButton(offset_x, offset_y, this);
+		this.retryButton = new RetryButton(offset_x + 20, offset_y + 180, this);
 
 		this.backToStageSelectingButton = new BackToStageSelectingButton(
-			offset_x,
-			offset_y,
+			offset_x + 20,
+			offset_y + 240,
 			this
 		);
 

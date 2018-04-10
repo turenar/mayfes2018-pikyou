@@ -4,8 +4,8 @@ export default class BackToStageSelectingButton extends enchant.Sprite {
 	public constructor(x: number, y: number, scene: GameOverScene) {
 		super(200, 40);
 		this.backgroundColor = 'blue';
-		this.x = x + 20;
-		this.y = y + 240;
+		this.x = x;
+		this.y = y;
 
 		this.listenButton(scene);
 	}
