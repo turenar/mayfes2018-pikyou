@@ -56,7 +56,7 @@ export class Character extends enchant.Sprite {
 
 	//向いている方向に進む
 	public moveForward() {
-		if (this.canMoveNext()) {
+		if (this.canMoveNext(this.direction)) {
 			this.velocity = this.defaultVelocity;
 
 			if (this.direction === 'north') {
@@ -126,10 +126,9 @@ export class Character extends enchant.Sprite {
 	 * 目の前のマスに進めるかどうか。
 	 * @returns {boolean} -進めればtrue
 	 */
-	private canMoveNext(): boolean {
+	private canMoveNext(direction: Direction): boolean {
 		const mapPoint_x = this.mapPoint_x;
 		const mapPoint_y = this.mapPoint_y;
-		const direction = this.direction;
 
 		return this.world.canMoveCharacterNext({
 			mapPoint_x,
