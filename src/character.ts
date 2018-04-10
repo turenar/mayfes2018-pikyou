@@ -119,7 +119,27 @@ export class Character extends enchant.Sprite {
 	 * @returns {number} -足元のマップチップの種類
 	 */
 	private getFeetTile(): number {
-		return this.world.checkCharacterFeetTile(this.mapPoint_x, this.mapPoint_y);
+		return this.world.checkTile(this.mapPoint_x, this.mapPoint_y);
+	}
+
+	/**
+	 * 目の前のマップチップの種類を取得する。
+	 * @returns {number} -目の前のマップチップの種類
+	 */
+	private getFrontTile(): number {
+		let next_x = this.mapPoint_x;
+		let next_y = this.mapPoint_y;
+
+		if (this.direction === 'north')
+			next_y -= 1;
+		if (this.direction === 'east')
+			next_x += 1;
+		if (this.direction === 'south')
+			next_y += 1;
+		if (this.direction === 'west')
+			next_x -= 1;
+
+		return this.world.checkTile(next_x, next_y);
 	}
 
 	/**

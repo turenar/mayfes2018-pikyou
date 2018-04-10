@@ -1,4 +1,5 @@
 import * as Blockly from 'node-blockly/browser';
+import MapChip from './enchant/mapchip';
 
 Blockly.JavaScript['execute'] = function(block: Blockly.Block) {
 	const code = '"以下のコードを実行します";\n';
@@ -29,5 +30,12 @@ Blockly.JavaScript['check_movable'] = function(block: Blockly.Block) {
 
 Blockly.JavaScript['check_wall_front'] = function(block: Blockly.Block) {
 	const code = '!this.canMoveNext(this.direction)';
+	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
+}
+
+Blockly.JavaScript['check_obstacle'] = function(block: Blockly.Block) {
+	const obstacle = block.getFieldValue('OBSTACLE');
+	const mapchip = obstacle === 'pitfall' ?  MapChip.Pitfall : -1;
+	const code = `this.getFrontTile() === ${mapchip}`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 }

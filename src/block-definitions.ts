@@ -197,7 +197,7 @@ Blockly.Blocks['check_obstacle'] = {
 				{
 					type: 'field_dropdown',
 					name: 'OBSTACLE',
-					options: [['落とし穴', 'PITFALL'], ['その他', 'OTHER']],
+					options: [['落とし穴', 'pitfall'], ['その他', 'other']],
 				},
 			],
 		});
