@@ -25,4 +25,9 @@ Blockly.JavaScript['check_movable'] = function(block: Blockly.Block) {
 	const direction = block.getFieldValue('DIRECTION');
 	const code = `this.canMoveNext('${direction}')`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
+};
+
+Blockly.JavaScript['check_wall_front'] = function(block: Blockly.Block) {
+	const code = '!this.canMoveNext(this.direction)';
+	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 }
