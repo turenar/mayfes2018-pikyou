@@ -130,14 +130,10 @@ export class Character extends enchant.Sprite {
 		let next_x = this.mapPoint_x;
 		let next_y = this.mapPoint_y;
 
-		if (this.direction === 'north')
-			next_y -= 1;
-		if (this.direction === 'east')
-			next_x += 1;
-		if (this.direction === 'south')
-			next_y += 1;
-		if (this.direction === 'west')
-			next_x -= 1;
+		if (this.direction === 'north') next_y -= 1;
+		if (this.direction === 'east') next_x += 1;
+		if (this.direction === 'south') next_y += 1;
+		if (this.direction === 'west') next_x -= 1;
 
 		return this.world.checkTile(next_x, next_y);
 	}
@@ -145,6 +141,7 @@ export class Character extends enchant.Sprite {
 	/**
 	 * 目の前のマスに進めるかどうか。
 	 * @returns {boolean} -進めればtrue
+	 * @param {Direction} direction  -方向
 	 */
 	private canMoveNext(direction: Direction): boolean {
 		const mapPoint_x = this.mapPoint_x;

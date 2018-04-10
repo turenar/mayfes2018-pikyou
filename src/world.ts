@@ -37,10 +37,7 @@ export class World {
 	 * @param {number} mapPoint_y -mapPoint_y
 	 * @returns {number} -タイル番号
 	 */
-	public checkTile(
-		mapPoint_x: number,
-		mapPoint_y: number
-	): number {
+	public checkTile(mapPoint_x: number, mapPoint_y: number): number {
 		const x = Map.getCoordinateFromMapPoint(mapPoint_x);
 		const y = Map.getCoordinateFromMapPoint(mapPoint_y);
 		return this.map.checkTile(x, y);
