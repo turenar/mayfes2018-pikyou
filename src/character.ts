@@ -56,7 +56,13 @@ export class Character extends enchant.Sprite {
 
 	//向いている方向に進む
 	public moveForward() {
-		if (this.canMoveNext()) {
+		const feetTile = this.getFeetTile();
+
+		if (
+			this.canMoveNext() &&
+			feetTile !== MapChip.Goal &&
+			feetTile !== MapChip.Pitfall
+		) {
 			this.velocity = this.defaultVelocity;
 
 			if (this.direction === 'north') {
