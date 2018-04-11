@@ -90,10 +90,12 @@ export class Character extends enchant.Sprite {
 		}
 		if (this.getFeetTile() === MapChip.Goal) {
 			this.isGoal = true;
+			throw 'goal';
 		}
 
 		if (this.getFeetTile() === MapChip.Pitfall) {
 			this.isDead = true;
+			throw 'die';
 		}
 	}
 
@@ -230,7 +232,13 @@ export class Character extends enchant.Sprite {
 				this.world.goal();
 			}
 
-			eval(code);
+			if (!this.isGoal && !this.isDead) {
+				try {
+					eval(code);
+				} catch (e) {
+					console.error(e);
+				}
+			}
 
 			if (!this.isAnimating) {
 				this.isAnimating = true;
