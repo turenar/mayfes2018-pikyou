@@ -56,7 +56,7 @@ export class Character extends enchant.Sprite {
 
 	//向いている方向に進む
 	public moveForward() {
-		if (this.canMoveNext()) {
+		if (this.canMoveNext(this.direction)) {
 			this.velocity = this.defaultVelocity;
 
 			if (this.direction === 'north') {
@@ -119,17 +119,33 @@ export class Character extends enchant.Sprite {
 	 * @returns {number} -足元のマップチップの種類
 	 */
 	private getFeetTile(): number {
-		return this.world.checkCharacterFeetTile(this.mapPoint_x, this.mapPoint_y);
+		return this.world.checkTile(this.mapPoint_x, this.mapPoint_y);
+	}
+
+	/**
+	 * 目の前のマップチップの種類を取得する。
+	 * @returns {number} -目の前のマップチップの種類
+	 */
+	private getFrontTile(): number {
+		let next_x = this.mapPoint_x;
+		let next_y = this.mapPoint_y;
+
+		if (this.direction === 'north') next_y -= 1;
+		if (this.direction === 'east') next_x += 1;
+		if (this.direction === 'south') next_y += 1;
+		if (this.direction === 'west') next_x -= 1;
+
+		return this.world.checkTile(next_x, next_y);
 	}
 
 	/**
 	 * 目の前のマスに進めるかどうか。
 	 * @returns {boolean} -進めればtrue
+	 * @param {Direction} direction  -方向
 	 */
-	private canMoveNext(): boolean {
+	private canMoveNext(direction: Direction): boolean {
 		const mapPoint_x = this.mapPoint_x;
 		const mapPoint_y = this.mapPoint_y;
-		const direction = this.direction;
 
 		return this.world.canMoveCharacterNext({
 			mapPoint_x,

@@ -32,15 +32,12 @@ export class World {
 	}
 
 	/**
-	 * マップ座標をわたすとcharacterの足元のマップチップを返す。
+	 * マップ座標をわたすとそこのマップチップを返す。
 	 * @param {number} mapPoint_x -mapPoint_x
 	 * @param {number} mapPoint_y -mapPoint_y
 	 * @returns {number} -タイル番号
 	 */
-	public checkCharacterFeetTile(
-		mapPoint_x: number,
-		mapPoint_y: number
-	): number {
+	public checkTile(mapPoint_x: number, mapPoint_y: number): number {
 		const x = Map.getCoordinateFromMapPoint(mapPoint_x);
 		const y = Map.getCoordinateFromMapPoint(mapPoint_y);
 		return this.map.checkTile(x, y);

@@ -154,10 +154,10 @@ Blockly.Blocks['check_movable'] = {
 					type: 'field_dropdown',
 					name: 'DIRECTION',
 					options: [
-						['東', 'EAST'],
-						['西', 'WEST'],
-						['南', 'SOUTH'],
-						['北', 'NORTH'],
+						['東', 'east'],
+						['西', 'west'],
+						['南', 'south'],
+						['北', 'north'],
 					],
 				},
 			],
@@ -197,7 +197,7 @@ Blockly.Blocks['check_obstacle'] = {
 				{
 					type: 'field_dropdown',
 					name: 'OBSTACLE',
-					options: [['落とし穴', 'PITFALL'], ['その他', 'OTHER']],
+					options: [['落とし穴', 'pitfall'], ['その他', 'other']],
 				},
 			],
 		});
