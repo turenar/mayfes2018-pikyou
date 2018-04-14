@@ -17,9 +17,12 @@ const initBlock = workspacePlayground.newBlock('execute', 'initialBlock');
 (workspacePlayground as Blockly.WorkspaceSvg).render();
 
 export var code: string = '';
+export var blockNum: number = 0;
 
 Blockly.addChangeListener(function(event) {
 	let allBlocks = workspacePlayground.getAllBlocks();
+
+	blockNum = allBlocks.length - 1;
 
 	allBlocks.map(block => {
 		if (block !== null && block.id !== 'initialBlock') {

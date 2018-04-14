@@ -4,6 +4,7 @@ import { SceneManager } from '../scene-manager';
 import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 import { Score, calcScore } from '../score';
+import { blockNum } from '../blockly-main';
 
 export default class ResultScene extends Scene {
     private retryButton: RetryButton;
@@ -26,21 +27,22 @@ export default class ResultScene extends Scene {
 		gameOverLabel.y = offset_y + 30;
         gameOverLabel.scale(2, 2);
 
-        const score = { score: 0, usingBlockNum: 0, gotJwellBoxNum: 0 }
+        const score = { score: 0, usingBlockNum: blockNum, gotJwellBoxNum: 0 }
+        score.score = calcScore(score.usingBlockNum, score.gotJwellBoxNum);
 
-        const scoreLabel = new enchant.Label(`スコア：${calcScore(score.usingBlockNum, score.gotJwellBoxNum)}/100`);
+        const scoreLabel = new enchant.Label(`スコア：${score.score}`);
         scoreLabel.color = 'black';
         scoreLabel.scale(1.2, 1.2);
         scoreLabel.x = offset_x + 50;
         scoreLabel.y = offset_y + 80;
         
-        const blockNumberLabel = new enchant.Label(`使用ブロック数：${score.usingBlockNum}`);
+        const blockNumberLabel = new enchant.Label(`つかったブロックのかず：${score.usingBlockNum}`);
         blockNumberLabel.color = 'black';
         blockNumberLabel.scale(1.2, 1.2);
         blockNumberLabel.x = offset_x + 50;
         blockNumberLabel.y = offset_y + 110;
 
-        const gotJwellBoxLabel = new enchant.Label('手に入れたアイテム：');
+        const gotJwellBoxLabel = new enchant.Label('てにいれたアイテム：');
         gotJwellBoxLabel.color = 'black';
         gotJwellBoxLabel.scale(1.2, 1.2);
         gotJwellBoxLabel.x = offset_x + 50;
