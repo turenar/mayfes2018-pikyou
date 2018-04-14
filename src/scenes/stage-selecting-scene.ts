@@ -2,7 +2,7 @@ import { Scene } from './scenes';
 import core from '../enchant/core';
 import { SceneManager } from '../scene-manager';
 import stages from '../stages';
-import StageLabels from '../enchant/stage-labels'
+import StageLabels from '../enchant/stage-labels';
 import ArrowButton from '../buttons/arrow_button';
 import StartToPlaySceneButton from '../buttons/start-to-playscene-button';
 import BackToTopButton from '../buttons/back-to-top-button';
@@ -62,7 +62,6 @@ export default class StageSelectingScene extends Scene {
 
 		console.log(`stageNum: ${this.stageNum}`);
 	}
-
 
 	private upNumber() {
 		if (this.stageNum == this.maxStageNum) {
