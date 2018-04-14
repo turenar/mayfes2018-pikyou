@@ -44,7 +44,7 @@ export default class StageSelectingScene extends Scene {
 			this.downNumber();
 		});
 		this.startButton.addEventListener('touchstart', () => {
-			this.manager.changeScene('Playing', this.stageNum);
+			this.moveNextScene('Playing', this.stageNum);
 		});
 
 		console.log(`stageNum: ${this.stageNum}`);

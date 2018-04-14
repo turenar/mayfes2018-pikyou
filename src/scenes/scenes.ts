@@ -15,7 +15,7 @@ export type SceneKind =
 	| 'Result';
 
 export class Scene extends enchant.Scene {
-	public manager: SceneManager;
+	private manager: SceneManager;
 	public kind: SceneKind;
 
 	public constructor(kind: SceneKind, manager: SceneManager) {
@@ -24,8 +24,8 @@ export class Scene extends enchant.Scene {
 		this.manager = manager;
 	}
 
-	public moveNextScene(nextkind: SceneKind) {
-		this.manager.changeScene(nextkind);
+	public moveNextScene(nextkind: SceneKind, stageNum?: number) {
+		this.manager.changeScene(nextkind, stageNum);
 	}
 }
 
