@@ -4,6 +4,7 @@ import { SceneManager } from '../scene-manager';
 import stages from '../stages';
 import ArrowButton from '../buttons/arrow_button';
 import StartToPlaySceneButton from '../buttons/start-to-playscene-button';
+import BackToTopButton from '../buttons/back-to-top-button';
 import { Event } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
 
@@ -13,6 +14,7 @@ export default class StageSelectingScene extends Scene {
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
 	public startButton: StartToPlaySceneButton;
+	public backButton: BackToTopButton;
 
 	public constructor(manager: SceneManager) {
 		super('StageSelecting', manager);
@@ -33,6 +35,8 @@ export default class StageSelectingScene extends Scene {
 		this.addChild(this.downButton);
 		this.startButton = new StartToPlaySceneButton(180, 400);
 		this.addChild(this.startButton);
+		this.backButton = new BackToTopButton(0, 0);
+		this.addChild(this.backButton);
 
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
@@ -45,6 +49,9 @@ export default class StageSelectingScene extends Scene {
 		});
 		this.startButton.addEventListener('touchstart', () => {
 			this.moveNextScene('Playing', this.stageNum);
+		});
+		this.backButton.addEventListener('touchstart', () => {
+			this.moveNextScene('Top');
 		});
 
 		console.log(`stageNum: ${this.stageNum}`);
