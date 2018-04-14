@@ -1,7 +1,8 @@
 import core from './enchant/core';
-import { Scenes, Scene, SceneKind } from './scenes';
+import { Scenes, Scene, SceneKind } from './scenes/scenes';
 import TopScene from './scenes/top-scene';
 import PlayingScene from './scenes/playing-scene';
+import GameOverScene from './scenes/gameover-scene';
 import { code } from './blockly-main';
 
 export class SceneManager {
@@ -12,7 +13,7 @@ export class SceneManager {
 			Top: new TopScene(this),
 			StageSelecting: new Scene('StageSelecting', this),
 			Playing: new PlayingScene(this),
-			GameOver: new Scene('GameOver', this),
+			GameOver: new GameOverScene(this),
 			Result: new Scene('Result', this),
 		};
 
@@ -39,6 +40,7 @@ export class SceneManager {
 			}
 			if (sceneKind === 'Playing') {
 				core.replaceScene(this.scenes.Playing);
+				this.scenes.Playing.reset();
 				return;
 			}
 		}

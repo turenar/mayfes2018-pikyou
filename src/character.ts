@@ -25,6 +25,8 @@ export class Character extends enchant.Sprite {
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
+	private isDead: boolean;
+	private isGoal: boolean;
 	public isAnimating: boolean;
 
 	public constructor(world: World) {
@@ -50,13 +52,15 @@ export class Character extends enchant.Sprite {
 		this.direction = 'south';
 		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
+		this.isDead = false;
+		this.isGoal = false;
 		this.isAnimating = false;
 		this.tl.clear();
 	}
 
 	//向いている方向に進む
 	public moveForward() {
-		if (this.canMoveNext(this.direction)) {
+		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
 			this.velocity = this.defaultVelocity;
 
 			if (this.direction === 'north') {
@@ -83,6 +87,15 @@ export class Character extends enchant.Sprite {
 			});
 
 			this.world.animationQueue.push(this.mkMovingAction(this.direction));
+		}
+		if (this.getFeetTile() === MapChip.Goal) {
+			this.isGoal = true;
+			throw 'goal';
+		}
+
+		if (this.getFeetTile() === MapChip.Pitfall) {
+			this.isDead = true;
+			throw 'die';
 		}
 	}
 
@@ -198,16 +211,33 @@ export class Character extends enchant.Sprite {
 		return action;
 	}
 
+	private die() {
+		this.world.die();
+	}
+
 	private initCharacter() {
 		this.on('enterframe', function() {
 			if (
-				this.getFeetTile() === MapChip.Goal &&
+				this.isDead &&
+				!this.isAnimating &&
+				this.world.animationQueue.length() === 0
+			) {
+				this.die();
+			}
+			if (
+				this.isGoal &&
 				!this.isAnimating &&
 				this.world.animationQueue.length() === 0
 			) {
 				this.world.goal();
-			} else {
-				eval(code);
+			}
+
+			if (!this.isGoal && !this.isDead) {
+				try {
+					eval(code);
+				} catch (e) {
+					console.error(e);
+				}
 			}
 
 			if (!this.isAnimating) {

@@ -72,4 +72,8 @@ export class World {
 		this.scene.moveNextScene('Playing');
 		this.reset();
 	}
+
+	public die() {
+		this.scene.moveNextScene('GameOver');
+	}
 }

@@ -1,5 +1,5 @@
 import core from '../enchant/core';
-import { Scene, SceneKind } from '../scenes';
+import { Scene, SceneKind } from './scenes';
 import { SceneManager } from '../scene-manager';
 import StartStopButton from '../buttons/start-stop-button';
 import { World } from '../world';
@@ -18,10 +18,17 @@ export default class PlayingScene extends Scene {
 
 		this.initScene();
 
-		core.pause();
+		this.reset();
 	}
 
 	public reset() {
+		core.pause();
+		this.isRunning = false;
+		this.world.reset();
+		this.button.reset();
+	}
+
+	public resetWorld() {
 		this.world.reset();
 	}
 

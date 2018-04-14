@@ -1,11 +1,11 @@
 import * as enchant from 'node-enchantjs';
-import core from './enchant/core';
-import { Map as EnchantMap } from './enchant/map';
-import stages from './stages';
-import { Character } from './character';
-import { SceneManager } from './scene-manager';
-import PlayingScene from './scenes/playing-scene';
-import TopScene from './scenes/top-scene';
+import core from '../enchant/core';
+import { Map as EnchantMap } from '../enchant/map';
+import stages from '../stages';
+import { Character } from '../character';
+import { SceneManager } from '../scene-manager';
+import PlayingScene from './playing-scene';
+import TopScene from './top-scene';
 
 export type SceneKind =
 	| 'Top'
