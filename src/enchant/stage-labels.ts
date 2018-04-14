@@ -42,10 +42,12 @@ export default class StageLabels extends enchant.Group {
 		this.clearMark.x = 200;
 		this.clearMark.y = 250;
 		this.addChild(this.clearMark);
+
+		this.update(0)
 	}
 
 	public update(stageNum: number){
-		this.stageNumLabel.text = "ステージ" + stageNum.toString();
+		this.stageNumLabel.text = "ステージ" + (stageNum + 1).toString();
 		this.stageNameLabel.text = stages[stageNum].name;
 		this.descriptionLabel.text = stages[stageNum].description;
 		this.scoreLabel.text = "score: " + "1200" //todo
