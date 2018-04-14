@@ -16,6 +16,7 @@ export default class StageSelectingScene extends Scene {
 	private stageNameLabel: Label;
 	private descriptionLabel: Label;
 	private scoreLabel: Label;
+	private clearMark: Sprite;
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
 	public startButton: StartToPlaySceneButton;
@@ -88,6 +89,12 @@ export default class StageSelectingScene extends Scene {
 		this.scoreLabel.x = 30;
 		this.scoreLabel.y = 270;
 		this.addChild(this.scoreLabel);
+
+		this.clearMark = new Sprite(70, 50);
+		this.clearMark.image = core.assets["img/clear_mark.png"];
+		this.clearMark.x = 200;
+		this.clearMark.y = 250;
+		this.addChild(this.clearMark);
 
 		this.updateLabels()
 	}
