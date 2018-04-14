@@ -43,13 +43,7 @@ export default class StageSelectingScene extends Scene {
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
 
-		this.stageNumLabel = new Label(" ");
-		this.stageNumLabel.text = "ステージ" + this.stageNum.toString();
-		this.stageNumLabel.font = "35px Palatino";
-		this.stageNumLabel.x = 30;
-		this.stageNumLabel.y = 100;
-		this.addChild(this.stageNumLabel);
-
+		this.initLabel();
 
 		this.upButton.addEventListener('touchstart', () => {
 			this.upNumber();
@@ -67,6 +61,20 @@ export default class StageSelectingScene extends Scene {
 		console.log(`stageNum: ${this.stageNum}`);
 	}
 
+	private initLabel(){
+		this.stageNumLabel = new Label("ステージ" + this.stageNum.toString());
+		this.stageNumLabel.font = "35px Palatino";
+		this.stageNumLabel.x = 30;
+		this.stageNumLabel.y = 100;
+		this.addChild(this.stageNumLabel);
+
+	}
+
+	private updateLabel(){
+		this.stageNumLabel.text = "ステージ" + this.stageNum.toString();
+	}
+
+
 	private upNumber() {
 		if (this.stageNum == this.maxStageNum) {
 			this.stageNum = 0;
@@ -74,8 +82,7 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum += 1;
 		}
 		console.log(`stageNum: ${this.stageNum}`);
-		this.stageNumLabel.text = "ステージを変更しました";
-		this.stageNumLabel.x = 100;
+		this.updateLabel();
 	}
 
 	private downNumber() {
@@ -85,5 +92,6 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum -= 1;
 		}
 		console.log(`stagenum: ${this.stageNum}`);
+		this.updateLabel();
 	}
 }
