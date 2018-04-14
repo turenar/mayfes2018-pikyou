@@ -27,11 +27,11 @@ export default class StageSelectingScene extends Scene {
 		sky.y = 0;
 		this.addChild(sky);
 
-		this.upButton = new ArrowButton(120, 10, 'up', this);
+		this.upButton = new ArrowButton(130, 10, 'up', this);
 		this.addChild(this.upButton);
-		this.downButton = new ArrowButton(120, 330, 'down', this);
+		this.downButton = new ArrowButton(130, 400, 'down', this);
 		this.addChild(this.downButton);
-		this.startButton = new StartToPlaySceneButton(80, 400);
+		this.startButton = new StartToPlaySceneButton(180, 400);
 		this.addChild(this.startButton);
 
 		this.maxStageNum = stages.length - 1;
