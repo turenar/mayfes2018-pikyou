@@ -23,11 +23,3 @@ export class Scene extends enchant.Scene {
 		this.manager.changeScene(nextkind, stageNum);
 	}
 }
-
-export type Scenes = {
-	Top: TopScene;
-	StageSelecting: Scene;
-	Playing: PlayingScene;
-	GameOver: Scene;
-	Result: Scene;
-};
