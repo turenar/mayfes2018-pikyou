@@ -4,6 +4,7 @@ import TopScene from './scenes/top-scene';
 import PlayingScene from './scenes/playing-scene';
 import StageSelectingScene from './scenes/stage-selecting-scene';
 import GameOverScene from './scenes/gameover-scene';
+import ResultScene from './scenes/result-scene';
 import { code } from './blockly-main';
 
 export class SceneManager {
