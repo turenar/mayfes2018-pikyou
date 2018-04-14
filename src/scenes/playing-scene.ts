@@ -9,11 +9,11 @@ export default class PlayingScene extends Scene {
 	public world: World;
 	public button: StartStopButton;
 
-	public constructor(manager: SceneManager) {
+	public constructor(manager: SceneManager, stageNum: number) {
 		super('Playing', manager);
 		this.isRunning = false;
 
-		this.world = new World(this, 0);
+		this.world = new World(this, stageNum);
 		this.button = new StartStopButton(this);
 
 		this.initScene();

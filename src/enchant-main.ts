@@ -12,6 +12,10 @@ export function init() {
 	core.preload('img/stopbutton.png');
 	core.preload('img/startinit.png');
 	core.preload('img/startcontinue.png');
+	core.preload('img/haikei.png');
+	core.preload('img/up_arrow.png');
+	core.preload('img/down_arrow.png');
+	core.preload('img/start_to_playscene.png');
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();
