@@ -7,10 +7,12 @@ import StartToPlaySceneButton from '../buttons/start-to-playscene-button';
 import BackToTopButton from '../buttons/back-to-top-button';
 import { Event } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
+import { Label } from 'node-enchantjs';
 
 export default class StageSelectingScene extends Scene {
 	private stageNum: number;
 	private maxStageNum: number;
+	private stageNumLabel: Label;
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
 	public startButton: StartToPlaySceneButton;
@@ -41,6 +43,14 @@ export default class StageSelectingScene extends Scene {
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
 
+		this.stageNumLabel = new Label(" ");
+		this.stageNumLabel.text = "ステージ" + this.stageNum.toString();
+		this.stageNumLabel.font = "35px Palatino";
+		this.stageNumLabel.x = 30;
+		this.stageNumLabel.y = 100;
+		this.addChild(this.stageNumLabel);
+
+
 		this.upButton.addEventListener('touchstart', () => {
 			this.upNumber();
 		});
@@ -64,6 +74,8 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum += 1;
 		}
 		console.log(`stageNum: ${this.stageNum}`);
+		this.stageNumLabel.text = "ステージを変更しました";
+		this.stageNumLabel.x = 100;
 	}
 
 	private downNumber() {
