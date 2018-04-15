@@ -1,5 +1,5 @@
 import core from './core';
-import MapChip from './mapchip';
+import MapChip from './map-chip';
 
 export type DrawingCoordinate = number;
 export type MapPoint = number;

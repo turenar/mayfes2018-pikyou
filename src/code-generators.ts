@@ -1,5 +1,5 @@
 import * as Blockly from 'node-blockly/browser';
-import MapChip from './enchant/mapchip';
+import MapChip from './enchant/map-chip';
 
 Blockly.JavaScript['execute'] = function(block: Blockly.Block) {
 	const code = '"以下のコードを実行します";\n';

@@ -3,7 +3,7 @@ import core from './enchant/core';
 import { code } from './blockly-main';
 import { mapchipSize, Map, MapPoint } from './enchant/map';
 import { World } from './world';
-import MapChip from './enchant/mapchip';
+import MapChip from './enchant/map-chip';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 

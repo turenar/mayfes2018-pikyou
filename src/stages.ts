@@ -1,4 +1,4 @@
-import MapChip from './enchant/mapchip';
+import MapChip from './enchant/map-chip';
 import { CharacterPosition } from './character';
 
 export type Stage = {
