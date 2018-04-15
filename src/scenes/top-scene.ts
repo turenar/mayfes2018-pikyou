@@ -14,7 +14,7 @@ export default class TopScene extends Scene {
 		this.startInitButton = new StartInitButton(20, 130, this);
 		this.startContinueButton = new StartContinueButton(20, 320, this);
 		this.initScene();
-		core.pause();
+		core.resume();
 	}
 
 	private initScene() {

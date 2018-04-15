@@ -16,6 +16,8 @@ export function init() {
 	core.preload('img/up_arrow.png');
 	core.preload('img/down_arrow.png');
 	core.preload('img/start_to_playscene.png');
+	core.preload('img/back_to_top_button.png');
+	core.preload('img/clear_mark.png');
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();

@@ -2,17 +2,22 @@ import { Scene } from './scenes';
 import core from '../enchant/core';
 import { SceneManager } from '../scene-manager';
 import stages from '../stages';
+import StageLabels from '../enchant/stage-labels';
 import ArrowButton from '../buttons/arrow_button';
 import StartToPlaySceneButton from '../buttons/start-to-playscene-button';
+import BackToTopButton from '../buttons/back-to-top-button';
 import { Event } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
+import { Label } from 'node-enchantjs';
 
 export default class StageSelectingScene extends Scene {
 	private stageNum: number;
 	private maxStageNum: number;
+	private stageLabels: StageLabels;
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
 	public startButton: StartToPlaySceneButton;
+	public backButton: BackToTopButton;
 
 	public constructor(manager: SceneManager) {
 		super('StageSelecting', manager);
@@ -27,15 +32,20 @@ export default class StageSelectingScene extends Scene {
 		sky.y = 0;
 		this.addChild(sky);
 
-		this.upButton = new ArrowButton(120, 10, 'up', this);
+		this.upButton = new ArrowButton(130, 10, 'up', this);
 		this.addChild(this.upButton);
-		this.downButton = new ArrowButton(120, 330, 'down', this);
+		this.downButton = new ArrowButton(130, 400, 'down', this);
 		this.addChild(this.downButton);
-		this.startButton = new StartToPlaySceneButton(80, 400);
+		this.startButton = new StartToPlaySceneButton(180, 400);
 		this.addChild(this.startButton);
+		this.backButton = new BackToTopButton(0, 0);
+		this.addChild(this.backButton);
 
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
+
+		this.stageLabels = new StageLabels();
+		this.addChild(this.stageLabels);
 
 		this.upButton.addEventListener('touchstart', () => {
 			this.upNumber();
@@ -45,6 +55,9 @@ export default class StageSelectingScene extends Scene {
 		});
 		this.startButton.addEventListener('touchstart', () => {
 			this.moveNextScene('Playing', this.stageNum);
+		});
+		this.backButton.addEventListener('touchstart', () => {
+			this.moveNextScene('Top');
 		});
 
 		console.log(`stageNum: ${this.stageNum}`);
@@ -57,6 +70,7 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum += 1;
 		}
 		console.log(`stageNum: ${this.stageNum}`);
+		this.stageLabels.update(this.stageNum);
 	}
 
 	private downNumber() {
@@ -66,5 +80,6 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum -= 1;
 		}
 		console.log(`stagenum: ${this.stageNum}`);
+		this.stageLabels.update(this.stageNum);
 	}
 }

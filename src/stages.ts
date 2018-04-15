@@ -1,7 +1,9 @@
 import MapChip from './enchant/mapchip';
 
-type Stage = {
+export type Stage = {
 	map: MapChip[][];
+	name: string;
+	description: string;
 };
 
 const stages: Stage[] = [
@@ -18,6 +20,8 @@ const stages: Stage[] = [
 			[1, 3, 10, 2, 2, 2, 5, 2, 9, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		],
+		name: 'まっすぐ進む',
+		description: '基本的な操作に慣れよう',
 	},
 	{
 		map: [
@@ -32,6 +36,8 @@ const stages: Stage[] = [
 			[1, 3, 10, 2, 4, 2, 5, 2, 9, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		],
+		name: '曲がる',
+		description: '曲がるという操作を覚えよう',
 	},
 ];
 
