@@ -1,6 +1,9 @@
 import core from './core';
 import MapChip from './mapchip';
 
+export type DrawingCoordinate = number;
+export type MapPoint = number;
+
 export const mapchipSize = 32;
 
 export class Map {
@@ -20,12 +23,16 @@ export class Map {
 
 	public reset() {}
 
-	public checkTile(x: number, y: number) {
-		return this.map.checkTile(x, y);
+	public checkTile(x: MapPoint, y: MapPoint) {
+		return this.map.checkTile(
+			Map.getCoordinateFromMapPoint(x),
+			Map.getCoordinateFromMapPoint(y)
+		);
 	}
 
-	public canEnter(x: number, y: number) {
-		if (this.map.checkTile(x, y) === MapChip.Wall) {
+	public canEnter(x: MapPoint, y: MapPoint): boolean {
+		const tile = this.checkTile(x, y);
+		if (tile === MapChip.Wall) {
 			return false;
 		} else {
 			return true;
@@ -37,7 +44,7 @@ export class Map {
 	 * @param {number} point - マップ座標(1~10)
 	 * @returns {number} - ピクセル座標
 	 */
-	public static getCoordinateFromMapPoint(point: number): number {
+	public static getCoordinateFromMapPoint(point: MapPoint): DrawingCoordinate {
 		return (point - 1) * mapchipSize;
 	}
 
@@ -46,7 +53,9 @@ export class Map {
 	 * @param {number} coordinate - ピクセル座標
 	 * @returns {number} - マップ座標
 	 */
-	public static getMapPointFromCoordinate(coordinate: number): number {
+	public static getMapPointFromCoordinate(
+		coordinate: DrawingCoordinate
+	): MapPoint {
 		return Math.floor(coordinate / mapchipSize);
 	}
 }
