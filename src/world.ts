@@ -5,12 +5,14 @@ import { Character, CharacterPosition } from './character';
 import { AnimationQueue } from './animation-queue';
 import { Map, MapPoint } from './enchant/map';
 import stages from './stages';
+import MapChip from './enchant/map-chip';
 
 export class World {
-	public scene: PlayingScene;
-	public character: Character;
-	public map: Map;
-	public animationQueue: AnimationQueue;
+	public readonly scene: PlayingScene;
+	public readonly character: Character;
+	public readonly map: Map;
+	public readonly animationQueue: AnimationQueue;
+	public readonly stageNumber: number;
 	public isAnimating: boolean;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
@@ -18,6 +20,7 @@ export class World {
 		this.character = new Character(this, stages[stageNumber].characterInitialPosition);
 		this.map = new Map(stages[stageNumber].map);
 		this.animationQueue = new AnimationQueue();
+		this.stageNumber = stageNumber;
 
 		this.map.addInto(this.scene);
 		this.scene.addChild(this.character);
@@ -27,7 +30,7 @@ export class World {
 
 	public reset() {
 		this.character.reset();
-		this.map.reset();
+		this.map.reset(stages[this.stageNumber].map);
 		this.animationQueue.clear();
 	}
 
@@ -39,6 +42,12 @@ export class World {
 	 */
 	public checkTile(x: MapPoint, y: MapPoint): number {
 		return this.map.checkTile(x, y);
+	}
+
+	public setTile(mapPoint_x: number, mapPoint_y: number, tile: MapChip) {
+		const x = Map.getCoordinateFromMapPoint(mapPoint_x);
+		const y = Map.getCoordinateFromMapPoint(mapPoint_y);
+		this.map.setTile(x, y, tile);
 	}
 
 	/**

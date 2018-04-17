@@ -1,5 +1,6 @@
 import core from './core';
 import MapChip from './map-chip';
+import mapChipDefinitions, { MapChipDefinitions } from './map-chip-definitions';
 
 export type DrawingCoordinate = number;
 export type MapPoint = number;
@@ -7,33 +8,50 @@ export type MapPoint = number;
 export const mapchipSize = 32;
 
 export class Map {
-	private map: enchant.Map;
+	private rawMapData: MapChip[][];
+	private readonly map: enchant.Map;
 
 	public constructor(mapData: MapChip[][]) {
 		const map = new enchant.Map(mapchipSize, mapchipSize);
 		map.image = core.assets['img/mapchip.png'];
-		map.loadData(mapData);
 
 		this.map = map;
+		this.reset(mapData);
 	}
 
 	public addInto(scene: enchant.Scene) {
 		scene.addChild(this.map);
 	}
 
-	public reset() {}
+	public reset(mapData: MapChip[][]) {
+		// deep copy
+		this.rawMapData = mapData.map(arr => arr.concat([]));
+
+		this.map.loadData(this.rawMapData);
+	}
+
+	public setTile(x: number, y: number, tile: MapChip) {
+		this.rawMapData[y][x] = tile;
+		this.map.loadData(this.rawMapData);
+	}
 
 	public checkTile(x: MapPoint, y: MapPoint) {
-		return this.map.checkTile(Map.getCoordinateFromMapPoint(x), Map.getCoordinateFromMapPoint(y));
+		return this.rawMapData[y][x];
 	}
 
 	public canEnter(x: MapPoint, y: MapPoint): boolean {
 		const tile = this.checkTile(x, y);
-		if (tile === MapChip.Wall || (tile >= MapChip.WallMin && tile <= MapChip.WallMax)) {
-			return false;
+		const def = mapChipDefinitions[tile];
+		if (def) {
+			return def.obstacle;
 		} else {
 			return true;
 		}
+	}
+
+	public getMapChipDef(x: MapPoint, y: MapPoint): MapChipDefinitions {
+		const tile = this.checkTile(x, y);
+		return mapChipDefinitions[tile];
 	}
 
 	/**
