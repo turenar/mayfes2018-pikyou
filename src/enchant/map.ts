@@ -25,7 +25,11 @@ export class Map {
 	}
 
 	public canEnter(x: number, y: number) {
-		if (this.map.checkTile(x, y) === MapChip.Wall) {
+		if (
+			this.map.checkTile(x, y) === MapChip.Wall ||
+			(this.map.checkTile(x, y) >= MapChip.WallMin &&
+				this.map.checkTile(x, y) <= MapChip.WallMax)
+		) {
 			return false;
 		} else {
 			return true;
