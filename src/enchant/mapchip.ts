@@ -43,7 +43,16 @@ const enum MapChip {
 	Walle2,
 	Walle3,
 	Walle4,
+	Walle5,
+	Walle6,
+	Walle7,
+	Walle8,
+	Walle9,
 	Wallf1,
+	Wallg1,
+	Wallg2,
+	Wallg3,
+	Wallg4,
 	WallMax,
 }
 
