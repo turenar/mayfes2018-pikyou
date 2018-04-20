@@ -1,15 +1,15 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
 import { code } from './blockly-main';
-import { mapchipSize, Map } from './enchant/map';
+import { mapchipSize, Map, MapPoint } from './enchant/map';
 import { World } from './world';
 import MapChip from './enchant/mapchip';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
 export type CharacterPosition = {
-	mapPoint_x: number;
-	mapPoint_y: number;
+	mapPoint_x: MapPoint;
+	mapPoint_y: MapPoint;
 	direction: Direction;
 };
 
@@ -17,10 +17,10 @@ export class Character extends enchant.Sprite {
 	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
 	private world: World;
-	private mapPoint_x: number;
-	private mapPoint_y: number;
-	private initMapPoint_x: number;
-	private initMapPoint_y: number;
+	private mapPoint_x: MapPoint;
+	private mapPoint_y: MapPoint;
+	private initMapPoint_x: MapPoint;
+	private initMapPoint_y: MapPoint;
 	private animationRate: number;
 	private defaultVelocity: number;
 	private velocity: number;
