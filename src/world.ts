@@ -50,10 +50,18 @@ export class World {
 		let next_x = position.mapPoint_x;
 		let next_y = position.mapPoint_y;
 
-		if (position.direction === 'north') next_y -= 1;
-		if (position.direction === 'east') next_x += 1;
-		if (position.direction === 'south') next_y += 1;
-		if (position.direction === 'west') next_x -= 1;
+		if (position.direction === 'north') {
+			next_y -= 1;
+		}
+		if (position.direction === 'east') {
+			next_x += 1;
+		}
+		if (position.direction === 'south') {
+			next_y += 1;
+		}
+		if (position.direction === 'west') {
+			next_x -= 1;
+		}
 
 		return this.map.canEnter(next_x, next_y);
 	}

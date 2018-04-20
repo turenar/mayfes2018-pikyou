@@ -61,12 +61,7 @@ Blockly.Blocks['set_direction'] = {
 				{
 					type: 'field_dropdown',
 					name: 'DIRECTION',
-					options: [
-						['東', 'east'],
-						['西', 'west'],
-						['南', 'south'],
-						['北', 'north'],
-					],
+					options: [['東', 'east'], ['西', 'west'], ['南', 'south'], ['北', 'north']],
 				},
 			],
 		});
@@ -153,12 +148,7 @@ Blockly.Blocks['check_movable'] = {
 				{
 					type: 'field_dropdown',
 					name: 'DIRECTION',
-					options: [
-						['東', 'east'],
-						['西', 'west'],
-						['南', 'south'],
-						['北', 'north'],
-					],
+					options: [['東', 'east'], ['西', 'west'], ['南', 'south'], ['北', 'north']],
 				},
 			],
 		});
@@ -252,12 +242,7 @@ Blockly.Blocks['check_mark'] = {
 				{
 					type: 'field_dropdown',
 					name: 'MARKCOLOR',
-					options: [
-						['赤', 'RED'],
-						['青', 'BLUE'],
-						['緑', 'GREEN'],
-						['黄', 'YELLOW'],
-					],
+					options: [['赤', 'RED'], ['青', 'BLUE'], ['緑', 'GREEN'], ['黄', 'YELLOW']],
 				},
 			],
 		});

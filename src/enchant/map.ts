@@ -24,10 +24,7 @@ export class Map {
 	public reset() {}
 
 	public checkTile(x: MapPoint, y: MapPoint) {
-		return this.map.checkTile(
-			Map.getCoordinateFromMapPoint(x),
-			Map.getCoordinateFromMapPoint(y)
-		);
+		return this.map.checkTile(Map.getCoordinateFromMapPoint(x), Map.getCoordinateFromMapPoint(y));
 	}
 
 	public canEnter(x: MapPoint, y: MapPoint): boolean {
@@ -53,9 +50,7 @@ export class Map {
 	 * @param {number} coordinate - ピクセル座標
 	 * @returns {number} - マップ座標
 	 */
-	public static getMapPointFromCoordinate(
-		coordinate: DrawingCoordinate
-	): MapPoint {
+	public static getMapPointFromCoordinate(coordinate: DrawingCoordinate): MapPoint {
 		return Math.floor(coordinate / mapchipSize);
 	}
 }

@@ -143,10 +143,18 @@ export class Character extends enchant.Sprite {
 		let next_x = this.mapPoint_x;
 		let next_y = this.mapPoint_y;
 
-		if (this.direction === 'north') next_y -= 1;
-		if (this.direction === 'east') next_x += 1;
-		if (this.direction === 'south') next_y += 1;
-		if (this.direction === 'west') next_x -= 1;
+		if (this.direction === 'north') {
+			next_y -= 1;
+		}
+		if (this.direction === 'east') {
+			next_x += 1;
+		}
+		if (this.direction === 'south') {
+			next_y += 1;
+		}
+		if (this.direction === 'west') {
+			next_x -= 1;
+		}
 
 		return this.world.checkTile(next_x, next_y);
 	}
@@ -217,18 +225,10 @@ export class Character extends enchant.Sprite {
 
 	private initCharacter() {
 		this.on('enterframe', function() {
-			if (
-				this.isDead &&
-				!this.isAnimating &&
-				this.world.animationQueue.length() === 0
-			) {
+			if (this.isDead && !this.isAnimating && this.world.animationQueue.length() === 0) {
 				this.die();
 			}
-			if (
-				this.isGoal &&
-				!this.isAnimating &&
-				this.world.animationQueue.length() === 0
-			) {
+			if (this.isGoal && !this.isAnimating && this.world.animationQueue.length() === 0) {
 				this.world.goal();
 			}
 
@@ -246,12 +246,7 @@ export class Character extends enchant.Sprite {
 			}
 
 			//debug用コード
-			if (
-				this.mapPoint_x < 2 ||
-				this.mapPoint_x > 9 ||
-				this.mapPoint_y < 2 ||
-				this.mapPoint_y > 9
-			) {
+			if (this.mapPoint_x < 2 || this.mapPoint_x > 9 || this.mapPoint_y < 2 || this.mapPoint_y > 9) {
 				this.world.reset();
 			}
 		});

@@ -43,10 +43,18 @@ Blockly.JavaScript['check_obstacle'] = function(block: Blockly.Block) {
 Blockly.JavaScript['check_mark'] = function(block: Blockly.Block) {
 	const markColor = block.getFieldValue('MARKCOLOR');
 	let mark;
-	if (markColor === 'RED') mark = MapChip.MarkRed;
-	if (markColor === 'BLUE') mark = MapChip.MarkBlue;
-	if (markColor === 'GREEN') mark = MapChip.MarkGreen;
-	if (markColor === 'YELLOW') mark = MapChip.MarkYellow;
+	if (markColor === 'RED') {
+		mark = MapChip.MarkRed;
+	}
+	if (markColor === 'BLUE') {
+		mark = MapChip.MarkBlue;
+	}
+	if (markColor === 'GREEN') {
+		mark = MapChip.MarkGreen;
+	}
+	if (markColor === 'YELLOW') {
+		mark = MapChip.MarkYellow;
+	}
 
 	const code = `this.getFeetTile() === ${mark}`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];

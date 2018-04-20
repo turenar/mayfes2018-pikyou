@@ -2,12 +2,7 @@ import StageSelectingScene from '../scenes/stage-selecting-scene';
 import core from '../enchant/core';
 
 export default class ArrowButton extends enchant.Sprite {
-	public constructor(
-		x: number,
-		y: number,
-		type: string,
-		scene: StageSelectingScene
-	) {
+	public constructor(x: number, y: number, type: string, scene: StageSelectingScene) {
 		super(40, 50); // 画像サイズに応じて決める
 		this.x = x;
 		this.y = y;
