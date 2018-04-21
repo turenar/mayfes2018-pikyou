@@ -10,10 +10,7 @@ fs.readFile('./assets/blocks.xml', 'utf-8', function(err, data) {
 		fs.writeFileSync('./src/blocks.ts', '/* this file is auto generated. */\n');
 
 		for (var i = 0; i < arr.length; i++) {
-			fs.appendFileSync(
-				'./src/blocks.ts',
-				`export const blockset${i} = '${arr[i].replace(/\r?\n/g, '')}';\n`
-			);
+			fs.appendFileSync('./src/blocks.ts', `export const blockset${i} = '${arr[i].replace(/\r?\n/g, '')}';\n`);
 		}
 	}
 });

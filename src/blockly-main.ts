@@ -31,8 +31,6 @@ Blockly.addChangeListener(function(event) {
 		}
 	});
 
-	code = Blockly.JavaScript.blockToCode(
-		workspacePlayground.getBlockById('initialBlock')
-	) as string;
+	code = Blockly.JavaScript.blockToCode(workspacePlayground.getBlockById('initialBlock')) as string;
 	console.log(code);
 });

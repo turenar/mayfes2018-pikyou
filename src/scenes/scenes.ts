@@ -7,12 +7,7 @@ import { SceneManager } from '../scene-manager';
 import PlayingScene from './playing-scene';
 import TopScene from './top-scene';
 
-export type SceneKind =
-	| 'Top'
-	| 'StageSelecting'
-	| 'Playing'
-	| 'GameOver'
-	| 'Result';
+export type SceneKind = 'Top' | 'StageSelecting' | 'Playing' | 'GameOver' | 'Result';
 
 export class Scene extends enchant.Scene {
 	private manager: SceneManager;

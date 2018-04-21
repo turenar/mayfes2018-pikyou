@@ -14,6 +14,9 @@
 		"quotes": ["error", "single"],
 		"semi": ["error", "always"],
 		"no-console": ["off"],
+		"max-len": ["warn", { "code": 120 }],
+		"curly": ["error", "all"],
+		"block-spacing": ["error", "always"],
 		"comma-dangle": [
 			"error",
 			{
