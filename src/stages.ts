@@ -1,9 +1,11 @@
 import MapChip from './enchant/mapchip';
+import { CharacterPosition } from './character';
 
 export type Stage = {
 	map: MapChip[][];
 	name: string;
 	description: string;
+	characterInitialPosition: CharacterPosition;
 };
 
 const stages: Stage[] = [
@@ -22,6 +24,11 @@ const stages: Stage[] = [
 		],
 		name: 'まっすぐ進む',
 		description: '基本的な操作に慣れよう',
+		characterInitialPosition: {
+			mapPoint_x: 5,
+			mapPoint_y: 5,
+			direction: 'south',
+		},
 	},
 	{
 		map: [
@@ -38,6 +45,11 @@ const stages: Stage[] = [
 		],
 		name: '曲がる',
 		description: '曲がるという操作を覚えよう',
+		characterInitialPosition: {
+			mapPoint_x: 5,
+			mapPoint_y: 5,
+			direction: 'south',
+		},
 	},
 ];
 

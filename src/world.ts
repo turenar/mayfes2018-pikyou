@@ -15,7 +15,7 @@ export class World {
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
-		this.character = new Character(this);
+		this.character = new Character(this, stages[stageNumber].characterInitialPosition);
 		this.map = new Map(stages[stageNumber].map);
 		this.animationQueue = new AnimationQueue();
 

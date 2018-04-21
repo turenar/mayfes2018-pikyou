@@ -19,8 +19,7 @@ export class Character extends enchant.Sprite {
 	private world: World;
 	private mapPoint_x: MapPoint;
 	private mapPoint_y: MapPoint;
-	private initMapPoint_x: MapPoint;
-	private initMapPoint_y: MapPoint;
+	private initialPosition: CharacterPosition;
 	private animationRate: number;
 	private defaultVelocity: number;
 	private velocity: number;
@@ -29,13 +28,12 @@ export class Character extends enchant.Sprite {
 	private isGoal: boolean;
 	public isAnimating: boolean;
 
-	public constructor(world: World) {
+	public constructor(world: World, initialPosition: CharacterPosition) {
 		const width = 32;
 		const height = 32;
 		super(width, height);
 		this.image = core.assets['img/chara1.png'];
-		this.initMapPoint_x = 5;
-		this.initMapPoint_y = 5;
+		this.initialPosition = initialPosition;
 		this.animationRate = 4;
 		this.defaultVelocity = mapchipSize / this.animationRate;
 		this.world = world;
@@ -46,10 +44,10 @@ export class Character extends enchant.Sprite {
 
 	//初期位置に戻す
 	public reset() {
-		this.mapPoint_x = this.initMapPoint_x;
-		this.mapPoint_y = this.initMapPoint_y;
+		this.mapPoint_x = this.initialPosition.mapPoint_x;
+		this.mapPoint_y = this.initialPosition.mapPoint_y;
+		this.direction = this.initialPosition.direction;
 		this.velocity = this.defaultVelocity;
-		this.direction = 'south';
 		this.x = Map.getCoordinateFromMapPoint(this.mapPoint_x);
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 		this.isDead = false;
