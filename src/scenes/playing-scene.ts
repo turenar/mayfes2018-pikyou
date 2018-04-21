@@ -22,7 +22,6 @@ export default class PlayingScene extends Scene {
 	}
 
 	public reset() {
-		core.pause();
 		this.isRunning = false;
 		this.world.reset();
 		this.button.reset();

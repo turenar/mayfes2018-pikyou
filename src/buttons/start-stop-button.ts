@@ -21,11 +21,9 @@ export default class StartStopButton extends enchant.Sprite {
 		if (isRunning) {
 			console.log('stop game');
 			this.image = core.assets['img/startbutton.png'];
-			core.pause();
 		} else {
 			console.log('start game');
 			this.image = core.assets['img/stopbutton.png'];
-			core.resume();
 		}
 		return !isRunning;
 	}

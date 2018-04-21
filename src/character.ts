@@ -230,7 +230,7 @@ export class Character extends enchant.Sprite {
 				this.world.goal();
 			}
 
-			if (!this.isGoal && !this.isDead) {
+			if (!this.isGoal && !this.isDead && this.world.scene.isRunning) {
 				try {
 					eval(code);
 				} catch (e) {
