@@ -5,22 +5,25 @@ import StartStopButton from '../buttons/start-stop-button';
 import { World } from '../world';
 import { code } from '../blockly-main';
 import CodeRunner from '../code-runner';
+import { BackToStageSelectingFromPlayingButton } from '../buttons/back-to-stageselecting-button';
 
 export default class PlayingScene extends Scene {
 	private stageNum: number;
 	private codeRunner: CodeRunner;
 	public isRunning: boolean;
 	public world: World;
-	public button: StartStopButton;
+	public startStopButton: StartStopButton;
+	public backToStageSelectingButton: BackToStageSelectingFromPlayingButton;
 
 	public constructor(manager: SceneManager, stageNum: number) {
 		super('Playing', manager);
 		this.isRunning = false;
 
 		this.world = new World(this, stageNum);
-		this.button = new StartStopButton(this);
 		this.stageNum = stageNum;
 		this.codeRunner = new CodeRunner(this.world);
+		this.startStopButton = new StartStopButton(this, 30, 330);
+		this.backToStageSelectingButton = new BackToStageSelectingFromPlayingButton(10, 430, this);
 
 		this.initScene();
 
@@ -30,7 +33,7 @@ export default class PlayingScene extends Scene {
 	public reset() {
 		this.isRunning = false;
 		this.world.reset();
-		this.button.reset();
+		this.startStopButton.reset();
 	}
 
 	public resetWorld() {
@@ -53,8 +56,6 @@ export default class PlayingScene extends Scene {
 	}
 
 	private initScene() {
-		this.addChild(this.button);
-
 		const { world } = this;
 		this.on('enterframe', () => {
 			if (world.isDead && !world.animationQueue.running) {
@@ -78,5 +79,7 @@ export default class PlayingScene extends Scene {
 				world.animationQueue.run();
 			}
 		});
+		this.addChild(this.startStopButton);
+		this.addChild(this.backToStageSelectingButton);
 	}
 }

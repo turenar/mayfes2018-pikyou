@@ -9,11 +9,14 @@ export function init() {
 	core.preload('img/mapchip.png');
 	core.preload('img/chara1.png');
 
-	core.preload('img/startbutton.png');
-	core.preload('img/stopbutton.png');
 	core.preload('img/top_init_button.png');
 	core.preload('img/top_continue_button.png');
 	core.preload('img/titletext.png');
+
+	core.preload('img/start_button.png');
+	core.preload('img/stop_button.png');
+	core.preload('img/back_to_stage_selecting_from_playing_button.png');
+
 	core.preload('img/haikei.png');
 	core.preload('img/background.png');
 

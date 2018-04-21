@@ -2,7 +2,7 @@ import core from '../enchant/core';
 import { Scene } from './scenes';
 import { SceneManager } from '../scene-manager';
 import RetryButton from '../buttons/retry-button';
-import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
+import { BackToStageSelectingButton } from '../buttons/back-to-stageselecting-button';
 
 export default class GameOverScene extends Scene {
 	private retryButton: RetryButton;
