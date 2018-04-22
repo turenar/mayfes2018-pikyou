@@ -97,6 +97,20 @@ export class SceneManager {
 		return this.clearSituations[stageNum];
 	}
 
+	public getMaxCanSelectStageNum() {
+		var maxClearedStageNum = -1;
+		for (var i: number = 0; i < stages.length; i++) {
+			if (this.clearSituations[i].isCleared) {
+				maxClearedStageNum = i;
+			}
+		}
+		if (i == stages.length - 1) {
+			return stages.length - 1;
+		} else {
+			return maxClearedStageNum + 1;
+		}
+	}
+
 	private initScene() {
 		this.currentScene = 'Top';
 		core.pushScene(new TopScene(this));

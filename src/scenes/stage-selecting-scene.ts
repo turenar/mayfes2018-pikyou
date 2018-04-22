@@ -64,18 +64,20 @@ export default class StageSelectingScene extends Scene {
 	}
 
 	private upNumber() {
-		if (this.stageNum == this.maxStageNum) {
-			this.stageNum = 0;
-		} else {
+		console.log(this.manager.getMaxCanSelectStageNum());
+		if (this.stageNum < this.manager.getMaxCanSelectStageNum()) {
 			this.stageNum += 1;
+		} else {
+			this.stageNum = 0;
 		}
 		console.log(`stageNum: ${this.stageNum}`);
 		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
 	}
 
 	private downNumber() {
+		console.log(this.manager.getMaxCanSelectStageNum());
 		if (this.stageNum == 0) {
-			this.stageNum = this.maxStageNum;
+			this.stageNum = this.manager.getMaxCanSelectStageNum();
 		} else {
 			this.stageNum -= 1;
 		}
