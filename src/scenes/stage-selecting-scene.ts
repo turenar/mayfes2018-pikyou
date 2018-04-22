@@ -44,7 +44,7 @@ export default class StageSelectingScene extends Scene {
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
 
-		this.stageLabels = new StageLabels();
+		this.stageLabels = new StageLabels(this.manager.getClearSituation(0));
 		this.addChild(this.stageLabels);
 
 		this.upButton.addEventListener('touchstart', () => {
@@ -70,7 +70,7 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum += 1;
 		}
 		console.log(`stageNum: ${this.stageNum}`);
-		this.stageLabels.update(this.stageNum);
+		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
 	}
 
 	private downNumber() {
@@ -80,6 +80,6 @@ export default class StageSelectingScene extends Scene {
 			this.stageNum -= 1;
 		}
 		console.log(`stagenum: ${this.stageNum}`);
-		this.stageLabels.update(this.stageNum);
+		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
 	}
 }

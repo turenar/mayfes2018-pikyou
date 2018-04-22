@@ -2,6 +2,7 @@ import core from '../enchant/core';
 import stages from '../stages';
 import { Label } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
+import clearSituationClass from '../score-manager';
 
 export default class StageLabels extends enchant.Group {
 	private stageNumLabel: Label;
@@ -10,7 +11,7 @@ export default class StageLabels extends enchant.Group {
 	private scoreLabel: Label;
 	private clearMark: Sprite;
 
-	public constructor() {
+	public constructor(clearSituationOfStageZero: clearSituationClass) {
 		super();
 
 		const background = new enchant.Sprite(280, 180);
@@ -49,13 +50,20 @@ export default class StageLabels extends enchant.Group {
 		this.clearMark.y = 250;
 		this.addChild(this.clearMark);
 
-		this.update(0);
+		this.update(0, clearSituationOfStageZero);
 	}
 
-	public update(stageNum: number) {
+	public update(stageNum: number, clearSituation: clearSituationClass) {
+		console.log(stageNum);
+		console.log(clearSituation.score);
 		this.stageNumLabel.text = 'ステージ' + (stageNum + 1).toString();
 		this.stageNameLabel.text = stages[stageNum].name;
 		this.descriptionLabel.text = stages[stageNum].description;
-		this.scoreLabel.text = 'score: ' + '1200'; //todo
+		this.scoreLabel.text = 'score: ' + clearSituation.score.toString();
+		if (clearSituation.isCleared) {
+			this.clearMark.opacity = 100;
+		} else {
+			this.clearMark.opacity = 0;
+		}
 	}
 }

@@ -66,5 +66,7 @@ export default class ResultScene extends Scene {
 		this.addChild(gotJwellBoxIcon);
 		this.addChild(retryButton);
 		this.addChild(backToStageSelectingButton);
+
+		this.manager.updateScore(stageNum, score.score);
 	}
 }
