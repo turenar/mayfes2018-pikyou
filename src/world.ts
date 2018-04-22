@@ -68,11 +68,6 @@ export class World {
 
 	public goal() {
 		this.scene.moveNextScene('Result');
-
-		//debug用コード（Result画面ができたら消す)
-		console.log(core.currentScene);
-		this.scene.moveNextScene('Playing');
-		this.reset();
 	}
 
 	public die() {

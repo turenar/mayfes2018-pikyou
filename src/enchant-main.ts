@@ -8,6 +8,7 @@ import { SceneManager } from './scene-manager';
 export function init() {
 	core.preload('img/mapchip.png');
 	core.preload('img/chara1.png');
+	core.preload('img/chest.png');
 	core.preload('img/startbutton.png');
 	core.preload('img/stopbutton.png');
 	core.preload('img/startinit.png');
