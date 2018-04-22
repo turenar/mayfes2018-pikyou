@@ -5,13 +5,17 @@ import PlayingScene from './scenes/playing-scene';
 import StageSelectingScene from './scenes/stage-selecting-scene';
 import GameOverScene from './scenes/gameover-scene';
 import ResultScene from './scenes/result-scene';
+import stages from './stages';
+import clearSituationClass from './score-manager';
 import { code } from './blockly-main';
 
 export class SceneManager {
+	private clearSituations: clearSituationClass[];
 	public currentScene: SceneKind;
 
 	public constructor() {
 		this.initScene();
+		this.initClearSituations();
 	}
 
 	/**
@@ -84,8 +88,24 @@ export class SceneManager {
 		console.log('Error! Transition of scenes is invalid!');
 	}
 
+	public updateScore(stageNum: number, score: number) {
+		this.clearSituations[stageNum].isCleared = true;
+		this.clearSituations[stageNum].score = score;
+	}
+
+	public getClearSituation(stageNum: number) {
+		return this.clearSituations[stageNum];
+	}
+
 	private initScene() {
 		this.currentScene = 'Top';
 		core.pushScene(new TopScene(this));
+	}
+
+	private initClearSituations() {
+		this.clearSituations = [];
+		for (var i: number = 0; i < stages.length; i++) {
+			this.clearSituations.push(new clearSituationClass());
+		}
 	}
 }
