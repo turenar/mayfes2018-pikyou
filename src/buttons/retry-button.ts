@@ -1,8 +1,7 @@
-import GameOverScene from '../scenes/gameover-scene';
-import ResultScene from '../scenes/result-scene';
+import { Scene } from '../scenes/scenes';
 
 export default class RetryButton extends enchant.Sprite {
-	public constructor(x: number, y: number, scene: GameOverScene | ResultScene) {
+	public constructor(x: number, y: number, scene: Scene) {
 		super(200, 40);
 		this.backgroundColor = 'green';
 		this.x = x;
@@ -11,7 +10,7 @@ export default class RetryButton extends enchant.Sprite {
 		this.listenButton(scene);
 	}
 
-	private listenButton(scene: GameOverScene | ResultScene) {
+	private listenButton(scene: Scene) {
 		this.addEventListener('touchstart', () => {
 			console.log('retry button is pushed!');
 			scene.moveNextScene('Playing');
