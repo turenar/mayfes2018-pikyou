@@ -5,6 +5,7 @@ import StartStopButton from '../buttons/start-stop-button';
 import { World } from '../world';
 
 export default class PlayingScene extends Scene {
+	private stageNum: number;
 	public isRunning: boolean;
 	public world: World;
 	public button: StartStopButton;
@@ -15,6 +16,7 @@ export default class PlayingScene extends Scene {
 
 		this.world = new World(this, stageNum);
 		this.button = new StartStopButton(this);
+		this.stageNum = stageNum;
 
 		this.initScene();
 
@@ -33,7 +35,7 @@ export default class PlayingScene extends Scene {
 
 	public moveNextScene(nextkind: SceneKind) {
 		this.reset();
-		super.moveNextScene(nextkind);
+		super.moveNextScene(nextkind, this.stageNum);
 	}
 
 	private initScene() {

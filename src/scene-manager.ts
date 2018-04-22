@@ -66,7 +66,7 @@ export class SceneManager {
 			}
 			if (sceneKind === 'Result') {
 				this.currentScene = 'Result';
-				core.pushScene(new ResultScene(this));
+				core.pushScene(new ResultScene(this, stageNum));
 				return;
 			}
 		}
