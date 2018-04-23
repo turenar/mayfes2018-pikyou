@@ -3,9 +3,9 @@ import core from '../enchant/core';
 
 export default class StartContinueButton extends enchant.Sprite {
 	public constructor(x: number, y: number, scene: TopScene) {
-		super(320, 140); // 画像サイズに応じて決める
+		super(280, 120); // 画像サイズに応じて決める
 		this.x = x;
 		this.y = y;
-		this.image = core.assets['img/startcontinue.png'];
+		this.image = core.assets['img/top_continue_button.png'];
 	}
 }
