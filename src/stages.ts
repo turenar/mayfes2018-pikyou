@@ -87,6 +87,11 @@ const stages: Stage[] = [
 		],
 		name: 'image test',
 		description: 'マップチップのテスト',
+		characterInitialPosition: {
+			mapPoint_x: 5,
+			mapPoint_y: 5,
+			direction: 'south',
+		},
 	},
 ];
 
