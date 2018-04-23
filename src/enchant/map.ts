@@ -29,7 +29,9 @@ export class Map {
 
 	public canEnter(x: MapPoint, y: MapPoint): boolean {
 		const tile = this.checkTile(x, y);
-		if (tile === MapChip.Wall) {
+		if (tile === MapChip.Wall ||
+		(tile >= MapChip.WallMin &&
+		tile <= MapChip.WallMax)) {
 			return false;
 		} else {
 			return true;
