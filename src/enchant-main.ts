@@ -28,7 +28,7 @@ export function init() {
 	core.preload('img/gameover_text.png');
 	core.preload('img/chest.png');
 	core.preload('img/retry_button.png');
-	core.preload('img/back_to_stage_selecting_button.png')
+	core.preload('img/back_to_stage_selecting_button.png');
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();
