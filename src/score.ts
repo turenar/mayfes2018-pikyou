@@ -5,10 +5,10 @@ export type Score = {
 };
 
 /**
- * @param {number} usingBlockNum - 使用しているブロック数
- * @param {number} gotJwellBox - 宝箱を取得したかどうか
- * @return {number} - 引数をもとにスコアを計算
+ * @param {number} usingBlockNum - 使用ブロック数
+ * @param {number} gotJwellBox - アイテムを取ったか
+ * @returns {Score} - スコアを計算する
  */
-export function calcScore(usingBlockNum: number, gotJwellBox: number): number {
-	return 100 - usingBlockNum * 5 + gotJwellBox * 20;
+export function calcScore(usingBlockNum: number, gotJwellBox: number) {
+	return 100 - 20 * usingBlockNum + gotJwellBox * 100;
 }
