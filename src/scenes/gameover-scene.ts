@@ -15,15 +15,14 @@ export default class GameOverScene extends Scene {
 		const offset_y = 10;
 
 		const background = new enchant.Sprite(240, 300);
-		background.backgroundColor = 'yellow';
+		background.image = core.assets['img/result_gameover_background.png'];
 		background.x = offset_x;
 		background.y = offset_y;
 
-		const gameOverLabel = new enchant.Label('GameOver');
-		gameOverLabel.color = 'red';
-		gameOverLabel.x = offset_x + 200;
-		gameOverLabel.y = offset_y + 30;
-		gameOverLabel.scale(2, 2);
+		const gameOverLabel = new enchant.Sprite(210, 50);
+		gameOverLabel.image = core.assets['img/gameover_text.png'];
+		gameOverLabel.x = offset_x + 15;
+		gameOverLabel.y = offset_y + 20;
 
 		this.retryButton = new RetryButton(offset_x + 20, offset_y + 180, this);
 

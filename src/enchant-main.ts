@@ -25,6 +25,7 @@ export function init() {
 
 	core.preload('img/result_gameover_background.png');
 	core.preload('img/result_gameclear_text.png');
+	core.preload('img/gameover_text.png');
 	core.preload('img/chest.png');
 	core.preload('img/retry_button.png');
 	core.preload('img/back_to_stage_selecting_button.png')
