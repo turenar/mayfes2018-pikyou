@@ -5,7 +5,7 @@ import StartStopButton from '../buttons/start-stop-button';
 import { World } from '../world';
 import { code } from '../blockly-main';
 import CodeRunner from '../code-runner';
-import { BackToStageSelectingFromPlayingButton } from '../buttons/back-to-stageselecting-button';
+import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 
 export default class PlayingScene extends Scene {
 	private stageNum: number;
@@ -13,7 +13,7 @@ export default class PlayingScene extends Scene {
 	public isRunning: boolean;
 	public world: World;
 	public startStopButton: StartStopButton;
-	public backToStageSelectingButton: BackToStageSelectingFromPlayingButton;
+	public backToStageSelectingButton: BackToStageSelectingButton;
 
 	public constructor(manager: SceneManager, stageNum: number) {
 		super('Playing', manager);
@@ -23,7 +23,14 @@ export default class PlayingScene extends Scene {
 		this.stageNum = stageNum;
 		this.codeRunner = new CodeRunner(this.world);
 		this.startStopButton = new StartStopButton(this, 30, 330);
-		this.backToStageSelectingButton = new BackToStageSelectingFromPlayingButton(10, 430, this);
+		this.backToStageSelectingButton = new BackToStageSelectingButton(
+			10,
+			430,
+			200,
+			40,
+			'img/back_to_stage_selecting_from_playing_button.png',
+			this
+		);
 
 		this.initScene();
 
