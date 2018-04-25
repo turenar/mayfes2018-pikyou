@@ -8,12 +8,15 @@ export const mapchipSize = 32;
 
 export class Map {
 	private map: enchant.Map;
+	private initialMapData: MapChip[][];
+	private pos_x: MapPoint = 5;
+	private pos_y: MapPoint = 8;
 
 	public constructor(mapData: MapChip[][]) {
 		const map = new enchant.Map(mapchipSize, mapchipSize);
 		map.image = core.assets['img/mapchip.png'];
 		map.loadData(mapData);
-
+		this.initialMapData = mapData;
 		this.map = map;
 	}
 
@@ -21,7 +24,16 @@ export class Map {
 		scene.addChild(this.map);
 	}
 
-	public reset() {}
+	public reset() {
+		console.log(this.initialMapData, 'in reset');
+		this.map.loadData(this.initialMapData);
+	}
+
+	public updateMap(x: MapPoint, y: MapPoint, mapchip: MapChip) {
+		const newMapData = JSON.parse(JSON.stringify(this.initialMapData));
+		newMapData[y - 1][x - 1] = mapchip;
+		this.map.loadData(newMapData);
+	}
 
 	public checkTile(x: MapPoint, y: MapPoint) {
 		return this.map.checkTile(Map.getCoordinateFromMapPoint(x), Map.getCoordinateFromMapPoint(y));

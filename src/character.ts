@@ -13,6 +13,8 @@ export type CharacterPosition = {
 	direction: Direction;
 };
 
+export type ItemKind = 'key' | 'chest';
+
 export class Character extends enchant.Sprite {
 	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
@@ -26,6 +28,8 @@ export class Character extends enchant.Sprite {
 	private direction: Direction;
 	private isDead: boolean;
 	private isGoal: boolean;
+	private isHavingKey: boolean;
+	private isHavingChest: boolean;
 	public isAnimating: boolean;
 
 	public constructor(world: World, initialPosition: CharacterPosition) {
@@ -52,6 +56,8 @@ export class Character extends enchant.Sprite {
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 		this.isDead = false;
 		this.isGoal = false;
+		this.isHavingKey = false;
+		this.isHavingChest = false;
 		this.isAnimating = false;
 		this.tl.clear();
 	}
@@ -94,6 +100,11 @@ export class Character extends enchant.Sprite {
 		if (this.getFeetTile() === MapChip.Pitfall) {
 			this.isDead = true;
 			throw 'die';
+		}
+
+		if (this.getFeetTile() === MapChip.Key) {
+			this.isHavingKey = true;
+			this.getItem('key');
 		}
 	}
 
@@ -219,6 +230,23 @@ export class Character extends enchant.Sprite {
 
 	private die() {
 		this.world.die();
+	}
+
+	private getItem(item: ItemKind) {
+		const characterPosition = this.getMapPointAndDirection();
+		this.world.animationQueue.push({
+			time: 1,
+			onactionstart: function() {
+				this.isAnimating = true;
+				console.log(`get ${item}!`);
+			},
+			onactionend: function() {
+				this.world.getItem(characterPosition);
+				this.isAnimating = false;
+				console.log(`map ${characterPosition.mapPoint_x}, ${characterPosition.mapPoint_y} update finished`);
+			},
+			onactiontick: function() {},
+		});
 	}
 
 	private initCharacter() {
