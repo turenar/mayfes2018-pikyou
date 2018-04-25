@@ -75,8 +75,8 @@ export class World {
 		this.scene.moveNextScene('GameOver');
 	}
 
-	public getItem(characterPosition: CharacterPosition) {
+	public changeMapChipIntoFloor(x: MapPoint, y: MapPoint) {
 		const mapchip = MapChip.Floor;
-		this.map.updateMap(characterPosition.mapPoint_x, characterPosition.mapPoint_y, mapchip);
+		this.map.updateMap(x, y, mapchip);
 	}
 }
