@@ -1,9 +1,17 @@
-export type QueuedAction = {
-	target: enchant.Sprite;
+export type ActionParams = {
 	time: number;
-	onactionstart: any;
-	onactionend: any;
-	onactiontick: any;
+	onactionstart?: () => void;
+	onactionend?: () => void;
+	onactiontick?: () => void;
+};
+
+export type AnimationTarget = {
+	action: (action: ActionParams) => void;
+	then: (callback: () => void) => void;
+};
+
+export type QueuedAction = ActionParams & {
+	target: AnimationTarget;
 };
 
 export class AnimationQueue {
@@ -23,11 +31,11 @@ export class AnimationQueue {
 	public run(): void {
 		if (!this.running) {
 			const action = this.pop();
-			console.log({ action });
+			console.log({ runAction: action });
 			if (action) {
 				this.running = true;
-				action.target.tl.action(action);
-				action.target.tl.then(() => {
+				action.target.action(action);
+				action.target.then(() => {
 					console.log('animation end');
 					this.running = false;
 					this.run();

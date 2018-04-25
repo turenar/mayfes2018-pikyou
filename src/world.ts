@@ -20,8 +20,8 @@ export class World {
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
 		this.character = new Character(this, stages[stageNumber].characterInitialPosition);
-		this.map = new Map(stages[stageNumber].map);
 		this.animationQueue = new AnimationQueue();
+		this.map = new Map(this.animationQueue, stages[stageNumber].map);
 		this.stageNumber = stageNumber;
 
 		this.map.addInto(this.scene);
@@ -46,9 +46,7 @@ export class World {
 		return this.map.checkTile(x, y);
 	}
 
-	public setTile(mapPoint_x: number, mapPoint_y: number, tile: MapChip) {
-		const x = Map.getCoordinateFromMapPoint(mapPoint_x);
-		const y = Map.getCoordinateFromMapPoint(mapPoint_y);
+	public setTile(x: MapPoint, y: MapPoint, tile: MapChip) {
 		this.map.setTile(x, y, tile);
 	}
 

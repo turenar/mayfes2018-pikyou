@@ -1,21 +1,53 @@
 import core from './core';
 import MapChip from './map-chip';
 import mapChipDefinitions, { MapChipDefinition } from './map-chip-definitions';
+import { ActionParams, AnimationQueue, AnimationTarget } from '../animation-queue';
 
 export type DrawingCoordinate = number;
 export type MapPoint = number;
 
 export const mapchipSize = 32;
 
-export class Map {
-	private rawMapData: MapChip[][];
-	private readonly map: enchant.Map;
+/**
+ * deep copy
+ *
+ * @param {Array<Array<MapChip>>} source clone source
+ * @return {Array<Array<MapChip>>} cloned
+ */
+function cloneMapData(source: MapChip[][]) {
+	return source.map(a => a.slice());
+}
 
-	public constructor(mapData: MapChip[][]) {
+class MapActionConsumer implements AnimationTarget {
+	private map: Map;
+
+	public constructor(map: Map) {
+		this.map = map;
+	}
+
+	public action(params: ActionParams) {
+		params.onactionend();
+	}
+
+	public then(callback: () => void) {
+		callback();
+	}
+}
+
+export class Map {
+	private readonly map: enchant.Map;
+	private readonly tl: MapActionConsumer;
+	private readonly queue: AnimationQueue;
+	private rawMapData: MapChip[][];
+
+	public constructor(queue: AnimationQueue, mapData: MapChip[][]) {
 		const map = new enchant.Map(mapchipSize, mapchipSize);
 		map.image = core.assets['img/mapchip.png'];
 
 		this.map = map;
+		this.tl = new MapActionConsumer(this);
+		this.queue = queue;
+
 		this.reset(mapData);
 	}
 
@@ -24,15 +56,22 @@ export class Map {
 	}
 
 	public reset(mapData: MapChip[][]) {
-		// deep copy
-		this.rawMapData = mapData.map(arr => arr.concat([]));
+		this.rawMapData = cloneMapData(mapData);
 
 		this.map.loadData(this.rawMapData);
 	}
 
 	public setTile(x: number, y: number, tile: MapChip) {
-		this.rawMapData[y - 1][x - 1] = tile;
-		this.map.loadData(this.rawMapData);
+		const newMapData = cloneMapData(this.rawMapData);
+		newMapData[y - 1][x - 1] = tile;
+		this.rawMapData = newMapData;
+		this.queue.push({
+			target: this.tl,
+			time: 0,
+			onactionend: () => {
+				this.map.loadData(newMapData);
+			},
+		});
 	}
 
 	public checkTile(x: MapPoint, y: MapPoint) {

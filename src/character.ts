@@ -178,7 +178,7 @@ export class Character extends enchant.Sprite {
 		this.isDead = true;
 	}
 
-	private mkMovingAction(direction: Direction) {
+	private mkMovingAction(direction: Direction): QueuedAction {
 		const velocity = this.velocity;
 		let actiontick;
 
@@ -207,7 +207,7 @@ export class Character extends enchant.Sprite {
 		}
 
 		const action: QueuedAction = {
-			target: this,
+			target: this.tl,
 			time: this.animationRate,
 			onactionstart: function() {
 				this.isAnimating = true;

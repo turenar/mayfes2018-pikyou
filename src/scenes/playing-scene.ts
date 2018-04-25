@@ -57,7 +57,6 @@ export default class PlayingScene extends Scene {
 
 		const { world } = this;
 		this.on('enterframe', () => {
-			console.log(world);
 			if (world.isDead && !world.animationQueue.running) {
 				this.die();
 			}
