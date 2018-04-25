@@ -242,11 +242,6 @@ export class Character extends enchant.Sprite {
 				this.isAnimating = true;
 				this.tl.action(this.world.animationQueue.pop());
 			}
-
-			//debug用コード
-			if (this.mapPoint_x < 2 || this.mapPoint_x > 9 || this.mapPoint_y < 2 || this.mapPoint_y > 9) {
-				this.world.reset();
-			}
 		});
 	}
 }
