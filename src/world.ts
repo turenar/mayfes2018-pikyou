@@ -1,10 +1,11 @@
 import core from './enchant/core';
 import PlayingScene from './scenes/playing-scene';
 import { code } from './blockly-main';
-import { Character, CharacterPosition } from './character';
+import { Character, CharacterPosition, ItemKind } from './character';
 import { AnimationQueue } from './animation-queue';
 import { Map, MapPoint } from './enchant/map';
 import stages from './stages';
+import MapChip from './enchant/mapchip';
 
 export class World {
 	public scene: PlayingScene;
@@ -72,5 +73,10 @@ export class World {
 
 	public die() {
 		this.scene.moveNextScene('GameOver');
+	}
+
+	public changeMapChipIntoFloor(x: MapPoint, y: MapPoint) {
+		const mapchip = MapChip.Floor;
+		this.map.updateMap(x, y, mapchip);
 	}
 }

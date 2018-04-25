@@ -8,20 +8,31 @@ export const mapchipSize = 32;
 
 export class Map {
 	private map: enchant.Map;
+	private initialMapData: MapChip[][];
+	private tmpMapData: MapChip[][];
 
 	public constructor(mapData: MapChip[][]) {
 		const map = new enchant.Map(mapchipSize, mapchipSize);
 		map.image = core.assets['img/mapchip.png'];
 		map.loadData(mapData);
-
 		this.map = map;
+		this.initialMapData = mapData;
+		this.tmpMapData = JSON.parse(JSON.stringify(this.initialMapData));
 	}
 
 	public addInto(scene: enchant.Scene) {
 		scene.addChild(this.map);
 	}
 
-	public reset() {}
+	public reset() {
+		this.map.loadData(this.initialMapData);
+		this.tmpMapData = JSON.parse(JSON.stringify(this.initialMapData));
+	}
+
+	public updateMap(x: MapPoint, y: MapPoint, mapchip: MapChip) {
+		this.tmpMapData[y - 1][x - 1] = mapchip;
+		this.map.loadData(this.tmpMapData);
+	}
 
 	public checkTile(x: MapPoint, y: MapPoint) {
 		return this.map.checkTile(Map.getCoordinateFromMapPoint(x), Map.getCoordinateFromMapPoint(y));
@@ -29,7 +40,7 @@ export class Map {
 
 	public canEnter(x: MapPoint, y: MapPoint): boolean {
 		const tile = this.checkTile(x, y);
-		if (tile === MapChip.Wall || (tile >= MapChip.WallMin && tile <= MapChip.WallMax)) {
+		if (tile === MapChip.Wall || tile === MapChip.Door || (tile >= MapChip.WallMin && tile <= MapChip.WallMax)) {
 			return false;
 		} else {
 			return true;

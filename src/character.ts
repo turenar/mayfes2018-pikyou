@@ -13,6 +13,8 @@ export type CharacterPosition = {
 	direction: Direction;
 };
 
+export type ItemKind = 'key' | 'chest';
+
 export class Character extends enchant.Sprite {
 	//mapPoint_*, init_* はマス目の座標を入れる。
 	//実際のピクセル座標は、getCoordinateで得る。
@@ -26,6 +28,8 @@ export class Character extends enchant.Sprite {
 	private direction: Direction;
 	private isDead: boolean;
 	private isGoal: boolean;
+	private isHavingKey: boolean;
+	private isHavingChest: boolean;
 	public isAnimating: boolean;
 
 	public constructor(world: World, initialPosition: CharacterPosition) {
@@ -52,6 +56,8 @@ export class Character extends enchant.Sprite {
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 		this.isDead = false;
 		this.isGoal = false;
+		this.isHavingKey = false;
+		this.isHavingChest = false;
 		this.isAnimating = false;
 		this.tl.clear();
 	}
@@ -95,6 +101,21 @@ export class Character extends enchant.Sprite {
 			this.isDead = true;
 			throw 'die';
 		}
+
+		if (this.getFeetTile() === MapChip.Key) {
+			this.isHavingKey = true;
+			this.getItem('key');
+		}
+
+		if (this.getFeetTile() === MapChip.Chest) {
+			this.isHavingChest = true;
+			this.getItem('chest');
+		}
+
+		if (this.getFrontTile() === MapChip.Door && this.isHavingKey) {
+			this.isHavingKey = false;
+			this.openDoor();
+		}
 	}
 
 	//方向転換
@@ -125,36 +146,49 @@ export class Character extends enchant.Sprite {
 		};
 	}
 
+	public getNextMapPointAndDirection(): CharacterPosition {
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
+		const direction = this.direction;
+
+		let next_x = mapPoint_x;
+		let next_y = mapPoint_y;
+
+		if (direction === 'north') {
+			next_y -= 1;
+		}
+		if (direction === 'east') {
+			next_x += 1;
+		}
+		if (direction === 'south') {
+			next_y += 1;
+		}
+		if (direction === 'west') {
+			next_x -= 1;
+		}
+
+		return {
+			mapPoint_x: next_x,
+			mapPoint_y: next_y,
+			direction,
+		};
+	}
+
 	/**
 	 * 足元のマップチップの種類を取得する。
-	 * @returns {number} -足元のマップチップの種類
+	 * @returns {MapChip} -足元のマップチップの種類
 	 */
-	private getFeetTile(): number {
+	private getFeetTile(): MapChip {
 		return this.world.checkTile(this.mapPoint_x, this.mapPoint_y);
 	}
 
 	/**
 	 * 目の前のマップチップの種類を取得する。
-	 * @returns {number} -目の前のマップチップの種類
+	 * @returns {MapChip} -目の前のマップチップの種類
 	 */
-	private getFrontTile(): number {
-		let next_x = this.mapPoint_x;
-		let next_y = this.mapPoint_y;
-
-		if (this.direction === 'north') {
-			next_y -= 1;
-		}
-		if (this.direction === 'east') {
-			next_x += 1;
-		}
-		if (this.direction === 'south') {
-			next_y += 1;
-		}
-		if (this.direction === 'west') {
-			next_x -= 1;
-		}
-
-		return this.world.checkTile(next_x, next_y);
+	private getFrontTile(): MapChip {
+		const { mapPoint_x, mapPoint_y } = this.getNextMapPointAndDirection();
+		return this.world.checkTile(mapPoint_x, mapPoint_y);
 	}
 
 	/**
@@ -219,6 +253,40 @@ export class Character extends enchant.Sprite {
 
 	private die() {
 		this.world.die();
+	}
+
+	private getItem(item: ItemKind) {
+		const characterPosition = this.getMapPointAndDirection();
+		this.world.animationQueue.push({
+			time: 1,
+			onactionstart: function() {
+				this.isAnimating = true;
+				console.log(`get ${item}!`);
+			},
+			onactionend: function() {
+				this.world.changeMapChipIntoFloor(characterPosition.mapPoint_x, characterPosition.mapPoint_y);
+				this.isAnimating = false;
+				console.log(`map ${characterPosition.mapPoint_x}, ${characterPosition.mapPoint_y} update finished`);
+			},
+			onactiontick: function() {},
+		});
+	}
+
+	private openDoor() {
+		const nextPosition = this.getNextMapPointAndDirection();
+		this.world.animationQueue.push({
+			time: 1,
+			onactionstart: function() {
+				this.isAnimating = true;
+				console.log('open door!');
+			},
+			onactionend: function() {
+				this.world.changeMapChipIntoFloor(nextPosition.mapPoint_x, nextPosition.mapPoint_y);
+				this.isAnimating = false;
+				console.log(`map ${nextPosition.mapPoint_x}, ${nextPosition.mapPoint_y} update finished`);
+			},
+			onactiontick: function() {},
+		});
 	}
 
 	private initCharacter() {
