@@ -43,9 +43,9 @@ export class Map {
 		const tile = this.checkTile(x, y);
 		const def = mapChipDefinitions[tile];
 		if (def) {
-			return def.obstacle;
+			return !def.obstacle;
 		} else {
-			return true;
+			return false;
 		}
 	}
 
