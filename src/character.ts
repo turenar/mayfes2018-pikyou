@@ -107,8 +107,12 @@ export class Character extends enchant.Sprite {
 			this.getItem('key');
 		}
 
+		if (this.getFeetTile() === MapChip.Chest) {
+			this.isHavingChest = true;
+			this.getItem('chest');
+		}
+
 		if (this.getFrontTile() === MapChip.Door && this.isHavingKey) {
-			console.log('hoge');
 			this.isHavingKey = false;
 			this.openDoor();
 		}
