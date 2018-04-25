@@ -31,12 +31,12 @@ export class Map {
 	}
 
 	public setTile(x: number, y: number, tile: MapChip) {
-		this.rawMapData[y][x] = tile;
+		this.rawMapData[y - 1][x - 1] = tile;
 		this.map.loadData(this.rawMapData);
 	}
 
 	public checkTile(x: MapPoint, y: MapPoint) {
-		return this.rawMapData[y][x];
+		return this.rawMapData[y - 1][x - 1];
 	}
 
 	public canEnter(x: MapPoint, y: MapPoint): boolean {
