@@ -14,6 +14,8 @@ export class World {
 	public readonly animationQueue: AnimationQueue;
 	public readonly stageNumber: number;
 	public isAnimating: boolean;
+	public isDead: boolean;
+	public isGoal: boolean;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
@@ -76,10 +78,11 @@ export class World {
 	}
 
 	public goal() {
-		this.scene.moveNextScene('Result');
+		this.isGoal = true;
 	}
 
 	public die() {
-		this.scene.moveNextScene('GameOver');
+		this.character.kill();
+		this.isDead = true;
 	}
 }

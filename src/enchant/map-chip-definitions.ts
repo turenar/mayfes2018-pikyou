@@ -1,7 +1,7 @@
 import { World } from '../world';
 import MapChip from './map-chip';
 
-export type MapChipDefinitions = {
+export type MapChipDefinition = {
 	obstacle?: boolean;
 	onAction?: (world: World, x: number, y: number) => void;
 	onEnter?: (world: World, x: number, y: number) => void;
@@ -17,7 +17,7 @@ function markerBase() {
 }
 
 // chipId should be [T in MapChip] but i don't know how
-const mapChipDefinitions: { [chipId: number]: MapChipDefinitions } = {
+const mapChipDefinitions: { [chipId: number]: MapChipDefinition } = {
 	[MapChip.Empty]: {},
 	[MapChip.Wall]: {
 		obstacle: true,

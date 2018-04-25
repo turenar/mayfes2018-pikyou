@@ -1,4 +1,5 @@
-export type Action = {
+export type QueuedAction = {
+	target: enchant.Sprite;
 	time: number;
 	onactionstart: any;
 	onactionend: any;
@@ -6,18 +7,37 @@ export type Action = {
 };
 
 export class AnimationQueue {
-	private queue: Action[];
+	private queue: QueuedAction[];
+	public running: boolean;
 
 	public constructor() {
 		this.queue = [];
+		this.running = false;
 	}
 
-	public push(action: Action) {
+	public push(action: QueuedAction) {
 		this.queue.push(action);
 		// console.log(this.queue);
 	}
 
-	public pop(): Action {
+	public run(): void {
+		if (!this.running) {
+			const action = this.pop();
+			console.log({ action });
+			if (action) {
+				this.running = true;
+				action.target.tl.action(action);
+				action.target.tl.then(() => {
+					console.log('animation end');
+					this.running = false;
+					this.run();
+				});
+				console.log(action.target);
+			}
+		}
+	}
+
+	public pop(): QueuedAction {
 		if (this.queue.length > 0) {
 			return this.queue.shift();
 		} else {

@@ -1,6 +1,6 @@
 import core from './core';
 import MapChip from './map-chip';
-import mapChipDefinitions, { MapChipDefinitions } from './map-chip-definitions';
+import mapChipDefinitions, { MapChipDefinition } from './map-chip-definitions';
 
 export type DrawingCoordinate = number;
 export type MapPoint = number;
@@ -36,6 +36,7 @@ export class Map {
 	}
 
 	public checkTile(x: MapPoint, y: MapPoint) {
+		// MapPoint: 1,2,3,...
 		return this.rawMapData[y - 1][x - 1];
 	}
 
@@ -45,11 +46,12 @@ export class Map {
 		if (def) {
 			return !def.obstacle;
 		} else {
+			console.warn({ warning: 'missing mapchip definition', tile });
 			return false;
 		}
 	}
 
-	public getMapChipDef(x: MapPoint, y: MapPoint): MapChipDefinitions {
+	public getMapChipDef(x: MapPoint, y: MapPoint): MapChipDefinition {
 		const tile = this.checkTile(x, y);
 		return mapChipDefinitions[tile];
 	}
