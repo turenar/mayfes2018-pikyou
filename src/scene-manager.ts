@@ -6,16 +6,16 @@ import StageSelectingScene from './scenes/stage-selecting-scene';
 import GameOverScene from './scenes/gameover-scene';
 import ResultScene from './scenes/result-scene';
 import stages from './stages';
-import clearSituationClass from './score-manager';
+import ScoreManager from './score-manager';
 import { code } from './blockly-main';
 
 export class SceneManager {
-	private clearSituations: clearSituationClass[];
+	private scoreManager: ScoreManager;
 	public currentScene: SceneKind;
 
 	public constructor() {
 		this.initScene();
-		this.initClearSituations();
+		this.scoreManager = new ScoreManager();
 	}
 
 	/**
@@ -89,18 +89,17 @@ export class SceneManager {
 	}
 
 	public updateScore(stageNum: number, score: number) {
-		this.clearSituations[stageNum].isCleared = true;
-		this.clearSituations[stageNum].score = score;
+		this.scoreManager.updateScore(stageNum, score);
 	}
 
 	public getClearSituation(stageNum: number) {
-		return this.clearSituations[stageNum];
+		return this.scoreManager.getClearSituation(stageNum);
 	}
 
 	public getMaxOfSelectableStageNumber() {
 		var maxClearedStageNum = -1;
 		for (var i: number = 0; i < stages.length; i++) {
-			if (this.clearSituations[i].isCleared) {
+			if (this.scoreManager.getClearSituation(i).isCleared) {
 				maxClearedStageNum = i;
 			}
 		}
@@ -114,12 +113,5 @@ export class SceneManager {
 	private initScene() {
 		this.currentScene = 'Top';
 		core.pushScene(new TopScene(this));
-	}
-
-	private initClearSituations() {
-		this.clearSituations = [];
-		for (var i: number = 0; i < stages.length; i++) {
-			this.clearSituations.push(new clearSituationClass());
-		}
 	}
 }
