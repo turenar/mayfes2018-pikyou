@@ -1,11 +1,19 @@
 import TopScene from '../scenes/top-scene';
 import core from '../enchant/core';
+import Button from './button';
 
-export default class StartContinueButton extends enchant.Sprite {
-	public constructor(x: number, y: number, scene: TopScene) {
-		super(280, 120); // 画像サイズに応じて決める
-		this.x = x;
+export default class StartContinueButton extends Button {
+	public constructor(y: number, scene: TopScene) {
+		super(320, 140, scene, 'img/top_continue_button.png', 'img/top_continue_button_hover.png');
+		this.x = (core.width - this.width) / 2;
 		this.y = y;
-		this.image = core.assets['img/top_continue_button.png'];
+		this.initButton(scene);
+	}
+
+	private initButton(scene: TopScene) {
+		this.addEventListener('touchstart', () => {
+			console.log('StageSelecting');
+			scene.moveNextScene('StageSelecting');
+		});
 	}
 }
