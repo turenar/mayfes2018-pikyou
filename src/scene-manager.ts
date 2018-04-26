@@ -97,7 +97,7 @@ export class SceneManager {
 		return this.clearSituations[stageNum];
 	}
 
-	public getMaxCanSelectStageNum() {
+	public getMaxOfSelectableStageNumber() {
 		var maxClearedStageNum = -1;
 		for (var i: number = 0; i < stages.length; i++) {
 			if (this.clearSituations[i].isCleared) {
