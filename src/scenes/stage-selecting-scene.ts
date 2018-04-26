@@ -74,7 +74,6 @@ export default class StageSelectingScene extends Scene {
 	}
 
 	private downNumber() {
-		console.log(this.manager.getMaxOfSelectableStageNumber());
 		if (this.stageNum == 0) {
 			this.stageNum = this.manager.getMaxOfSelectableStageNumber();
 		} else {
