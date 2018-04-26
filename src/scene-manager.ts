@@ -103,7 +103,7 @@ export class SceneManager {
 				maxClearedStageNum = i;
 			}
 		}
-		if (i == stages.length - 1) {
+		if (maxClearedStageNum == stages.length - 1) {
 			return stages.length - 1;
 		} else {
 			return maxClearedStageNum + 1;
