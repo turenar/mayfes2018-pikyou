@@ -10,7 +10,7 @@ export default class ResultScene extends Scene {
 	private retryButton: RetryButton;
 	private backToStageSelectingButton: BackToStageSelectingButton;
 
-	public constructor(manager: SceneManager) {
+	public constructor(manager: SceneManager, stageNum: number) {
 		super('Result', manager);
 
 		const offset_x = 40;
@@ -64,5 +64,7 @@ export default class ResultScene extends Scene {
 		this.addChild(gotJwellBoxIcon);
 		this.addChild(retryButton);
 		this.addChild(backToStageSelectingButton);
+
+		this.manager.updateScore(stageNum, score.score);
 	}
 }

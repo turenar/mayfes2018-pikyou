@@ -5,13 +5,17 @@ import PlayingScene from './scenes/playing-scene';
 import StageSelectingScene from './scenes/stage-selecting-scene';
 import GameOverScene from './scenes/gameover-scene';
 import ResultScene from './scenes/result-scene';
+import stages from './stages';
+import ScoreManager from './score-manager';
 import { code } from './blockly-main';
 
 export class SceneManager {
+	private scoreManager: ScoreManager;
 	public currentScene: SceneKind;
 
 	public constructor() {
 		this.initScene();
+		this.scoreManager = new ScoreManager();
 	}
 
 	/**
@@ -62,7 +66,7 @@ export class SceneManager {
 			}
 			if (sceneKind === 'Result') {
 				this.currentScene = 'Result';
-				core.pushScene(new ResultScene(this));
+				core.pushScene(new ResultScene(this, stageNum));
 				return;
 			}
 		}
@@ -82,6 +86,28 @@ export class SceneManager {
 		}
 
 		console.log('Error! Transition of scenes is invalid!');
+	}
+
+	public updateScore(stageNum: number, score: number) {
+		this.scoreManager.updateScore(stageNum, score);
+	}
+
+	public getClearSituation(stageNum: number) {
+		return this.scoreManager.getClearSituation(stageNum);
+	}
+
+	public getMaxOfSelectableStageNumber() {
+		var maxClearedStageNum = -1;
+		for (var i: number = 0; i < stages.length; i++) {
+			if (this.scoreManager.getClearSituation(i).isCleared) {
+				maxClearedStageNum = i;
+			}
+		}
+		if (maxClearedStageNum == stages.length - 1) {
+			return stages.length - 1;
+		} else {
+			return maxClearedStageNum + 1;
+		}
 	}
 
 	private initScene() {
