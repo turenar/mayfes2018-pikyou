@@ -59,5 +59,6 @@ export class AnimationQueue {
 
 	public clear() {
 		this.queue = [];
+		this.running = false;
 	}
 }

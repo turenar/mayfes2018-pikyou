@@ -31,6 +31,8 @@ export class World {
 	}
 
 	public reset() {
+		this.isDead = false;
+		this.isGoal = false;
 		this.character.reset();
 		this.map.reset(stages[this.stageNumber].map);
 		this.animationQueue.clear();
