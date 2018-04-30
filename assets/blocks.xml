@@ -5,8 +5,6 @@
     <block type="set_direction"></block>
     <block type="move_forward"></block>
     <block type="stop"></block>
-    <block type="act_pick"></block>
-    <block type="act_use"></block>
     <block type="act_jump"></block>
     <block type="check_movable"></block>
     <block type="check_wall_front"></block>
