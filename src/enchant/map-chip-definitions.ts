@@ -40,16 +40,24 @@ const mapChipDefinitions: { [chipId: number]: MapChipDefinition } = {
 	},
 	[MapChip.Key]: {
 		onEnter: (world, x, y) => {
-			// TODO 鍵所持処理
 			world.setTile(x, y, MapChip.Floor);
+			world.getItem('key');
 		},
 	},
 	[MapChip.Door]: {
-		// TODO
+		obstacle: true,
+		onAction: (world, x, y) => {
+			if (world.isHavingKey) {
+				world.setTile(x, y, MapChip.Floor);
+			}
+		},
 	},
 	[MapChip.Chest]: {
-		obstacle: true,
-		// TODO
+		obstacle: false,
+		onEnter: (world, x, y) => {
+			world.setTile(x, y, MapChip.Floor);
+			world.getItem('chest');
+		},
 	},
 };
 

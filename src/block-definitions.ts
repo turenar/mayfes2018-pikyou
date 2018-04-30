@@ -90,38 +90,6 @@ Blockly.Blocks['stop'] = {
 	color: 180,
 };
 
-//act pick
-Blockly.Blocks['act_pick'] = {
-	init: function() {
-		this.jsonInit({
-			type: 'Act',
-			message0: '拾う',
-		});
-		this.setNextStatement(true);
-		this.setPreviousStatement(true);
-		this.setOutput(false);
-		this.setColour(this.color);
-		this.setTooltip('足元にあるアイテムを拾います');
-	},
-	color: 120,
-};
-
-//act use
-Blockly.Blocks['act_use'] = {
-	init: function() {
-		this.jsonInit({
-			type: 'Act',
-			message0: 'アイテムを使う',
-		});
-		this.setNextStatement(true);
-		this.setPreviousStatement(true);
-		this.setOutput(false);
-		this.setColour(this.color);
-		this.setTooltip('所持しているアイテムを使います');
-	},
-	color: 120,
-};
-
 //act jump
 Blockly.Blocks['act_jump'] = {
 	init: function() {

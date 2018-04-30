@@ -9,7 +9,7 @@ export default class CodeRunner {
 	}
 
 	public run(code: string) {
-		console.log({ code });
+		// console.log({ code });
 		eval(code);
 	}
 
@@ -26,14 +26,14 @@ export default class CodeRunner {
 	}
 
 	public canMoveNext(direction: Direction) {
-		this.world.character.canMoveNext(direction);
+		return this.world.character.canMoveNext(direction);
 	}
 
 	public getFrontTile() {
-		this.world.character.getFrontTile();
+		return this.world.character.getFrontTile();
 	}
 
 	public getFeetTile() {
-		this.world.character.getFeetTile();
+		return this.world.character.getFeetTile();
 	}
 }

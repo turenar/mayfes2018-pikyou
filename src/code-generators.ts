@@ -29,7 +29,7 @@ Blockly.JavaScript['check_movable'] = function(block: Blockly.Block) {
 };
 
 Blockly.JavaScript['check_wall_front'] = function(block: Blockly.Block) {
-	const code = '!this.canMoveNext(this.direction)';
+	const code = '!this.canMoveNext(this.world.character.direction)';
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 };
 
