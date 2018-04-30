@@ -30,6 +30,7 @@ export default class PlayingScene extends Scene {
 			300,
 			60,
 			'img/back_to_stage_selecting_from_playing_button.png',
+			'img/back_to_stage_selecting_from_playing_button_hover.png',
 			this
 		);
 

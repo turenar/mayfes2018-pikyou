@@ -32,6 +32,7 @@ export default class GameOverScene extends Scene {
 			200,
 			50,
 			'img/back_to_stage_selecting_button.png',
+			'img/back_to_stage_selecting_button.png',
 			this
 		);
 

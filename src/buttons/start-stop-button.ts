@@ -21,11 +21,9 @@ export default class StartStopButton extends enchant.Sprite {
 		if (isRunning) {
 			console.log('stop game');
 			this.image = core.assets['img/start_button.png'];
-			core.pause();
 		} else {
 			console.log('start game');
 			this.image = core.assets['img/stop_button.png'];
-			core.resume();
 		}
 		return !isRunning;
 	}
@@ -36,22 +34,29 @@ export default class StartStopButton extends enchant.Sprite {
 	}
 
 	private initButton() {
-		this.addEventListener('touchstart', () => {
+		this.addEventListener('touchend', () => {
 			console.log(this.scene.manager.mouseController.getPoint());
 			this.scene.isRunning = this.reloadButton(this.scene.isRunning);
 			this.scene.resetWorld();
 		});
 
 		this.addEventListener('enterframe', () => {
-			const {x, y} = this.scene.manager.mouseController.getPoint();
+			const { x, y } = this.scene.manager.mouseController.getPoint();
+			const isInside = x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height;
 			console.log(x, y, this.scene.isRunning);
 			if (!this.scene.isRunning) {
-				if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height) {
-					this.image = core.assets['img/start_button_pushed.png'];
+				if (isInside) {
+					this.image = core.assets['img/start_button_hover.png'];
 				} else {
 					this.image = core.assets['img/start_button.png'];
 				}
+			} else {
+				if (isInside) {
+					this.image = core.assets['img/stop_button_hover.png'];
+				} else {
+					this.image = core.assets['img/stop_button.png'];
+				}
 			}
-		})
+		});
 	}
 }

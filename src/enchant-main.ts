@@ -14,9 +14,11 @@ export function init() {
 	core.preload('img/titletext.png');
 
 	core.preload('img/start_button.png');
-	core.preload('img/start_button_pushed.png');
+	core.preload('img/start_button_hover.png');
 	core.preload('img/stop_button.png');
+	core.preload('img/stop_button_hover.png');
 	core.preload('img/back_to_stage_selecting_from_playing_button.png');
+	core.preload('img/back_to_stage_selecting_from_playing_button_hover.png');
 
 	core.preload('img/haikei.png');
 	core.preload('img/background.png');
