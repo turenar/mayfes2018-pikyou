@@ -94,7 +94,7 @@ export class Character extends enchant.Sprite {
 				feetDef.onEnter(this.world, this.mapPoint_x, this.mapPoint_y);
 			}
 			if (frontDef && frontDef.onAction) {
-				const {mapPoint_x, mapPoint_y} = this.getNextMapPointAndDirection();
+				const { mapPoint_x, mapPoint_y } = this.getNextMapPointAndDirection();
 				frontDef.onAction(this.world, mapPoint_x, mapPoint_y);
 			}
 		}
@@ -196,7 +196,7 @@ export class Character extends enchant.Sprite {
 	}
 
 	public getFrontTileDef(): MapChipDefinition {
-		const {mapPoint_x, mapPoint_y} = this.getNextMapPointAndDirection();
+		const { mapPoint_x, mapPoint_y } = this.getNextMapPointAndDirection();
 		return this.world.map.getMapChipDef(mapPoint_x, mapPoint_y);
 	}
 

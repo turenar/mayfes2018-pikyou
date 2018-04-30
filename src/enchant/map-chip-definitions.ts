@@ -47,17 +47,17 @@ const mapChipDefinitions: { [chipId: number]: MapChipDefinition } = {
 	[MapChip.Door]: {
 		obstacle: true,
 		onAction: (world, x, y) => {
-			if(world.isHavingkey) {
+			if (world.isHavingkey) {
 				world.setTile(x, y, MapChip.Floor);
 			}
-		}
+		},
 	},
 	[MapChip.Chest]: {
 		obstacle: false,
 		onEnter: (world, x, y) => {
 			world.setTile(x, y, MapChip.Floor);
 			world.getItem('chest');
-		}
+		},
 	},
 };
 

@@ -82,7 +82,7 @@ export class World {
 			next_x -= 1;
 		}
 
-		console.log({next_x, next_y});
+		console.log({ next_x, next_y });
 
 		return this.map.canEnter(next_x, next_y);
 	}
