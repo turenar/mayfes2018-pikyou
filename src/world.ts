@@ -5,19 +5,24 @@ import { Character, CharacterPosition } from './character';
 import { AnimationQueue } from './animation-queue';
 import { Map, MapPoint } from './enchant/map';
 import stages from './stages';
+import MapChip from './enchant/map-chip';
 
 export class World {
-	public scene: PlayingScene;
-	public character: Character;
-	public map: Map;
-	public animationQueue: AnimationQueue;
+	public readonly scene: PlayingScene;
+	public readonly character: Character;
+	public readonly map: Map;
+	public readonly animationQueue: AnimationQueue;
+	public readonly stageNumber: number;
 	public isAnimating: boolean;
+	public isDead: boolean;
+	public isGoal: boolean;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
 		this.character = new Character(this, stages[stageNumber].characterInitialPosition);
-		this.map = new Map(stages[stageNumber].map);
 		this.animationQueue = new AnimationQueue();
+		this.map = new Map(this.animationQueue, stages[stageNumber].map);
+		this.stageNumber = stageNumber;
 
 		this.map.addInto(this.scene);
 		this.scene.addChild(this.character);
@@ -26,8 +31,10 @@ export class World {
 	}
 
 	public reset() {
+		this.isDead = false;
+		this.isGoal = false;
 		this.character.reset();
-		this.map.reset();
+		this.map.reset(stages[this.stageNumber].map);
 		this.animationQueue.clear();
 	}
 
@@ -39,6 +46,10 @@ export class World {
 	 */
 	public checkTile(x: MapPoint, y: MapPoint): number {
 		return this.map.checkTile(x, y);
+	}
+
+	public setTile(x: MapPoint, y: MapPoint, tile: MapChip) {
+		this.map.setTile(x, y, tile);
 	}
 
 	/**
@@ -67,10 +78,11 @@ export class World {
 	}
 
 	public goal() {
-		this.scene.moveNextScene('Result');
+		this.isGoal = true;
 	}
 
 	public die() {
-		this.scene.moveNextScene('GameOver');
+		this.character.kill();
+		this.isDead = true;
 	}
 }

@@ -3,7 +3,9 @@ import core from './enchant/core';
 import { code } from './blockly-main';
 import { mapchipSize, Map, MapPoint } from './enchant/map';
 import { World } from './world';
-import MapChip from './enchant/mapchip';
+import MapChip from './enchant/map-chip';
+import { QueuedAction } from './animation-queue';
+import { MapChipDefinition } from './enchant/map-chip-definitions';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -39,7 +41,6 @@ export class Character extends enchant.Sprite {
 		this.world = world;
 
 		this.reset();
-		this.initCharacter();
 	}
 
 	//初期位置に戻す
@@ -85,15 +86,11 @@ export class Character extends enchant.Sprite {
 			});
 
 			this.world.animationQueue.push(this.mkMovingAction(this.direction));
-		}
-		if (this.getFeetTile() === MapChip.Goal) {
-			this.isGoal = true;
-			throw 'goal';
-		}
 
-		if (this.getFeetTile() === MapChip.Pitfall) {
-			this.isDead = true;
-			throw 'die';
+			const def = this.getFeetTileDef();
+			if (def && def.onEnter) {
+				def.onEnter(this.world, this.mapPoint_x, this.mapPoint_y);
+			}
 		}
 	}
 
@@ -129,15 +126,19 @@ export class Character extends enchant.Sprite {
 	 * 足元のマップチップの種類を取得する。
 	 * @returns {number} -足元のマップチップの種類
 	 */
-	private getFeetTile(): number {
+	public getFeetTile(): number {
 		return this.world.checkTile(this.mapPoint_x, this.mapPoint_y);
+	}
+
+	public getFeetTileDef(): MapChipDefinition {
+		return this.world.map.getMapChipDef(this.mapPoint_x, this.mapPoint_y);
 	}
 
 	/**
 	 * 目の前のマップチップの種類を取得する。
 	 * @returns {number} -目の前のマップチップの種類
 	 */
-	private getFrontTile(): number {
+	public getFrontTile(): number {
 		let next_x = this.mapPoint_x;
 		let next_y = this.mapPoint_y;
 
@@ -162,7 +163,7 @@ export class Character extends enchant.Sprite {
 	 * @returns {boolean} -進めればtrue
 	 * @param {Direction} direction  -方向
 	 */
-	private canMoveNext(direction: Direction): boolean {
+	public canMoveNext(direction: Direction): boolean {
 		const mapPoint_x = this.mapPoint_x;
 		const mapPoint_y = this.mapPoint_y;
 
@@ -173,7 +174,11 @@ export class Character extends enchant.Sprite {
 		});
 	}
 
-	private mkMovingAction(direction: Direction) {
+	public kill() {
+		this.isDead = true;
+	}
+
+	private mkMovingAction(direction: Direction): QueuedAction {
 		const velocity = this.velocity;
 		let actiontick;
 
@@ -201,7 +206,8 @@ export class Character extends enchant.Sprite {
 			};
 		}
 
-		const action = {
+		const action: QueuedAction = {
+			target: this.tl,
 			time: this.animationRate,
 			onactionstart: function() {
 				this.isAnimating = true;
@@ -215,33 +221,5 @@ export class Character extends enchant.Sprite {
 		};
 
 		return action;
-	}
-
-	private die() {
-		this.world.die();
-	}
-
-	private initCharacter() {
-		this.on('enterframe', function() {
-			if (this.isDead && !this.isAnimating && this.world.animationQueue.length() === 0) {
-				this.die();
-			}
-			if (this.isGoal && !this.isAnimating && this.world.animationQueue.length() === 0) {
-				this.world.goal();
-			}
-
-			if (!this.isGoal && !this.isDead && this.world.scene.isRunning) {
-				try {
-					eval(code);
-				} catch (e) {
-					console.error(e);
-				}
-			}
-
-			if (!this.isAnimating) {
-				this.isAnimating = true;
-				this.tl.action(this.world.animationQueue.pop());
-			}
-		});
 	}
 }
