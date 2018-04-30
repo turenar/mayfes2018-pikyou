@@ -1,7 +1,8 @@
 import { Scene } from '../scenes/scenes';
 import core from '../enchant/core';
+import Button from './button';
 
-export default class BackToStageSelectingButton extends enchant.Sprite {
+export default class BackToStageSelectingButton extends Button {
 	private scene: Scene;
 
 	public constructor(
@@ -13,8 +14,7 @@ export default class BackToStageSelectingButton extends enchant.Sprite {
 		imageHoverPath: string,
 		scene: Scene
 	) {
-		super(width, height);
-		this.image = core.assets[imagePath];
+		super(width, height, scene, imagePath, imageHoverPath);
 		this.x = x;
 		this.y = y;
 
@@ -25,16 +25,6 @@ export default class BackToStageSelectingButton extends enchant.Sprite {
 		this.addEventListener('touchstart', () => {
 			console.log('BackToStageSelecting button is pushed!');
 			scene.moveNextScene('StageSelecting');
-		});
-
-		this.addEventListener('enterframe', () => {
-			const { x, y } = this.scene.manager.mouseController.getPoint();
-			const isInside = x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height;
-			if (isInside) {
-				this.image = core.assets['img/back_to_stage_selecting_from_playing_button_hover.png'];
-			} else {
-				this.image = core.assets['img/back_to_stage_selecting_from_playing_button.png'];
-			}
 		});
 	}
 }
