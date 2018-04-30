@@ -8,14 +8,17 @@ import ResultScene from './scenes/result-scene';
 import stages from './stages';
 import ScoreManager from './score-manager';
 import { code } from './blockly-main';
+import MouseController from './mouse-controller';
 
 export class SceneManager {
 	private scoreManager: ScoreManager;
 	public currentScene: SceneKind;
+	public mouseController: MouseController;
 
 	public constructor() {
 		this.initScene();
 		this.scoreManager = new ScoreManager();
+		this.mouseController = new MouseController();
 	}
 
 	/**

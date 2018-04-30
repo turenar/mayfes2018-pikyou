@@ -41,5 +41,17 @@ export default class StartStopButton extends enchant.Sprite {
 			this.scene.isRunning = this.reloadButton(this.scene.isRunning);
 			this.scene.resetWorld();
 		});
+
+		this.addEventListener('enterframe', () => {
+			const {x, y} = this.scene.manager.mouseController.getPoint();
+			console.log(x, y, this.scene.isRunning);
+			if (!this.scene.isRunning) {
+				if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height) {
+					this.image = core.assets['img/start_button_pushed.png'];
+				} else {
+					this.image = core.assets['img/start_button.png'];
+				}
+			}
+		})
 	}
 }
