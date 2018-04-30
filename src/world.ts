@@ -18,7 +18,7 @@ export class World {
 	public isAnimating: boolean;
 	public isDead: boolean;
 	public isGoal: boolean;
-	public isHavingkey: boolean;
+	public isHavingKey: boolean;
 	public isHavingChest: boolean;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
@@ -39,7 +39,7 @@ export class World {
 	public reset() {
 		this.isDead = false;
 		this.isGoal = false;
-		this.isHavingkey = false;
+		this.isHavingKey = false;
 		this.isHavingChest = false;
 		this.character.reset();
 		this.map.reset(stages[this.stageNumber].map);
@@ -99,7 +99,7 @@ export class World {
 
 	public getItem(item: ItemKind) {
 		if (item === 'key') {
-			this.isHavingkey = true;
+			this.isHavingKey = true;
 		}
 		if (item === 'chest') {
 			this.isHavingChest = true;
