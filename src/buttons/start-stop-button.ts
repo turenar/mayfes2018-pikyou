@@ -6,8 +6,8 @@ export default class StartStopButton extends enchant.Sprite {
 	public scene: PlayingScene;
 
 	public constructor(scene: PlayingScene, x: number, y: number) {
-		const width = 260;
-		const height = 80;
+		const width = 300;
+		const height = 92;
 		super(width, height);
 		this.scene = scene;
 		this.x = x;
@@ -37,6 +37,7 @@ export default class StartStopButton extends enchant.Sprite {
 
 	private initButton() {
 		this.addEventListener('touchstart', () => {
+			console.log(this.scene.manager.mouseController.getPoint());
 			this.scene.isRunning = this.reloadButton(this.scene.isRunning);
 			this.scene.resetWorld();
 		});
