@@ -7,6 +7,8 @@ import { Map, MapPoint } from './enchant/map';
 import stages from './stages';
 import MapChip from './enchant/map-chip';
 
+export type ItemKind = 'key' | 'chest';
+
 export class World {
 	public readonly scene: PlayingScene;
 	public readonly character: Character;
@@ -16,6 +18,8 @@ export class World {
 	public isAnimating: boolean;
 	public isDead: boolean;
 	public isGoal: boolean;
+	public isHavingkey: boolean;
+	public isHavingChest: boolean;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
@@ -28,11 +32,15 @@ export class World {
 		this.scene.addChild(this.character);
 
 		this.isAnimating = this.character.isAnimating;
+
+		this.reset();
 	}
 
 	public reset() {
 		this.isDead = false;
 		this.isGoal = false;
+		this.isHavingkey = false;
+		this.isHavingChest = false;
 		this.character.reset();
 		this.map.reset(stages[this.stageNumber].map);
 		this.animationQueue.clear();
@@ -74,15 +82,27 @@ export class World {
 			next_x -= 1;
 		}
 
+		console.log({next_x, next_y});
+
 		return this.map.canEnter(next_x, next_y);
 	}
 
 	public goal() {
+		this.character.goal();
 		this.isGoal = true;
 	}
 
 	public die() {
 		this.character.kill();
 		this.isDead = true;
+	}
+
+	public getItem(item: ItemKind) {
+		if (item === 'key') {
+			this.isHavingkey = true;
+		}
+		if (item === 'chest') {
+			this.isHavingChest = true;
+		}
 	}
 }

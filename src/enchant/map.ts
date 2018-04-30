@@ -82,6 +82,7 @@ export class Map {
 	public canEnter(x: MapPoint, y: MapPoint): boolean {
 		const tile = this.checkTile(x, y);
 		const def = mapChipDefinitions[tile];
+		console.log(tile);
 		if (def) {
 			return !def.obstacle;
 		} else {

@@ -87,9 +87,15 @@ export class Character extends enchant.Sprite {
 
 			this.world.animationQueue.push(this.mkMovingAction(this.direction));
 
-			const def = this.getFeetTileDef();
-			if (def && def.onEnter) {
-				def.onEnter(this.world, this.mapPoint_x, this.mapPoint_y);
+			const feetDef = this.getFeetTileDef();
+			const frontDef = this.getFrontTileDef();
+
+			if (feetDef && feetDef.onEnter) {
+				feetDef.onEnter(this.world, this.mapPoint_x, this.mapPoint_y);
+			}
+			if (frontDef && frontDef.onAction) {
+				const {mapPoint_x, mapPoint_y} = this.getNextMapPointAndDirection();
+				frontDef.onAction(this.world, mapPoint_x, mapPoint_y);
 			}
 		}
 	}
@@ -118,6 +124,37 @@ export class Character extends enchant.Sprite {
 		return {
 			mapPoint_x,
 			mapPoint_y,
+			direction,
+		};
+	}
+	/**
+	 * 自分の目の前のCharacterPositionを返す。
+	 * @returns {CharacterPosition} -characterの目の前の座標を返す。
+	 */
+	public getNextMapPointAndDirection(): CharacterPosition {
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
+		const direction = this.direction;
+
+		let next_x = mapPoint_x;
+		let next_y = mapPoint_y;
+
+		if (direction === 'north') {
+			next_y -= 1;
+		}
+		if (direction === 'east') {
+			next_x += 1;
+		}
+		if (direction === 'south') {
+			next_y += 1;
+		}
+		if (direction === 'west') {
+			next_x -= 1;
+		}
+
+		return {
+			mapPoint_x: next_x,
+			mapPoint_y: next_y,
 			direction,
 		};
 	}
@@ -158,6 +195,11 @@ export class Character extends enchant.Sprite {
 		return this.world.checkTile(next_x, next_y);
 	}
 
+	public getFrontTileDef(): MapChipDefinition {
+		const {mapPoint_x, mapPoint_y} = this.getNextMapPointAndDirection();
+		return this.world.map.getMapChipDef(mapPoint_x, mapPoint_y);
+	}
+
 	/**
 	 * 目の前のマスに進めるかどうか。
 	 * @returns {boolean} -進めればtrue
@@ -172,6 +214,10 @@ export class Character extends enchant.Sprite {
 			mapPoint_y,
 			direction,
 		});
+	}
+
+	public goal() {
+		this.isGoal = true;
 	}
 
 	public kill() {
