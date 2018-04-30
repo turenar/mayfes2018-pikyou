@@ -35,7 +35,7 @@ export default class StartStopButton extends enchant.Sprite {
 
 	private initButton() {
 		this.addEventListener('touchend', () => {
-			console.log(this.scene.manager.mouseController.getPoint());
+			// console.log(this.scene.manager.mouseController.getPoint());
 			this.scene.isRunning = this.reloadButton(this.scene.isRunning);
 			this.scene.resetWorld();
 		});
@@ -43,7 +43,7 @@ export default class StartStopButton extends enchant.Sprite {
 		this.addEventListener('enterframe', () => {
 			const { x, y } = this.scene.manager.mouseController.getPoint();
 			const isInside = x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height;
-			console.log(x, y, this.scene.isRunning);
+			// console.log(x, y, this.scene.isRunning);
 			if (!this.scene.isRunning) {
 				if (isInside) {
 					this.image = core.assets['img/start_button_hover.png'];
