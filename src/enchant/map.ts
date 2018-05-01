@@ -76,7 +76,7 @@ export class Map {
 
 	public checkTile(x: MapPoint, y: MapPoint) {
 		// MapPoint: 1,2,3,...
-		if(x < 1 || x > 12 || y < 1 || y > 12){
+		if (x < 1 || x > 12 || y < 1 || y > 12) {
 			return MapChip.Wall;
 		}
 		return this.rawMapData[y - 1][x - 1];

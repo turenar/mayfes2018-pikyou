@@ -26,6 +26,7 @@ export class Character extends enchant.Sprite {
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
+	private nextjump: boolean;
 	private isDead: boolean;
 	private isGoal: boolean;
 	public isAnimating: boolean;
@@ -61,21 +62,26 @@ export class Character extends enchant.Sprite {
 	public moveForward() {
 		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
 			this.velocity = this.defaultVelocity;
+			let distance = 1;
+			let isjump = this.nextjump && this.canJumpNext(this.direction);
+			if (isjump) {
+				distance = 2;
+			}
 
 			if (this.direction === 'north') {
-				this.mapPoint_y -= 1;
+				this.mapPoint_y -= distance;
 			}
 
 			if (this.direction === 'east') {
-				this.mapPoint_x += 1;
+				this.mapPoint_x += distance;
 			}
 
 			if (this.direction === 'south') {
-				this.mapPoint_y += 1;
+				this.mapPoint_y += distance;
 			}
 
 			if (this.direction === 'west') {
-				this.mapPoint_x -= 1;
+				this.mapPoint_x -= distance;
 			}
 
 			console.log({
@@ -85,7 +91,12 @@ export class Character extends enchant.Sprite {
 				direction: this.direction,
 			});
 
-			this.world.animationQueue.push(this.mkMovingAction(this.direction));
+			if (isjump) {
+				this.world.animationQueue.push(this.mkJumpingAction(this.direction));
+			} else {
+				this.world.animationQueue.push(this.mkMovingAction(this.direction));
+			}
+			this.nextjump = false;
 
 			const feetDef = this.getFeetTileDef();
 			const frontDef = this.getFrontTileDef();
@@ -107,7 +118,7 @@ export class Character extends enchant.Sprite {
 
 	//ジャンプ
 	public setJump() {
-		//
+		this.nextjump = true;
 	}
 
 	//ストップ
@@ -221,6 +232,20 @@ export class Character extends enchant.Sprite {
 		});
 	}
 
+	public canJumpNext(direction: Direction): boolean {
+		const mapPoint_x = this.mapPoint_x;
+		const mapPoint_y = this.mapPoint_y;
+
+		return this.world.canMoveCharacterNext(
+			{
+				mapPoint_x,
+				mapPoint_y,
+				direction,
+			},
+			2
+		);
+	}
+
 	public goal() {
 		this.isGoal = true;
 	}
@@ -231,6 +256,50 @@ export class Character extends enchant.Sprite {
 
 	private mkMovingAction(direction: Direction): QueuedAction {
 		const velocity = this.velocity;
+		let actiontick;
+
+		if (direction === 'north') {
+			actiontick = function() {
+				this.moveBy(0, -velocity);
+			};
+		}
+
+		if (direction === 'east') {
+			actiontick = function() {
+				this.moveBy(velocity, 0);
+			};
+		}
+
+		if (direction === 'south') {
+			actiontick = function() {
+				this.moveBy(0, velocity);
+			};
+		}
+
+		if (direction === 'west') {
+			actiontick = function() {
+				this.moveBy(-velocity, 0);
+			};
+		}
+
+		const action: QueuedAction = {
+			target: this.tl,
+			time: this.animationRate,
+			onactionstart: function() {
+				this.isAnimating = true;
+				console.log('action start');
+			},
+			onactionend: function() {
+				this.isAnimating = false;
+				console.log('action end');
+			},
+			onactiontick: actiontick,
+		};
+
+		return action;
+	}
+	private mkJumpingAction(direction: Direction): QueuedAction {
+		const velocity = this.velocity * 2;
 		let actiontick;
 
 		if (direction === 'north') {
