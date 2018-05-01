@@ -105,6 +105,11 @@ export class Character extends enchant.Sprite {
 		this.direction = direction;
 	}
 
+	//ジャンプ
+	public setJump() {
+		//
+	}
+
 	//ストップ
 	public stop() {
 		if (!this.isAnimating) {

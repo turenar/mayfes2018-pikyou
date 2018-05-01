@@ -74,6 +74,22 @@ Blockly.Blocks['set_direction'] = {
 	color: 180,
 };
 
+//set jump
+Blockly.Blocks['set_jump'] = {
+	init: function() {
+		this.jsonInit({
+			type: 'Act',
+			message0: 'ジャンプする',
+		});
+		this.setNextStatement(true);
+		this.setPreviousStatement(true);
+		this.setOutput(false);
+		this.setColour(this.color);
+		this.setTooltip('進むときにジャンプして1マス飛び越えます');
+	},
+	color: 180,
+};
+
 //move stop
 Blockly.Blocks['stop'] = {
 	init: function() {
@@ -88,22 +104,6 @@ Blockly.Blocks['stop'] = {
 		this.setTooltip('キャラクターが停止します');
 	},
 	color: 180,
-};
-
-//act jump
-Blockly.Blocks['act_jump'] = {
-	init: function() {
-		this.jsonInit({
-			type: 'Act',
-			message0: 'ジャンプする',
-		});
-		this.setNextStatement(true);
-		this.setPreviousStatement(true);
-		this.setOutput(false);
-		this.setColour(this.color);
-		this.setTooltip('ジャンプして1マス飛び越えます');
-	},
-	color: 120,
 };
 
 //check movable
