@@ -26,7 +26,7 @@ export class Character extends enchant.Sprite {
 	private defaultVelocity: number;
 	private velocity: number;
 	private direction: Direction;
-	private nextjump: boolean;
+	private nextJump: boolean;
 	private isDead: boolean;
 	private isGoal: boolean;
 	public isAnimating: boolean;
@@ -54,7 +54,7 @@ export class Character extends enchant.Sprite {
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 		this.isDead = false;
 		this.isGoal = false;
-		this.nextjump = false;
+		this.nextJump = false;
 		this.isAnimating = false;
 		this.tl.clear();
 	}
@@ -63,11 +63,8 @@ export class Character extends enchant.Sprite {
 	public moveForward() {
 		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
 			this.velocity = this.defaultVelocity;
-			let distance = 1;
-			let isjump = this.nextjump && this.canJumpNext(this.direction);
-			if (isjump) {
-				distance = 2;
-			}
+			const isJump = this.nextJump && this.canJumpNext(this.direction);
+			const distance = isJump ? 2 : 1
 
 			if (this.direction === 'north') {
 				this.mapPoint_y -= distance;
@@ -92,12 +89,12 @@ export class Character extends enchant.Sprite {
 				direction: this.direction,
 			});
 
-			if (isjump) {
+			if (isJump) {
 				this.world.animationQueue.push(this.mkJumpingAction(this.direction));
 			} else {
 				this.world.animationQueue.push(this.mkMovingAction(this.direction));
 			}
-			this.nextjump = false;
+			this.nextJump = false;
 
 			const feetDef = this.getFeetTileDef();
 			const frontDef = this.getFrontTileDef();
@@ -119,7 +116,7 @@ export class Character extends enchant.Sprite {
 
 	//ジャンプ
 	public setJump() {
-		this.nextjump = true;
+		this.nextJump = true;
 	}
 
 	//ストップ
