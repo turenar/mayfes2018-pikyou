@@ -4,10 +4,10 @@ import core from '../enchant/core';
 import StartStopButton from './start-stop-button';
 
 export default class Button extends enchant.Sprite {
-	public constructor(width: number, height: number, scene: Scene, imagePath?: string, imageHoverPath?: string) {
+	public constructor(width: number, height: number, scene: Scene, imagePath: string, imageHoverPath?: string) {
 		super(width, height);
 
-		if (!(this instanceof StartStopButton)) {
+		if (imageHoverPath) {
 			this.addEventListener('enterframe', () => {
 				const { x, y } = scene.manager.mouseController.getPoint();
 				const isInside = x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height;
@@ -18,6 +18,8 @@ export default class Button extends enchant.Sprite {
 					this.image = core.assets[imagePath];
 				}
 			});
+		} else {
+			this.image = core.assets[imagePath];
 		}
 	}
 }
