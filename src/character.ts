@@ -54,6 +54,7 @@ export class Character extends enchant.Sprite {
 		this.y = Map.getCoordinateFromMapPoint(this.mapPoint_y);
 		this.isDead = false;
 		this.isGoal = false;
+		this.nextjump = false;
 		this.isAnimating = false;
 		this.tl.clear();
 	}
