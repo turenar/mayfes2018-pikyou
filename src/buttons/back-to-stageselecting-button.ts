@@ -6,22 +6,16 @@ export default class BackToStageSelectingButton extends Button {
 	private scene: Scene;
 
 	public constructor(
-		x: number,
-		y: number,
-		width: number,
-		height: number,
-		imagePath: string,
-		imageHoverPath: string,
 		scene: Scene
 	) {
-		super(width, height, scene, imagePath, imageHoverPath);
-		this.x = x;
-		this.y = y;
+		super(300, 60, scene, 'img/back_to_stage_selecting_button.png', 'img/back_to_stage_selecting_button_hover.png');
+		this.x = 10;
+		this.y = 510;
 
-		this.listenButton(scene);
+		this.initButton(scene);
 	}
 
-	private listenButton(scene: Scene) {
+	private initButton(scene: Scene) {
 		this.addEventListener('touchstart', () => {
 			console.log('BackToStageSelecting button is pushed!');
 			scene.moveNextScene('StageSelecting');

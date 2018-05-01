@@ -8,6 +8,8 @@ import { SceneManager } from './scene-manager';
 export function init() {
 	//Common
 	core.preload('img/background.png');
+	core.preload('img/back_to_stage_selecting_button.png');
+	core.preload('img/back_to_stage_selecting_button_hover.png');	
 
 	//TopScene
 	core.preload('img/top_init_button.png');
@@ -23,8 +25,6 @@ export function init() {
 	core.preload('img/start_button_hover.png');
 	core.preload('img/stop_button.png');
 	core.preload('img/stop_button_hover.png');
-	core.preload('img/back_to_stage_selecting_from_playing_button.png');
-	core.preload('img/back_to_stage_selecting_from_playing_button_hover.png');
 
 	//StageSelecting
 	core.preload('img/haikei.png');
@@ -37,7 +37,7 @@ export function init() {
 	//Result, GameOver
 	core.preload('img/result_gameover_background.png');
 	core.preload('img/retry_button.png');
-	core.preload('img/back_to_stage_selecting_button.png');
+	core.preload('img/retry_button_hover.png');	
 	core.preload('img/result_gameclear_text.png');
 	core.preload('img/gameover_text.png');
 	core.preload('img/chest.png');
