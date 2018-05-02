@@ -1,14 +1,18 @@
 import core from '../enchant/core';
 import * as enchant from 'node-enchantjs';
 import PlayingScene from '../scenes/playing-scene';
+import Button from './button';
 
-export default class StartStopButton extends enchant.Sprite {
+export default class StartStopButton extends Button {
+	private scene: PlayingScene;
+
 	public constructor(scene: PlayingScene, x: number, y: number) {
 		const width = 300;
 		const height = 92;
-		super(width, height);
+		super(width, height, scene, 'img/start_button.png');
 		this.x = x;
 		this.y = y;
+		this.scene = scene;
 
 		this.initButton(scene);
 	}
@@ -29,6 +33,16 @@ export default class StartStopButton extends enchant.Sprite {
 		this.image = core.assets['img/start_button.png'];
 	}
 
+	public onMouseEnter() {
+		this.image = !this.scene.isRunning
+			? core.assets['img/start_button_hover.png']
+			: core.assets['img/stop_button_hover.png'];
+	}
+
+	public onMouseExit() {
+		this.image = !this.scene.isRunning ? core.assets['img/start_button.png'] : core.assets['img/stop_button.png'];
+	}
+
 	private initButton(scene: PlayingScene) {
 		this.addEventListener('touchend', () => {
 			scene.isRunning = this.reloadButton(scene.isRunning);
@@ -38,7 +52,6 @@ export default class StartStopButton extends enchant.Sprite {
 		this.addEventListener('enterframe', () => {
 			const { x, y } = scene.manager.mouseController.getPoint();
 			const isInside = x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height;
-			// console.log(x, y, this.scene.isRunning);
 			if (!scene.isRunning) {
 				if (isInside) {
 					this.image = core.assets['img/start_button_hover.png'];
