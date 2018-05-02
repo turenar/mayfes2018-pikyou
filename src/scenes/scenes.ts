@@ -10,7 +10,7 @@ import TopScene from './top-scene';
 export type SceneKind = 'Top' | 'StageSelecting' | 'Playing' | 'GameOver' | 'Result';
 
 export class Scene extends enchant.Scene {
-	protected manager: SceneManager;
+	public manager: SceneManager;
 	public kind: SceneKind;
 
 	public constructor(kind: SceneKind, manager: SceneManager) {
