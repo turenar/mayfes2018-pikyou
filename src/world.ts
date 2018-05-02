@@ -66,12 +66,9 @@ export class World {
 	 * @param {number} distance -FocusDistance
 	 * @returns {boolean} -進めるならtrue
 	 */
-	public canMoveCharacterNext(position: CharacterPosition, distance?: number): boolean {
+	public canMoveCharacterNext(position: CharacterPosition, distance: number = 1): boolean {
 		let next_x = position.mapPoint_x;
 		let next_y = position.mapPoint_y;
-		if (!distance) {
-			distance = 1;
-		}
 
 		if (position.direction === 'north') {
 			next_y -= distance;
