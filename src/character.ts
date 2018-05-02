@@ -64,7 +64,7 @@ export class Character extends enchant.Sprite {
 		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
 			this.velocity = this.defaultVelocity;
 			const isJump = this.nextJump && this.canJumpNext(this.direction);
-			const distance = isJump ? 2 : 1
+			const distance = isJump ? 2 : 1;
 
 			if (this.direction === 'north') {
 				this.mapPoint_y -= distance;
