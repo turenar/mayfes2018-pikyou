@@ -257,25 +257,25 @@ export class Character extends enchant.Sprite {
 		let actiontick;
 
 		if (direction === 'north') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(0, -velocity);
 			};
 		}
 
 		if (direction === 'east') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(velocity, 0);
 			};
 		}
 
 		if (direction === 'south') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(0, velocity);
 			};
 		}
 
 		if (direction === 'west') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(-velocity, 0);
 			};
 		}
@@ -301,25 +301,25 @@ export class Character extends enchant.Sprite {
 		let actiontick;
 
 		if (direction === 'north') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(0, -velocity);
 			};
 		}
 
 		if (direction === 'east') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(velocity, 0);
 			};
 		}
 
 		if (direction === 'south') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(0, velocity);
 			};
 		}
 
 		if (direction === 'west') {
-			actiontick = function() {
+			actiontick = () => {
 				this.moveBy(-velocity, 0);
 			};
 		}
