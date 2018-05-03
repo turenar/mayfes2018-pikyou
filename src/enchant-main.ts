@@ -35,12 +35,12 @@ export function init() {
 	core.preload('img/clear_mark.png');
 
 	//Result, GameOver
-	core.preload('img/result_gameover_background.png');
 	core.preload('img/retry_button.png');
 	core.preload('img/retry_button_hover.png');	
+	core.preload('img/result_background.png');
 	core.preload('img/result_gameclear_text.png');
+	core.preload('img/result_chest.png');
 	core.preload('img/gameover_text.png');
-	core.preload('img/chest.png');
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();

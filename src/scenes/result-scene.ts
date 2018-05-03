@@ -16,12 +16,12 @@ export default class ResultScene extends Scene {
 		const offset_x = 40;
 		const offset_y = 10;
 
-		const background = new enchant.Sprite(240, 300);
-		background.image = core.assets['img/result_gameover_background.png'];
+		const background = new enchant.Sprite(300, 360);
+		background.image = core.assets['img/result_background.png'];
 		background.x = offset_x;
 		background.y = offset_y;
 
-		const gameOverLabel = new enchant.Sprite(200, 50);
+		const gameOverLabel = new enchant.Sprite(260, 60);
 		gameOverLabel.image = core.assets['img/result_gameclear_text.png'];
 		gameOverLabel.x = offset_x + 20;
 		gameOverLabel.y = offset_y + 20;
@@ -38,9 +38,9 @@ export default class ResultScene extends Scene {
 
 		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
 		scoreLabel.color = 'black';
-		scoreLabel.scale(1.2, 1.2);
-		scoreLabel.x = offset_x + 45;
-		scoreLabel.y = offset_y + 80;
+		scoreLabel.scale(2.0, 2.0);
+		scoreLabel.x = offset_x + 170;
+		scoreLabel.y = offset_y + 100;
 
 		const gotChestNumLabel = new enchant.Label(`てにいれたチェストのかず: ${score.gotChestNum}`);
 		gotChestNumLabel.color = 'black';
@@ -60,7 +60,13 @@ export default class ResultScene extends Scene {
 		blockCostSumLabel.x = offset_x + 45;
 		blockCostSumLabel.y = offset_y + 170;
 
-		const retryButton = new RetryButton(offset_x + 20, offset_y + 180, this);
+		const trunNumLabel = new enchant.Label(`- クリアにかかったターンすう：${0}`);
+		trunNumLabel.color = 'black';
+		trunNumLabel.scale(1.2, 1.2);
+		trunNumLabel.x = offset_x + 55;
+		trunNumLabel.y = offset_y + 215;
+
+		const retryButton = new RetryButton(42, 400, this);
 
 		const backToStageSelectingButton = new BackToStageSelectingButton(this);
 
