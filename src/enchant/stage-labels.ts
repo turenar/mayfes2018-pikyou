@@ -15,40 +15,45 @@ export default class StageLabels extends enchant.Group {
 	public constructor(clearSituationOfStageZero: ClearSituation) {
 		super();
 
-		const background = new enchant.Sprite(280, 180);
-		background.backgroundColor = 'pink';
-		background.x = 10;
-		background.y = 130;
+		const width = 270;
+		const heigt = 380;
+		const offset_x = (core.width - width) / 2;
+		const offset_y = 85;
+
+		const background = new enchant.Sprite(width, heigt);
+		background.image = core.assets['img/result_background.png'];
+		background.x = offset_x;
+		background.y = offset_y;
 		this.addChild(background);
 
 		this.stageNumLabel = new Label(' ');
-		this.stageNumLabel.font = '30px Palatino';
-		this.stageNumLabel.x = 30;
-		this.stageNumLabel.y = 140;
+		this.stageNumLabel.font = '40px PixelMplus10';
+		this.stageNumLabel.x = offset_x + 35;
+		this.stageNumLabel.y = offset_y + 20;
 		this.addChild(this.stageNumLabel);
 
 		this.stageNameLabel = new Label(' ');
-		this.stageNameLabel.font = '30px Palatino';
-		this.stageNameLabel.x = 30;
-		this.stageNameLabel.y = 190;
+		this.stageNameLabel.font = '30px PixelMplus10';
+		this.stageNameLabel.x = offset_x + 20;
+		this.stageNameLabel.y = offset_y + 80;
 		this.addChild(this.stageNameLabel);
 
 		this.descriptionLabel = new Label(' ');
-		this.descriptionLabel.font = '15px Palatino';
-		this.descriptionLabel.x = 30;
-		this.descriptionLabel.y = 230;
+		this.descriptionLabel.font = '15px PixelMplus10';
+		this.descriptionLabel.x = offset_x + 20;
+		this.descriptionLabel.y = offset_y + 130;
 		this.addChild(this.descriptionLabel);
 
 		this.scoreLabel = new Label(' ');
-		this.scoreLabel.font = '25px Palatino';
-		this.scoreLabel.x = 30;
-		this.scoreLabel.y = 270;
+		this.scoreLabel.font = '25px PixelMplus10';
+		this.scoreLabel.x = offset_x + 20;
+		this.scoreLabel.y = offset_y + 180;
 		this.addChild(this.scoreLabel);
 
 		this.clearMark = new Sprite(70, 50);
 		this.clearMark.image = core.assets['img/clear_mark.png'];
-		this.clearMark.x = 200;
-		this.clearMark.y = 250;
+		this.clearMark.x = offset_x + 190;
+		this.clearMark.y = offset_y + 120;
 		this.addChild(this.clearMark);
 
 		this.update(0, clearSituationOfStageZero);

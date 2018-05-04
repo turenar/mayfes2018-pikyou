@@ -27,11 +27,12 @@ export function init() {
 	core.preload('img/stop_button_hover.png');
 
 	//StageSelecting
-	core.preload('img/haikei.png');
-	core.preload('img/up_arrow.png');
-	core.preload('img/down_arrow.png');
-	core.preload('img/start_to_playscene.png');
+	core.preload('img/stageselecting_right_arrow.png');
+	core.preload('img/stageselecting_left_arrow.png');
+	core.preload('img/start_playing_button.png');
+	core.preload('img/start_playing_button_hover.png');	
 	core.preload('img/back_to_top_button.png');
+	core.preload('img/back_to_top_button_hover.png');	
 	core.preload('img/clear_mark.png');
 
 	//Result, GameOver
