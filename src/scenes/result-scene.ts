@@ -3,14 +3,14 @@ import { Scene } from './scenes';
 import { SceneManager } from '../scene-manager';
 import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
-import { Score, calcScore } from '../score';
-import { blockNum } from '../blockly-main';
+import { ScoreManager, Score } from '../score-manager';
+import { ClearStatus } from '../world';
 
 export default class ResultScene extends Scene {
 	private retryButton: RetryButton;
 	private backToStageSelectingButton: BackToStageSelectingButton;
 
-	public constructor(manager: SceneManager, stageNum: number) {
+	public constructor(manager: SceneManager, stageNum: number, clearStatus: ClearStatus) {
 		super('Result', manager);
 
 		const offset_x = 40;
@@ -27,8 +27,8 @@ export default class ResultScene extends Scene {
 		gameOverLabel.y = offset_y + 20;
 
 		// blocklyからそれぞれの値を取得する todo
-		const score = { gotChestNum: 3, actionNum: 10, blockCostSum: 100 };
-		const scoreValue = calcScore(score);
+		const score = ScoreManager.getScore(clearStatus);
+		const scoreValue =  ScoreManager.calcScore(score);
 
 		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
 		scoreLabel.color = 'black';

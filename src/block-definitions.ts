@@ -14,6 +14,7 @@ Blockly.Blocks['execute'] = {
 		this.setTooltip('この下に連なる処理が実行されます');
 	},
 	color: 300,
+	cost: 0,
 };
 
 //controls_if

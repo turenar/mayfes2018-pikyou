@@ -1,8 +1,11 @@
 import stages from './stages';
+import { allBlocks } from './blockly-main';
+import { ClearStatus } from './world';
+
 
 export type ClearSituation = { isCleared: boolean; score: number };
 
-export default class ScoreManager {
+export class ScoreManager {
 	private clearSituations: Array<ClearSituation>;
 
 	public constructor() {
@@ -20,4 +23,21 @@ export default class ScoreManager {
 		this.clearSituations[stageNum].isCleared = true;
 		this.clearSituations[stageNum].score = Math.max(score, this.clearSituations[stageNum].score);
 	}
+
+	public static getScore(clearStatus: ClearStatus): Score {
+		const { gotChestNum, actionNum }  = clearStatus;
+		const blockCostSum = allBlocks[1].cost;
+
+		return { gotChestNum, actionNum, blockCostSum };
+	}
+
+	public static calcScore(score: Score) {
+		return 100 + score.gotChestNum * 100 + (50 - score.actionNum) - score.blockCostSum;
+	}
 }
+
+export type Score = {
+	gotChestNum: number;
+	actionNum: number;
+	blockCostSum: number;
+};

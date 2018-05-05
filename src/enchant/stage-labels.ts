@@ -2,7 +2,7 @@ import core from '../enchant/core';
 import stages from '../stages';
 import { Label } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
-import ScoreManager from '../score-manager';
+import { ScoreManager } from '../score-manager';
 import { ClearSituation } from '../score-manager';
 
 export default class StageLabels extends enchant.Group {
