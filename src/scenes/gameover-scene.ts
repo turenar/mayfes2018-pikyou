@@ -13,7 +13,7 @@ export default class GameOverScene extends Scene {
 
 		const gameOverLabel = new enchant.Sprite(300, 80);
 		gameOverLabel.image = core.assets['img/gameover_text.png'];
-		gameOverLabel.x = (core.width - 300) /2;
+		gameOverLabel.x = (core.width - 300) / 2;
 		gameOverLabel.y = (32 * 12 - 80) / 2;
 
 		this.retryButton = new RetryButton(42, 400, this);
