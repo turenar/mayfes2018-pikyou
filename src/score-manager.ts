@@ -18,6 +18,6 @@ export default class ScoreManager {
 
 	public updateScore(stageNum: number, score: number) {
 		this.clearSituations[stageNum].isCleared = true;
-		this.clearSituations[stageNum].score = score;
+		this.clearSituations[stageNum].score = Math.max(score, this.clearSituations[stageNum].score);
 	}
 }
