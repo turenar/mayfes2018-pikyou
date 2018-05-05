@@ -31,8 +31,10 @@ export default class ResultScene extends Scene {
 			actionNum: clearStatus.actionNum,
 			gotChestNum: clearStatus.gotChestNum,
 			blockCostSum: ScoreManager.getBlockCostSum(),
+			clearPoint: ScoreManager.getStageClearPoint(stageNum),
 		};
-		const scoreValue = ScoreManager.calcScore(score);
+
+		const scoreValue = ScoreManager.calcScoreValue(score);
 
 		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
 		scoreLabel.color = 'black';

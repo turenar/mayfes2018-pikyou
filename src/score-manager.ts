@@ -35,8 +35,12 @@ export class ScoreManager {
 		return blockCostSum;
 	}
 
-	public static calcScore(score: Score) {
-		return 100 + score.gotChestNum * 100 + (50 - score.actionNum) - score.blockCostSum;
+	public static calcScoreValue(score: Score) {
+		return score.clearPoint + score.gotChestNum * 100 + (50 - score.actionNum) - score.blockCostSum;
+	}
+
+	public static getStageClearPoint(stageNum) {
+		return stages[stageNum].clearPoint;
 	}
 }
 
@@ -44,4 +48,5 @@ export type Score = {
 	gotChestNum: number;
 	actionNum: number;
 	blockCostSum: number;
+	clearPoint: number;
 };
