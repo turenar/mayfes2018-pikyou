@@ -13,7 +13,7 @@ import { Label } from 'node-enchantjs';
 export default class StageSelectingScene extends Scene {
 	private maxStageNum: number;
 	private stageLabels: StageLabels;
-	public stageNum: number;	
+	public stageNum: number;
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
 	public startButton: StartPlayingButton;
@@ -51,7 +51,7 @@ export default class StageSelectingScene extends Scene {
 		this.addChild(this.downButton);
 		this.addChild(this.startButton);
 		this.addChild(this.backButton);
-		this.addChild(this.stageLabels);		
+		this.addChild(this.stageLabels);
 
 		console.log(`stageNum: ${this.stageNum}`);
 	}
