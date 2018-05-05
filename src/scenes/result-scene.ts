@@ -28,7 +28,7 @@ export default class ResultScene extends Scene {
 
 		// blocklyからそれぞれの値を取得する todo
 		const score = ScoreManager.getScore(clearStatus);
-		const scoreValue =  ScoreManager.calcScore(score);
+		const scoreValue = ScoreManager.calcScore(score);
 
 		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
 		scoreLabel.color = 'black';

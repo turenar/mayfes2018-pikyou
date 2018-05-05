@@ -6,7 +6,7 @@ import StageSelectingScene from './scenes/stage-selecting-scene';
 import GameOverScene from './scenes/gameover-scene';
 import ResultScene from './scenes/result-scene';
 import stages from './stages';
-import {ScoreManager} from './score-manager';
+import { ScoreManager } from './score-manager';
 import { code } from './blockly-main';
 import MouseController from './mouse-controller';
 import { ClearStatus } from './world';
@@ -27,6 +27,7 @@ export class SceneManager {
 	 * @return {void}
 	 * @param {SceneKind} sceneKind - 遷移先のシーン種類。
 	 * @param {number} stageNum - 繊維先がPlayingの時のステージ番号
+	 * @param {ClearStatus} clearStatus - {actionNum, gotChestNum}
 	 */
 	public changeScene(sceneKind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
 		if (this.currentScene === 'Top') {

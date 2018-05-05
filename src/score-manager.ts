@@ -2,7 +2,6 @@ import stages from './stages';
 import { allBlocks } from './blockly-main';
 import { ClearStatus } from './world';
 
-
 export type ClearSituation = { isCleared: boolean; score: number };
 
 export class ScoreManager {
@@ -25,11 +24,11 @@ export class ScoreManager {
 	}
 
 	public static getScore(clearStatus: ClearStatus): Score {
-		const { gotChestNum, actionNum }  = clearStatus;
+		const { gotChestNum, actionNum } = clearStatus;
 		let blockCostSum = 0;
 
 		allBlocks.forEach(block => {
-			if(block.getRootBlock().id === 'initialBlock') {
+			if (block.getRootBlock().id === 'initialBlock') {
 				blockCostSum += block.cost;
 			}
 		});

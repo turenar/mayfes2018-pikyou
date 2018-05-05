@@ -10,9 +10,9 @@ import MapChip from './enchant/map-chip';
 export type ItemKind = 'key' | 'chest';
 
 export type ClearStatus = {
-	actionNum: number,
-	gotChestNum: number,
-}
+	actionNum: number;
+	gotChestNum: number;
+};
 
 export class World {
 	public readonly scene: PlayingScene;
