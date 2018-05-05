@@ -63,23 +63,24 @@ export class World {
 	/**
 	 * CharacterPositionを渡すとキャラクターが目の前のマスに進めるかを返す。
 	 * @param {CharacterPosition} position -CharacterPosition
+	 * @param {number} distance -FocusDistance
 	 * @returns {boolean} -進めるならtrue
 	 */
-	public canMoveCharacterNext(position: CharacterPosition): boolean {
+	public canMoveCharacterNext(position: CharacterPosition, distance: number = 1): boolean {
 		let next_x = position.mapPoint_x;
 		let next_y = position.mapPoint_y;
 
 		if (position.direction === 'north') {
-			next_y -= 1;
+			next_y -= distance;
 		}
 		if (position.direction === 'east') {
-			next_x += 1;
+			next_x += distance;
 		}
 		if (position.direction === 'south') {
-			next_y += 1;
+			next_y += distance;
 		}
 		if (position.direction === 'west') {
-			next_x -= 1;
+			next_x -= distance;
 		}
 
 		console.log({ next_x, next_y });

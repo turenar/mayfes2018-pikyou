@@ -17,6 +17,11 @@ Blockly.JavaScript['set_direction'] = function(block: Blockly.Block) {
 	return code;
 };
 
+Blockly.JavaScript['set_jump'] = function(block: Blockly.Block) {
+	const code = 'this.setJump();\n';
+	return code;
+};
+
 Blockly.JavaScript['stop'] = function(block: Blockly.Block) {
 	const code = 'this.stop();\n';
 	return code;
