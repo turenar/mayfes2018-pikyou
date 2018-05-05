@@ -23,8 +23,7 @@ export class ScoreManager {
 		this.clearSituations[stageNum].score = Math.max(score, this.clearSituations[stageNum].score);
 	}
 
-	public static getScore(clearStatus: ClearStatus): Score {
-		const { gotChestNum, actionNum } = clearStatus;
+	public static getBlockCostSum(): number {
 		let blockCostSum = 0;
 
 		allBlocks.forEach(block => {
@@ -33,7 +32,7 @@ export class ScoreManager {
 			}
 		});
 
-		return { gotChestNum, actionNum, blockCostSum };
+		return blockCostSum;
 	}
 
 	public static calcScore(score: Score) {

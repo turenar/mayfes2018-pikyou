@@ -27,7 +27,11 @@ export default class ResultScene extends Scene {
 		gameOverLabel.y = offset_y + 20;
 
 		// blocklyからそれぞれの値を取得する todo
-		const score = ScoreManager.getScore(clearStatus);
+		const score = {
+			actionNum: clearStatus.actionNum,
+			gotChestNum: clearStatus.gotChestNum,
+			blockCostSum: ScoreManager.getBlockCostSum(),
+		};
 		const scoreValue = ScoreManager.calcScore(score);
 
 		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
