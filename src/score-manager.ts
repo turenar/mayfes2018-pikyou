@@ -26,7 +26,13 @@ export class ScoreManager {
 
 	public static getScore(clearStatus: ClearStatus): Score {
 		const { gotChestNum, actionNum }  = clearStatus;
-		const blockCostSum = allBlocks[1].cost;
+		let blockCostSum = 0;
+
+		allBlocks.forEach(block => {
+			if(block.getRootBlock().id === 'initialBlock') {
+				blockCostSum += block.cost;
+			}
+		});
 
 		return { gotChestNum, actionNum, blockCostSum };
 	}
