@@ -44,19 +44,19 @@ export default class ResultScene extends Scene {
 
 		const gotChestNumLabel = new enchant.Label(`てにいれたチェストのかず: ${score.gotChestNum}`);
 		gotChestNumLabel.color = 'black';
-		gotChestNumLabel.font = '18px PixelMplus10';	
+		gotChestNumLabel.font = '18px PixelMplus10';
 		gotChestNumLabel.x = offset_x + 35;
 		gotChestNumLabel.y = offset_y + 140;
 
 		const actionNumLabel = new enchant.Label(`いどうしたマスのかず: ${score.actionNum}`);
 		actionNumLabel.color = 'black';
-		actionNumLabel.font = '18px PixelMplus10';		
+		actionNumLabel.font = '18px PixelMplus10';
 		actionNumLabel.x = offset_x + 35;
 		actionNumLabel.y = offset_y + 175;
 
 		const blockCostSumLabel = new enchant.Label(`つかったブロックのコスト: ${score.blockCostSum}`);
 		blockCostSumLabel.color = 'black';
-		blockCostSumLabel.font = '18px PixelMplus10';		
+		blockCostSumLabel.font = '18px PixelMplus10';
 		blockCostSumLabel.x = offset_x + 35;
 		blockCostSumLabel.y = offset_y + 210;
 
