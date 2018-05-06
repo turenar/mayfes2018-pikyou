@@ -10,7 +10,8 @@ export default class StageLabels extends enchant.Group {
 	private stageNameLabel: Label;
 	private descriptionLabel: Label;
 	private scoreLabel: Label;
-	private clearMark: Sprite;
+	private clearMark: enchant.Sprite;
+	private excellentClearMark: enchant.Sprite;
 
 	public constructor(clearSituationOfStageZero: ClearSituation) {
 		super();
@@ -47,14 +48,21 @@ export default class StageLabels extends enchant.Group {
 		this.scoreLabel = new Label(' ');
 		this.scoreLabel.font = '25px PixelMplus10';
 		this.scoreLabel.x = offset_x + 20;
-		this.scoreLabel.y = offset_y + 180;
+		this.scoreLabel.y = offset_y + 300;
 		this.addChild(this.scoreLabel);
 
 		this.clearMark = new Sprite(70, 50);
 		this.clearMark.image = core.assets['img/clear_mark.png'];
-		this.clearMark.x = offset_x + 190;
-		this.clearMark.y = offset_y + 120;
+		this.clearMark.x = offset_x + 30;
+		this.clearMark.y = offset_y + 180;
 		this.addChild(this.clearMark);
+
+		//TODO:スコアが一定値を超えた時のみ表示されるようにする。
+		this.excellentClearMark = new Sprite(70, 50);
+		this.excellentClearMark.image = core.assets['img/clear_mark.png'];
+		this.excellentClearMark.x = offset_x + 170;
+		this.excellentClearMark.y = offset_y + 180;
+		this.addChild(this.excellentClearMark);
 
 		this.update(0, clearSituationOfStageZero);
 	}
@@ -63,7 +71,7 @@ export default class StageLabels extends enchant.Group {
 		this.stageNumLabel.text = `ステージ ${stageNum + 1}`;
 		this.stageNameLabel.text = stages[stageNum].name;
 		this.descriptionLabel.text = stages[stageNum].description;
-		this.scoreLabel.text = `score: ${clearSituation.score}`;
+		this.scoreLabel.text = `ハイスコア: ${clearSituation.score}`;
 		if (clearSituation.isCleared) {
 			this.clearMark.opacity = 100;
 		} else {
