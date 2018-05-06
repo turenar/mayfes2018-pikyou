@@ -62,6 +62,7 @@ export class Character extends enchant.Sprite {
 	//向いている方向に進む
 	public moveForward() {
 		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
+			this.world.actionNum += 1;
 			this.velocity = this.defaultVelocity;
 			const isJump = this.nextJump && this.canJumpNext(this.direction);
 			const distance = isJump ? 2 : 1;

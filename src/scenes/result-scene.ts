@@ -3,14 +3,14 @@ import { Scene } from './scenes';
 import { SceneManager } from '../scene-manager';
 import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
-import { Score } from '../score';
-import { blockNum } from '../blockly-main';
+import { ScoreManager, Score } from '../score-manager';
+import { ClearStatus } from '../world';
 
 export default class ResultScene extends Scene {
 	private retryButton: RetryButton;
 	private backToStageSelectingButton: BackToStageSelectingButton;
 
-	public constructor(manager: SceneManager, stageNum: number) {
+	public constructor(manager: SceneManager, stageNum: number, clearStatus: ClearStatus) {
 		super('Result', manager);
 
 		const offset_x = 40;
@@ -26,31 +26,39 @@ export default class ResultScene extends Scene {
 		gameOverLabel.x = offset_x + 20;
 		gameOverLabel.y = offset_y + 20;
 
-		const score = { score: 0, usingBlockNum: blockNum, gotJwellBoxNum: 0 };
+		// blocklyからそれぞれの値を取得する todo
+		const score = {
+			actionNum: clearStatus.actionNum,
+			gotChestNum: clearStatus.gotChestNum,
+			blockCostSum: ScoreManager.getBlockCostSum(),
+			clearPoint: ScoreManager.getStageClearPoint(stageNum),
+		};
 
-		const scoreLabel = new enchant.Label(`スコア：${score.score}`);
+		const scoreValue = ScoreManager.calcScoreValue(score);
+
+		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
 		scoreLabel.color = 'black';
 		scoreLabel.scale(1.2, 1.2);
 		scoreLabel.x = offset_x + 45;
 		scoreLabel.y = offset_y + 80;
 
-		const blockNumberLabel = new enchant.Label(`つかったブロックのかず：${score.usingBlockNum}`);
-		blockNumberLabel.color = 'black';
-		blockNumberLabel.scale(1.2, 1.2);
-		blockNumberLabel.x = offset_x + 45;
-		blockNumberLabel.y = offset_y + 110;
+		const gotChestNumLabel = new enchant.Label(`てにいれたチェストのかず: ${score.gotChestNum}`);
+		gotChestNumLabel.color = 'black';
+		gotChestNumLabel.scale(1.2, 1.2);
+		gotChestNumLabel.x = offset_x + 45;
+		gotChestNumLabel.y = offset_y + 110;
 
-		const gotJwellBoxLabel = new enchant.Label('てにいれたアイテム：');
-		gotJwellBoxLabel.color = 'black';
-		gotJwellBoxLabel.scale(1.2, 1.2);
-		gotJwellBoxLabel.x = offset_x + 45;
-		gotJwellBoxLabel.y = offset_y + 140;
+		const actionNumLabel = new enchant.Label(`いどうしたマスのかず: ${score.actionNum}`);
+		actionNumLabel.color = 'black';
+		actionNumLabel.scale(1.2, 1.2);
+		actionNumLabel.x = offset_x + 45;
+		actionNumLabel.y = offset_y + 140;
 
-		const gotJwellBoxIcon = new enchant.Sprite(32, 32);
-		//ここはあとでアイテム実装後にアイテムを取得したかどうかで変化させる。
-		gotJwellBoxIcon.image = core.assets['img/chest.png'];
-		gotJwellBoxIcon.x = offset_x + 190;
-		gotJwellBoxIcon.y = offset_y + 130;
+		const blockCostSumLabel = new enchant.Label(`つかったブロックのコスト: ${score.blockCostSum}`);
+		blockCostSumLabel.color = 'black';
+		blockCostSumLabel.scale(1.2, 1.2);
+		blockCostSumLabel.x = offset_x + 45;
+		blockCostSumLabel.y = offset_y + 170;
 
 		const retryButton = new RetryButton(offset_x + 20, offset_y + 180, this);
 
@@ -67,12 +75,12 @@ export default class ResultScene extends Scene {
 		this.addChild(background);
 		this.addChild(gameOverLabel);
 		this.addChild(scoreLabel);
-		this.addChild(blockNumberLabel);
-		this.addChild(gotJwellBoxLabel);
-		this.addChild(gotJwellBoxIcon);
+		this.addChild(gotChestNumLabel);
+		this.addChild(actionNumLabel);
+		this.addChild(blockCostSumLabel);
 		this.addChild(retryButton);
 		this.addChild(backToStageSelectingButton);
 
-		this.manager.updateScore(stageNum, score.score);
+		this.manager.updateScore(stageNum, scoreValue);
 	}
 }

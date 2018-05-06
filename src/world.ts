@@ -9,6 +9,11 @@ import MapChip from './enchant/map-chip';
 
 export type ItemKind = 'key' | 'chest';
 
+export type ClearStatus = {
+	actionNum: number;
+	gotChestNum: number;
+};
+
 export class World {
 	public readonly scene: PlayingScene;
 	public readonly character: Character;
@@ -19,7 +24,8 @@ export class World {
 	public isDead: boolean;
 	public isGoal: boolean;
 	public isHavingKey: boolean;
-	public isHavingChest: boolean;
+	public gotChestNum: number;
+	public actionNum: number;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
@@ -40,7 +46,8 @@ export class World {
 		this.isDead = false;
 		this.isGoal = false;
 		this.isHavingKey = false;
-		this.isHavingChest = false;
+		this.gotChestNum = 0;
+		this.actionNum = 0;
 		this.character.reset();
 		this.map.reset(stages[this.stageNumber].map);
 		this.animationQueue.clear();
@@ -103,7 +110,11 @@ export class World {
 			this.isHavingKey = true;
 		}
 		if (item === 'chest') {
-			this.isHavingChest = true;
+			this.gotChestNum += 1;
 		}
+	}
+
+	public getClearStatus(): ClearStatus {
+		return { actionNum: this.actionNum, gotChestNum: this.gotChestNum };
 	}
 }
