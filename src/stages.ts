@@ -32,7 +32,7 @@ const stages: Stage[] = [
 			mapPoint_y: 6,
 			direction: 'east',
 		},
-		clearPoint: 200,
+		clearPoint: 100,
 	},
 	{
 		map: [
@@ -56,6 +56,7 @@ const stages: Stage[] = [
 			mapPoint_y: 6,
 			direction: 'east',
 		},
+		clearPoint: 100,
 	},
 	{
 		map: [
@@ -79,6 +80,7 @@ const stages: Stage[] = [
 			mapPoint_y: 10,
 			direction: 'north',
 		},
+		clearPoint: 120,
 	},
 	{
 		map: [
@@ -102,6 +104,7 @@ const stages: Stage[] = [
 			mapPoint_y: 11,
 			direction: 'east',
 		},
+		clearPoint: 150,
 	},
 	{
 		map: [
@@ -125,6 +128,7 @@ const stages: Stage[] = [
 			mapPoint_y: 10,
 			direction: 'north',
 		},
+		clearPoint: 160,
 	},
 	{
 		map: [
@@ -148,7 +152,7 @@ const stages: Stage[] = [
 			mapPoint_y: 2,
 			direction: 'south',
 		},
-		clearPoint: 100,
+		clearPoint: 170,
 	},
 	{
 		map: [
@@ -172,6 +176,7 @@ const stages: Stage[] = [
 			mapPoint_y: 11,
 			direction: 'north',
 		},
+		clearPoint: 180,
 	},
 	{
 		map: [
@@ -193,8 +198,9 @@ const stages: Stage[] = [
 		characterInitialPosition: {
 			mapPoint_x: 4,
 			mapPoint_y: 11,
-			direction: 'east',
+			direction: 'north',
 		},
+		clearPoint: 210,
 	},
 	/*
 	{
