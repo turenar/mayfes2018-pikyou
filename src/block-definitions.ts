@@ -14,24 +14,21 @@ Blockly.Blocks['execute'] = {
 		this.setTooltip('この下に連なる処理が実行されます');
 	},
 	color: 300,
+	cost: 0,
 };
 
 //controls_if
 Blockly.Blocks['controls_if'] = {
 	...Blockly.Blocks['controls_if'],
 	color: '#5b80a5',
-};
-
-//controls_repeat
-Blockly.Blocks['controls_repeat'] = {
-	...Blockly.Blocks['controls_repeat'],
-	color: '#5ba55b',
+	cost: 5,
 };
 
 //logic_operation
 Blockly.Blocks['logic_operation'] = {
 	...Blockly.Blocks['logic_operation'],
 	color: '#5b80a5',
+	cost: 0,
 };
 
 //move forward
@@ -48,6 +45,7 @@ Blockly.Blocks['move_forward'] = {
 		this.setTooltip('キャラクターが移動を始めます');
 	},
 	color: 180,
+	cost: 50,
 };
 
 //set direction
@@ -72,26 +70,11 @@ Blockly.Blocks['set_direction'] = {
 		this.setTooltip('キャラクターの向きを変更します');
 	},
 	color: 180,
+	cost: 0,
 };
 
-//move stop
-Blockly.Blocks['stop'] = {
-	init: function() {
-		this.jsonInit({
-			type: 'Move',
-			message0: '止まる',
-		});
-		this.setNextStatement(true);
-		this.setPreviousStatement(true);
-		this.setOutput(false);
-		this.setColour(this.color);
-		this.setTooltip('キャラクターが停止します');
-	},
-	color: 180,
-};
-
-//act jump
-Blockly.Blocks['act_jump'] = {
+//set jump
+Blockly.Blocks['set_jump'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Act',
@@ -101,9 +84,10 @@ Blockly.Blocks['act_jump'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('ジャンプして1マス飛び越えます');
+		this.setTooltip('進むときにジャンプして1マス飛び越えます');
 	},
-	color: 120,
+	color: 180,
+	cost: 50,
 };
 
 //check movable
@@ -127,6 +111,7 @@ Blockly.Blocks['check_movable'] = {
 		this.setTooltip('特定の方向に進むことができるかを返します');
 	},
 	color: 80,
+	cost: 1,
 };
 
 //check wall
@@ -143,6 +128,7 @@ Blockly.Blocks['check_wall_front'] = {
 		this.setTooltip('正面に壁があるかを返します');
 	},
 	color: 80,
+	cost: 1,
 };
 
 //check obstacle
@@ -166,6 +152,7 @@ Blockly.Blocks['check_obstacle'] = {
 		this.setTooltip('正面に障害物があるかを返します');
 	},
 	color: 80,
+	cost: 1,
 };
 
 //check item
@@ -182,6 +169,7 @@ Blockly.Blocks['check_item'] = {
 		this.setTooltip('足元にアイテムがあるかを返します');
 	},
 	color: 80,
+	cost: 1,
 };
 
 //check possession
@@ -198,6 +186,7 @@ Blockly.Blocks['check_possession'] = {
 		this.setTooltip('アイテムを持っているかを返します');
 	},
 	color: 80,
+	cost: 1,
 };
 
 //check mark
@@ -221,4 +210,5 @@ Blockly.Blocks['check_mark'] = {
 		this.setTooltip('足元に特定のマーカーがあるかを返します');
 	},
 	color: 80,
+	cost: 1,
 };

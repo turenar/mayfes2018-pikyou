@@ -1,11 +1,9 @@
 <xml id="toolbox" style="display: none">
     <block type="controls_if"></block>
     <block type="logic_operation"></block>
-    <block type="controls_repeat"></block>
     <block type="set_direction"></block>
     <block type="move_forward"></block>
-    <block type="stop"></block>
-    <block type="act_jump"></block>
+    <block type="set_jump"></block>
     <block type="check_movable"></block>
     <block type="check_wall_front"></block>
     <block type="check_obstacle"></block>

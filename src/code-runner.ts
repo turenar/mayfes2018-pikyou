@@ -21,6 +21,10 @@ export default class CodeRunner {
 		this.world.character.setDirection(direction);
 	}
 
+	public setJump() {
+		this.world.character.setJump();
+	}
+
 	public stop() {
 		this.world.character.stop();
 	}

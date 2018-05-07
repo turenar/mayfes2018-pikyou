@@ -9,6 +9,11 @@ import MapChip from './enchant/map-chip';
 
 export type ItemKind = 'key' | 'chest';
 
+export type ClearStatus = {
+	actionNum: number;
+	gotChestNum: number;
+};
+
 export class World {
 	public readonly scene: PlayingScene;
 	public readonly character: Character;
@@ -19,7 +24,8 @@ export class World {
 	public isDead: boolean;
 	public isGoal: boolean;
 	public isHavingKey: boolean;
-	public isHavingChest: boolean;
+	public gotChestNum: number;
+	public actionNum: number;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
@@ -40,7 +46,8 @@ export class World {
 		this.isDead = false;
 		this.isGoal = false;
 		this.isHavingKey = false;
-		this.isHavingChest = false;
+		this.gotChestNum = 0;
+		this.actionNum = 0;
 		this.character.reset();
 		this.map.reset(stages[this.stageNumber].map);
 		this.animationQueue.clear();
@@ -63,23 +70,24 @@ export class World {
 	/**
 	 * CharacterPositionを渡すとキャラクターが目の前のマスに進めるかを返す。
 	 * @param {CharacterPosition} position -CharacterPosition
+	 * @param {number} distance -FocusDistance
 	 * @returns {boolean} -進めるならtrue
 	 */
-	public canMoveCharacterNext(position: CharacterPosition): boolean {
+	public canMoveCharacterNext(position: CharacterPosition, distance: number = 1): boolean {
 		let next_x = position.mapPoint_x;
 		let next_y = position.mapPoint_y;
 
 		if (position.direction === 'north') {
-			next_y -= 1;
+			next_y -= distance;
 		}
 		if (position.direction === 'east') {
-			next_x += 1;
+			next_x += distance;
 		}
 		if (position.direction === 'south') {
-			next_y += 1;
+			next_y += distance;
 		}
 		if (position.direction === 'west') {
-			next_x -= 1;
+			next_x -= distance;
 		}
 
 		console.log({ next_x, next_y });
@@ -102,7 +110,11 @@ export class World {
 			this.isHavingKey = true;
 		}
 		if (item === 'chest') {
-			this.isHavingChest = true;
+			this.gotChestNum += 1;
 		}
+	}
+
+	public getClearStatus(): ClearStatus {
+		return { actionNum: this.actionNum, gotChestNum: this.gotChestNum };
 	}
 }

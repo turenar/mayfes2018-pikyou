@@ -6,11 +6,12 @@ import { Character } from '../character';
 import { SceneManager } from '../scene-manager';
 import PlayingScene from './playing-scene';
 import TopScene from './top-scene';
+import { ClearStatus } from '../world';
 
 export type SceneKind = 'Top' | 'StageSelecting' | 'Playing' | 'GameOver' | 'Result';
 
 export class Scene extends enchant.Scene {
-	protected manager: SceneManager;
+	public manager: SceneManager;
 	public kind: SceneKind;
 
 	public constructor(kind: SceneKind, manager: SceneManager) {
@@ -19,7 +20,7 @@ export class Scene extends enchant.Scene {
 		this.manager = manager;
 	}
 
-	public moveNextScene(nextkind: SceneKind, stageNum?: number) {
-		this.manager.changeScene(nextkind, stageNum);
+	public moveNextScene(nextkind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
+		this.manager.changeScene(nextkind, stageNum, clearStatus);
 	}
 }
