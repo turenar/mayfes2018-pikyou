@@ -39,9 +39,7 @@ Blockly.JavaScript['check_wall_front'] = function(block: Blockly.Block) {
 };
 
 Blockly.JavaScript['check_obstacle'] = function(block: Blockly.Block) {
-	const obstacle = block.getFieldValue('OBSTACLE');
-	const mapchip = obstacle === 'pitfall' ? MapChip.Pitfall : -1;
-	const code = `this.getFrontTile() === ${mapchip}`;
+	const code = `this.getFrontTile() === ${MapChip.Pitfall}`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 };
 

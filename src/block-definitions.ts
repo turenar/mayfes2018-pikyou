@@ -136,20 +136,13 @@ Blockly.Blocks['check_obstacle'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Check',
-			message0: '正面に %1',
-			args0: [
-				{
-					type: 'field_dropdown',
-					name: 'OBSTACLE',
-					options: [['落とし穴', 'pitfall'], ['その他', 'other']],
-				},
-			],
+			message0: '正面に落とし穴がある',
 		});
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('正面に障害物があるかを返します');
+		this.setTooltip('正面に落とし穴があるかを返します');
 	},
 	color: 80,
 	cost: 1,
