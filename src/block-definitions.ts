@@ -87,7 +87,7 @@ Blockly.Blocks['set_jump'] = {
 		this.setTooltip('進むときにジャンプして1マス飛び越えます');
 	},
 	color: 180,
-	cost: 50,
+	cost: 10,
 };
 
 //check movable
