@@ -7,6 +7,7 @@ export type Stage = {
 	description: string;
 	characterInitialPosition: CharacterPosition;
 	clearPoint: number;
+	excellentClearNroma: number;
 };
 
 const stages: Stage[] = [
@@ -32,7 +33,8 @@ const stages: Stage[] = [
 			mapPoint_y: 6,
 			direction: 'east',
 		},
-		clearPoint: 100,
+		clearPoint: 200,
+		excellentClearNroma: 200,
 	},
 	{
 		map: [
@@ -57,6 +59,7 @@ const stages: Stage[] = [
 			direction: 'east',
 		},
 		clearPoint: 100,
+		excellentClearNroma: 200,
 	},
 	{
 		map: [
