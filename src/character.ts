@@ -61,6 +61,17 @@ export class Character extends enchant.Sprite {
 
 	//向いている方向に進む
 	public moveForward() {
+		const feetDef = this.getFeetTileDef();
+		const frontDef = this.getFrontTileDef();
+
+		if (feetDef && feetDef.onEnter) {
+			feetDef.onEnter(this.world, this.mapPoint_x, this.mapPoint_y);
+		}
+		if (frontDef && frontDef.onAction) {
+			const { mapPoint_x, mapPoint_y } = this.getNextMapPointAndDirection();
+			frontDef.onAction(this.world, mapPoint_x, mapPoint_y);
+		}
+
 		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
 			this.world.actionNum += 1;
 			this.velocity = this.defaultVelocity;
@@ -96,17 +107,6 @@ export class Character extends enchant.Sprite {
 				this.world.animationQueue.push(this.mkMovingAction(this.direction));
 			}
 			this.nextJump = false;
-
-			const feetDef = this.getFeetTileDef();
-			const frontDef = this.getFrontTileDef();
-
-			if (feetDef && feetDef.onEnter) {
-				feetDef.onEnter(this.world, this.mapPoint_x, this.mapPoint_y);
-			}
-			if (frontDef && frontDef.onAction) {
-				const { mapPoint_x, mapPoint_y } = this.getNextMapPointAndDirection();
-				frontDef.onAction(this.world, mapPoint_x, mapPoint_y);
-			}
 		}
 	}
 
