@@ -2,7 +2,7 @@ import stages from './stages';
 import { allBlocks } from './blockly-main';
 import { ClearStatus } from './world';
 
-export type ClearSituation = { isCleared: boolean; score: number };
+export type ClearSituation = { isCleared: boolean; isExcellentCleared: boolean; score: number };
 
 export class ScoreManager {
 	private clearSituations: Array<ClearSituation>;
@@ -10,7 +10,7 @@ export class ScoreManager {
 	public constructor() {
 		this.clearSituations = [];
 		for (var i: number = 0; i < stages.length; i++) {
-			this.clearSituations.push({ isCleared: false, score: 0 });
+			this.clearSituations.push({ isCleared: false, isExcellentCleared: false, score: 0 });
 		}
 	}
 
@@ -20,6 +20,9 @@ export class ScoreManager {
 
 	public updateScore(stageNum: number, score: number) {
 		this.clearSituations[stageNum].isCleared = true;
+		if (score >= stages[stageNum].excellentClearNroma) {
+			this.clearSituations[stageNum].isExcellentCleared = true;
+		}
 		this.clearSituations[stageNum].score = Math.max(score, this.clearSituations[stageNum].score);
 	}
 
