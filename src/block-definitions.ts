@@ -153,7 +153,14 @@ Blockly.Blocks['check_item'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Check',
-			message0: 'アイテムがある',
+			message0: '%1 がある',
+			args0: [
+				{
+					type: 'field_dropdown',
+					name: 'ITEMKIND',
+					options: [['鍵', 'KEY'], ['宝箱', 'CHEST']],
+				},
+			],
 		});
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
@@ -175,7 +182,7 @@ Blockly.Blocks['check_possession'] = {
 				{
 					type: 'field_dropdown',
 					name: 'ITEMKIND',
-					options: [['鍵', 'KEY'], ['宝箱', 'CHEST']]
+					options: [['鍵', 'KEY'], ['宝箱', 'CHEST']],
 				},
 			],
 		});

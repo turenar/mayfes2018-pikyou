@@ -43,11 +43,18 @@ Blockly.JavaScript['check_obstacle'] = function(block: Blockly.Block) {
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 };
 
+Blockly.JavaScript['check_item'] = function(block: Blockly.Block) {
+	const itemKind = block.getFieldValue('ITEMKIND');
+	const mapchip = itemKind === 'KEY' ? MapChip.Key : MapChip.Chest;
+	const code = `this.getFeetTile() === ${mapchip}`;
+	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
+};
+
 Blockly.JavaScript['check_possession'] = function(block: Blockly.Block) {
 	const itemKind = block.getFieldValue('ITEMKIND').toLowerCase();
 	const code = `this.isHavingItem('${itemKind}')`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
-}
+};
 
 Blockly.JavaScript['check_mark'] = function(block: Blockly.Block) {
 	const markColor = block.getFieldValue('MARKCOLOR');
