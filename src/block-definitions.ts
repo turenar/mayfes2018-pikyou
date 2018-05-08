@@ -33,6 +33,13 @@ Blockly.Blocks['logic_operation'] = {
 	cost: 0,
 };
 
+//logic_negate
+Blockly.Blocks['logic_negate'] = {
+	...Blockly.Blocks['logic_negate'],
+	color: '#5b80a5',
+	cost: 0,
+};
+
 //move forward
 Blockly.Blocks['move_forward'] = {
 	init: function() {

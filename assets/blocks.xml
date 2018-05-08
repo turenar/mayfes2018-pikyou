@@ -1,6 +1,7 @@
 <xml id="toolbox" style="display: none">
     <block type="controls_if"></block>
     <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
     <block type="set_direction"></block>
     <block type="move_forward"></block>
     <block type="set_jump"></block>
