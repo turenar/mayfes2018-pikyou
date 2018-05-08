@@ -28,7 +28,11 @@ export class ScoreManager {
 
 		allBlocks.forEach(block => {
 			if (block.getRootBlock().id === 'initialBlock') {
-				blockCostSum += block.cost;
+				if (block.type === 'controls_if') {
+					blockCostSum += block.costIf + block.costElseIf * block.elseifCount_ + block.costElse * block.elseCount_;
+				} else {
+					blockCostSum += block.cost;
+				}
 			}
 		});
 

@@ -21,7 +21,9 @@ Blockly.Blocks['execute'] = {
 Blockly.Blocks['controls_if'] = {
 	...Blockly.Blocks['controls_if'],
 	color: '#5b80a5',
-	cost: 5,
+	costIf: 5,
+	costElseIf: 3,
+	costElse: 3,
 };
 
 //logic_operation
