@@ -52,23 +52,23 @@ export default class StageLabels extends enchant.Group {
 		this.normaLabel.y = offset_y + 160;
 		this.addChild(this.normaLabel);
 
+		this.clearMark = new Sprite(90, 90);
+		this.clearMark.image = core.assets['img/clear_mark.png'];
+		this.clearMark.x = offset_x + 20;
+		this.clearMark.y = offset_y + 190;
+		this.addChild(this.clearMark);
+
+		this.excellentClearMark = new Sprite(90, 90);
+		this.excellentClearMark.image = core.assets['img/clear_mark.png'];
+		this.excellentClearMark.x = offset_x + 150;
+		this.excellentClearMark.y = offset_y + 190;
+		this.addChild(this.excellentClearMark);
+
 		this.scoreLabel = new Label(' ');
 		this.scoreLabel.font = '25px PixelMplus10';
 		this.scoreLabel.x = offset_x + 20;
-		this.scoreLabel.y = offset_y + 300;
+		this.scoreLabel.y = offset_y + 310;
 		this.addChild(this.scoreLabel);
-
-		this.clearMark = new Sprite(70, 50);
-		this.clearMark.image = core.assets['img/clear_mark.png'];
-		this.clearMark.x = offset_x + 30;
-		this.clearMark.y = offset_y + 200;
-		this.addChild(this.clearMark);
-
-		this.excellentClearMark = new Sprite(70, 50);
-		this.excellentClearMark.image = core.assets['img/clear_mark.png'];
-		this.excellentClearMark.x = offset_x + 170;
-		this.excellentClearMark.y = offset_y + 200;
-		this.addChild(this.excellentClearMark);
 
 		this.update(0, clearSituationOfStageZero);
 	}
@@ -88,7 +88,7 @@ export default class StageLabels extends enchant.Group {
 		if (clearSituation.isExcellentCleared) {
 			this.excellentClearMark.opacity = 100;
 		} else {
-			this.excellentClearMark.opacity = 0;
+			this.excellentClearMark.opacity = 100;
 		}
 	}
 }
