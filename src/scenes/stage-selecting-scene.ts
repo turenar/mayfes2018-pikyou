@@ -32,7 +32,7 @@ export default class StageSelectingScene extends Scene {
 		this.upButton = new ArrowButton(330, 270, 'right', this);
 		this.downButton = new ArrowButton(5, 270, 'left', this);
 		this.startButton = new StartPlayingButton((core.width - 290) / 2 + 3, 480, this);
-		this.backButton = new BackToTopButton(0, 0, this);
+		this.backButton = new BackToTopButton(this);
 
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
