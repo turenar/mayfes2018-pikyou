@@ -42,6 +42,7 @@ export function init() {
 	core.preload('img/result_gameclear_text.png');
 	core.preload('img/result_chest.png');
 	core.preload('img/gameover_text.png');
+	core.preload('img/gameover_reason_text.png');	
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();
