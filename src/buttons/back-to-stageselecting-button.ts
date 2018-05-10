@@ -6,9 +6,9 @@ export default class BackToStageSelectingButton extends Button {
 	private scene: Scene;
 
 	public constructor(scene: Scene) {
-		super(180, 89, scene, 'img/back_button.png', 'img/back_button_hover.png');
-		this.x = 5;
-		this.y = 500;
+		super(164, 66, scene, 'img/back_button.png', 'img/back_button_hover.png');
+		this.x = 0;
+		this.y = 510;
 
 		this.initButton(scene);
 	}

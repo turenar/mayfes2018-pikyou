@@ -26,17 +26,16 @@ export default class StageSelectingScene extends Scene {
 	}
 
 	private initScene() {
-		const background = new Sprite(core.width, core.height);
-		background.image = core.assets['img/background.png'];
-
-		this.upButton = new ArrowButton(330, 270, 'right', this);
-		this.downButton = new ArrowButton(5, 270, 'left', this);
-		this.startButton = new StartPlayingButton((core.width - 290) / 2 + 3, 480, this);
-		this.backButton = new BackToTopButton(this);
-
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
 
+		const background = new Sprite(core.width, core.height);
+		background.image = core.assets['img/background.png'];
+
+		this.upButton = new ArrowButton(330, 210, 'right', this);
+		this.downButton = new ArrowButton(5, 210, 'left', this);
+		this.startButton = new StartPlayingButton((core.width - 290) / 2 + 3, 420, this);
+		this.backButton = new BackToTopButton(this);
 		this.stageLabels = new StageLabels(this.manager.getClearSituation(0));
 
 		this.upButton.addEventListener('touchstart', () => {
