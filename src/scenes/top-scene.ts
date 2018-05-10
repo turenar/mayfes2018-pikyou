@@ -21,8 +21,8 @@ export default class TopScene extends Scene {
 		title.image = core.assets['img/titletext.png'];
 		title.moveTo(0, 35);
 
-		this.startInitButton = new StartInitButton(260, this);
-		this.startContinueButton = new StartContinueButton(420, this);
+		this.startInitButton = new StartInitButton(190, this);
+		this.startContinueButton = new StartContinueButton(370, this);
 
 		this.addChild(background);
 		this.addChild(titleBackGround);
