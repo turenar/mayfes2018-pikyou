@@ -30,7 +30,7 @@ Blockly.Blocks['controls_if'] = {
 Blockly.Blocks['logic_operation'] = {
 	...Blockly.Blocks['logic_operation'],
 	color: '#5b80a5',
-	cost: 0,
+	cost: 2,
 };
 
 //logic_negate
