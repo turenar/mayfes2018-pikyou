@@ -20,7 +20,7 @@ export default class StageLabels extends enchant.Group {
 		const width = 270;
 		const heigt = 380;
 		const offset_x = (core.width - width) / 2;
-		const offset_y = 85;
+		const offset_y = 35;
 
 		const background = new enchant.Sprite(width, heigt);
 		background.image = core.assets['img/result_background.png'];
@@ -54,7 +54,7 @@ export default class StageLabels extends enchant.Group {
 
 		this.clearMark = new Sprite(90, 90);
 		this.clearMark.image = core.assets['img/clear_mark.png'];
-		this.clearMark.x = offset_x + 20;
+		this.clearMark.x = offset_x + 25;
 		this.clearMark.y = offset_y + 190;
 		this.addChild(this.clearMark);
 
@@ -83,12 +83,12 @@ export default class StageLabels extends enchant.Group {
 		if (clearSituation.isCleared) {
 			this.clearMark.opacity = 100;
 		} else {
-			this.clearMark.opacity = 100;
+			this.clearMark.opacity = 0;
 		}
 		if (clearSituation.isExcellentCleared) {
 			this.excellentClearMark.opacity = 100;
 		} else {
-			this.excellentClearMark.opacity = 100;
+			this.excellentClearMark.opacity = 0;
 		}
 	}
 }
