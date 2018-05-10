@@ -8,6 +8,8 @@ import { SceneManager } from './scene-manager';
 export function init() {
 	//Common
 	core.preload('img/background.png');
+	core.preload('img/back_button.png');
+	core.preload('img/back_button_hover.png');
 	core.preload('img/back_to_stage_selecting_button.png');
 	core.preload('img/back_to_stage_selecting_button_hover.png');
 
@@ -42,7 +44,7 @@ export function init() {
 	core.preload('img/result_gameclear_text.png');
 	core.preload('img/result_chest.png');
 	core.preload('img/gameover_text.png');
-	core.preload('img/gameover_reason_text.png');	
+	core.preload('img/gameover_reason_text.png');
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();

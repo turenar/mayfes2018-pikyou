@@ -3,10 +3,10 @@ import Button from './button';
 import StageSelectingScene from '../scenes/stage-selecting-scene';
 
 export default class BackToTopButton extends Button {
-	public constructor(x: number, y: number, scene: StageSelectingScene) {
-		super(270, 70, scene, 'img/back_to_top_button.png', 'img/back_to_top_button_hover.png');
-		this.x = x;
-		this.y = y;
+	public constructor(scene: StageSelectingScene) {
+		super(180, 89, scene, 'img/back_button.png', 'img/back_button_hover.png');
+		this.x = 0;
+		this.y = 0;
 
 		this.initButton(scene);
 	}

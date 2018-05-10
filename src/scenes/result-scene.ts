@@ -43,7 +43,7 @@ export default class ResultScene extends Scene {
 		scoreLabel.x = offset_x + 20;
 		scoreLabel.y = offset_y + 90;
 
-		const stageClearPointLabel = new enchant.Label(`ステージクリアボーナス: ${stages[stageNum].clearPoint}`)
+		const stageClearPointLabel = new enchant.Label(`ステージクリアボーナス: ${stages[stageNum].clearPoint}`);
 		stageClearPointLabel.color = 'black';
 		stageClearPointLabel.font = '18px PixelMplus10';
 		stageClearPointLabel.x = offset_x + 35;
