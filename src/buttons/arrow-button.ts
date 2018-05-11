@@ -8,8 +8,14 @@ export default class ArrowButton extends enchant.Sprite {
 		this.y = y;
 		if (type === 'left') {
 			this.image = core.assets['img/stageselecting_left_arrow.png'];
+			this.addEventListener('touchstart', () => {
+				scene.downNumber();
+			});
 		} else if (type === 'right') {
 			this.image = core.assets['img/stageselecting_right_arrow.png'];
+			this.addEventListener('touchstart', () => {
+				scene.upNumber();
+			});
 		}
 	}
 }
