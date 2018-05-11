@@ -7,6 +7,7 @@ export type Stage = {
 	description: string;
 	characterInitialPosition: CharacterPosition;
 	clearPoint: number;
+	excellentClearNorma: number;
 };
 
 const stages: Stage[] = [
@@ -33,6 +34,7 @@ const stages: Stage[] = [
 			direction: 'east',
 		},
 		clearPoint: 100,
+		excellentClearNorma: 90,
 	},
 
 	{
@@ -58,6 +60,7 @@ const stages: Stage[] = [
 			direction: 'north',
 		},
 		clearPoint: 120,
+		excellentClearNorma: 100,
 	},
 
 	{
@@ -83,6 +86,7 @@ const stages: Stage[] = [
 			direction: 'east',
 		},
 		clearPoint: 150,
+		excellentClearNorma: 200,
 	},
 
 	{
@@ -107,7 +111,8 @@ const stages: Stage[] = [
 			mapPoint_y: 10,
 			direction: 'north',
 		},
-		clearPoint: 160,
+		clearPoint: 100,
+		excellentClearNorma: 220,
 	},
 
 	{
@@ -133,6 +138,7 @@ const stages: Stage[] = [
 			direction: 'south',
 		},
 		clearPoint: 170,
+		excellentClearNorma: 225,
 	},
 
 	{
@@ -157,7 +163,8 @@ const stages: Stage[] = [
 			mapPoint_y: 11,
 			direction: 'north',
 		},
-		clearPoint: 180,
+		clearPoint: 190,
+		excellentClearNorma: 230,
 	},
 
 	{
@@ -183,6 +190,7 @@ const stages: Stage[] = [
 			direction: 'south',
 		},
 		clearPoint: 190,
+		excellentClearNorma: 235,
 	},
 
 	{
@@ -207,7 +215,8 @@ const stages: Stage[] = [
 			mapPoint_y: 11,
 			direction: 'north',
 		},
-		clearPoint: 210,
+		clearPoint: 230,
+		excellentClearNorma: 240,
 	},
 
 	{
@@ -232,7 +241,8 @@ const stages: Stage[] = [
 			mapPoint_y: 11,
 			direction: 'north',
 		},
-		clearPoint: 300,
+		clearPoint: 250,
+		excellentClearNorma: 250,
 	},
 
 	{
@@ -257,7 +267,8 @@ const stages: Stage[] = [
 			mapPoint_y: 11,
 			direction: 'east',
 		},
-		clearPoint: 332,
+		clearPoint: 260,
+		excellentClearNorma: 270,
 	},
 
 	{
@@ -282,7 +293,8 @@ const stages: Stage[] = [
 			mapPoint_y: 9,
 			direction: 'east',
 		},
-		clearPoint: 233,
+		clearPoint: 220,
+		excellentClearNorma: 280,
 	},
 
 	{
@@ -307,7 +319,8 @@ const stages: Stage[] = [
 			mapPoint_y: 10,
 			direction: 'south',
 		},
-		clearPoint: 123,
+		clearPoint: 320,
+		excellentClearNorma: 300,
 	},
 
 	{
@@ -332,7 +345,8 @@ const stages: Stage[] = [
 			mapPoint_y: 9,
 			direction: 'east',
 		},
-		clearPoint: 86,
+		clearPoint: 320,
+		excellentClearNorma: 300,
 	},
 
 ];

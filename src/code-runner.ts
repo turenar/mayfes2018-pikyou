@@ -1,4 +1,4 @@
-import { World } from './world';
+import { World, ItemKind } from './world';
 import { Direction } from './character';
 
 export default class CodeRunner {
@@ -39,5 +39,14 @@ export default class CodeRunner {
 
 	public getFeetTile() {
 		return this.world.character.getFeetTile();
+	}
+
+	public isHavingItem(itemKind: ItemKind) {
+		if (itemKind === 'key') {
+			return this.world.isHavingKey;
+		}
+		if (itemKind === 'chest') {
+			return this.world.gotChestNum > 0;
+		}
 	}
 }

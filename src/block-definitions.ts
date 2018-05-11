@@ -21,12 +21,21 @@ Blockly.Blocks['execute'] = {
 Blockly.Blocks['controls_if'] = {
 	...Blockly.Blocks['controls_if'],
 	color: '#5b80a5',
-	cost: 5,
+	costIf: 5,
+	costElseIf: 3,
+	costElse: 3,
 };
 
 //logic_operation
 Blockly.Blocks['logic_operation'] = {
 	...Blockly.Blocks['logic_operation'],
+	color: '#5b80a5',
+	cost: 2,
+};
+
+//logic_negate
+Blockly.Blocks['logic_negate'] = {
+	...Blockly.Blocks['logic_negate'],
 	color: '#5b80a5',
 	cost: 0,
 };
@@ -87,7 +96,7 @@ Blockly.Blocks['set_jump'] = {
 		this.setTooltip('進むときにジャンプして1マス飛び越えます');
 	},
 	color: 180,
-	cost: 50,
+	cost: 10,
 };
 
 //check movable
@@ -136,20 +145,13 @@ Blockly.Blocks['check_obstacle'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Check',
-			message0: '正面に %1',
-			args0: [
-				{
-					type: 'field_dropdown',
-					name: 'OBSTACLE',
-					options: [['落とし穴', 'pitfall'], ['その他', 'other']],
-				},
-			],
+			message0: '正面に落とし穴がある',
 		});
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('正面に障害物があるかを返します');
+		this.setTooltip('正面に落とし穴があるかを返します');
 	},
 	color: 80,
 	cost: 1,
@@ -160,7 +162,14 @@ Blockly.Blocks['check_item'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Check',
-			message0: 'アイテムがある',
+			message0: '%1 がある',
+			args0: [
+				{
+					type: 'field_dropdown',
+					name: 'ITEMKIND',
+					options: [['鍵', 'KEY'], ['宝箱', 'CHEST']],
+				},
+			],
 		});
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);
@@ -177,7 +186,14 @@ Blockly.Blocks['check_possession'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Check',
-			message0: 'アイテムを持っている',
+			message0: '%1 を持っている',
+			args0: [
+				{
+					type: 'field_dropdown',
+					name: 'ITEMKIND',
+					options: [['鍵', 'KEY'], ['宝箱', 'CHEST']],
+				},
+			],
 		});
 		this.setNextStatement(false);
 		this.setPreviousStatement(false);

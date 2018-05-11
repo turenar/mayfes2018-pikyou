@@ -1,10 +1,19 @@
 import core from '../enchant/core';
+import Button from './button';
+import StageSelectingScene from '../scenes/stage-selecting-scene';
 
-export default class BackToTopButton extends enchant.Sprite {
-	public constructor(x: number, y: number) {
-		super(90, 90); // 画像サイズに応じて決める
-		this.x = x;
-		this.y = y;
-		this.image = core.assets['img/back_to_top_button.png'];
+export default class BackToTopButton extends Button {
+	public constructor(scene: StageSelectingScene) {
+		super(164, 66, scene, 'img/back_button.png', 'img/back_button_hover.png');
+		this.x = 0;
+		this.y = 510;
+
+		this.initButton(scene);
+	}
+
+	private initButton(scene: StageSelectingScene) {
+		this.addEventListener('touchstart', () => {
+			scene.moveNextScene('Top');
+		});
 	}
 }
