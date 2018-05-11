@@ -5,6 +5,7 @@ import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 import { ScoreManager, Score } from '../score-manager';
 import { ClearStatus } from '../world';
+import stages from '../stages';
 
 export default class ResultScene extends Scene {
 	private retryButton: RetryButton;
@@ -16,15 +17,15 @@ export default class ResultScene extends Scene {
 		const offset_x = 40;
 		const offset_y = 10;
 
-		const background = new enchant.Sprite(240, 300);
-		background.image = core.assets['img/result_gameover_background.png'];
+		const background = new enchant.Sprite(300, 360);
+		background.image = core.assets['img/result_background.png'];
 		background.x = offset_x;
 		background.y = offset_y;
 
-		const gameOverLabel = new enchant.Sprite(200, 50);
-		gameOverLabel.image = core.assets['img/result_gameclear_text.png'];
-		gameOverLabel.x = offset_x + 20;
-		gameOverLabel.y = offset_y + 20;
+		const gameClearLabel = new enchant.Sprite(260, 60);
+		gameClearLabel.image = core.assets['img/result_gameclear_text.png'];
+		gameClearLabel.x = offset_x + 20;
+		gameClearLabel.y = offset_y + 20;
 
 		// blocklyからそれぞれの値を取得する todo
 		const score = {
@@ -38,43 +39,42 @@ export default class ResultScene extends Scene {
 
 		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
 		scoreLabel.color = 'black';
-		scoreLabel.scale(1.2, 1.2);
-		scoreLabel.x = offset_x + 45;
-		scoreLabel.y = offset_y + 80;
+		scoreLabel.font = '30px PixelMplus10';
+		scoreLabel.x = offset_x + 20;
+		scoreLabel.y = offset_y + 90;
+
+		const stageClearPointLabel = new enchant.Label(`ステージクリアボーナス: ${stages[stageNum].clearPoint}`);
+		stageClearPointLabel.color = 'black';
+		stageClearPointLabel.font = '18px PixelMplus10';
+		stageClearPointLabel.x = offset_x + 35;
+		stageClearPointLabel.y = offset_y + 140;
 
 		const gotChestNumLabel = new enchant.Label(`てにいれたチェストのかず: ${score.gotChestNum}`);
 		gotChestNumLabel.color = 'black';
-		gotChestNumLabel.scale(1.2, 1.2);
-		gotChestNumLabel.x = offset_x + 45;
-		gotChestNumLabel.y = offset_y + 110;
+		gotChestNumLabel.font = '18px PixelMplus10';
+		gotChestNumLabel.x = offset_x + 35;
+		gotChestNumLabel.y = offset_y + 175;
 
 		const actionNumLabel = new enchant.Label(`いどうしたマスのかず: ${score.actionNum}`);
 		actionNumLabel.color = 'black';
-		actionNumLabel.scale(1.2, 1.2);
-		actionNumLabel.x = offset_x + 45;
-		actionNumLabel.y = offset_y + 140;
+		actionNumLabel.font = '18px PixelMplus10';
+		actionNumLabel.x = offset_x + 35;
+		actionNumLabel.y = offset_y + 210;
 
 		const blockCostSumLabel = new enchant.Label(`つかったブロックのコスト: ${score.blockCostSum}`);
 		blockCostSumLabel.color = 'black';
-		blockCostSumLabel.scale(1.2, 1.2);
-		blockCostSumLabel.x = offset_x + 45;
-		blockCostSumLabel.y = offset_y + 170;
+		blockCostSumLabel.font = '18px PixelMplus10';
+		blockCostSumLabel.x = offset_x + 35;
+		blockCostSumLabel.y = offset_y + 245;
 
-		const retryButton = new RetryButton(offset_x + 20, offset_y + 180, this);
+		const retryButton = new RetryButton(42, 400, this);
 
-		const backToStageSelectingButton = new BackToStageSelectingButton(
-			offset_x + 20,
-			offset_y + 240,
-			200,
-			50,
-			'img/back_to_stage_selecting_button.png',
-			'img/back_to_stage_selecting_button.png',
-			this
-		);
+		const backToStageSelectingButton = new BackToStageSelectingButton(this);
 
 		this.addChild(background);
-		this.addChild(gameOverLabel);
+		this.addChild(gameClearLabel);
 		this.addChild(scoreLabel);
+		this.addChild(stageClearPointLabel);
 		this.addChild(gotChestNumLabel);
 		this.addChild(actionNumLabel);
 		this.addChild(blockCostSumLabel);

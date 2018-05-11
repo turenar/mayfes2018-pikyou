@@ -3,20 +3,20 @@ import core from '../enchant/core';
 import { SceneManager } from '../scene-manager';
 import stages from '../stages';
 import StageLabels from '../enchant/stage-labels';
-import ArrowButton from '../buttons/arrow_button';
-import StartToPlaySceneButton from '../buttons/start-to-playscene-button';
+import ArrowButton from '../buttons/arrow-button';
+import StartPlayingButton from '../buttons/start-playing-button';
 import BackToTopButton from '../buttons/back-to-top-button';
 import { Event } from 'node-enchantjs';
 import { Sprite } from 'node-enchantjs';
 import { Label } from 'node-enchantjs';
 
 export default class StageSelectingScene extends Scene {
-	private stageNum: number;
 	private maxStageNum: number;
 	private stageLabels: StageLabels;
+	public stageNum: number;
 	public upButton: ArrowButton;
 	public downButton: ArrowButton;
-	public startButton: StartToPlaySceneButton;
+	public startButton: StartPlayingButton;
 	public backButton: BackToTopButton;
 
 	public constructor(manager: SceneManager) {
@@ -26,26 +26,17 @@ export default class StageSelectingScene extends Scene {
 	}
 
 	private initScene() {
-		var sky = new Sprite(320, 640);
-		sky.image = core.assets['img/haikei.png'];
-		sky.x = 0;
-		sky.y = 0;
-		this.addChild(sky);
-
-		this.upButton = new ArrowButton(130, 10, 'up', this);
-		this.addChild(this.upButton);
-		this.downButton = new ArrowButton(130, 400, 'down', this);
-		this.addChild(this.downButton);
-		this.startButton = new StartToPlaySceneButton(180, 400);
-		this.addChild(this.startButton);
-		this.backButton = new BackToTopButton(0, 0);
-		this.addChild(this.backButton);
-
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
 
+		const background = new Sprite(core.width, core.height);
+		background.image = core.assets['img/background.png'];
+
+		this.upButton = new ArrowButton(330, 210, 'right', this);
+		this.downButton = new ArrowButton(5, 210, 'left', this);
+		this.startButton = new StartPlayingButton((core.width - 290) / 2 + 3, 420, this);
+		this.backButton = new BackToTopButton(this);
 		this.stageLabels = new StageLabels(this.manager.getClearSituation(0));
-		this.addChild(this.stageLabels);
 
 		this.upButton.addEventListener('touchstart', () => {
 			this.upNumber();
@@ -53,12 +44,13 @@ export default class StageSelectingScene extends Scene {
 		this.downButton.addEventListener('touchstart', () => {
 			this.downNumber();
 		});
-		this.startButton.addEventListener('touchstart', () => {
-			this.moveNextScene('Playing', this.stageNum);
-		});
-		this.backButton.addEventListener('touchstart', () => {
-			this.moveNextScene('Top');
-		});
+
+		this.addChild(background);
+		this.addChild(this.upButton);
+		this.addChild(this.downButton);
+		this.addChild(this.startButton);
+		this.addChild(this.backButton);
+		this.addChild(this.stageLabels);
 
 		console.log(`stageNum: ${this.stageNum}`);
 	}

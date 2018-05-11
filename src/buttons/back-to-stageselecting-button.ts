@@ -5,23 +5,15 @@ import Button from './button';
 export default class BackToStageSelectingButton extends Button {
 	private scene: Scene;
 
-	public constructor(
-		x: number,
-		y: number,
-		width: number,
-		height: number,
-		imagePath: string,
-		imageHoverPath: string,
-		scene: Scene
-	) {
-		super(width, height, scene, imagePath, imageHoverPath);
-		this.x = x;
-		this.y = y;
+	public constructor(scene: Scene) {
+		super(164, 66, scene, 'img/back_button.png', 'img/back_button_hover.png');
+		this.x = 0;
+		this.y = 510;
 
-		this.listenButton(scene);
+		this.initButton(scene);
 	}
 
-	private listenButton(scene: Scene) {
+	private initButton(scene: Scene) {
 		this.addEventListener('touchstart', () => {
 			console.log('BackToStageSelecting button is pushed!');
 			scene.moveNextScene('StageSelecting');

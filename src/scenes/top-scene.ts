@@ -11,18 +11,18 @@ export default class TopScene extends Scene {
 	public constructor(manager: SceneManager) {
 		super('Top', manager);
 
-		const background = new enchant.Sprite(320, 640);
+		const background = new enchant.Sprite(core.width, core.height);
 		background.image = core.assets['img/background.png'];
 
-		const titleBackGround = new enchant.Sprite(320, 100);
+		const titleBackGround = new enchant.Sprite(core.width, 120);
 		titleBackGround.backgroundColor = 'skyblue';
 
-		const title = new enchant.Sprite(320, 43);
+		const title = new enchant.Sprite(core.width, 52);
 		title.image = core.assets['img/titletext.png'];
-		title.moveTo(0, 30);
+		title.moveTo(0, 35);
 
-		this.startInitButton = new StartInitButton(20, 180, this);
-		this.startContinueButton = new StartContinueButton(20, 320, this);
+		this.startInitButton = new StartInitButton(190, this);
+		this.startContinueButton = new StartContinueButton(370, this);
 
 		this.addChild(background);
 		this.addChild(titleBackGround);
@@ -30,14 +30,6 @@ export default class TopScene extends Scene {
 		this.addChild(this.startInitButton);
 		this.addChild(this.startContinueButton);
 
-		this.initScene();
 		core.resume();
-	}
-
-	private initScene() {
-		this.startInitButton.addEventListener('touchstart', () => {
-			console.log('StageSelecting');
-			this.moveNextScene('StageSelecting');
-		});
 	}
 }

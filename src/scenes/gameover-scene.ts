@@ -11,33 +11,22 @@ export default class GameOverScene extends Scene {
 	public constructor(manager: SceneManager) {
 		super('GameOver', manager);
 
-		const offset_x = 40;
-		const offset_y = 10;
-
-		const background = new enchant.Sprite(240, 300);
-		background.image = core.assets['img/result_gameover_background.png'];
-		background.x = offset_x;
-		background.y = offset_y;
-
-		const gameOverLabel = new enchant.Sprite(210, 50);
+		const gameOverLabel = new enchant.Sprite(300, 80);
 		gameOverLabel.image = core.assets['img/gameover_text.png'];
-		gameOverLabel.x = offset_x + 15;
-		gameOverLabel.y = offset_y + 20;
+		gameOverLabel.x = (core.width - 300) / 2;
+		gameOverLabel.y = (32 * 12 - 80) / 2 + 20;
 
-		this.retryButton = new RetryButton(offset_x + 20, offset_y + 180, this);
+		const gameOverReasonLabel = new enchant.Sprite(300, 50);
+		gameOverReasonLabel.image = core.assets['img/gameover_reason_text.png'];
+		gameOverReasonLabel.x = (core.width - 300) / 2;
+		gameOverReasonLabel.y = 100;
 
-		this.backToStageSelectingButton = new BackToStageSelectingButton(
-			offset_x + 20,
-			offset_y + 240,
-			200,
-			50,
-			'img/back_to_stage_selecting_button.png',
-			'img/back_to_stage_selecting_button.png',
-			this
-		);
+		this.retryButton = new RetryButton(42, 400, this);
 
-		this.addChild(background);
+		this.backToStageSelectingButton = new BackToStageSelectingButton(this);
+
 		this.addChild(gameOverLabel);
+		this.addChild(gameOverReasonLabel);
 		this.addChild(this.retryButton);
 		this.addChild(this.backToStageSelectingButton);
 	}
