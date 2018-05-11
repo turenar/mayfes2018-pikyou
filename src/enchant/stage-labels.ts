@@ -77,7 +77,7 @@ export default class StageLabels extends enchant.Group {
 		this.stageNumLabel.text = `ステージ ${stageNum + 1}`;
 		this.stageNameLabel.text = stages[stageNum].name;
 		this.descriptionLabel.text = stages[stageNum].description;
-		this.normaLabel.text = `エクセレントクリアノルマ：${stages[stageNum].excellentClearNroma}`;
+		this.normaLabel.text = `エクセレントクリアノルマ：${stages[stageNum].excellentClearNorma}`;
 		this.scoreLabel.text = `ハイスコア: ${clearSituation.score}`;
 
 		if (clearSituation.isCleared) {
