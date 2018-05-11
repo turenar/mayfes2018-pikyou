@@ -20,7 +20,7 @@ export class ScoreManager {
 
 	public updateScore(stageNum: number, score: number) {
 		this.clearSituations[stageNum].isCleared = true;
-		if (score >= stages[stageNum].excellentClearNroma) {
+		if (score >= stages[stageNum].excellentClearNorma) {
 			this.clearSituations[stageNum].isExcellentCleared = true;
 		}
 		this.clearSituations[stageNum].score = Math.max(score, this.clearSituations[stageNum].score);
