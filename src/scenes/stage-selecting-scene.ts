@@ -25,6 +25,26 @@ export default class StageSelectingScene extends Scene {
 		this.initScene();
 	}
 
+	public upNumber() {
+		if (this.stageNum < this.manager.getMaxOfSelectableStageNumber()) {
+			this.stageNum += 1;
+		} else {
+			this.stageNum = 0;
+		}
+		console.log(`stageNum: ${this.stageNum}`);
+		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
+	}
+
+	public downNumber() {
+		if (this.stageNum == 0) {
+			this.stageNum = this.manager.getMaxOfSelectableStageNumber();
+		} else {
+			this.stageNum -= 1;
+		}
+		console.log(`stagenum: ${this.stageNum}`);
+		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
+	}
+
 	private initScene() {
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
@@ -38,13 +58,6 @@ export default class StageSelectingScene extends Scene {
 		this.backButton = new BackToTopButton(this);
 		this.stageLabels = new StageLabels(this.manager.getClearSituation(0));
 
-		this.upButton.addEventListener('touchstart', () => {
-			this.upNumber();
-		});
-		this.downButton.addEventListener('touchstart', () => {
-			this.downNumber();
-		});
-
 		this.addChild(background);
 		this.addChild(this.upButton);
 		this.addChild(this.downButton);
@@ -53,25 +66,5 @@ export default class StageSelectingScene extends Scene {
 		this.addChild(this.stageLabels);
 
 		console.log(`stageNum: ${this.stageNum}`);
-	}
-
-	private upNumber() {
-		if (this.stageNum < this.manager.getMaxOfSelectableStageNumber()) {
-			this.stageNum += 1;
-		} else {
-			this.stageNum = 0;
-		}
-		console.log(`stageNum: ${this.stageNum}`);
-		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
-	}
-
-	private downNumber() {
-		if (this.stageNum == 0) {
-			this.stageNum = this.manager.getMaxOfSelectableStageNumber();
-		} else {
-			this.stageNum -= 1;
-		}
-		console.log(`stagenum: ${this.stageNum}`);
-		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
 	}
 }
