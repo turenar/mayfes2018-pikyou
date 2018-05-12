@@ -1,5 +1,6 @@
 import core from './enchant/core';
 import { SceneManager } from './scene-manager';
+import DebugTool from './debug-tool';
 
 /**
  * enchant関連初期化
@@ -48,6 +49,7 @@ export function init() {
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();
+		(window as any).debugTool = new DebugTool(sceneManager.scoreManager);
 	};
 }
 
