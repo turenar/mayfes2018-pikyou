@@ -12,7 +12,7 @@ import MouseController from './mouse-controller';
 import { ClearStatus } from './world';
 
 export class SceneManager {
-	private scoreManager: ScoreManager;
+	public scoreManager: ScoreManager;
 	public currentScene: SceneKind;
 	public mouseController: MouseController;
 
