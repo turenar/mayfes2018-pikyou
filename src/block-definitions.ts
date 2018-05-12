@@ -10,6 +10,7 @@ Blockly.Blocks['execute'] = {
 		this.setNextStatement(true);
 		this.moveBy(20, 20);
 		this.setMovable(false);
+		this.setDeletable(false);
 		this.setColour(this.color);
 		this.setTooltip('この下に連なる処理が実行されます');
 	},
