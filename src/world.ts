@@ -1,6 +1,5 @@
 import core from './enchant/core';
 import PlayingScene from './scenes/playing-scene';
-import { code } from './blockly-main';
 import { Character, CharacterPosition } from './character';
 import { AnimationQueue } from './animation-queue';
 import { Map, MapPoint } from './enchant/map';
