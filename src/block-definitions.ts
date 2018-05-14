@@ -20,30 +20,30 @@ Blockly.Blocks['execute'] = {
 
 //controls_if
 Blockly.Blocks['controls_if'] = {
-	init: function () {
+	init: function() {
 		this.jsonInit({
-			type: "controls_if",
-			message0: "もしも %1",
+			type: 'controls_if',
+			message0: 'もしも %1',
 			args0: [
 				{
-					"type": "input_value",
-					"name": "IF0",
-					"check": "Boolean"
-				}
+					type: 'input_value',
+					name: 'IF0',
+					check: 'Boolean',
+				},
 			],
-			message1: "ならば %1",
+			message1: 'ならば %1',
 			args1: [
 				{
-					"type": "input_statement",
-					"name": "DO0"
-				}
+					type: 'input_statement',
+					name: 'DO0',
+				},
 			],
 			previousStatement: null,
 			nextStatement: null,
-			colour: "%{BKY_LOGIC_HUE}",
-			helpUrl: "%{BKY_CONTROLS_IF_HELPURL}",
-			mutator: "controls_if_mutator",
-			extensions: ["controls_if_tooltip"]
+			colour: '%{BKY_LOGIC_HUE}',
+			helpUrl: '%{BKY_CONTROLS_IF_HELPURL}',
+			mutator: 'controls_if_mutator',
+			extensions: ['controls_if_tooltip'],
 		});
 		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします');
 	},
@@ -55,43 +55,43 @@ Blockly.Blocks['controls_if'] = {
 
 //controls_if mutator1
 Blockly.Blocks['controls_if_if'] = {
-	init: function () {
+	init: function() {
 		this.jsonInit({
-			type: "controls_if_if",
-			message0: "もしも",
+			type: 'controls_if_if',
+			message0: 'もしも',
 			nextStatement: null,
 			enableContextMenu: false,
-			colour: "%{BKY_LOGIC_HUE}",
-			tooltip: "この下に左のブロックを加えて、いろんなチェックを作ろう"
+			colour: '%{BKY_LOGIC_HUE}',
+			tooltip: 'この下に左のブロックを加えて、いろんなチェックを作ろう',
 		});
 	},
 };
 
 //controls_if mutator2
 Blockly.Blocks['controls_if_elseif'] = {
-	init: function () {
+	init: function() {
 		this.jsonInit({
-			type: "controls_if_elseif",
-			message0: "それ以外でもしも",
+			type: 'controls_if_elseif',
+			message0: 'それ以外でもしも',
 			previousStatement: null,
 			nextStatement: null,
 			enableContextMenu: false,
-			colour: "%{BKY_LOGIC_HUE}",
-			tooltip: "１つ前のチェックではもれたけれど、もしも…"
+			colour: '%{BKY_LOGIC_HUE}',
+			tooltip: '１つ前のチェックではもれたけれど、もしも…',
 		});
 	},
 };
 
 //controls_if mutator3
 Blockly.Blocks['controls_if_else'] = {
-	init: function () {
+	init: function() {
 		this.jsonInit({
-			type: "controls_if_else",
-			message0: "その他",
+			type: 'controls_if_else',
+			message0: 'その他',
 			previousStatement: null,
 			enableContextMenu: false,
-			colour: "%{BKY_LOGIC_HUE}",
-			tooltip: "ここまでの「もしも」が全部当てはまらない時"
+			colour: '%{BKY_LOGIC_HUE}',
+			tooltip: 'ここまでの「もしも」が全部当てはまらない時',
 		});
 	},
 };
@@ -99,35 +99,32 @@ Blockly.Blocks['controls_if_else'] = {
 //logic_operation
 Blockly.Blocks['logic_operation'] = {
 	...Blockly.Blocks['logic_operation'],
-	init: function(){
+	init: function() {
 		this.jsonInit({
-			type: "logic_operation",
-			message0: "%1 %2 %3",
+			type: 'logic_operation',
+			message0: '%1 %2 %3',
 			args0: [
-			  {
-				"type": "input_value",
-				"name": "A",
-				"check": "Boolean"
-			  },
-			  {
-				"type": "field_dropdown",
-				"name": "OP",
-				"options": [
-				  ["%{BKY_LOGIC_OPERATION_AND}", "AND"],
-						["%{BKY_LOGIC_OPERATION_OR}", "OR"]
-					]
+				{
+					type: 'input_value',
+					name: 'A',
+					check: 'Boolean',
 				},
 				{
-					"type": "input_value",
-					"name": "B",
-					"check": "Boolean"
-				}
+					type: 'field_dropdown',
+					name: 'OP',
+					options: [['%{BKY_LOGIC_OPERATION_AND}', 'AND'], ['%{BKY_LOGIC_OPERATION_OR}', 'OR']],
+				},
+				{
+					type: 'input_value',
+					name: 'B',
+					check: 'Boolean',
+				},
 			],
 			inputsInline: true,
-			output: "Boolean",
-			colour: "%{BKY_LOGIC_HUE}",
-			helpUrl: "%{BKY_LOGIC_OPERATION_HELPURL}",
-			extensions: ["logic_op_tooltip"]
+			output: 'Boolean',
+			colour: '%{BKY_LOGIC_HUE}',
+			helpUrl: '%{BKY_LOGIC_OPERATION_HELPURL}',
+			extensions: ['logic_op_tooltip'],
 		});
 		this.setTooltip('２つのチェックを同時に考えることができます');
 	},
