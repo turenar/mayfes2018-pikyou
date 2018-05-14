@@ -59,11 +59,11 @@ export default class StageSelectingScene extends Scene {
 		this.stageLabels = new StageLabels(this.manager.getClearSituation(0));
 
 		this.addChild(background);
+		this.addChild(this.stageLabels);
 		this.addChild(this.upButton);
 		this.addChild(this.downButton);
 		this.addChild(this.startButton);
 		this.addChild(this.backButton);
-		this.addChild(this.stageLabels);
 
 		console.log(`stageNum: ${this.stageNum}`);
 	}
