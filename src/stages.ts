@@ -27,7 +27,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
 		name: '01:進む',
-		description: 'Tutorial:1',
+		description: 'キャラクタを動かそう',
 		characterInitialPosition: {
 			mapPoint_x: 3,
 			mapPoint_y: 6,
@@ -53,7 +53,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
 		name: '02:方向転換',
-		description: 'Tutorial:2',
+		description: '進む向きを変えよう',
 		characterInitialPosition: {
 			mapPoint_x: 6,
 			mapPoint_y: 10,
@@ -79,7 +79,7 @@ const stages: Stage[] = [
 			[27, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 29],
 		],
 		name: '03:複数条件',
-		description: 'Tutorial:3',
+		description: '向きを何度も変えてみよう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
 			mapPoint_y: 11,
@@ -105,7 +105,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
 		name: '04:ギミック',
-		description: 'Tutorial:4',
+		description: '仕掛けに対応しよう',
 		characterInitialPosition: {
 			mapPoint_x: 3,
 			mapPoint_y: 10,
@@ -131,7 +131,7 @@ const stages: Stage[] = [
 			[27, 28, 29, 27, 28, 29, 25, 27, 28, 48, 28, 29],
 		],
 		name: '05:"If"',
-		description: 'Normal:1',
+		description: 'さまざまな条件を使いこなそう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
 			mapPoint_y: 2,
@@ -157,7 +157,7 @@ const stages: Stage[] = [
 			[27, 28, 29, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
 		name: '06:"AND"',
-		description: 'Normal:2',
+		description: '「かつ」を使ってみよう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
 			mapPoint_y: 11,
@@ -183,7 +183,7 @@ const stages: Stage[] = [
 			[25, 25, 27, 28, 29, 25, 25, 25, 25, 25, 25, 25],
 		],
 		name: '07:"NOT"',
-		description: 'Normal:3',
+		description: '「ではない」を使ってみよう',
 		characterInitialPosition: {
 			mapPoint_x: 4,
 			mapPoint_y: 3,
@@ -209,7 +209,7 @@ const stages: Stage[] = [
 			[25, 25, 27, 28, 29, 25, 25, 27, 28, 29, 25, 25],
 		],
 		name: '08:"ELSE"',
-		description: 'Normal:4',
+		description: '「もし〜それ以外」を使ってみよう',
 		characterInitialPosition: {
 			mapPoint_x: 4,
 			mapPoint_y: 11,
@@ -235,7 +235,7 @@ const stages: Stage[] = [
 			[27, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 29],
 		],
 		name: '09:"FINAL"',
-		description: 'Normal:5',
+		description: 'ゴールへの行き方を考えよう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
 			mapPoint_y: 11,
