@@ -54,7 +54,7 @@ export class Character extends enchant.Sprite {
 		this.isGoal = false;
 		this.nextJump = false;
 		this.isAnimating = false;
-		this.frame = this.getDirectionFrame(this.initialPosition.direction);
+		this.frame = this.getFrameOffset(this.initialPosition.direction);
 		this.tl.clear();
 	}
 
@@ -260,24 +260,32 @@ export class Character extends enchant.Sprite {
 		if (direction === 'north') {
 			actiontick = () => {
 				this.moveBy(0, -velocity);
+				const nextFrame = this.frame + 1 < 15 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'east') {
 			actiontick = () => {
 				this.moveBy(velocity, 0);
+				const nextFrame = this.frame + 1 < 11 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'south') {
 			actiontick = () => {
 				this.moveBy(0, velocity);
+				const nextFrame = this.frame + 1 < 3 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'west') {
 			actiontick = () => {
 				this.moveBy(-velocity, 0);
+				const nextFrame = this.frame + 1 < 7 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
@@ -344,7 +352,7 @@ export class Character extends enchant.Sprite {
 	}
 
 	private mkSetDirectionAnimation(direction: Direction) {
-		const frame = this.getDirectionFrame(direction);
+		const frame = this.getFrameOffset(direction);
 
 		const action: QueuedAction = {
 			target: this.tl,
@@ -357,7 +365,7 @@ export class Character extends enchant.Sprite {
 		return action;
 	}
 
-	private getDirectionFrame(direction: Direction) {
+	private getFrameOffset(direction: Direction) {
 		let frame;
 		if (direction === 'north') {
 			frame = 12;
