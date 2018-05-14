@@ -309,28 +309,41 @@ export class Character extends enchant.Sprite {
 	private mkJumpingAction(direction: Direction): QueuedAction {
 		const velocity = this.velocity * 2;
 		let actiontick;
+		let startFrame;
 
 		if (direction === 'north') {
 			actiontick = () => {
 				this.moveBy(0, -velocity);
+				startFrame = 15;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'east') {
 			actiontick = () => {
 				this.moveBy(velocity, 0);
+				startFrame = 11;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'south') {
 			actiontick = () => {
 				this.moveBy(0, velocity);
+				startFrame = 3;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'west') {
 			actiontick = () => {
 				this.moveBy(-velocity, 0);
+				startFrame = 7;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
@@ -339,6 +352,7 @@ export class Character extends enchant.Sprite {
 			time: this.animationRate,
 			onactionstart: function() {
 				this.isAnimating = true;
+				this.frame = startFrame;
 				console.log('action start');
 			},
 			onactionend: function() {
