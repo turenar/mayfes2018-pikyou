@@ -1,3 +1,10 @@
+@font-face {
+	font-family: 'PixelMplus10';
+	src: url('./PixelMplus10-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 html {
 	width: 100%;
 	height: 100%;
