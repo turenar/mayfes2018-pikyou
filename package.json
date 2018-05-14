@@ -13,7 +13,7 @@
     "@types/": "https://github.com/aqla114/blockly-types.git",
     "@types/node": "^9.4.6",
     "browser-sync": "^2.18.13",
-    "browserify": "^14.5.0",
+    "browserify": "^16.2.2",
     "eslint": "^4.18.1",
     "eslint-config-typescript": "^1.0.2",
     "eslint-plugin-typescript": "^0.9.0",
@@ -28,10 +28,11 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "build": "yarn build:mapchip && tsc ./tools/xmlparser.ts && yarn build:xml && yarn build:src",
+    "build": "yarn build:mapchip && tsc ./tools/xmlparser.ts && yarn build:xml && yarn build:src && yarn build:browser",
     "build:src": "tsc",
     "build:mapchip": "bash tools/concat-mapchips.sh",
     "build:xml": "node ./tools/xmlparser.js && tsc ./src/blocks.ts --outDir ./dest",
+    "build:browser": "browserify dest/main.js > assets/main.js",
     "format": "prettier-eslint '**/*.ts' --write",
     "format-check": "prettier-eslint '**/*.ts' --list-different",
     "lint": "eslint -c .eslintrc.json '**/*.ts'",
