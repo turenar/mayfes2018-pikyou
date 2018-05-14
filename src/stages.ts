@@ -111,7 +111,7 @@ const stages: Stage[] = [
 			mapPoint_y: 10,
 			direction: 'north',
 		},
-		clearPoint: 100,
+		clearPoint: 160,
 		excellentClearNorma: 220,
 	},
 
