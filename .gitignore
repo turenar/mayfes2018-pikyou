@@ -10,4 +10,6 @@ src/blocks.ts
 tools/xmlparser.js
 united/
 
+assets/main.js
+
 !.gitkeep
