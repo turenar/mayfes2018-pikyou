@@ -33,7 +33,7 @@ export class Character extends enchant.Sprite {
 		const width = 32;
 		const height = 32;
 		super(width, height);
-		this.image = core.assets['img/chara1.png'];
+		this.image = core.assets['img/character.png'];
 		this.initialPosition = initialPosition;
 		this.animationRate = 4;
 		this.defaultVelocity = mapchipSize / this.animationRate;
@@ -54,6 +54,7 @@ export class Character extends enchant.Sprite {
 		this.isGoal = false;
 		this.nextJump = false;
 		this.isAnimating = false;
+		this.frame = this.getDirectionFrame(this.initialPosition.direction);
 		this.tl.clear();
 	}
 
@@ -111,6 +112,7 @@ export class Character extends enchant.Sprite {
 	//方向転換
 	public setDirection(direction: Direction) {
 		this.direction = direction;
+		this.world.animationQueue.push(this.mkSetDirectionAnimation(this.direction));
 	}
 
 	//ジャンプ
@@ -295,6 +297,7 @@ export class Character extends enchant.Sprite {
 
 		return action;
 	}
+
 	private mkJumpingAction(direction: Direction): QueuedAction {
 		const velocity = this.velocity * 2;
 		let actiontick;
@@ -338,5 +341,36 @@ export class Character extends enchant.Sprite {
 		};
 
 		return action;
+	}
+
+	private mkSetDirectionAnimation(direction: Direction) {
+		const frame = this.getDirectionFrame(direction);
+
+		const action: QueuedAction = {
+			target: this.tl,
+			time: 1,
+			onactionstart: function() {
+				this.frame = frame;
+			},
+		};
+
+		return action;
+	}
+
+	private getDirectionFrame(direction: Direction) {
+		let frame;
+		if (direction === 'north') {
+			frame = 12;
+		}
+		if (direction === 'east') {
+			frame = 8;
+		}
+		if (direction === 'south') {
+			frame = 0;
+		}
+		if (direction === 'west') {
+			frame = 4;
+		}
+		return frame;
 	}
 }

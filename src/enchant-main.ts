@@ -23,7 +23,7 @@ export function init() {
 
 	//PlayingScene
 	core.preload('img/mapchip.png');
-	core.preload('img/chara1.png');
+	core.preload('img/character.png');
 	core.preload('img/start_button.png');
 	core.preload('img/start_button_hover.png');
 	core.preload('img/stop_button.png');
