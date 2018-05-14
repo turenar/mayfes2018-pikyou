@@ -1,9 +1,7 @@
 import * as enchant from 'node-enchantjs';
 import core from './enchant/core';
-import { code } from './blockly-main';
 import { mapchipSize, Map, MapPoint } from './enchant/map';
 import { World } from './world';
-import MapChip from './enchant/map-chip';
 import { QueuedAction } from './animation-queue';
 import { MapChipDefinition } from './enchant/map-chip-definitions';
 

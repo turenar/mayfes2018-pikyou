@@ -2,6 +2,7 @@ import core from '../enchant/core';
 import * as enchant from 'node-enchantjs';
 import PlayingScene from '../scenes/playing-scene';
 import Button from './button';
+import { allBlocks } from '../blockly-main';
 
 export default class StartStopButton extends Button {
 	private scene: PlayingScene;
@@ -25,12 +26,15 @@ export default class StartStopButton extends Button {
 			console.log('start game');
 			this.image = core.assets['img/stop_button.png'];
 		}
+		this.updateWorkspace(isRunning);
+
 		return !isRunning;
 	}
 
 	public reset() {
 		console.log('stop game');
 		this.image = core.assets['img/start_button.png'];
+		this.updateWorkspace(true);
 	}
 
 	public onMouseEnter() {
@@ -66,5 +70,17 @@ export default class StartStopButton extends Button {
 				}
 			}
 		});
+	}
+
+	private updateWorkspace(isRunning: boolean) {
+		allBlocks.map(block => {
+			block.setEditable(isRunning);
+			block.setDeletable(isRunning);
+			block.setMovable(isRunning);
+		});
+		(document.getElementsByClassName('blocklyFlyout')[0] as HTMLElement).style.display = isRunning ? '' : 'none';
+		(document.getElementsByClassName(
+			'blocklyScrollbarVertical blocklyFlyoutScrollbar'
+		)[0] as HTMLElement).style.display = isRunning ? '' : 'none';
 	}
 }
