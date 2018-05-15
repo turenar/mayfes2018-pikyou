@@ -10,6 +10,7 @@ const toolbox = blockset0;
 
 const workspacePlayground = Blockly.inject('blocklyDiv', {
 	toolbox: toolbox,
+	scrollbars: true,
 });
 
 const initBlock = workspacePlayground.newBlock('execute', 'initialBlock');
