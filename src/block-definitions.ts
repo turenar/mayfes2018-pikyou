@@ -5,14 +5,21 @@ Blockly.Blocks['execute'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Execution',
-			message0: 'この下につなげた動きがくり返されます',
+			message0: 'この中につなげた動きがくり返されます',
+			message1: '%1',
+			args1: [
+				{
+					type: 'input_statement',
+					name: 'DO0',
+				},
+			],
 		});
-		this.setNextStatement(true);
+		this.setNextStatement(false);
 		this.moveBy(20, 20);
 		this.setMovable(false);
 		this.setDeletable(false);
 		this.setColour(this.color);
-		this.setTooltip('この下につなげた動きがくり返されます');
+		this.setTooltip('この中につなげた動きがくり返されます');
 	},
 	color: 300,
 	cost: 0,

@@ -2,7 +2,9 @@ import * as Blockly from 'node-blockly/browser';
 import MapChip from './enchant/map-chip';
 
 Blockly.JavaScript['execute'] = function(block: Blockly.Block) {
-	const code = '"以下のコードを実行します";\n';
+	const branch0 = Blockly.JavaScript.statementToCode(block, 'DO0');
+	var code = '"以下のコードを実行します";\n';
+	code += '' + branch0 + '\n';
 	return code;
 };
 
