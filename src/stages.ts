@@ -26,7 +26,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 25, 25, 27, 28, 29, 25, 25, 25, 25],
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
-		name: '01:進む',
+		name: 'チュートリアル',
 		description: 'キャラクタを動かそう',
 		characterInitialPosition: {
 			mapPoint_x: 3,
@@ -52,7 +52,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 25, 27, 28, 29, 25, 25, 25, 25, 25],
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
-		name: '02:方向転換',
+		name: '4つの分かれ道',
 		description: '進む向きを変えよう',
 		characterInitialPosition: {
 			mapPoint_x: 6,
@@ -78,7 +78,7 @@ const stages: Stage[] = [
 			[24,  2,  2,  2,  2,  2,  2,  2,  2,  4,  8, 26],
 			[27, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 29],
 		],
-		name: '03:複数条件',
+		name: '宝の発見',
 		description: '向きを何度も変えてみよう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
@@ -104,7 +104,7 @@ const stages: Stage[] = [
 			[25, 27, 28, 29, 25, 25, 25, 25, 27, 28, 29, 25],
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
-		name: '04:ギミック',
+		name: 'トビラと落とし穴',
 		description: '仕掛けに対応しよう',
 		characterInitialPosition: {
 			mapPoint_x: 3,
@@ -130,7 +130,7 @@ const stages: Stage[] = [
 			[24,  8, 26, 24,  8, 26, 25, 24,  8, 42,  8, 26],
 			[27, 28, 29, 27, 28, 29, 25, 27, 28, 48, 28, 29],
 		],
-		name: '05:"If"',
+		name: '目印のない道',
 		description: 'さまざまな条件を使いこなそう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
@@ -156,7 +156,7 @@ const stages: Stage[] = [
 			[24,  2, 30, 28, 29, 25, 25, 25, 25, 27, 28, 29],
 			[27, 28, 29, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
-		name: '06:"AND"',
+		name: 'マーカーの選択',
 		description: '「かつ」を使ってみよう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
@@ -182,7 +182,7 @@ const stages: Stage[] = [
 			[25, 25, 24,  8, 26, 25, 25, 25, 25, 25, 25, 25],
 			[25, 25, 27, 28, 29, 25, 25, 25, 25, 25, 25, 25],
 		],
-		name: '07:"NOT"',
+		name: '2本の通路',
 		description: '「ではない」を使ってみよう',
 		characterInitialPosition: {
 			mapPoint_x: 4,
@@ -208,7 +208,7 @@ const stages: Stage[] = [
 			[25, 25, 24,  2, 26, 25, 25, 24,  8, 26, 25, 25],
 			[25, 25, 27, 28, 29, 25, 25, 27, 28, 29, 25, 25],
 		],
-		name: '08:"ELSE"',
+		name: '赤い迷路',
 		description: '「もし〜それ以外」を使ってみよう',
 		characterInitialPosition: {
 			mapPoint_x: 4,
@@ -234,7 +234,7 @@ const stages: Stage[] = [
 			[24,  2,  2,  4,  8,  8,  2,  5,  2,  2,  8, 26],
 			[27, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 29],
 		],
-		name: '09:"FINAL"',
+		name: '洞窟探検',
 		description: 'ゴールへの行き方を考えよう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
