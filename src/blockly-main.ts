@@ -21,17 +21,8 @@ export var code: string = '';
 export var allBlocks;
 
 Blockly.addChangeListener(function(event) {
+	Blockly.Events.disableOrphans(event);
 	allBlocks = workspacePlayground.getAllBlocks();
-
-	allBlocks.map(block => {
-		if (block !== null && block.id !== 'initialBlock') {
-			if (block.getRootBlock().id !== 'initialBlock') {
-				block.setColour('#646665');
-			} else {
-				block.setColour((Blockly.Blocks[block.type] as any).color);
-			}
-		}
-	});
 
 	code = Blockly.JavaScript.blockToCode(workspacePlayground.getBlockById('initialBlock')) as string;
 	console.log(code);
