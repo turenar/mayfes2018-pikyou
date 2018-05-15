@@ -5,18 +5,146 @@ Blockly.Blocks['execute'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Execution',
-			message0: '少年がこの下につながった動きをくりかえします',
+			message0: 'この下につなげた動きがくり返されます',
 		});
 		this.setNextStatement(true);
 		this.moveBy(20, 20);
 		this.setMovable(false);
 		this.setDeletable(false);
 		this.setColour(this.color);
-		this.setTooltip('少年はこの下につながった動きをくりかえします');
+		this.setTooltip('この下につなげた動きがくり返されます');
 	},
 	color: 300,
 	cost: 0,
 };
+
+var CONTROLS_IF_MUTATOR_MIXIN_AFTER;
+CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
+	elseifCount_: 0,
+	elseCount_: 0,
+
+	mutationToDom: function() {
+		if (!this.elseifCount_ && !this.elseCount_) {
+			return null;
+		}
+		var container = document.createElement('mutation');
+		if (this.elseifCount_) {
+			container.setAttribute('elseif', this.elseifCount_);
+		}
+		if (this.elseCount_) {
+			container.setAttribute('else', '1');
+		}
+		return container;
+	},
+
+	domToMutation: function(xmlElement) {
+		this.elseifCount_ = parseInt(xmlElement.getAttribute('elseif'), 10) || 0;
+		this.elseCount_ = parseInt(xmlElement.getAttribute('else'), 10) || 0;
+		this.updateShape_();
+	},
+
+	decompose: function(workspace) {
+		var containerBlock = workspace.newBlock('controls_if_if');
+		containerBlock.initSvg();
+		var connection = containerBlock.nextConnection;
+		for (var i = 1; i <= this.elseifCount_; i++) {
+			var elseifBlock = workspace.newBlock('controls_if_elseif');
+			elseifBlock.initSvg();
+			connection.connect(elseifBlock.previousConnection);
+			connection = elseifBlock.nextConnection;
+		}
+		if (this.elseCount_) {
+			var elseBlock = workspace.newBlock('controls_if_else');
+			elseBlock.initSvg();
+			connection.connect(elseBlock.previousConnection);
+		}
+		return containerBlock;
+	},
+
+	compose: function(containerBlock) {
+		var clauseBlock = containerBlock.nextConnection.targetBlock();
+		// Count number of inputs.
+		this.elseifCount_ = 0;
+		this.elseCount_ = 0;
+		var valueConnections = [null];
+		var statementConnections = [null];
+		var elseStatementConnection = null;
+		while (clauseBlock) {
+			switch (clauseBlock.type) {
+			case 'controls_if_elseif':
+				this.elseifCount_++;
+				valueConnections.push(clauseBlock.valueConnection_);
+				statementConnections.push(clauseBlock.statementConnection_);
+				break;
+			case 'controls_if_else':
+				this.elseCount_++;
+				elseStatementConnection = clauseBlock.statementConnection_;
+				break;
+			default:
+				throw 'Unknown block type.';
+			}
+			clauseBlock = clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
+		}
+		this.updateShape_();
+		// Reconnect any child blocks.
+		for (var i = 1; i <= this.elseifCount_; i++) {
+			Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
+			Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
+		}
+		Blockly.Mutator.reconnect(elseStatementConnection, this, 'ELSE');
+	},
+
+	saveConnections: function(containerBlock) {
+		var clauseBlock = containerBlock.nextConnection.targetBlock();
+		var i = 1;
+		while (clauseBlock) {
+			var inputDo;
+			switch (clauseBlock.type) {
+			case 'controls_if_elseif':
+				var inputIf = this.getInput('IF' + i);
+				inputDo = this.getInput('DO' + i);
+				clauseBlock.valueConnection_ = inputIf && inputIf.connection.targetConnection;
+				clauseBlock.statementConnection_ = inputDo && inputDo.connection.targetConnection;
+				i++;
+				break;
+			case 'controls_if_else':
+				inputDo = this.getInput('ELSE');
+				clauseBlock.statementConnection_ = inputDo && inputDo.connection.targetConnection;
+				break;
+			default:
+				throw 'Unknown block type.';
+			}
+			clauseBlock = clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
+		}
+	},
+
+	updateShape_: function() {
+		// Delete everything.
+		if (this.getInput('ELSE')) {
+			this.removeInput('ELSE');
+		}
+		var i = 1;
+		while (this.getInput('IF' + i)) {
+			this.removeInput('IF' + i);
+			this.removeInput('DO' + i);
+			i++;
+		}
+		// Rebuild block.
+		for (i = 1; i <= this.elseifCount_; i++) {
+			this.appendValueInput('IF' + i)
+				.setCheck('Boolean')
+				.appendField('その他でもしも');
+			this.appendStatementInput('DO' + i).appendField('ならば');
+		}
+		if (this.elseCount_) {
+			this.appendStatementInput('ELSE').appendField('その他ならば');
+		}
+	},
+};
+Blockly.Extensions.registerMutator('controls_if_mutator_after', CONTROLS_IF_MUTATOR_MIXIN_AFTER, null, [
+	'controls_if_elseif',
+	'controls_if_else',
+]);
 
 //controls_if
 Blockly.Blocks['controls_if'] = {
@@ -42,7 +170,7 @@ Blockly.Blocks['controls_if'] = {
 			nextStatement: null,
 			colour: '%{BKY_LOGIC_HUE}',
 			helpUrl: '%{BKY_CONTROLS_IF_HELPURL}',
-			mutator: 'controls_if_mutator',
+			mutator: 'controls_if_mutator_after',
 			extensions: ['controls_if_tooltip'],
 		});
 		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします');
@@ -62,7 +190,7 @@ Blockly.Blocks['controls_if_if'] = {
 			nextStatement: null,
 			enableContextMenu: false,
 			colour: '%{BKY_LOGIC_HUE}',
-			tooltip: 'この下に左のブロックを加えて、いろんなチェックを作ろう',
+			tooltip: 'この下に左のブロックを加えて、ふくざつなチェックができます',
 		});
 	},
 };
@@ -77,7 +205,7 @@ Blockly.Blocks['controls_if_elseif'] = {
 			nextStatement: null,
 			enableContextMenu: false,
 			colour: '%{BKY_LOGIC_HUE}',
-			tooltip: '１つ前のチェックではもれたけれど、もしも…',
+			tooltip: '１つ前の「もしも」に当てはらない場合に、他の「もしも」をチェックします',
 		});
 	},
 };
@@ -91,7 +219,7 @@ Blockly.Blocks['controls_if_else'] = {
 			previousStatement: null,
 			enableContextMenu: false,
 			colour: '%{BKY_LOGIC_HUE}',
-			tooltip: 'ここまでの「もしも」が全部当てはまらない時',
+			tooltip: 'ここまでの「もしも」が全て当てはまらない場合を考えます',
 		});
 	},
 };
@@ -135,6 +263,24 @@ Blockly.Blocks['logic_operation'] = {
 //logic_negate
 Blockly.Blocks['logic_negate'] = {
 	...Blockly.Blocks['logic_negate'],
+	init: function() {
+		this.jsonInit({
+			type: 'logic_negate',
+			message0: '%{BKY_LOGIC_NEGATE_TITLE}',
+			args0: [
+				{
+					type: 'input_value',
+					name: 'BOOL',
+					check: 'Boolean',
+				},
+			],
+			output: 'Boolean',
+			colour: '%{BKY_LOGIC_HUE}',
+			tooltip: '%{BKY_LOGIC_NEGATE_TOOLTIP}',
+			helpUrl: '%{BKY_LOGIC_NEGATE_HELPURL}',
+		});
+		this.setTooltip('チェックの成功と失敗を入れかえることができます');
+	},
 	color: '#5b80a5',
 	cost: 0,
 };
@@ -150,7 +296,7 @@ Blockly.Blocks['move_forward'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('少年が向いている方向に１マスすすみます');
+		this.setTooltip('１マスすすみます');
 	},
 	color: 180,
 	cost: 50,
@@ -175,7 +321,7 @@ Blockly.Blocks['set_direction'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('少年が矢印の方向を向きます');
+		this.setTooltip('矢印の方向を向きます');
 	},
 	color: 180,
 	cost: 0,
@@ -186,13 +332,13 @@ Blockly.Blocks['set_jump'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Act',
-			message0: 'ジャンプ',
+			message0: '次にすすむ時ジャンプする',
 		});
 		this.setNextStatement(true);
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('次の「すすむ」で少年がジャンプします');
+		this.setTooltip('次の「１マスすすむ」で落とし穴などをとびこえます');
 	},
 	color: 180,
 	cost: 10,
@@ -216,7 +362,7 @@ Blockly.Blocks['check_movable'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('決めた方向の１マス先にすすめるかチェックします');
+		this.setTooltip('矢印の向きの１マス先にすすめるかチェックします');
 	},
 	color: 80,
 	cost: 1,
@@ -233,7 +379,7 @@ Blockly.Blocks['check_wall_front'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('少年が向いている方向の１マス先にカベがあるかチェックします');
+		this.setTooltip('正面の１マス先にカベ、トビラがあるかチェックします');
 	},
 	color: 80,
 	cost: 1,
@@ -250,7 +396,7 @@ Blockly.Blocks['check_obstacle'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('少年が向いている方向の１マス先に落とし穴があるかチェックします');
+		this.setTooltip('正面の１マス先に落とし穴があるかチェックします');
 	},
 	color: 80,
 	cost: 1,
@@ -274,7 +420,7 @@ Blockly.Blocks['check_item'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('少年がアイテムのあるマスに入っているかチェックします');
+		this.setTooltip('今アイテムを取ったところかどうかチェックします');
 	},
 	color: 80,
 	cost: 1,
@@ -298,7 +444,7 @@ Blockly.Blocks['check_possession'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('少年がアイテムを持っているかチェックします');
+		this.setTooltip('アイテムを持っているかチェックします');
 	},
 	color: 80,
 	cost: 1,
@@ -322,7 +468,7 @@ Blockly.Blocks['check_mark'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('少年がある色のマーカーの上にいるかチェックします');
+		this.setTooltip('選んだ色のマーカーの上にいるかチェックします');
 	},
 	color: 80,
 	cost: 1,
