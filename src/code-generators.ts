@@ -39,14 +39,14 @@ Blockly.JavaScript['check_wall_front'] = function(block: Blockly.Block) {
 };
 
 Blockly.JavaScript['check_obstacle'] = function(block: Blockly.Block) {
-	const code = `this.getFrontTile() === ${MapChip.Pitfall}`;
+	const code = `(this.getFrontTile() === ${MapChip.Pitfall})`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 };
 
 Blockly.JavaScript['check_item'] = function(block: Blockly.Block) {
 	const itemKind = block.getFieldValue('ITEMKIND');
 	const mapchip = itemKind === 'KEY' ? MapChip.Key : MapChip.Chest;
-	const code = `this.getFeetTile() === ${mapchip}`;
+	const code = `(this.getFeetTile() === ${mapchip})`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 };
 
@@ -72,6 +72,6 @@ Blockly.JavaScript['check_mark'] = function(block: Blockly.Block) {
 		mark = MapChip.MarkYellow;
 	}
 
-	const code = `this.getFeetTile() === ${mark}`;
+	const code = `(this.getFeetTile() === ${mark})`;
 	return [code, (Blockly.JavaScript as any).ORDER_MEMBER];
 };
