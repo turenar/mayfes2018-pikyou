@@ -144,14 +144,24 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 			i++;
 		}
 		// Rebuild block.
+		var mutatorCount = 0;
 		for (i = 1; i <= this.elseifCount_; i++) {
 			this.appendValueInput('IF' + i)
 				.setCheck('Boolean')
 				.appendField('その他でもしも');
 			this.appendStatementInput('DO' + i).appendField('ならば');
+			mutatorCount++;
 		}
 		if (this.elseCount_) {
 			this.appendStatementInput('ELSE').appendField('その他ならば');
+			mutatorCount++;
+		}
+		if (mutatorCount == 0) {
+			this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします\nコスト：5点');
+		} else {
+			this.setTooltip(
+				'自分で決めたチェックのうち、当てはまっている行動をします\nコスト：' + (5 + mutatorCount * 3) + '点'
+			);
 		}
 	},
 };
@@ -187,9 +197,7 @@ Blockly.Blocks['controls_if'] = {
 			mutator: 'controls_if_mutator_after',
 			extensions: ['controls_if_tooltip'],
 		});
-		this.setTooltip(
-			'「もしも」のチェックが正しければ、「ならば」の行動をします\nコスト：5点(「それ以外でもしも」「その他」×3点をプラス)'
-		);
+		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします\nコスト：5点');
 	},
 	color: '#5b80a5',
 	costIf: 5,
@@ -221,7 +229,8 @@ Blockly.Blocks['controls_if_elseif'] = {
 			nextStatement: null,
 			enableContextMenu: false,
 			colour: '%{BKY_LOGIC_HUE}',
-			tooltip: '１つ前の「もしも」に当てはらない場合に、他の「もしも」をチェックします',
+			tooltip:
+				'１つ前の「もしも」に当てはらない場合に、他の「もしも」をチェックします\n「もしも」ブロックのコストがプラス3されます',
 		});
 	},
 };
@@ -235,7 +244,7 @@ Blockly.Blocks['controls_if_else'] = {
 			previousStatement: null,
 			enableContextMenu: false,
 			colour: '%{BKY_LOGIC_HUE}',
-			tooltip: 'ここまでの「もしも」が全て当てはまらない場合を考えます',
+			tooltip: 'ここまでの「もしも」が全て当てはまらない場合を考えます\n「もしも」ブロックのコストがプラス3されます',
 		});
 	},
 };
