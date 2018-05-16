@@ -271,7 +271,7 @@ h1{
 /*about contents footer -> factor*/
 /*##############################*/
 
-.factor {
+.factor, .factor-section {
     font-size: 1.6rem;
     border-bottom: 1px solid gray;
     padding: 105px 50px 50px 50px;
@@ -364,7 +364,7 @@ h1{
     box-shadow:0px 0px 10px #ccc;
 }
 
-.contents-text{
+.contents-text p{
     text-align: justify;
 
     flex-grow: 2;
@@ -718,7 +718,7 @@ h4{
     /*factor*/
     /*##############################*/
 
-    .factor {
+    .factor, .factor-section {
         padding: 80px 50px 50px 50px;
         margin-top: -50px;
     }
