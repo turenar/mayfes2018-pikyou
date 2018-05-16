@@ -5,8 +5,15 @@ Blockly.Blocks['execute'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Execution',
-			message0: 'この中につなげた動きがくり返されます',
+			message0: 'この中につなげた動きがくり返されます。現在の総コスト: %1',
 			message1: '%1',
+			args0: [
+				{
+					type: "field_label",
+					name: "blockCost",
+					text: '0',
+				}
+			],
 			args1: [
 				{
 					type: 'input_statement',
