@@ -43,7 +43,6 @@ export function init() {
 	core.preload('img/retry_button_hover.png');
 	core.preload('img/result_background.png');
 	core.preload('img/result_gameclear_text.png');
-	core.preload('img/result_chest.png');
 	core.preload('img/gameover_text.png');
 	core.preload('img/gameover_reason_text.png');
 
