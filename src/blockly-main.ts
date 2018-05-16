@@ -24,7 +24,7 @@ export var allBlocks;
 
 Blockly.addChangeListener(function(event) {
 	Blockly.Events.disableOrphans(event);
-	allBlocks = workspacePlayground.getAllBlocks().filter((block) => (block.type !== 'execute'));
+	allBlocks = workspacePlayground.getAllBlocks().filter(block => block.type !== 'execute');
 
 	code = Blockly.JavaScript.blockToCode(workspacePlayground.getBlockById('initialBlock')) as string;
 	console.log(code);

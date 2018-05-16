@@ -23,7 +23,7 @@ export function init() {
 
 	//PlayingScene
 	core.preload('img/mapchip.png');
-	core.preload('img/chara1.png');
+	core.preload('img/character.png');
 	core.preload('img/start_button.png');
 	core.preload('img/start_button_hover.png');
 	core.preload('img/stop_button.png');
@@ -43,7 +43,6 @@ export function init() {
 	core.preload('img/retry_button_hover.png');
 	core.preload('img/result_background.png');
 	core.preload('img/result_gameclear_text.png');
-	core.preload('img/result_chest.png');
 	core.preload('img/gameover_text.png');
 	core.preload('img/gameover_reason_text.png');
 
