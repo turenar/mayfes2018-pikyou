@@ -187,7 +187,9 @@ Blockly.Blocks['controls_if'] = {
 			mutator: 'controls_if_mutator_after',
 			extensions: ['controls_if_tooltip'],
 		});
-		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします\nコスト：5点(「それ以外でもしも」「その他」×3点をプラス)');
+		this.setTooltip(
+			'「もしも」のチェックが正しければ、「ならば」の行動をします\nコスト：5点(「それ以外でもしも」「その他」×3点をプラス)'
+		);
 	},
 	color: '#5b80a5',
 	costIf: 5,
