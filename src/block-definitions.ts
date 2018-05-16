@@ -187,7 +187,7 @@ Blockly.Blocks['controls_if'] = {
 			mutator: 'controls_if_mutator_after',
 			extensions: ['controls_if_tooltip'],
 		});
-		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします');
+		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします\nコスト：5点(「それ以外でもしも」「その他」×3点をプラス)');
 	},
 	color: '#5b80a5',
 	costIf: 5,
@@ -268,7 +268,7 @@ Blockly.Blocks['logic_operation'] = {
 			helpUrl: '%{BKY_LOGIC_OPERATION_HELPURL}',
 			extensions: ['logic_op_tooltip'],
 		});
-		this.setTooltip('２つのチェックを同時に考えることができます');
+		this.setTooltip('２つのチェックを同時に考えることができます\nコスト：1点');
 	},
 	color: '#5b80a5',
 	cost: 2,
@@ -293,7 +293,7 @@ Blockly.Blocks['logic_negate'] = {
 			tooltip: '%{BKY_LOGIC_NEGATE_TOOLTIP}',
 			helpUrl: '%{BKY_LOGIC_NEGATE_HELPURL}',
 		});
-		this.setTooltip('チェックの成功と失敗を入れかえることができます');
+		this.setTooltip('チェックの成功と失敗を入れかえることができます\nコスト：0点');
 	},
 	color: '#5b80a5',
 	cost: 0,
@@ -310,7 +310,7 @@ Blockly.Blocks['move_forward'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('１マスすすみます');
+		this.setTooltip('１マスすすみます\nコスト：50点');
 	},
 	color: 180,
 	cost: 50,
@@ -335,7 +335,7 @@ Blockly.Blocks['set_direction'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('矢印の方向を向きます');
+		this.setTooltip('矢印の方向を向きます\nコスト：0点');
 	},
 	color: 180,
 	cost: 0,
@@ -352,7 +352,7 @@ Blockly.Blocks['set_jump'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('次の「１マスすすむ」で落とし穴などをとびこえます');
+		this.setTooltip('次の「１マスすすむ」で落とし穴などをとびこえます\nコスト：10点');
 	},
 	color: 180,
 	cost: 10,
@@ -376,7 +376,7 @@ Blockly.Blocks['check_movable'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('矢印の向きの１マス先にすすめるかチェックします');
+		this.setTooltip('矢印の向きの１マス先にすすめるかチェックします\nコスト：1点');
 	},
 	color: 80,
 	cost: 1,
@@ -393,7 +393,7 @@ Blockly.Blocks['check_wall_front'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('正面の１マス先にカベ、トビラがあるかチェックします');
+		this.setTooltip('正面の１マス先にカベ、トビラがあるかチェックします\nコスト：1点');
 	},
 	color: 80,
 	cost: 1,
@@ -410,7 +410,7 @@ Blockly.Blocks['check_obstacle'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('正面の１マス先に落とし穴があるかチェックします');
+		this.setTooltip('正面の１マス先に落とし穴があるかチェックします\nコスト：1点');
 	},
 	color: 80,
 	cost: 1,
@@ -434,7 +434,7 @@ Blockly.Blocks['check_item'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('今アイテムを取ったところかどうかチェックします');
+		this.setTooltip('今アイテムを取ったところかどうかチェックします\nコスト：1点');
 	},
 	color: 80,
 	cost: 1,
@@ -458,7 +458,7 @@ Blockly.Blocks['check_possession'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('アイテムを持っているかチェックします');
+		this.setTooltip('アイテムを持っているかチェックします\nコスト：1点');
 	},
 	color: 80,
 	cost: 1,
@@ -482,7 +482,7 @@ Blockly.Blocks['check_mark'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('選んだ色のマーカーの上にいるかチェックします');
+		this.setTooltip('選んだ色のマーカーの上にいるかチェックします\nコスト：1点');
 	},
 	color: 80,
 	cost: 1,
