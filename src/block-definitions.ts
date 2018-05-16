@@ -9,10 +9,10 @@ Blockly.Blocks['execute'] = {
 			message1: '%1',
 			args0: [
 				{
-					type: "field_label",
-					name: "blockCost",
+					type: 'field_label',
+					name: 'blockCost',
 					text: '0',
-				}
+				},
 			],
 			args1: [
 				{
