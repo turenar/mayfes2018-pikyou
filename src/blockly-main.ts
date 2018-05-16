@@ -3,6 +3,7 @@ import * as Ja from 'node-blockly/lib/i18n/ja';
 import './block-definitions';
 import './code-generators';
 import { blockset0 } from './blocks';
+import { ScoreManager } from './score-manager';
 
 Blockly.setLocale(Ja);
 
@@ -27,4 +28,8 @@ Blockly.addChangeListener(function(event) {
 
 	code = Blockly.JavaScript.blockToCode(workspacePlayground.getBlockById('initialBlock')) as string;
 	console.log(code);
+
+	// initBlock（executeBlock）に表示されている総コストを更新する
+	// ex. `この下につながっている処理を実行します。現在の総コスト: ${cost}`
+	initBlock.setFieldValue(`${ScoreManager.getBlockCostSum()}`, 'blockCost');
 });
