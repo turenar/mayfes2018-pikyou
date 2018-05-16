@@ -27,7 +27,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
 		name: 'チュートリアル',
-		description: 'キャラクタを動かそう',
+		description: 'キャラクターを動かそう',
 		characterInitialPosition: {
 			mapPoint_x: 3,
 			mapPoint_y: 6,
@@ -78,7 +78,7 @@ const stages: Stage[] = [
 			[24,  2,  2,  2,  2,  2,  2,  2,  2,  4,  8, 26],
 			[27, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 29],
 		],
-		name: '宝の発見',
+		name: 'オタカラの発見',
 		description: '向きを何度も変えてみよう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
@@ -131,7 +131,7 @@ const stages: Stage[] = [
 			[27, 28, 29, 27, 28, 29, 25, 27, 28, 48, 28, 29],
 		],
 		name: '目印のない道',
-		description: 'さまざまな条件を使いこなそう',
+		description: 'いろいろな条件を使いこなそう',
 		characterInitialPosition: {
 			mapPoint_x: 2,
 			mapPoint_y: 2,
@@ -261,7 +261,7 @@ const stages: Stage[] = [
 			[25, 25, 27, 28, 28, 28, 28, 28, 28, 29, 25,25],
 		],
 		name: 'マーカーの道',
-		description: 'おたからをどうやって取ろう',
+		description: 'オタカラをどうやって取るか考えよう',
 		characterInitialPosition: {
 			mapPoint_x: 4,
 			mapPoint_y: 11,
@@ -287,7 +287,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,25],
 		],
 		name: '穴の交差点',
-		description: '穴があったらジャンプしよう',
+		description: '穴はジャンプで飛びこえよう',
 		characterInitialPosition: {
 			mapPoint_x: 3,
 			mapPoint_y: 9,
