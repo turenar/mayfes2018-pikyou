@@ -39,6 +39,7 @@ body {
 /* .block-contents */
 .block-contents {
     flex-direction: column;
+    display: none;
 }
 
 /* block-content */
@@ -54,6 +55,11 @@ body {
 }
 
 /* block-top */
+.block-top {
+    margin:10px;
+    cursor:pointer;
+}
+
 .block-top h3 {
     border-left: 10px solid;
     padding-left: 10px;
