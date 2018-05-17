@@ -54,11 +54,6 @@ footer {
     background: #c2edff;
 }
 
-.block-content > h4 > .alter,
-.block-content > p > .alter {
-    background: #acb0b3;
-}
-
 .contents-img + .contents-text {
     width: 75%;
     margin-left: 0;
@@ -84,12 +79,24 @@ footer {
     border-color: #5b80a5;
 }
 
+.if .alter {
+    background-color: #bdccdb;
+}
+
 .move > .block-top > h3 {
     border-color: #5ba5a5;
 }
 
+.move .alter {
+    background-color: #bddbdb;
+}
+
 .find > .block-top > h3 {
     border-color: #8ca55b;
+}
+
+.find .alter {
+    background-color: #d1dbbd;
 }
 
 /* @media screen and (max-width: 800px){
