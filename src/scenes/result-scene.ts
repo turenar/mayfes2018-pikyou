@@ -37,30 +37,32 @@ export default class ResultScene extends Scene {
 
 		const scoreValue = ScoreManager.calcScoreValue(score);
 
-		const scoreLabel = new enchant.Label('スコア ：' + ('   '+(scoreValue)).slice(-3));
+		const scoreLabel = new enchant.Label('スコア ：' + ('   ' + scoreValue).slice(-3));
 		scoreLabel.color = 'black';
 		scoreLabel.font = '28px PixelMplus10';
 		scoreLabel.x = offset_x + 100;
 		scoreLabel.y = offset_y + 280;
 
-		const stageClearPointLabel = new enchant.Label('所持ゴールド     + ' + ('   '+(stages[stageNum].clearPoint - score.blockCostSum)).slice(-3));
+		const stageClearPointLabel = new enchant.Label(
+			'所持ゴールド     + ' + ('   ' + (stages[stageNum].clearPoint - score.blockCostSum)).slice(-3)
+		);
 		stageClearPointLabel.color = 'black';
 		stageClearPointLabel.font = '22px PixelMplus10';
 		stageClearPointLabel.x = offset_x + 30;
 		stageClearPointLabel.y = offset_y + 110;
 
-		const gotChestNumLabel = new enchant.Label('残りターン数     + ' + ('   '+(50 - score.actionNum)).slice(-3));
+		const gotChestNumLabel = new enchant.Label('残りターン数     + ' + ('   ' + (50 - score.actionNum)).slice(-3));
 		gotChestNumLabel.color = 'black';
 		gotChestNumLabel.font = '22px PixelMplus10';
 		gotChestNumLabel.x = offset_x + 30;
 		gotChestNumLabel.y = offset_y + 160;
 
-		const actionNumLabel = new enchant.Label('オタカラボーナス + ' + ('   '+(score.gotChestNum * 100)).slice(-3));
+		const actionNumLabel = new enchant.Label('オタカラボーナス + ' + ('   ' + score.gotChestNum * 100).slice(-3));
 		actionNumLabel.color = 'black';
 		actionNumLabel.font = '22px PixelMplus10';
 		actionNumLabel.x = offset_x + 30;
 		actionNumLabel.y = offset_y + 210;
-/*
+		/*
 		const blockCostSumLabel = new enchant.Label(`つかったブロックのコスト: ${score.blockCostSum}`);
 		blockCostSumLabel.color = 'black';
 		blockCostSumLabel.font = '18px PixelMplus10';
