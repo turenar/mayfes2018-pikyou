@@ -79,7 +79,7 @@ footer {
     border-color: #5b80a5;
 }
 
-.if .alter {
+.if .option-element {
     background-color: #bdccdb;
 }
 
@@ -87,7 +87,7 @@ footer {
     border-color: #5ba5a5;
 }
 
-.move .alter {
+.move .option-element {
     background-color: #bddbdb;
 }
 
@@ -95,11 +95,11 @@ footer {
     border-color: #8ca55b;
 }
 
-.find .alter {
+.find .option-element {
     background-color: #d1dbbd;
 }
 
-.block-content > p > span.alter {
+.block-content > p > span.option-element {
     font-weight: normal;
 }
 
