@@ -1,6 +1,14 @@
+/*##############################*/
+/*html*/
+/*##############################*/
+
 body {
     background-color: #cfcfcf;
 }
+
+/*##############################*/
+/*common*/
+/*##############################*/
 
 .wrapper {
     max-width: 1000px;
@@ -8,11 +16,6 @@ body {
     background-color: white;
     text-align: left;
     box-shadow: 0 0 15px 0 #4262a0;
-}
-
-footer {
-    background-color: #373433;
-    color: white;
 }
 
 .inner-bg {
@@ -23,6 +26,10 @@ footer {
     padding-bottom: 40%;
     background-color: rgba(0, 0, 0, 0.6);
 }
+
+/*##############################*/
+/*blocks*/
+/*##############################*/
 
 .block-contents {
     flex-direction: column;
@@ -109,6 +116,19 @@ footer {
 .block-content > p > span.option-element {
     font-weight: normal;
 }
+
+/*##############################*/
+/*footer*/
+/*##############################*/
+
+footer {
+    background-color: #373433;
+    color: white;
+}
+
+/*##############################*/
+/*For SmartPhone*/
+/*##############################*/
 
 /* @media screen and (max-width: 800px){
     .block-content,
