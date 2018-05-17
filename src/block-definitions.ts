@@ -32,8 +32,7 @@ Blockly.Blocks['execute'] = {
 	cost: 0,
 };
 
-var CONTROLS_IF_MUTATOR_MIXIN_AFTER;
-CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
+const CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	elseifCount_: 0,
 	elseCount_: 0,
 
@@ -41,7 +40,7 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 		if (!this.elseifCount_ && !this.elseCount_) {
 			return null;
 		}
-		var container = document.createElement('mutation');
+		const container = document.createElement('mutation');
 		if (this.elseifCount_) {
 			container.setAttribute('elseif', this.elseifCount_);
 		}
@@ -58,17 +57,17 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	},
 
 	decompose: function(workspace) {
-		var containerBlock = workspace.newBlock('controls_if_if');
+		const containerBlock = workspace.newBlock('controls_if_if');
 		containerBlock.initSvg();
-		var connection = containerBlock.nextConnection;
-		for (var i = 1; i <= this.elseifCount_; i++) {
-			var elseifBlock = workspace.newBlock('controls_if_elseif');
+		let connection = containerBlock.nextConnection;
+		for (let i = 1; i <= this.elseifCount_; i++) {
+			const elseifBlock = workspace.newBlock('controls_if_elseif');
 			elseifBlock.initSvg();
 			connection.connect(elseifBlock.previousConnection);
 			connection = elseifBlock.nextConnection;
 		}
 		if (this.elseCount_) {
-			var elseBlock = workspace.newBlock('controls_if_else');
+			const elseBlock = workspace.newBlock('controls_if_else');
 			elseBlock.initSvg();
 			connection.connect(elseBlock.previousConnection);
 		}
@@ -76,13 +75,13 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	},
 
 	compose: function(containerBlock) {
-		var clauseBlock = containerBlock.nextConnection.targetBlock();
+		let clauseBlock = containerBlock.nextConnection.targetBlock();
 		// Count number of inputs.
 		this.elseifCount_ = 0;
 		this.elseCount_ = 0;
-		var valueConnections = [null];
-		var statementConnections = [null];
-		var elseStatementConnection = null;
+		const valueConnections = [null];
+		const statementConnections = [null];
+		let elseStatementConnection = null;
 		while (clauseBlock) {
 			switch (clauseBlock.type) {
 			case 'controls_if_elseif':
@@ -101,7 +100,7 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 		}
 		this.updateShape_();
 		// Reconnect any child blocks.
-		for (var i = 1; i <= this.elseifCount_; i++) {
+		for (let i = 1; i <= this.elseifCount_; i++) {
 			Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
 			Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
 		}
@@ -109,13 +108,14 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	},
 
 	saveConnections: function(containerBlock) {
-		var clauseBlock = containerBlock.nextConnection.targetBlock();
-		var i = 1;
+		let clauseBlock = containerBlock.nextConnection.targetBlock();
+		let i = 1;
+		let inputIf;
 		while (clauseBlock) {
-			var inputDo;
+			let inputDo;
 			switch (clauseBlock.type) {
 			case 'controls_if_elseif':
-				var inputIf = this.getInput('IF' + i);
+				inputIf = this.getInput('IF' + i);
 				inputDo = this.getInput('DO' + i);
 				clauseBlock.valueConnection_ = inputIf && inputIf.connection.targetConnection;
 				clauseBlock.statementConnection_ = inputDo && inputDo.connection.targetConnection;
@@ -137,14 +137,14 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 		if (this.getInput('ELSE')) {
 			this.removeInput('ELSE');
 		}
-		var i = 1;
+		let i = 1;
 		while (this.getInput('IF' + i)) {
 			this.removeInput('IF' + i);
 			this.removeInput('DO' + i);
 			i++;
 		}
 		// Rebuild block.
-		var mutatorCount = 0;
+		let mutatorCount = 0;
 		for (i = 1; i <= this.elseifCount_; i++) {
 			this.appendValueInput('IF' + i)
 				.setCheck('Boolean')
@@ -156,13 +156,9 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 			this.appendStatementInput('ELSE').appendField('その他ならば');
 			mutatorCount++;
 		}
-		if (mutatorCount == 0) {
-			this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします\nねだん：5ゴールド');
-		} else {
-			this.setTooltip(
-				'自分で決めたチェックのうち、当てはまっている行動をします\nコスト：${ 5 + mutatorCount * 3}ゴールド'
-			);
-		}
+		this.setTooltip(
+			`自分で決めたチェックのうち、当てはまっている行動をします\nコスト：${5 + mutatorCount * 3}ゴールド`
+		);
 	},
 };
 Blockly.Extensions.registerMutator('controls_if_mutator_after', CONTROLS_IF_MUTATOR_MIXIN_AFTER, null, [
