@@ -9,7 +9,7 @@ import TopScene from './top-scene';
 import { ClearStatus } from '../world';
 import { initBlock } from '../blockly-main';
 
-export type SceneKind = 'Top' | 'StageSelecting' | 'Playing' | 'GameOver' | 'Result';
+export type SceneKind = 'Top' | 'StageSelecting' | 'Playing' | 'GameOver' | 'Result' | 'StopGame';
 
 export class Scene extends enchant.Scene {
 	public manager: SceneManager;

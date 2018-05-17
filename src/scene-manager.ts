@@ -10,8 +10,11 @@ import { ScoreManager } from './score-manager';
 import { code } from './blockly-main';
 import MouseController from './mouse-controller';
 import { ClearStatus } from './world';
+import TimeKeeper from './time-keeper';
+import StopGameScene from './scenes/stop-game-scene';
 
 export class SceneManager {
+	private timeKeeper: TimeKeeper;
 	public scoreManager: ScoreManager;
 	public currentScene: SceneKind;
 	public mouseController: MouseController;
@@ -20,6 +23,7 @@ export class SceneManager {
 		this.initScene();
 		this.scoreManager = new ScoreManager();
 		this.mouseController = new MouseController();
+		this.timeKeeper = new TimeKeeper(this);
 	}
 
 	/**
@@ -30,6 +34,17 @@ export class SceneManager {
 	 * @param {ClearStatus} clearStatus - {actionNum, gotChestNum}
 	 */
 	public changeScene(sceneKind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
+		if (this.currentScene === 'StopGame') {
+			// do nothing
+			return;
+		}
+		if (sceneKind === 'StopGame') {
+			// FIXME this.timeKeeper.getState() === RECOMMENDのときの処理
+			this.currentScene = 'StopGame';
+			core.replaceScene(new StopGameScene(this));
+			return;
+		}
+
 		if (this.currentScene === 'Top') {
 			if (sceneKind === 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
