@@ -1,6 +1,6 @@
 import stages from './stages';
 import { allBlocks } from './blockly-main';
-import { ClearStatus } from './world';
+import { EndStatus } from './world';
 
 export type ClearSituation = { isCleared: boolean; isExcellentCleared: boolean; score: number };
 

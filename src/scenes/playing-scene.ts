@@ -50,8 +50,8 @@ export default class PlayingScene extends Scene {
 	}
 
 	public moveNextScene(nextkind: SceneKind) {
-		const clearStatus = this.world.getClearStatus();
-		super.moveNextScene(nextkind, this.stageNum, clearStatus);
+		const endStatus = this.world.getEndStatus();
+		super.moveNextScene(nextkind, this.stageNum, endStatus);
 		this.reset();
 	}
 

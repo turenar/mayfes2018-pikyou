@@ -4,14 +4,14 @@ import { SceneManager } from '../scene-manager';
 import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 import { ScoreManager, Score } from '../score-manager';
-import { ClearStatus } from '../world';
+import { EndStatus } from '../world';
 import stages from '../stages';
 
 export default class ResultScene extends Scene {
 	private retryButton: RetryButton;
 	private backToStageSelectingButton: BackToStageSelectingButton;
 
-	public constructor(manager: SceneManager, stageNum: number, clearStatus: ClearStatus) {
+	public constructor(manager: SceneManager, stageNum: number, endStatus: EndStatus) {
 		super('Result', manager);
 
 		const offset_x = 40;
@@ -29,8 +29,8 @@ export default class ResultScene extends Scene {
 
 		// blocklyからそれぞれの値を取得する todo
 		const score = {
-			actionNum: clearStatus.actionNum,
-			gotChestNum: clearStatus.gotChestNum,
+			actionNum: endStatus.actionNum,
+			gotChestNum: endStatus.gotChestNum,
 			blockCostSum: ScoreManager.getBlockCostSum(),
 			clearPoint: ScoreManager.getStageClearPoint(stageNum),
 		};

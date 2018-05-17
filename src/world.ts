@@ -8,7 +8,7 @@ import MapChip from './enchant/map-chip';
 
 export type ItemKind = 'key' | 'chest';
 
-export type ClearStatus = {
+export type EndStatus = {
 	actionNum: number;
 	gotChestNum: number;
 };
@@ -113,7 +113,7 @@ export class World {
 		}
 	}
 
-	public getClearStatus(): ClearStatus {
+	public getEndStatus(): EndStatus {
 		return { actionNum: this.actionNum, gotChestNum: this.gotChestNum };
 	}
 }

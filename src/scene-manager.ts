@@ -9,9 +9,9 @@ import stages from './stages';
 import { ScoreManager } from './score-manager';
 import { code } from './blockly-main';
 import MouseController from './mouse-controller';
-import { ClearStatus } from './world';
 import TimeKeeper from './time-keeper';
 import StopGameScene from './scenes/stop-game-scene';
+import { EndStatus } from './world';
 
 export class SceneManager {
 	private timeKeeper: TimeKeeper;
@@ -31,9 +31,9 @@ export class SceneManager {
 	 * @return {void}
 	 * @param {SceneKind} sceneKind - 遷移先のシーン種類。
 	 * @param {number} stageNum - 繊維先がPlayingの時のステージ番号
-	 * @param {ClearStatus} clearStatus - {actionNum, gotChestNum}
+	 * @param {EndStatus} endStatus - {actionNum, gotChestNum}
 	 */
-	public changeScene(sceneKind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
+	public changeScene(sceneKind: SceneKind, stageNum?: number, endStatus?: EndStatus) {
 		if (this.currentScene === 'StopGameScene') {
 			// do nothing
 			return;
@@ -88,7 +88,7 @@ export class SceneManager {
 			}
 			if (sceneKind === 'Result') {
 				this.currentScene = 'Result';
-				core.pushScene(new ResultScene(this, stageNum, clearStatus));
+				core.pushScene(new ResultScene(this, stageNum, endStatus));
 				return;
 			}
 		}
