@@ -94,7 +94,7 @@ export class SceneManager {
 	}
 
 	public updateScore(stageNum: number, score: number) {
-		this.scoreManager.updateScore(stageNum, score);
+		this.scoreManager.updateClearSituations(stageNum, score);
 	}
 
 	public getClearSituation(stageNum: number) {

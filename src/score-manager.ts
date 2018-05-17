@@ -9,21 +9,22 @@ export class ScoreManager {
 
 	public constructor() {
 		this.clearSituations = [];
-		for (var i: number = 0; i < stages.length; i++) {
-			this.clearSituations.push({ isCleared: false, isExcellentCleared: false, score: 0 });
-		}
 	}
 
 	public getClearSituation(stageNum: number) {
 		return this.clearSituations[stageNum];
 	}
 
-	public updateScore(stageNum: number, score: number) {
+	public updateClearSituations(stageNum: number, score: number) {
 		this.clearSituations[stageNum].isCleared = true;
 		if (score >= stages[stageNum].excellentClearNorma) {
 			this.clearSituations[stageNum].isExcellentCleared = true;
 		}
 		this.clearSituations[stageNum].score = Math.max(score, this.clearSituations[stageNum].score);
+
+		if ('localStorage' in window && window.localStorage !== null) {
+			localStorage.setItem('clearSituations', JSON.stringify(this.clearSituations));
+		}
 	}
 
 	public static getBlockCostSum(): number {
@@ -48,6 +49,25 @@ export class ScoreManager {
 
 	public static getStageClearPoint(stageNum) {
 		return stages[stageNum].clearPoint;
+	}
+
+	public resetClearSituations() {
+		this.clearSituations = [];
+		for (var i: number = 0; i < stages.length; i++) {
+			this.clearSituations.push({ isCleared: false, isExcellentCleared: false, score: 0 });
+		}
+		if ('localStorage' in window && window.localStorage) {
+			localStorage.setItem('clearSituations', JSON.stringify(this.clearSituations));
+		}
+	}
+
+	public loadClearSituations() {
+		if ('localStorage' in window && window.localStorage.clearSituations) {
+			this.clearSituations = JSON.parse(localStorage.getItem('clearSituations'));
+		} else {
+			console.error('There are no ClearSituations in LocalStorage!');
+			this.resetClearSituations();
+		}
 	}
 }
 
