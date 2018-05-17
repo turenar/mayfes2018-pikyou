@@ -17,6 +17,7 @@ export default class BackToStageSelectingButton extends Button {
 		this.addEventListener('touchstart', () => {
 			console.log('BackToStageSelecting button is pushed!');
 			scene.moveNextScene('StageSelecting', stageNum);
+			scene.updateExecuteBlock(`${0}`);
 		});
 	}
 }

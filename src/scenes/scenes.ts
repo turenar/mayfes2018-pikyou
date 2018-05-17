@@ -7,6 +7,7 @@ import { SceneManager } from '../scene-manager';
 import PlayingScene from './playing-scene';
 import TopScene from './top-scene';
 import { ClearStatus } from '../world';
+import { initBlock } from '../blockly-main';
 
 export type SceneKind = 'Top' | 'StageSelecting' | 'Playing' | 'GameOver' | 'Result';
 
@@ -22,5 +23,11 @@ export class Scene extends enchant.Scene {
 
 	public moveNextScene(nextkind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
 		this.manager.changeScene(nextkind, stageNum, clearStatus);
+	}
+
+	public updateExecuteBlock(fieldValue: string) {
+		// initBlock（executeBlock）に表示されている総コストを更新する
+		// ex. `この下につながっている処理を実行します。現在の総コスト: ${cost}`
+		initBlock.setFieldValue(fieldValue, 'balance');
 	}
 }

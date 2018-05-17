@@ -3,9 +3,10 @@ import { Scene, SceneKind } from './scenes';
 import { SceneManager } from '../scene-manager';
 import StartStopButton from '../buttons/start-stop-button';
 import { World } from '../world';
-import { code } from '../blockly-main';
+import { code, blockCost } from '../blockly-main';
 import CodeRunner from '../code-runner';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
+import stages from '../stages';
 
 export default class PlayingScene extends Scene {
 	private stageNum: number;
@@ -60,6 +61,8 @@ export default class PlayingScene extends Scene {
 	private initScene() {
 		const { world } = this;
 		this.on('enterframe', () => {
+			this.updateExecuteBlock(`${stages[this.stageNum].clearPoint - blockCost}`);
+
 			if (world.isDead && !world.animationQueue.running) {
 				this.die();
 			}
