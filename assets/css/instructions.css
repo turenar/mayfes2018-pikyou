@@ -31,10 +31,12 @@ body {
 /*blocks*/
 /*##############################*/
 
+/* .block-contents */
 .block-contents {
     flex-direction: column;
 }
 
+/* block-content */
 .block-content {
     display: flex;
     width: 100%;
@@ -46,6 +48,18 @@ body {
     /* margin-left: 20%; */
 }
 
+/* block-top */
+.block-top h3 {
+    border-left: 10px solid;
+    padding-left: 10px;
+}
+
+/* block-content */
+.block-content h4 {
+    margin-bottom: 1rem;
+    font-size: 1.7rem;
+}
+
 .block-content h4:before {
     content:'◆';
 }
@@ -54,6 +68,15 @@ body {
     margin-left: 10px;
 }
 
+.block-content > p > span {
+    font-weight: bold;
+}
+
+.block-content > p > span.option-element {
+    font-weight: normal;
+}
+
+/* small-block-top */
 .small-block-top {
     margin-left: 10px;
 }
@@ -64,10 +87,7 @@ body {
     font-size: 1.5rem;
 }
 
-.block-content > p > span {
-    font-weight: bold;
-}
-
+/* design for image */
 .contents-img + .contents-text {
     width: 75%;
     margin-left: 0;
@@ -79,16 +99,7 @@ body {
     border-radius: 0;
 }
 
-.block-content h4 {
-    margin-bottom: 1rem;
-    font-size: 1.7rem;
-}
-
-.block-top h3 {
-    border-left: 10px solid;
-    padding-left: 10px;
-}
-
+/* design for each block */
 .if > .block-top > h3 {
     border-color: #5b80a5;
 }
@@ -111,10 +122,6 @@ body {
 
 .find .option-element {
     background-color: #d1dbbd;
-}
-
-.block-content > p > span.option-element {
-    font-weight: normal;
 }
 
 /*##############################*/
