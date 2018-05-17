@@ -7,6 +7,7 @@ import { code, blockCost } from '../blockly-main';
 import CodeRunner from '../code-runner';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 import stages from '../stages';
+import { MAXTURN } from './gameover-scene';
 
 export default class PlayingScene extends Scene {
 	private codeRunner: CodeRunner;
@@ -16,6 +17,7 @@ export default class PlayingScene extends Scene {
 	public startStopButton: StartStopButton;
 	public backToStageSelectingButton: BackToStageSelectingButton;
 	public attentionLabel: enchant.Label;
+	public leftTurnLabel: enchant.Label;
 
 	public constructor(manager: SceneManager, stageNum: number) {
 		super('Playing', manager);
@@ -24,7 +26,7 @@ export default class PlayingScene extends Scene {
 		this.world = new World(this, stageNum);
 		this.stageNum = stageNum;
 		this.codeRunner = new CodeRunner(this.world);
-		this.startStopButton = new StartStopButton(this, 42, 400);
+		this.startStopButton = new StartStopButton(this);
 		this.backToStageSelectingButton = new BackToStageSelectingButton(this, this.stageNum);
 		this.attentionLabel = new enchant.Label('所持ゴールドが足りません！');
 		this.attentionLabel.width = core.width;
@@ -33,6 +35,10 @@ export default class PlayingScene extends Scene {
 		this.attentionLabel.x = 40;
 		this.attentionLabel.y = 200;
 		this.attentionLabel.opacity = 0;
+		this.leftTurnLabel = new enchant.Label(`のこりターン数：${MAXTURN}`);
+		this.leftTurnLabel.font = '20px PixelMplus10';
+		this.leftTurnLabel.x = 5;
+		this.leftTurnLabel.y = 385;
 
 		this.initScene();
 
@@ -69,6 +75,7 @@ export default class PlayingScene extends Scene {
 		const { world } = this;
 		this.on('enterframe', () => {
 			this.updateExecuteBlock(`${stages[this.stageNum].clearPoint - blockCost}`);
+			this.leftTurnLabel.text = `のこりターン数：${MAXTURN - this.world.actionNum}`;
 
 			if (world.isDead && !world.animationQueue.running) {
 				this.die();
@@ -87,7 +94,8 @@ export default class PlayingScene extends Scene {
 			}
 		});
 		this.addChild(this.attentionLabel);
-		this.addChild(this.startStopButton);
 		this.addChild(this.backToStageSelectingButton);
+		this.addChild(this.startStopButton);
+		this.addChild(this.leftTurnLabel);
 	}
 }

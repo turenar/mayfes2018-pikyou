@@ -70,7 +70,7 @@ export default class ResultScene extends Scene {
 		blockCostSumLabel.x = offset_x + 35;
 		blockCostSumLabel.y = offset_y + 245;
 */
-		const retryButton = new RetryButton(42, 400, this);
+		const retryButton = new RetryButton(this);
 
 		let nextStageLabel = Math.min(stageNum + 1, stages.length - 1);
 		const backToStageSelectingButton = new BackToStageSelectingButton(this, nextStageLabel);

@@ -26,7 +26,7 @@ export class GameOverScene extends Scene {
 		gameOverReasonLabel.x = (core.width - 300) / 2;
 		gameOverReasonLabel.y = 100;
 
-		this.retryButton = new RetryButton(42, 400, this);
+		this.retryButton = new RetryButton(this);
 
 		this.backToStageSelectingButton = new BackToStageSelectingButton(this, stageNum);
 
