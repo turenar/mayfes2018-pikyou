@@ -34,20 +34,27 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 7rem;
-}
-
-/* .reverse .block-content:nth-child(odd) {
-    flex-direction: row-reverse;
-}
-
-.reverse .block-content:nth-child(odd) .block-content{
-    text-align: right;
-} */
-
-.block-content {
     flex-grow: 0;
     line-height: 4rem;
     /* margin-left: 20%; */
+}
+
+.block-content h4:before {
+    content:'◆';
+}
+
+.block-content p {
+    margin-left: 10px;
+}
+
+.small-block-top {
+    margin-left: 10px;
+}
+
+.small-block-top h6 {
+    border-left: 5px solid;
+    padding-left: 10px;
+    font-size: 1.5rem;
 }
 
 .block-content > p > span {
