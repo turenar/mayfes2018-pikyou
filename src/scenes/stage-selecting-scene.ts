@@ -58,7 +58,7 @@ export default class StageSelectingScene extends Scene {
 		this.backButton = new BackToTopButton(this);
 		this.stageLabels = new StageLabels(this.manager.getClearSituation(0));
 		this.stageNum = stageNum;
-		this.stageLabels.update(stageNum,this.manager.getClearSituation(stageNum));
+		this.stageLabels.update(stageNum, this.manager.getClearSituation(stageNum));
 
 		this.addChild(background);
 		this.addChild(this.stageLabels);
