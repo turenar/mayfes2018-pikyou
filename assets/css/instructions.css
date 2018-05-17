@@ -31,7 +31,7 @@ footer {
 .block-content {
     display: flex;
     width: 100%;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     margin-bottom: 7rem;
 }
