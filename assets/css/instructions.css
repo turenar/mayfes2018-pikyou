@@ -53,6 +53,12 @@ footer {
 .block-content > p > span {
     background: #c2edff;
 }
+
+.block-content > h4 > .alter,
+.block-content > p > .alter {
+    background: #acb0b3;
+}
+
 .contents-img + .contents-text {
     width: 75%;
     margin-left: 0;
