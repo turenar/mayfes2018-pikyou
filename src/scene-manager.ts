@@ -33,7 +33,7 @@ export class SceneManager {
 		if (this.currentScene === 'Top') {
 			if (sceneKind === 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
-				core.replaceScene(new StageSelectingScene(this));
+				core.replaceScene(new StageSelectingScene(this, 0));
 				return;
 			}
 		}
@@ -60,13 +60,13 @@ export class SceneManager {
 
 			if (sceneKind == 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
-				core.replaceScene(new StageSelectingScene(this));
+				core.replaceScene(new StageSelectingScene(this, stageNum));
 				return;
 			}
 
 			if (sceneKind === 'GameOver') {
 				this.currentScene = 'GameOver';
-				core.pushScene(new GameOverScene(this));
+				core.pushScene(new GameOverScene(this, stageNum));
 				return;
 			}
 			if (sceneKind === 'Result') {
@@ -85,7 +85,8 @@ export class SceneManager {
 			if (sceneKind === 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
 				core.popScene();
-				core.replaceScene(new StageSelectingScene(this));
+				console.log(stageNum);
+				core.replaceScene(new StageSelectingScene(this, stageNum));
 				return;
 			}
 		}

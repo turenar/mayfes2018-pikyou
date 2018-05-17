@@ -24,7 +24,7 @@ export default class PlayingScene extends Scene {
 		this.stageNum = stageNum;
 		this.codeRunner = new CodeRunner(this.world);
 		this.startStopButton = new StartStopButton(this, 42, 400);
-		this.backToStageSelectingButton = new BackToStageSelectingButton(this);
+		this.backToStageSelectingButton = new BackToStageSelectingButton(this, this.stageNum);
 
 		this.initScene();
 

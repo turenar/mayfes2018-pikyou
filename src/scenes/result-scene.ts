@@ -71,7 +71,8 @@ export default class ResultScene extends Scene {
 */
 		const retryButton = new RetryButton(42, 400, this);
 
-		const backToStageSelectingButton = new BackToStageSelectingButton(this);
+		let nextStageLabel = Math.min(stageNum + 1, stages.length - 1);
+		const backToStageSelectingButton = new BackToStageSelectingButton(this, nextStageLabel);
 
 		this.addChild(background);
 		this.addChild(gameClearLabel);
