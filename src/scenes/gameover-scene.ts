@@ -8,7 +8,7 @@ export default class GameOverScene extends Scene {
 	private retryButton: RetryButton;
 	private backToStageSelectingButton: BackToStageSelectingButton;
 
-	public constructor(manager: SceneManager) {
+	public constructor(manager: SceneManager, stageNum: number) {
 		super('GameOver', manager);
 
 		const gameOverLabel = new enchant.Sprite(300, 80);
@@ -23,7 +23,7 @@ export default class GameOverScene extends Scene {
 
 		this.retryButton = new RetryButton(42, 400, this);
 
-		this.backToStageSelectingButton = new BackToStageSelectingButton(this);
+		this.backToStageSelectingButton = new BackToStageSelectingButton(this, stageNum);
 
 		this.addChild(gameOverLabel);
 		this.addChild(gameOverReasonLabel);
