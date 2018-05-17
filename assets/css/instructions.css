@@ -99,6 +99,10 @@ footer {
     background-color: #d1dbbd;
 }
 
+.block-content > p > span.alter {
+    font-weight: normal;
+}
+
 /* @media screen and (max-width: 800px){
     .block-content,
     .reverse .block-content:nth-child(odd)  {
