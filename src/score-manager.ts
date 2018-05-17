@@ -1,6 +1,7 @@
 import stages from './stages';
 import { allBlocks } from './blockly-main';
 import { EndStatus } from './world';
+import { MAXTURN } from './scenes/gameover-scene';
 
 export type ClearSituation = { isCleared: boolean; isExcellentCleared: boolean; score: number };
 
@@ -44,7 +45,7 @@ export class ScoreManager {
 	}
 
 	public static calcScoreValue(score: Score) {
-		return score.clearPoint + score.gotChestNum * 100 + (50 - score.actionNum) - score.blockCostSum;
+		return score.clearPoint + score.gotChestNum * 100 + (MAXTURN - score.actionNum) - score.blockCostSum;
 	}
 
 	public static getStageClearPoint(stageNum) {

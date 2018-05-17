@@ -6,6 +6,7 @@ import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button
 import { ScoreManager, Score } from '../score-manager';
 import { EndStatus } from '../world';
 import stages from '../stages';
+import { MAXTURN } from './gameover-scene';
 
 export default class ResultScene extends Scene {
 	private retryButton: RetryButton;
@@ -51,7 +52,7 @@ export default class ResultScene extends Scene {
 		stageClearPointLabel.x = offset_x + 30;
 		stageClearPointLabel.y = offset_y + 110;
 
-		const gotChestNumLabel = new enchant.Label('残りターン数     + ' + ('   ' + (50 - score.actionNum)).slice(-3));
+		const gotChestNumLabel = new enchant.Label('残りターン数     + ' + ('   ' + (MAXTURN - score.actionNum)).slice(-3));
 		gotChestNumLabel.color = 'black';
 		gotChestNumLabel.font = '22px PixelMplus10';
 		gotChestNumLabel.x = offset_x + 30;
