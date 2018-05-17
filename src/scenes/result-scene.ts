@@ -37,36 +37,38 @@ export default class ResultScene extends Scene {
 
 		const scoreValue = ScoreManager.calcScoreValue(score);
 
-		const scoreLabel = new enchant.Label(`スコア：${scoreValue}`);
+		const scoreLabel = new enchant.Label('スコア ：' + ('   ' + scoreValue).slice(-3));
 		scoreLabel.color = 'black';
-		scoreLabel.font = '30px PixelMplus10';
-		scoreLabel.x = offset_x + 20;
-		scoreLabel.y = offset_y + 90;
+		scoreLabel.font = '28px PixelMplus10';
+		scoreLabel.x = offset_x + 100;
+		scoreLabel.y = offset_y + 280;
 
-		const stageClearPointLabel = new enchant.Label(`ステージクリアボーナス: ${stages[stageNum].clearPoint}`);
+		const stageClearPointLabel = new enchant.Label(
+			'所持ゴールド     + ' + ('   ' + (stages[stageNum].clearPoint - score.blockCostSum)).slice(-3)
+		);
 		stageClearPointLabel.color = 'black';
-		stageClearPointLabel.font = '18px PixelMplus10';
-		stageClearPointLabel.x = offset_x + 35;
-		stageClearPointLabel.y = offset_y + 140;
+		stageClearPointLabel.font = '22px PixelMplus10';
+		stageClearPointLabel.x = offset_x + 30;
+		stageClearPointLabel.y = offset_y + 110;
 
-		const gotChestNumLabel = new enchant.Label(`てにいれたチェストのかず: ${score.gotChestNum}`);
+		const gotChestNumLabel = new enchant.Label('残りターン数     + ' + ('   ' + (50 - score.actionNum)).slice(-3));
 		gotChestNumLabel.color = 'black';
-		gotChestNumLabel.font = '18px PixelMplus10';
-		gotChestNumLabel.x = offset_x + 35;
-		gotChestNumLabel.y = offset_y + 175;
+		gotChestNumLabel.font = '22px PixelMplus10';
+		gotChestNumLabel.x = offset_x + 30;
+		gotChestNumLabel.y = offset_y + 160;
 
-		const actionNumLabel = new enchant.Label(`いどうしたマスのかず: ${score.actionNum}`);
+		const actionNumLabel = new enchant.Label('オタカラボーナス + ' + ('   ' + score.gotChestNum * 100).slice(-3));
 		actionNumLabel.color = 'black';
-		actionNumLabel.font = '18px PixelMplus10';
-		actionNumLabel.x = offset_x + 35;
+		actionNumLabel.font = '22px PixelMplus10';
+		actionNumLabel.x = offset_x + 30;
 		actionNumLabel.y = offset_y + 210;
-
+		/*
 		const blockCostSumLabel = new enchant.Label(`つかったブロックのコスト: ${score.blockCostSum}`);
 		blockCostSumLabel.color = 'black';
 		blockCostSumLabel.font = '18px PixelMplus10';
 		blockCostSumLabel.x = offset_x + 35;
 		blockCostSumLabel.y = offset_y + 245;
-
+*/
 		const retryButton = new RetryButton(42, 400, this);
 
 		const backToStageSelectingButton = new BackToStageSelectingButton(this);
@@ -77,7 +79,7 @@ export default class ResultScene extends Scene {
 		this.addChild(stageClearPointLabel);
 		this.addChild(gotChestNumLabel);
 		this.addChild(actionNumLabel);
-		this.addChild(blockCostSumLabel);
+		//this.addChild(blockCostSumLabel);
 		this.addChild(retryButton);
 		this.addChild(backToStageSelectingButton);
 
