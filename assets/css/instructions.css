@@ -40,24 +40,33 @@ body {
 .block-contents {
     flex-direction: column;
     display: none;
+    padding: 10px;
+    background-color: rgba(255, 195, 60, 0.7);
 }
 
 /* block-content */
 .block-content {
+    margin-bottom: 7rem;
+    padding-left: 10%;
+    border-bottom: 1px solid #000000;
     display: flex;
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 7rem;
     flex-grow: 0;
     line-height: 4rem;
-    /* margin-left: 20%; */
 }
 
 /* block-top */
 .block-top {
+    border: 1px solid #ffc33c;
     margin:10px;
     cursor:pointer;
+    background-color: rgba(255, 195, 60, 0.3);
+}
+
+.block-top:hover {
+    background-color: rgba(255, 195, 60, 0.5);
 }
 
 .block-top h3 {
