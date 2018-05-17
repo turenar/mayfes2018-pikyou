@@ -80,25 +80,16 @@ footer {
     padding-left: 10px;
 }
 
-.if > .block-top > h3,
+.if > .block-top > h3 {
+    border-color: #5b80a5;
+}
+
 .move > .block-top > h3 {
-    border-color: #5a7fa7;
+    border-color: #5ba5a5;
 }
 
 .find > .block-top > h3 {
-    border-color: #58a658;
-}
-
-.math > .block-top > h3 {
-    border-color: #5a65a7;
-}
-
-.text > .block-top > h3 {
-    border-color: #58a68c;
-}
-
-.var > .block-top > h3 {
-    border-color: #a65a80;
+    border-color: #8ca55b;
 }
 
 /* @media screen and (max-width: 800px){
