@@ -157,7 +157,7 @@ const CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 			mutatorCount++;
 		}
 		this.setTooltip(
-			`自分で決めたチェックのうち、当てはまっている行動をします\nコスト：${5 + mutatorCount * 3}ゴールド`
+			`自分で決めたチェックのうち、当てはまっている行動をします\nねだん：${5 + mutatorCount * 3}ゴールド`
 		);
 	},
 };
