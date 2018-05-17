@@ -50,6 +50,9 @@ footer {
     /* margin-left: 20%; */
 }
 
+.block-content > p > span {
+    background: #c2edff;
+}
 .contents-img + .contents-text {
     width: 75%;
     margin-left: 0;
