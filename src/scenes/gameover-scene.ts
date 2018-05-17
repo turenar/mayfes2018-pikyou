@@ -4,7 +4,9 @@ import { SceneManager } from '../scene-manager';
 import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 
-export default class GameOverScene extends Scene {
+export type GameOverReason = 'maxturn' | 'pitfall';
+
+export class GameOverScene extends Scene {
 	private retryButton: RetryButton;
 	private backToStageSelectingButton: BackToStageSelectingButton;
 
@@ -16,9 +18,11 @@ export default class GameOverScene extends Scene {
 		gameOverLabel.x = (core.width - 300) / 2;
 		gameOverLabel.y = (32 * 12 - 80) / 2 + 20;
 
-		const gameOverReasonLabel = new enchant.Sprite(300, 50);
-		gameOverReasonLabel.image = core.assets['img/gameover_reason_text.png'];
-		gameOverReasonLabel.x = (core.width - 300) / 2;
+		const gameOverReason = 'pitfall';
+		const labelWidth = gameOverReason === 'pitfall' ? 300 : 400;
+		const gameOverReasonLabel = new enchant.Sprite(labelWidth, 50);
+		gameOverReasonLabel.image = core.assets[`img/gameover_reason_text_${gameOverReason}.png`];
+		gameOverReasonLabel.x = (core.width - labelWidth) / 2;
 		gameOverReasonLabel.y = 100;
 
 		this.retryButton = new RetryButton(42, 400, this);
