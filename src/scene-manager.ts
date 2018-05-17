@@ -40,6 +40,8 @@ export class SceneManager {
 		}
 		if (sceneKind === 'StopGame') {
 			// FIXME this.timeKeeper.getState() === RECOMMENDのときの処理
+			// シーン変更 (ResultScene/GameOverScene/StageSelectingから抜ける？) 時に
+			// StopGameSceneに飛ばす
 			this.currentScene = 'StopGame';
 			core.replaceScene(new StopGameScene(this));
 			return;
