@@ -51,7 +51,7 @@ footer {
 }
 
 .block-content > p > span {
-    background: #c2edff;
+    font-weight: bold;
 }
 
 .contents-img + .contents-text {
