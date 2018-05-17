@@ -82,11 +82,6 @@ export default class PlayingScene extends Scene {
 					this.codeRunner.run(code);
 				} catch (e) {
 					console.error(e);
-					if (e === 'goal') {
-						world.goal();
-					} else if (e === 'die') {
-						world.die();
-					}
 				}
 				world.animationQueue.run();
 			}

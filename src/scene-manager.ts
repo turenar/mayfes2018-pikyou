@@ -83,7 +83,7 @@ export class SceneManager {
 
 			if (sceneKind === 'GameOver') {
 				this.currentScene = 'GameOver';
-				core.pushScene(new GameOverScene(this, stageNum));
+				core.pushScene(new GameOverScene(this, stageNum, endStatus));
 				return;
 			}
 			if (sceneKind === 'Result') {
