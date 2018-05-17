@@ -72,6 +72,7 @@ body {
 .block-top h3 {
     border-left: 10px solid;
     padding-left: 10px;
+    margin-top: 0px;
 }
 
 /* block-content */
