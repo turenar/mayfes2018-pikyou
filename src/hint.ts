@@ -3,7 +3,7 @@ export default class Hint {
 	private nextDisplayNumber: number;
 
 	public constructor(hints: string[]) {
-		this.hints = hints;
+		this.hints = hints ? hints : ['ヒントはありません'];
 		this.reset();
 	}
 
