@@ -103,6 +103,7 @@ section .instructions {
 
 .block-content > p > span {
     font-weight: bold;
+    /* undifined ERROR */
 }
 
 .block-content > p > span.option-element {
