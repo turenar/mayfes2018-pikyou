@@ -28,6 +28,9 @@ export function init() {
 	core.preload('img/start_button_hover.png');
 	core.preload('img/stop_button.png');
 	core.preload('img/stop_button_hover.png');
+	core.preload('img/hint.png');
+	core.preload('img/hint_hover.png');
+	core.preload('img/hint_on.png');
 
 	//StageSelecting
 	core.preload('img/stageselecting_right_arrow.png');

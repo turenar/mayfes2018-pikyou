@@ -8,9 +8,13 @@ import CodeRunner from '../code-runner';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 import stages from '../stages';
 import { MAXTURN } from './gameover-scene';
+import HintButton from '../buttons/hint-button';
+import Hint from '../hint';
 
 export default class PlayingScene extends Scene {
 	private codeRunner: CodeRunner;
+	private hintButton: HintButton;
+	private hint: Hint;
 	public stageNum: number;
 	public isRunning: boolean;
 	public world: World;
@@ -39,6 +43,8 @@ export default class PlayingScene extends Scene {
 		this.leftTurnLabel.font = '20px PixelMplus10';
 		this.leftTurnLabel.x = 5;
 		this.leftTurnLabel.y = 385;
+		this.hint = new Hint(stages[stageNum].hints);
+		this.hintButton = new HintButton(330, 510, this, this.hint);
 
 		this.initScene();
 
@@ -49,6 +55,7 @@ export default class PlayingScene extends Scene {
 		this.isRunning = false;
 		this.world.reset();
 		this.startStopButton.reset();
+		this.hintButton.reset();
 	}
 
 	public resetWorld() {
@@ -95,6 +102,8 @@ export default class PlayingScene extends Scene {
 		});
 		this.addChild(this.attentionLabel);
 		this.addChild(this.leftTurnLabel);
+		this.addChild(this.hintButton);
+		this.addChild(this.startStopButton);
 		this.addChild(this.backToStageSelectingButton);
 		this.addChild(this.startStopButton);
 	}
