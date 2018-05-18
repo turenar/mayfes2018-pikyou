@@ -8,6 +8,7 @@ export type Stage = {
 	characterInitialPosition: CharacterPosition;
 	clearPoint: number;
 	excellentClearNorma: number;
+	hints?: string[];
 };
 
 const stages: Stage[] = [
@@ -35,6 +36,13 @@ const stages: Stage[] = [
 		},
 		clearPoint: 100,
 		excellentClearNorma: 90,
+		hints: [
+			"「1マスすすむ」をくりかえすと、カベにぶつかるまですすむよ！",
+			"「1マスすすむ」をくりかえすと、カベにぶつかるまですすむよ！",
+			"「1マスすすむ」をくりかえすと、カベにぶつかるまですすむよ！",
+			"「1マスすすむ」をくりかえすと、カベにぶつかるまですすむよ！",
+			"「1マスすすむ」をくりかえすと、カベにぶつかるまですすむよ！",
+		],
 	},
 
 	{
