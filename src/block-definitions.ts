@@ -476,12 +476,17 @@ Blockly.Blocks['check_mark'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Check',
-			message0: '%1 マーカーにいる',
+			message0: '%1 にいる',
 			args0: [
 				{
 					type: 'field_dropdown',
 					name: 'MARKCOLOR',
-					options: [['赤', 'RED'], ['青', 'BLUE'], ['緑', 'GREEN'], ['黄', 'YELLOW']],
+					options: [
+						[{ src: '../assets/blockly-img/mark_red.png', width: 32, height: 32, alt: '赤マーカー' }, 'RED'],
+						[{ src: '../assets/blockly-img/mark_blue.png', width: 32, height: 32, alt: '青マーカー' }, 'BLUE'],
+						[{ src: '../assets/blockly-img/mark_green.png', width: 32, height: 32, alt: '緑マーカー' }, 'GREEN'],
+						[{ src: '../assets/blockly-img/mark_yellow.png', width: 32, height: 32, alt: '黄マーカー' }, 'YELLOW'],
+					],
 				},
 			],
 		});
