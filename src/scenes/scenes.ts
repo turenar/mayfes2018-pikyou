@@ -6,7 +6,7 @@ import { Character } from '../character';
 import { SceneManager } from '../scene-manager';
 import PlayingScene from './playing-scene';
 import TopScene from './top-scene';
-import { ClearStatus } from '../world';
+import { EndStatus } from '../world';
 import { initBlock } from '../blockly-main';
 
 export type SceneKind = 'Top' | 'StageSelecting' | 'Playing' | 'GameOver' | 'Result' | 'StopGameScene';
@@ -21,8 +21,8 @@ export class Scene extends enchant.Scene {
 		this.manager = manager;
 	}
 
-	public moveNextScene(nextkind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
-		this.manager.changeScene(nextkind, stageNum, clearStatus);
+	public moveNextScene(nextkind: SceneKind, stageNum?: number, endStatus?: EndStatus) {
+		this.manager.changeScene(nextkind, stageNum, endStatus);
 	}
 
 	public updateExecuteBlock(fieldValue: string) {

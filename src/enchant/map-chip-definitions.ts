@@ -35,7 +35,7 @@ const mapChipDefinitions: { [chipId: number]: MapChipDefinition } = {
 	[MapChip.Pitfall]: {
 		obstacle: false,
 		onEnter: world => {
-			world.die();
+			world.die('pitfall');
 		},
 	},
 	[MapChip.Key]: {

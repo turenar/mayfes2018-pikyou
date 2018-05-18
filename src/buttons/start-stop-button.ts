@@ -10,12 +10,12 @@ import { setTimeout } from 'timers';
 export default class StartStopButton extends Button {
 	private scene: PlayingScene;
 
-	public constructor(scene: PlayingScene, x: number, y: number) {
+	public constructor(scene: PlayingScene) {
 		const width = 300;
 		const height = 92;
 		super(width, height, scene, 'img/start_button.png');
-		this.x = x;
-		this.y = y;
+		this.x = 42;
+		this.y = 410;
 		this.scene = scene;
 
 		this.initButton(scene);

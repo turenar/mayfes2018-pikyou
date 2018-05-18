@@ -4,14 +4,15 @@ import { SceneManager } from '../scene-manager';
 import RetryButton from '../buttons/retry-button';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
 import { ScoreManager, Score } from '../score-manager';
-import { ClearStatus } from '../world';
+import { EndStatus } from '../world';
 import stages from '../stages';
+import { MAXTURN } from './gameover-scene';
 
 export default class ResultScene extends Scene {
 	private retryButton: RetryButton;
 	private backToStageSelectingButton: BackToStageSelectingButton;
 
-	public constructor(manager: SceneManager, stageNum: number, clearStatus: ClearStatus) {
+	public constructor(manager: SceneManager, stageNum: number, endStatus: EndStatus) {
 		super('Result', manager);
 
 		const offset_x = 40;
@@ -29,8 +30,8 @@ export default class ResultScene extends Scene {
 
 		// blocklyからそれぞれの値を取得する todo
 		const score = {
-			actionNum: clearStatus.actionNum,
-			gotChestNum: clearStatus.gotChestNum,
+			actionNum: endStatus.actionNum,
+			gotChestNum: endStatus.gotChestNum,
 			blockCostSum: ScoreManager.getBlockCostSum(),
 			clearPoint: ScoreManager.getStageClearPoint(stageNum),
 		};
@@ -51,7 +52,7 @@ export default class ResultScene extends Scene {
 		stageClearPointLabel.x = offset_x + 30;
 		stageClearPointLabel.y = offset_y + 110;
 
-		const gotChestNumLabel = new enchant.Label('残りターン数     + ' + ('   ' + (50 - score.actionNum)).slice(-3));
+		const gotChestNumLabel = new enchant.Label('のこり移動回数   + ' + ('   ' + (MAXTURN - score.actionNum)).slice(-3));
 		gotChestNumLabel.color = 'black';
 		gotChestNumLabel.font = '22px PixelMplus10';
 		gotChestNumLabel.x = offset_x + 30;
@@ -69,7 +70,7 @@ export default class ResultScene extends Scene {
 		blockCostSumLabel.x = offset_x + 35;
 		blockCostSumLabel.y = offset_y + 245;
 */
-		const retryButton = new RetryButton(42, 400, this);
+		const retryButton = new RetryButton(this);
 
 		let nextStageLabel = Math.min(stageNum + 1, stages.length - 1);
 		const backToStageSelectingButton = new BackToStageSelectingButton(this, nextStageLabel);

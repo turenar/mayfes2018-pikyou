@@ -4,6 +4,7 @@ import { mapchipSize, Map, MapPoint } from './enchant/map';
 import { World } from './world';
 import { QueuedAction } from './animation-queue';
 import { MapChipDefinition } from './enchant/map-chip-definitions';
+import { MAXTURN } from './scenes/gameover-scene';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -69,6 +70,10 @@ export class Character extends enchant.Sprite {
 		if (frontDef && frontDef.onAction) {
 			const { mapPoint_x, mapPoint_y } = this.getNextMapPointAndDirection();
 			frontDef.onAction(this.world, mapPoint_x, mapPoint_y);
+		}
+
+		if (!this.isDead && !this.isGoal && this.world.actionNum >= MAXTURN) {
+			this.world.die('maxturn');
 		}
 
 		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
