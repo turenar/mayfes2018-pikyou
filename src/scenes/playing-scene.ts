@@ -94,8 +94,8 @@ export default class PlayingScene extends Scene {
 			}
 		});
 		this.addChild(this.attentionLabel);
+		this.addChild(this.leftTurnLabel);
 		this.addChild(this.backToStageSelectingButton);
 		this.addChild(this.startStopButton);
-		this.addChild(this.leftTurnLabel);
 	}
 }
