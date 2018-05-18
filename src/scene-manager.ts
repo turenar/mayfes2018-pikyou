@@ -34,15 +34,15 @@ export class SceneManager {
 	 * @param {ClearStatus} clearStatus - {actionNum, gotChestNum}
 	 */
 	public changeScene(sceneKind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
-		if (this.currentScene === 'StopGame') {
+		if (this.currentScene === 'StopGameScene') {
 			// do nothing
 			return;
 		}
-		if (sceneKind === 'StopGame') {
+		if (sceneKind === 'StopGameScene') {
 			// FIXME this.timeKeeper.getState() === RECOMMENDのときの処理
 			// シーン変更 (ResultScene/GameOverScene/StageSelectingから抜ける？) 時に
 			// StopGameSceneに飛ばす
-			this.currentScene = 'StopGame';
+			this.currentScene = 'StopGameScene';
 			core.replaceScene(new StopGameScene(this));
 			return;
 		}
