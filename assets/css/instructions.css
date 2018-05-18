@@ -46,8 +46,9 @@ body {
 
 /* block-content */
 .block-content {
-    margin-bottom: 7rem;
+    margin-bottom: 2rem;
     padding-left: 3%;
+    padding-bottom: 2rem;
     border-bottom: 1px solid #000000;
     display: flex;
     width: 100%;
