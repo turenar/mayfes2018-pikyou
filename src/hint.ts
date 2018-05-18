@@ -4,10 +4,7 @@ export default class Hint {
 
 	public constructor(hints: string[]) {
 		this.hints = hints;
-		this.nextDisplayNumber = 0;
-
-		this.initHtml();
-		this.hide();
+		this.reset();
 	}
 
 	public show() {
@@ -26,6 +23,12 @@ export default class Hint {
 		if (this.nextDisplayNumber >= this.hints.length) {
 			document.getElementById('next-hint').classList.add('hidden');
 		}
+	}
+
+	public reset() {
+		this.nextDisplayNumber = 0;
+		this.initHtml();
+		this.hide();
 	}
 
 	private initHtml() {

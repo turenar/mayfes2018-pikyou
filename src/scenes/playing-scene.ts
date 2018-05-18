@@ -55,6 +55,7 @@ export default class PlayingScene extends Scene {
 		this.isRunning = false;
 		this.world.reset();
 		this.startStopButton.reset();
+		this.hintButton.reset();
 	}
 
 	public resetWorld() {

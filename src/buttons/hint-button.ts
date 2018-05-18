@@ -28,4 +28,10 @@ export default class HintButton extends Button {
 			this.hint.hide();
 		}
 	}
+
+	public reset() {
+		this.imagePath = imageDefaultPath;
+		this.showing = false;
+		this.hint.reset();
+	}
 }
