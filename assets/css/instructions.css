@@ -108,6 +108,11 @@ body {
     font-size: 1.5rem;
 }
 
+/* design for #about */
+#about .block-content {
+    flex-direction: row;
+}
+
 /* design for image */
 .contents-img + .contents-text {
     width: 75%;
