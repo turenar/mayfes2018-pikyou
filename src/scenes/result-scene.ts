@@ -52,7 +52,7 @@ export default class ResultScene extends Scene {
 		stageClearPointLabel.x = offset_x + 30;
 		stageClearPointLabel.y = offset_y + 110;
 
-		const gotChestNumLabel = new enchant.Label('残りターン数     + ' + ('   ' + (MAXTURN - score.actionNum)).slice(-3));
+		const gotChestNumLabel = new enchant.Label('のこり移動回数   + ' + ('   ' + (MAXTURN - score.actionNum)).slice(-3));
 		gotChestNumLabel.color = 'black';
 		gotChestNumLabel.font = '22px PixelMplus10';
 		gotChestNumLabel.x = offset_x + 30;

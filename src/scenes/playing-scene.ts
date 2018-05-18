@@ -35,7 +35,7 @@ export default class PlayingScene extends Scene {
 		this.attentionLabel.x = 40;
 		this.attentionLabel.y = 200;
 		this.attentionLabel.opacity = 0;
-		this.leftTurnLabel = new enchant.Label(`のこりターン数：${MAXTURN}`);
+		this.leftTurnLabel = new enchant.Label(`のこり移動回数：${MAXTURN}`);
 		this.leftTurnLabel.font = '20px PixelMplus10';
 		this.leftTurnLabel.x = 5;
 		this.leftTurnLabel.y = 385;
@@ -75,7 +75,7 @@ export default class PlayingScene extends Scene {
 		const { world } = this;
 		this.on('enterframe', () => {
 			this.updateExecuteBlock(`${stages[this.stageNum].clearPoint - blockCost}`);
-			this.leftTurnLabel.text = `のこりターン数：${MAXTURN - this.world.actionNum}`;
+			this.leftTurnLabel.text = `のこり移動回数：${MAXTURN - this.world.actionNum}`;
 
 			if (world.isDead && !world.animationQueue.running) {
 				this.die();
