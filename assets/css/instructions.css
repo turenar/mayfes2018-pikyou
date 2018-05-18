@@ -101,9 +101,10 @@ section .instructions {
     margin-left: 10px;
 }
 
-.block-content > p > span {
+.block-content > p > span,
+.small-block-top > p > span,
+.block-top > p > span {
     font-weight: bold;
-    /* undifined ERROR */
 }
 
 .block-content > p > span.option-element {
