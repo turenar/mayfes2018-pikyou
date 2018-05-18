@@ -17,7 +17,7 @@ export default class TimeKeeperApi {
 	}
 
 	public static tryCreateInstance() {
-		if (TIME_KEEPER_API_BASE === undefined) {
+		if ((window as any).TIME_KEEPER_API_BASE === undefined) {
 			// TimeKeeperは無効
 			console.log({ TimeKeeper: 'disabled' });
 			return null;
