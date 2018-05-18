@@ -4,7 +4,7 @@ import core from '../enchant/core';
 
 export default class StopGameScene extends Scene {
 	public constructor(manager: SceneManager) {
-		super('StopGame', manager);
+		super('StopGameScene', manager);
 
 		const background = new enchant.Sprite(core.width, core.height);
 		background.image = core.assets['img/background.png'];

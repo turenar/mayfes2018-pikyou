@@ -43,7 +43,7 @@ export default class TimeKeeper {
 
 	private updateState(state: TimeKeeperState) {
 		if (state === TimeKeeperState.FORCED) {
-			this.sceneManager.changeScene('StopGame');
+			this.sceneManager.changeScene('StopGameScene');
 		}
 		this.state = state;
 	}
