@@ -9,12 +9,13 @@ import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button
 import stages from '../stages';
 
 export default class PlayingScene extends Scene {
-	private stageNum: number;
 	private codeRunner: CodeRunner;
+	public stageNum: number;
 	public isRunning: boolean;
 	public world: World;
 	public startStopButton: StartStopButton;
 	public backToStageSelectingButton: BackToStageSelectingButton;
+	public attentionLabel: enchant.Label;
 
 	public constructor(manager: SceneManager, stageNum: number) {
 		super('Playing', manager);
@@ -25,6 +26,13 @@ export default class PlayingScene extends Scene {
 		this.codeRunner = new CodeRunner(this.world);
 		this.startStopButton = new StartStopButton(this, 42, 400);
 		this.backToStageSelectingButton = new BackToStageSelectingButton(this, this.stageNum);
+		this.attentionLabel = new enchant.Label('所持ゴールドが足りません！');
+		this.attentionLabel.width = core.width;
+		this.attentionLabel.font = '25px PixelMplus10';
+		this.attentionLabel.color = 'red';
+		this.attentionLabel.x = 40;
+		this.attentionLabel.y = 200;
+		this.attentionLabel.opacity = 0;
 
 		this.initScene();
 
@@ -83,6 +91,7 @@ export default class PlayingScene extends Scene {
 				world.animationQueue.run();
 			}
 		});
+		this.addChild(this.attentionLabel);
 		this.addChild(this.startStopButton);
 		this.addChild(this.backToStageSelectingButton);
 	}
