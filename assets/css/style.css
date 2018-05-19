@@ -60,6 +60,17 @@ body p{
     align-items: center;
     box-shadow: 0 0 15px 0 #4262a0;
 }
+.game-header {
+    height: 75px;
+    width: 100vw;
+    background: #ffc33c;
+    color: white;
+
+    padding: 13px 70px 5px 90px;
+    align-items: center;
+    box-shadow: 0 0 15px 0 #4262a0;
+}
+
 .header a{
     color: white;
 }

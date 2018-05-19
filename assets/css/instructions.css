@@ -1,12 +1,4 @@
 /*##############################*/
-/*html*/
-/*##############################*/
-
-body {
-    background-color: #cfcfcf;
-}
-
-/*##############################*/
 /*top*/
 /*##############################*/
 
@@ -35,7 +27,7 @@ section .instructions {
 /*common*/
 /*##############################*/
 
-.wrapper {
+.instructions-wrapper {
     max-width: 1000px;
     margin: 0 auto;
     background-color: white;
