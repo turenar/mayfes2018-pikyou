@@ -3,16 +3,19 @@ import * as enchant from 'node-enchantjs';
 import PlayingScene from '../scenes/playing-scene';
 import Button from './button';
 import { allBlocks } from '../blockly-main';
+import stages from '../stages';
+import { ScoreManager } from '../score-manager';
+import { setTimeout } from 'timers';
 
 export default class StartStopButton extends Button {
 	private scene: PlayingScene;
 
-	public constructor(scene: PlayingScene, x: number, y: number) {
+	public constructor(scene: PlayingScene) {
 		const width = 300;
 		const height = 92;
 		super(width, height, scene, 'img/start_button.png');
-		this.x = x;
-		this.y = y;
+		this.x = 42;
+		this.y = 410;
 		this.scene = scene;
 
 		this.initButton(scene);
@@ -49,8 +52,16 @@ export default class StartStopButton extends Button {
 
 	private initButton(scene: PlayingScene) {
 		this.addEventListener('touchend', () => {
-			scene.isRunning = this.reloadButton(scene.isRunning);
-			scene.resetWorld();
+			if (stages[scene.stageNum].clearPoint - ScoreManager.getBlockCostSum() >= 0) {
+				this.scene.attentionLabel.opacity = 0;
+				scene.isRunning = this.reloadButton(scene.isRunning);
+				scene.resetWorld();
+			} else {
+				this.scene.attentionLabel.opacity = 100;
+				setTimeout(() => {
+					this.scene.attentionLabel.opacity = 0;
+				}, 3000);
+			}
 		});
 
 		this.addEventListener('enterframe', () => {

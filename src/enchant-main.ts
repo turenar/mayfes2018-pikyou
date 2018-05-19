@@ -23,11 +23,14 @@ export function init() {
 
 	//PlayingScene
 	core.preload('img/mapchip.png');
-	core.preload('img/chara1.png');
+	core.preload('img/character.png');
 	core.preload('img/start_button.png');
 	core.preload('img/start_button_hover.png');
 	core.preload('img/stop_button.png');
 	core.preload('img/stop_button_hover.png');
+	core.preload('img/hint.png');
+	core.preload('img/hint_hover.png');
+	core.preload('img/hint_on.png');
 
 	//StageSelecting
 	core.preload('img/stageselecting_right_arrow.png');
@@ -43,9 +46,9 @@ export function init() {
 	core.preload('img/retry_button_hover.png');
 	core.preload('img/result_background.png');
 	core.preload('img/result_gameclear_text.png');
-	core.preload('img/result_chest.png');
 	core.preload('img/gameover_text.png');
-	core.preload('img/gameover_reason_text.png');
+	core.preload('img/gameover_reason_text_pitfall.png');
+	core.preload('img/gameover_reason_text_maxturn.png');
 
 	core.onload = () => {
 		const sceneManager = new SceneManager();

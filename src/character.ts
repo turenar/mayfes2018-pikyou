@@ -4,6 +4,7 @@ import { mapchipSize, Map, MapPoint } from './enchant/map';
 import { World } from './world';
 import { QueuedAction } from './animation-queue';
 import { MapChipDefinition } from './enchant/map-chip-definitions';
+import { MAXTURN } from './scenes/gameover-scene';
 
 export type Direction = 'north' | 'east' | 'south' | 'west';
 
@@ -33,7 +34,7 @@ export class Character extends enchant.Sprite {
 		const width = 32;
 		const height = 32;
 		super(width, height);
-		this.image = core.assets['img/chara1.png'];
+		this.image = core.assets['img/character.png'];
 		this.initialPosition = initialPosition;
 		this.animationRate = 4;
 		this.defaultVelocity = mapchipSize / this.animationRate;
@@ -54,6 +55,7 @@ export class Character extends enchant.Sprite {
 		this.isGoal = false;
 		this.nextJump = false;
 		this.isAnimating = false;
+		this.frame = this.getFrameOffset(this.initialPosition.direction);
 		this.tl.clear();
 	}
 
@@ -68,6 +70,10 @@ export class Character extends enchant.Sprite {
 		if (frontDef && frontDef.onAction) {
 			const { mapPoint_x, mapPoint_y } = this.getNextMapPointAndDirection();
 			frontDef.onAction(this.world, mapPoint_x, mapPoint_y);
+		}
+
+		if (!this.isDead && !this.isGoal && this.world.actionNum >= MAXTURN) {
+			this.world.die('maxturn');
 		}
 
 		if (this.canMoveNext(this.direction) && !this.isGoal && !this.isDead) {
@@ -111,6 +117,7 @@ export class Character extends enchant.Sprite {
 	//方向転換
 	public setDirection(direction: Direction) {
 		this.direction = direction;
+		this.world.animationQueue.push(this.mkSetDirectionAnimation(this.direction));
 	}
 
 	//ジャンプ
@@ -258,24 +265,32 @@ export class Character extends enchant.Sprite {
 		if (direction === 'north') {
 			actiontick = () => {
 				this.moveBy(0, -velocity);
+				const nextFrame = this.frame + 1 < 15 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'east') {
 			actiontick = () => {
 				this.moveBy(velocity, 0);
+				const nextFrame = this.frame + 1 < 11 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'south') {
 			actiontick = () => {
 				this.moveBy(0, velocity);
+				const nextFrame = this.frame + 1 < 3 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'west') {
 			actiontick = () => {
 				this.moveBy(-velocity, 0);
+				const nextFrame = this.frame + 1 < 7 ? this.frame + 1 : this.frame - 2;
+				this.frame = nextFrame;
 			};
 		}
 
@@ -295,31 +310,45 @@ export class Character extends enchant.Sprite {
 
 		return action;
 	}
+
 	private mkJumpingAction(direction: Direction): QueuedAction {
 		const velocity = this.velocity * 2;
 		let actiontick;
+		let startFrame;
 
 		if (direction === 'north') {
 			actiontick = () => {
 				this.moveBy(0, -velocity);
+				startFrame = 15;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'east') {
 			actiontick = () => {
 				this.moveBy(velocity, 0);
+				startFrame = 11;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'south') {
 			actiontick = () => {
 				this.moveBy(0, velocity);
+				startFrame = 3;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
 		if (direction === 'west') {
 			actiontick = () => {
 				this.moveBy(-velocity, 0);
+				startFrame = 7;
+				const nextFrame = this.frame + 4 <= 15 ? this.frame + 4 : 3;
+				this.frame = nextFrame;
 			};
 		}
 
@@ -328,6 +357,7 @@ export class Character extends enchant.Sprite {
 			time: this.animationRate,
 			onactionstart: function() {
 				this.isAnimating = true;
+				this.frame = startFrame;
 				console.log('action start');
 			},
 			onactionend: function() {
@@ -338,5 +368,36 @@ export class Character extends enchant.Sprite {
 		};
 
 		return action;
+	}
+
+	private mkSetDirectionAnimation(direction: Direction) {
+		const frame = this.getFrameOffset(direction);
+
+		const action: QueuedAction = {
+			target: this.tl,
+			time: 1,
+			onactionstart: function() {
+				this.frame = frame;
+			},
+		};
+
+		return action;
+	}
+
+	private getFrameOffset(direction: Direction) {
+		let frame;
+		if (direction === 'north') {
+			frame = 12;
+		}
+		if (direction === 'east') {
+			frame = 8;
+		}
+		if (direction === 'south') {
+			frame = 0;
+		}
+		if (direction === 'west') {
+			frame = 4;
+		}
+		return frame;
 	}
 }

@@ -19,10 +19,10 @@ export default class StageSelectingScene extends Scene {
 	public startButton: StartPlayingButton;
 	public backButton: BackToTopButton;
 
-	public constructor(manager: SceneManager) {
+	public constructor(manager: SceneManager, stageNum: number) {
 		super('StageSelecting', manager);
 
-		this.initScene();
+		this.initScene(stageNum);
 	}
 
 	public upNumber() {
@@ -45,7 +45,7 @@ export default class StageSelectingScene extends Scene {
 		this.stageLabels.update(this.stageNum, this.manager.getClearSituation(this.stageNum));
 	}
 
-	private initScene() {
+	private initScene(stageNum: number) {
 		this.maxStageNum = stages.length - 1;
 		this.stageNum = 0;
 
@@ -57,6 +57,8 @@ export default class StageSelectingScene extends Scene {
 		this.startButton = new StartPlayingButton((core.width - 290) / 2 + 3, 420, this);
 		this.backButton = new BackToTopButton(this);
 		this.stageLabels = new StageLabels(this.manager.getClearSituation(0));
+		this.stageNum = stageNum;
+		this.stageLabels.update(stageNum, this.manager.getClearSituation(stageNum));
 
 		this.addChild(background);
 		this.addChild(this.stageLabels);

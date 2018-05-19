@@ -12,7 +12,7 @@ export default class StartContinueButton extends Button {
 
 	private initButton(scene: TopScene) {
 		this.addEventListener('touchstart', () => {
-			console.log('StageSelecting');
+			scene.manager.scoreManager.loadClearSituations();
 			scene.moveNextScene('StageSelecting');
 		});
 	}

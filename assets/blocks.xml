@@ -1,14 +1,25 @@
 <xml id="toolbox" style="display: none">
     <block type="controls_if"></block>
+    <sep gap="15"></sep>
     <block type="logic_operation"></block>
+    <sep gap="15"></sep>
     <block type="logic_negate"></block>
+    <sep gap="15"></sep>
     <block type="set_direction"></block>
+    <sep gap="15"></sep>
     <block type="move_forward"></block>
+    <sep gap="15"></sep>
     <block type="set_jump"></block>
+    <sep gap="15"></sep>
     <block type="check_movable"></block>
+    <sep gap="15"></sep>
     <block type="check_wall_front"></block>
+    <sep gap="15"></sep>
     <block type="check_obstacle"></block>
+    <sep gap="15"></sep>
     <block type="check_item"></block>
+    <sep gap="15"></sep>
     <block type="check_possession"></block>
+    <sep gap="15"></sep>
     <block type="check_mark"></block>
 </xml>

@@ -9,6 +9,6 @@ export default class DebugTool {
 	}
 
 	public clearAllStages() {
-		stages.forEach((_, idx) => this.scoreManager.updateScore(idx, 1));
+		stages.forEach((_, idx) => this.scoreManager.updateClearSituations(idx, 1));
 	}
 }

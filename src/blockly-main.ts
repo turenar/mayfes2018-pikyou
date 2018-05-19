@@ -15,21 +15,19 @@ const workspacePlayground = Blockly.inject('blocklyDiv', {
 	trashcan: true,
 });
 
-const initBlock = workspacePlayground.newBlock('execute', 'initialBlock');
+export const initBlock = workspacePlayground.newBlock('execute', 'initialBlock');
 (initBlock as Blockly.BlockSvg).initSvg();
 (workspacePlayground as Blockly.WorkspaceSvg).render();
-
-export var code: string = '';
+export var blockCost = 0;
 export var allBlocks;
+export var code: string = '';
 
 Blockly.addChangeListener(function(event) {
 	Blockly.Events.disableOrphans(event);
-	allBlocks = workspacePlayground.getAllBlocks().filter((block) => (block.type !== 'execute'));
+	allBlocks = workspacePlayground.getAllBlocks().filter(block => block.type !== 'execute');
 
 	code = Blockly.JavaScript.blockToCode(workspacePlayground.getBlockById('initialBlock')) as string;
 	console.log(code);
 
-	// initBlock（executeBlock）に表示されている総コストを更新する
-	// ex. `この下につながっている処理を実行します。現在の総コスト: ${cost}`
-	initBlock.setFieldValue(`${ScoreManager.getBlockCostSum()}`, 'blockCost');
+	blockCost = ScoreManager.getBlockCostSum();
 });

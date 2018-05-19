@@ -5,12 +5,14 @@ import { AnimationQueue } from './animation-queue';
 import { Map, MapPoint } from './enchant/map';
 import stages from './stages';
 import MapChip from './enchant/map-chip';
+import { GameOverReason } from './scenes/gameover-scene';
 
 export type ItemKind = 'key' | 'chest';
 
-export type ClearStatus = {
+export type EndStatus = {
 	actionNum: number;
 	gotChestNum: number;
+	gameOverReason?: GameOverReason;
 };
 
 export class World {
@@ -25,6 +27,7 @@ export class World {
 	public isHavingKey: boolean;
 	public gotChestNum: number;
 	public actionNum: number;
+	public gameOverReason: GameOverReason;
 
 	public constructor(scene: PlayingScene, stageNumber: number) {
 		this.scene = scene;
@@ -99,9 +102,10 @@ export class World {
 		this.isGoal = true;
 	}
 
-	public die() {
+	public die(gameOverReason: GameOverReason) {
 		this.character.kill();
 		this.isDead = true;
+		this.gameOverReason = gameOverReason;
 	}
 
 	public getItem(item: ItemKind) {
@@ -113,7 +117,7 @@ export class World {
 		}
 	}
 
-	public getClearStatus(): ClearStatus {
-		return { actionNum: this.actionNum, gotChestNum: this.gotChestNum };
+	public getEndStatus(): EndStatus {
+		return { actionNum: this.actionNum, gotChestNum: this.gotChestNum, gameOverReason: this.gameOverReason };
 	}
 }

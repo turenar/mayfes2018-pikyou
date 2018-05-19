@@ -4,8 +4,8 @@ import core from '../enchant/core';
 import StartStopButton from './start-stop-button';
 
 export default class Button extends enchant.Sprite {
-	private imagePath: string;
-	private imageHoverPath: string;
+	protected imagePath: string;
+	protected imageHoverPath: string;
 
 	public constructor(width: number, height: number, scene: Scene, imagePath: string, imageHoverPath?: string) {
 		super(width, height);
@@ -27,6 +27,9 @@ export default class Button extends enchant.Sprite {
 		} else {
 			this.image = core.assets[this.imagePath];
 		}
+		this.addEventListener('touchend', () => {
+			this.onClick();
+		});
 	}
 
 	public onMouseEnter() {
@@ -36,4 +39,6 @@ export default class Button extends enchant.Sprite {
 	public onMouseExit() {
 		this.image = core.assets[this.imagePath];
 	}
+
+	public onClick() {}
 }

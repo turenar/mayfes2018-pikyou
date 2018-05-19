@@ -3,15 +3,18 @@ import { SceneKind } from './scenes/scenes';
 import TopScene from './scenes/top-scene';
 import PlayingScene from './scenes/playing-scene';
 import StageSelectingScene from './scenes/stage-selecting-scene';
-import GameOverScene from './scenes/gameover-scene';
+import { GameOverScene } from './scenes/gameover-scene';
 import ResultScene from './scenes/result-scene';
 import stages from './stages';
 import { ScoreManager } from './score-manager';
 import { code } from './blockly-main';
 import MouseController from './mouse-controller';
-import { ClearStatus } from './world';
+import TimeKeeper from './time-keeper';
+import StopGameScene from './scenes/stop-game-scene';
+import { EndStatus } from './world';
 
 export class SceneManager {
+	private timeKeeper: TimeKeeper;
 	public scoreManager: ScoreManager;
 	public currentScene: SceneKind;
 	public mouseController: MouseController;
@@ -20,6 +23,7 @@ export class SceneManager {
 		this.initScene();
 		this.scoreManager = new ScoreManager();
 		this.mouseController = new MouseController();
+		this.timeKeeper = new TimeKeeper(this);
 	}
 
 	/**
@@ -27,13 +31,26 @@ export class SceneManager {
 	 * @return {void}
 	 * @param {SceneKind} sceneKind - 遷移先のシーン種類。
 	 * @param {number} stageNum - 繊維先がPlayingの時のステージ番号
-	 * @param {ClearStatus} clearStatus - {actionNum, gotChestNum}
+	 * @param {EndStatus} endStatus - {actionNum, gotChestNum}
 	 */
-	public changeScene(sceneKind: SceneKind, stageNum?: number, clearStatus?: ClearStatus) {
+	public changeScene(sceneKind: SceneKind, stageNum?: number, endStatus?: EndStatus) {
+		if (this.currentScene === 'StopGameScene') {
+			// do nothing
+			return;
+		}
+		if (sceneKind === 'StopGameScene') {
+			// FIXME this.timeKeeper.getState() === RECOMMENDのときの処理
+			// シーン変更 (ResultScene/GameOverScene/StageSelectingから抜ける？) 時に
+			// StopGameSceneに飛ばす
+			this.currentScene = 'StopGameScene';
+			core.replaceScene(new StopGameScene(this));
+			return;
+		}
+
 		if (this.currentScene === 'Top') {
 			if (sceneKind === 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
-				core.replaceScene(new StageSelectingScene(this));
+				core.replaceScene(new StageSelectingScene(this, 0));
 				return;
 			}
 		}
@@ -60,18 +77,18 @@ export class SceneManager {
 
 			if (sceneKind == 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
-				core.replaceScene(new StageSelectingScene(this));
+				core.replaceScene(new StageSelectingScene(this, stageNum));
 				return;
 			}
 
 			if (sceneKind === 'GameOver') {
 				this.currentScene = 'GameOver';
-				core.pushScene(new GameOverScene(this));
+				core.pushScene(new GameOverScene(this, stageNum, endStatus));
 				return;
 			}
 			if (sceneKind === 'Result') {
 				this.currentScene = 'Result';
-				core.pushScene(new ResultScene(this, stageNum, clearStatus));
+				core.pushScene(new ResultScene(this, stageNum, endStatus));
 				return;
 			}
 		}
@@ -85,7 +102,8 @@ export class SceneManager {
 			if (sceneKind === 'StageSelecting') {
 				this.currentScene = 'StageSelecting';
 				core.popScene();
-				core.replaceScene(new StageSelectingScene(this));
+				console.log(stageNum);
+				core.replaceScene(new StageSelectingScene(this, stageNum));
 				return;
 			}
 		}
@@ -94,7 +112,7 @@ export class SceneManager {
 	}
 
 	public updateScore(stageNum: number, score: number) {
-		this.scoreManager.updateScore(stageNum, score);
+		this.scoreManager.updateClearSituations(stageNum, score);
 	}
 
 	public getClearSituation(stageNum: number) {

@@ -5,14 +5,14 @@ Blockly.Blocks['execute'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Execution',
-			message0: 'この中につなげた動きがくり返されます。現在の総コスト: %1',
+			message0: 'この中につなげた動きがくり返されます。所持ゴールド: %1',
 			message1: '%1',
 			args0: [
 				{
-					type: "field_label",
-					name: "blockCost",
+					type: 'field_label',
+					name: 'balance',
 					text: '0',
-				}
+				},
 			],
 			args1: [
 				{
@@ -32,8 +32,7 @@ Blockly.Blocks['execute'] = {
 	cost: 0,
 };
 
-var CONTROLS_IF_MUTATOR_MIXIN_AFTER;
-CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
+const CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	elseifCount_: 0,
 	elseCount_: 0,
 
@@ -41,7 +40,7 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 		if (!this.elseifCount_ && !this.elseCount_) {
 			return null;
 		}
-		var container = document.createElement('mutation');
+		const container = document.createElement('mutation');
 		if (this.elseifCount_) {
 			container.setAttribute('elseif', this.elseifCount_);
 		}
@@ -58,17 +57,17 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	},
 
 	decompose: function(workspace) {
-		var containerBlock = workspace.newBlock('controls_if_if');
+		const containerBlock = workspace.newBlock('controls_if_if');
 		containerBlock.initSvg();
-		var connection = containerBlock.nextConnection;
-		for (var i = 1; i <= this.elseifCount_; i++) {
-			var elseifBlock = workspace.newBlock('controls_if_elseif');
+		let connection = containerBlock.nextConnection;
+		for (let i = 1; i <= this.elseifCount_; i++) {
+			const elseifBlock = workspace.newBlock('controls_if_elseif');
 			elseifBlock.initSvg();
 			connection.connect(elseifBlock.previousConnection);
 			connection = elseifBlock.nextConnection;
 		}
 		if (this.elseCount_) {
-			var elseBlock = workspace.newBlock('controls_if_else');
+			const elseBlock = workspace.newBlock('controls_if_else');
 			elseBlock.initSvg();
 			connection.connect(elseBlock.previousConnection);
 		}
@@ -76,13 +75,13 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	},
 
 	compose: function(containerBlock) {
-		var clauseBlock = containerBlock.nextConnection.targetBlock();
+		let clauseBlock = containerBlock.nextConnection.targetBlock();
 		// Count number of inputs.
 		this.elseifCount_ = 0;
 		this.elseCount_ = 0;
-		var valueConnections = [null];
-		var statementConnections = [null];
-		var elseStatementConnection = null;
+		const valueConnections = [null];
+		const statementConnections = [null];
+		let elseStatementConnection = null;
 		while (clauseBlock) {
 			switch (clauseBlock.type) {
 			case 'controls_if_elseif':
@@ -101,7 +100,7 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 		}
 		this.updateShape_();
 		// Reconnect any child blocks.
-		for (var i = 1; i <= this.elseifCount_; i++) {
+		for (let i = 1; i <= this.elseifCount_; i++) {
 			Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
 			Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
 		}
@@ -109,13 +108,14 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 	},
 
 	saveConnections: function(containerBlock) {
-		var clauseBlock = containerBlock.nextConnection.targetBlock();
-		var i = 1;
+		let clauseBlock = containerBlock.nextConnection.targetBlock();
+		let i = 1;
+		let inputIf;
 		while (clauseBlock) {
-			var inputDo;
+			let inputDo;
 			switch (clauseBlock.type) {
 			case 'controls_if_elseif':
-				var inputIf = this.getInput('IF' + i);
+				inputIf = this.getInput('IF' + i);
 				inputDo = this.getInput('DO' + i);
 				clauseBlock.valueConnection_ = inputIf && inputIf.connection.targetConnection;
 				clauseBlock.statementConnection_ = inputDo && inputDo.connection.targetConnection;
@@ -137,22 +137,28 @@ CONTROLS_IF_MUTATOR_MIXIN_AFTER = {
 		if (this.getInput('ELSE')) {
 			this.removeInput('ELSE');
 		}
-		var i = 1;
+		let i = 1;
 		while (this.getInput('IF' + i)) {
 			this.removeInput('IF' + i);
 			this.removeInput('DO' + i);
 			i++;
 		}
 		// Rebuild block.
+		let mutatorCount = 0;
 		for (i = 1; i <= this.elseifCount_; i++) {
 			this.appendValueInput('IF' + i)
 				.setCheck('Boolean')
 				.appendField('その他でもしも');
 			this.appendStatementInput('DO' + i).appendField('ならば');
+			mutatorCount++;
 		}
 		if (this.elseCount_) {
 			this.appendStatementInput('ELSE').appendField('その他ならば');
+			mutatorCount++;
 		}
+		this.setTooltip(
+			`自分で決めたチェックのうち、当てはまっている行動をします\nねだん：${5 + mutatorCount * 3}ゴールド`
+		);
 	},
 };
 Blockly.Extensions.registerMutator('controls_if_mutator_after', CONTROLS_IF_MUTATOR_MIXIN_AFTER, null, [
@@ -187,7 +193,7 @@ Blockly.Blocks['controls_if'] = {
 			mutator: 'controls_if_mutator_after',
 			extensions: ['controls_if_tooltip'],
 		});
-		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします');
+		this.setTooltip('「もしも」のチェックが正しければ、「ならば」の行動をします\nねだん：5ゴールド');
 	},
 	color: '#5b80a5',
 	costIf: 5,
@@ -219,7 +225,8 @@ Blockly.Blocks['controls_if_elseif'] = {
 			nextStatement: null,
 			enableContextMenu: false,
 			colour: '%{BKY_LOGIC_HUE}',
-			tooltip: '１つ前の「もしも」に当てはらない場合に、他の「もしも」をチェックします',
+			tooltip:
+				'１つ前の「もしも」に当てはらない場合に、他の「もしも」をチェックします\n「もしも」ブロックのねだんがプラス3されます',
 		});
 	},
 };
@@ -233,7 +240,7 @@ Blockly.Blocks['controls_if_else'] = {
 			previousStatement: null,
 			enableContextMenu: false,
 			colour: '%{BKY_LOGIC_HUE}',
-			tooltip: 'ここまでの「もしも」が全て当てはまらない場合を考えます',
+			tooltip: 'ここまでの「もしも」が全て当てはまらない場合を考えます\n「もしも」ブロックのねだんがプラス3されます',
 		});
 	},
 };
@@ -268,7 +275,7 @@ Blockly.Blocks['logic_operation'] = {
 			helpUrl: '%{BKY_LOGIC_OPERATION_HELPURL}',
 			extensions: ['logic_op_tooltip'],
 		});
-		this.setTooltip('２つのチェックを同時に考えることができます');
+		this.setTooltip('２つのチェックを同時に考えることができます\nねだん：1ゴールド');
 	},
 	color: '#5b80a5',
 	cost: 2,
@@ -293,7 +300,7 @@ Blockly.Blocks['logic_negate'] = {
 			tooltip: '%{BKY_LOGIC_NEGATE_TOOLTIP}',
 			helpUrl: '%{BKY_LOGIC_NEGATE_HELPURL}',
 		});
-		this.setTooltip('チェックの成功と失敗を入れかえることができます');
+		this.setTooltip('チェックの成功と失敗を入れかえることができます\nねだん：0ゴールド');
 	},
 	color: '#5b80a5',
 	cost: 0,
@@ -310,7 +317,7 @@ Blockly.Blocks['move_forward'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('１マスすすみます');
+		this.setTooltip('１マスすすみます\nねだん：50ゴールド');
 	},
 	color: 180,
 	cost: 50,
@@ -335,7 +342,7 @@ Blockly.Blocks['set_direction'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('矢印の方向を向きます');
+		this.setTooltip('矢印の方向を向きます\nねだん：0ゴールド');
 	},
 	color: 180,
 	cost: 0,
@@ -352,7 +359,7 @@ Blockly.Blocks['set_jump'] = {
 		this.setPreviousStatement(true);
 		this.setOutput(false);
 		this.setColour(this.color);
-		this.setTooltip('次の「１マスすすむ」で落とし穴などをとびこえます');
+		this.setTooltip('次の「１マスすすむ」で落とし穴などをとびこえます\nねだん：10ゴールド');
 	},
 	color: 180,
 	cost: 10,
@@ -376,7 +383,7 @@ Blockly.Blocks['check_movable'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('矢印の向きの１マス先にすすめるかチェックします');
+		this.setTooltip('矢印の向きの１マス先にすすめるかチェックします\nねだん：1ゴールド');
 	},
 	color: 80,
 	cost: 1,
@@ -393,7 +400,7 @@ Blockly.Blocks['check_wall_front'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('正面の１マス先にカベ、トビラがあるかチェックします');
+		this.setTooltip('正面の１マス先にカベ、トビラがあるかチェックします\nねだん：1ゴールド');
 	},
 	color: 80,
 	cost: 1,
@@ -410,7 +417,7 @@ Blockly.Blocks['check_obstacle'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('正面の１マス先に落とし穴があるかチェックします');
+		this.setTooltip('正面の１マス先に落とし穴があるかチェックします\nねだん：1ゴールド');
 	},
 	color: 80,
 	cost: 1,
@@ -434,7 +441,7 @@ Blockly.Blocks['check_item'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('今アイテムを取ったところかどうかチェックします');
+		this.setTooltip('今アイテムを取ったところかどうかチェックします\nねだん：1ゴールド');
 	},
 	color: 80,
 	cost: 1,
@@ -458,7 +465,7 @@ Blockly.Blocks['check_possession'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('アイテムを持っているかチェックします');
+		this.setTooltip('アイテムを持っているかチェックします\nねだん：1ゴールド');
 	},
 	color: 80,
 	cost: 1,
@@ -469,12 +476,17 @@ Blockly.Blocks['check_mark'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'Check',
-			message0: '%1 マーカーにいる',
+			message0: '%1 にいる',
 			args0: [
 				{
 					type: 'field_dropdown',
 					name: 'MARKCOLOR',
-					options: [['赤', 'RED'], ['青', 'BLUE'], ['緑', 'GREEN'], ['黄', 'YELLOW']],
+					options: [
+						[{ src: 'blockly-img/mark_red.png', width: 12, height: 12, alt: '赤マーカー' }, 'RED'],
+						[{ src: 'blockly-img/mark_blue.png', width: 12, height: 12, alt: '青マーカー' }, 'BLUE'],
+						[{ src: 'blockly-img/mark_green.png', width: 12, height: 12, alt: '緑マーカー' }, 'GREEN'],
+						[{ src: 'blockly-img/mark_yellow.png', width: 12, height: 12, alt: '黄マーカー' }, 'YELLOW'],
+					],
 				},
 			],
 		});
@@ -482,7 +494,7 @@ Blockly.Blocks['check_mark'] = {
 		this.setPreviousStatement(false);
 		this.setOutput(true);
 		this.setColour(this.color);
-		this.setTooltip('選んだ色のマーカーの上にいるかチェックします');
+		this.setTooltip('選んだ色のマーカーの上にいるかチェックします\nねだん：1ゴールド');
 	},
 	color: 80,
 	cost: 1,

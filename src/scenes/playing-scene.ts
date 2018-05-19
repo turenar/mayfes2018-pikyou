@@ -3,17 +3,25 @@ import { Scene, SceneKind } from './scenes';
 import { SceneManager } from '../scene-manager';
 import StartStopButton from '../buttons/start-stop-button';
 import { World } from '../world';
-import { code } from '../blockly-main';
+import { code, blockCost } from '../blockly-main';
 import CodeRunner from '../code-runner';
 import BackToStageSelectingButton from '../buttons/back-to-stageselecting-button';
+import stages from '../stages';
+import { MAXTURN } from './gameover-scene';
+import HintButton from '../buttons/hint-button';
+import Hint from '../hint';
 
 export default class PlayingScene extends Scene {
-	private stageNum: number;
 	private codeRunner: CodeRunner;
+	private hintButton: HintButton;
+	private hint: Hint;
+	public stageNum: number;
 	public isRunning: boolean;
 	public world: World;
 	public startStopButton: StartStopButton;
 	public backToStageSelectingButton: BackToStageSelectingButton;
+	public attentionLabel: enchant.Label;
+	public leftTurnLabel: enchant.Label;
 
 	public constructor(manager: SceneManager, stageNum: number) {
 		super('Playing', manager);
@@ -22,8 +30,21 @@ export default class PlayingScene extends Scene {
 		this.world = new World(this, stageNum);
 		this.stageNum = stageNum;
 		this.codeRunner = new CodeRunner(this.world);
-		this.startStopButton = new StartStopButton(this, 42, 400);
-		this.backToStageSelectingButton = new BackToStageSelectingButton(this);
+		this.startStopButton = new StartStopButton(this);
+		this.backToStageSelectingButton = new BackToStageSelectingButton(this, this.stageNum);
+		this.attentionLabel = new enchant.Label('所持ゴールドが足りません！');
+		this.attentionLabel.width = core.width;
+		this.attentionLabel.font = '25px PixelMplus10';
+		this.attentionLabel.color = 'red';
+		this.attentionLabel.x = 40;
+		this.attentionLabel.y = 200;
+		this.attentionLabel.opacity = 0;
+		this.leftTurnLabel = new enchant.Label(`のこり移動回数：${MAXTURN}`);
+		this.leftTurnLabel.font = '20px PixelMplus10';
+		this.leftTurnLabel.x = 5;
+		this.leftTurnLabel.y = 385;
+		this.hint = new Hint(stages[stageNum].hints);
+		this.hintButton = new HintButton(330, 510, this, this.hint);
 
 		this.initScene();
 
@@ -34,6 +55,7 @@ export default class PlayingScene extends Scene {
 		this.isRunning = false;
 		this.world.reset();
 		this.startStopButton.reset();
+		this.hintButton.reset();
 	}
 
 	public resetWorld() {
@@ -41,8 +63,8 @@ export default class PlayingScene extends Scene {
 	}
 
 	public moveNextScene(nextkind: SceneKind) {
-		const clearStatus = this.world.getClearStatus();
-		super.moveNextScene(nextkind, this.stageNum, clearStatus);
+		const endStatus = this.world.getEndStatus();
+		super.moveNextScene(nextkind, this.stageNum, endStatus);
 		this.reset();
 	}
 
@@ -59,6 +81,9 @@ export default class PlayingScene extends Scene {
 	private initScene() {
 		const { world } = this;
 		this.on('enterframe', () => {
+			this.updateExecuteBlock(`${stages[this.stageNum].clearPoint - blockCost}`);
+			this.leftTurnLabel.text = `のこり移動回数：${MAXTURN - this.world.actionNum}`;
+
 			if (world.isDead && !world.animationQueue.running) {
 				this.die();
 			}
@@ -71,16 +96,15 @@ export default class PlayingScene extends Scene {
 					this.codeRunner.run(code);
 				} catch (e) {
 					console.error(e);
-					if (e === 'goal') {
-						world.goal();
-					} else if (e === 'die') {
-						world.die();
-					}
 				}
 				world.animationQueue.run();
 			}
 		});
+		this.addChild(this.attentionLabel);
+		this.addChild(this.leftTurnLabel);
+		this.addChild(this.hintButton);
 		this.addChild(this.startStopButton);
 		this.addChild(this.backToStageSelectingButton);
+		this.addChild(this.startStopButton);
 	}
 }
