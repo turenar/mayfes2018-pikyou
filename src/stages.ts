@@ -59,7 +59,7 @@ const stages: Stage[] = [
 			[25, 25, 25, 27, 28, 29, 25, 25, 27, 28, 29, 25],
 			[25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
 		],
-		name: '向きを変えてみよう',
+		name: '向きを変えよう',
 		description: '進む向きを変えよう',
 		characterInitialPosition: {
 			mapPoint_x: 5,
