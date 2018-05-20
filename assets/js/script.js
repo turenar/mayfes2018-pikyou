@@ -57,7 +57,7 @@ $(function(){
       var cw = $("#modal-content").outerWidth();
       var ch = $("#modal-content").outerHeight();
       //センタリングを実行する
-      $("#modal-content").css( {"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"} );
+      $("#modal-content").css( {"left": ((w - cw)*31/32) + "px","top": ((h - ch)/2) + "px"} );
     }
   });
 });
