@@ -220,7 +220,7 @@ Blockly.Blocks['controls_if_elseif'] = {
 	init: function() {
 		this.jsonInit({
 			type: 'controls_if_elseif',
-			message0: 'それ以外でもしも',
+			message0: 'その他でもしも',
 			previousStatement: null,
 			nextStatement: null,
 			enableContextMenu: false,
