@@ -275,7 +275,7 @@ Blockly.Blocks['logic_operation'] = {
 			helpUrl: '%{BKY_LOGIC_OPERATION_HELPURL}',
 			extensions: ['logic_op_tooltip'],
 		});
-		this.setTooltip('２つのチェックを同時に考えることができます\nねだん：1ゴールド');
+		this.setTooltip('２つのチェックを同時に考えることができます\nねだん：2ゴールド');
 	},
 	color: '#5b80a5',
 	cost: 2,
