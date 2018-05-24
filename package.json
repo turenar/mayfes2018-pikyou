@@ -6,6 +6,10 @@
   "author": "eeic2017",
   "license": "MIT",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babelify": "^8.0.0",
     "node-blockly": "^1.0.32",
     "node-enchantjs": "https://github.com/turenar/node-enchantjs.git"
   },
@@ -32,7 +36,7 @@
     "build:src": "tsc",
     "build:mapchip": "bash tools/concat-mapchips.sh",
     "build:xml": "node ./tools/xmlparser.js && tsc ./src/blocks.ts --outDir ./dest",
-    "build:browser": "browserify dest/main.js > assets/main.js",
+    "build:browser": "browserify dest/main.js -t babelify --outfile ./assets/main.js",
     "format": "prettier-eslint '**/*.ts' --write",
     "format-check": "prettier-eslint '**/*.ts' --list-different",
     "lint": "eslint -c .eslintrc.json '**/*.ts'",
