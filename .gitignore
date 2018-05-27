@@ -1,15 +1,15 @@
 *.log
 *.tmp
+*.zip
 .DS_STORE
 .python-version
 assets/img/mapchip.png
+assets/main.js
 dest/*
 node_modules
 nohup.out
 src/blocks.ts
 tools/xmlparser.js
 united/
-
-assets/main.js
 
 !.gitkeep
