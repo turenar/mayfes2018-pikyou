@@ -38,27 +38,29 @@ export default class CreditScene extends Scene {
 		addLabel(18, 24, true, '@tkygtr6');
 		addLabel(18, 24, true, '@turenar');
 
-		offsetY += 24;
-		addLabel(22, 30, false, 'グラフィック');
-		addLabel(18, 24, true, '@eeic19');
-
-		offsetX = core.width / 2;
-		offsetY = 100;
+		offsetY += 16;
 		addLabel(22, 30, false, 'レベルデザイン');
 		addLabel(18, 24, true, '@eeic19');
 		addLabel(18, 24, true, '@reito48916');
 
-		offsetY += 24;
+		offsetX = core.width / 2;
+		offsetY = 100;
+		addLabel(22, 30, false, 'グラフィック');
+		addLabel(18, 24, true, '@eeic19');
+
+		offsetY += 16;
 		addLabel(22, 30, false, 'ウェブ・ポスター');
 		addLabel(18, 24, true, '@AkariAsai');
 		addLabel(18, 24, true, '@miya789');
 		addLabel(18, 24, true, '@utsubuki');
 
-		offsetY += 24;
-		addLabel(22, 30, false, '雑用');
+		offsetY += 16;
+		addLabel(22, 30, false, 'Special Thanks');
 		addLabel(18, 24, true, '@iinuma0710');
+		addLabel(15, 20, true, '当日シフトのみなさん');
+		addLabel(18, 24, true, '...And you!');
 
-		offsetY = 400;
+		offsetY = 410;
 		const licenseLabel = new DottedLabel(16, 'This software is licensed under MIT license.<br>Copyright 2018 EEIC 五月祭2018ピ教制作チーム');
 		licenseLabel.width = core.width;
 		licenseLabel.x = 10;
