@@ -13,6 +13,7 @@ const workspacePlayground = Blockly.inject('blocklyDiv', {
 	toolbox: toolbox,
 	scrollbars: true,
 	trashcan: true,
+	media: './blockly-media/',
 });
 
 export const initBlock = workspacePlayground.newBlock('execute', 'initialBlock');
