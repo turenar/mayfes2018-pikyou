@@ -1,6 +1,10 @@
 # mayfes2018-pikyou
 
-## Developement
+## Publishment
+
+assets/README.md をご覧ください。
+
+## Development
 ### Required environments
 * \*nix OS/environment
 * yarn
