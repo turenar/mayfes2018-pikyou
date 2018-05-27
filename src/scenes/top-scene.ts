@@ -21,12 +21,32 @@ export default class TopScene extends Scene {
 		title.image = core.assets['img/titletext.png'];
 		title.moveTo(0, 35);
 
+		const fontSize = 20;
+		const versionLabel = new enchant.Label('Version 1.2');
+		versionLabel.color = 'black';
+		versionLabel.font = `${fontSize}px PixelMplus10`;
+		versionLabel.x = 4;
+		versionLabel.y = core.height - fontSize - 4;
+
+		const creditLabel = new enchant.Label('Credit');
+		creditLabel.color = 'black';
+		creditLabel.font = `${fontSize}px PixelMplus10`;
+		creditLabel.x = 4;
+		creditLabel.width = core.width - 8;
+		creditLabel.y = core.height - fontSize - 4;
+		creditLabel.textAlign = 'right';
+		creditLabel.on('touchend', () => {
+			this.moveNextScene('Credit');
+		});
+
 		this.startInitButton = new StartInitButton(190, this);
 		this.startContinueButton = new StartContinueButton(370, this);
 
 		this.addChild(background);
 		this.addChild(titleBackGround);
 		this.addChild(title);
+		this.addChild(versionLabel);
+		this.addChild(creditLabel);
 		this.addChild(this.startInitButton);
 		this.addChild(this.startContinueButton);
 
