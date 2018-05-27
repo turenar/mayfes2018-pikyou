@@ -61,14 +61,20 @@ export default class CreditScene extends Scene {
 		addLabel(18, 24, true, '...And you!');
 
 		offsetY = 410;
-		const licenseLabel = new DottedLabel(16, 'This software is licensed under MIT license.<br>Copyright 2018 EEIC 五月祭2018ピ教制作チーム');
+		const licenseLabel = new DottedLabel(
+			16,
+			'This software is licensed under MIT license.<br>Copyright 2018 EEIC 五月祭2018ピ教制作チーム'
+		);
 		licenseLabel.width = core.width;
 		licenseLabel.x = 10;
 		licenseLabel.y = offsetY;
 		this.addChild(licenseLabel);
 
 		offsetY += 44;
-		const apacheLabel = new DottedLabel(16, 'This software includes the work that is<br>distributed in the Apache License 2.0.');
+		const apacheLabel = new DottedLabel(
+			16,
+			'This software includes the work that is<br>distributed in the Apache License 2.0.'
+		);
 		apacheLabel.width = core.width;
 		apacheLabel.x = 10;
 		apacheLabel.y = offsetY;
