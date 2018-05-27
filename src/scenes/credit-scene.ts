@@ -13,18 +13,18 @@ export default class CreditScene extends Scene {
 		const creditLabel = new DottedLabel(36, 'クレジット');
 		creditLabel.width = core.width;
 		creditLabel.x = 0;
-		creditLabel.y = 40;
+		creditLabel.y = 35;
 		creditLabel.textAlign = 'center';
 
 		let offsetX = 0;
-		let offsetY = 110;
+		let offsetY = 100;
 
 		this.addChild(background);
 		this.addChild(creditLabel);
 
 		const addLabel = (fontSize: number, height: number, indent: boolean, text: string) => {
 			const label = new DottedLabel(fontSize, text);
-			label.x = offsetX + (indent ? 40 : 20);
+			label.x = offsetX + (indent ? 30 : 10);
 			label.y = offsetY;
 			offsetY += height;
 			this.addChild(label);
@@ -43,15 +43,20 @@ export default class CreditScene extends Scene {
 		addLabel(18, 24, true, '@eeic19');
 
 		offsetX = core.width / 2;
-		offsetY = 110;
+		offsetY = 100;
 		addLabel(22, 30, false, 'レベルデザイン');
 		addLabel(18, 24, true, '@eeic19');
 		addLabel(18, 24, true, '@reito48916');
 
 		offsetY += 24;
-		addLabel(22, 30, false, 'ウェブページ');
+		addLabel(22, 30, false, 'ウェブ・ポスター');
 		addLabel(18, 24, true, '@AkariAsai');
 		addLabel(18, 24, true, '@miya789');
+		addLabel(18, 24, true, '@utsubuki');
+
+		offsetY += 24;
+		addLabel(22, 30, false, '雑用');
+		addLabel(18, 24, true, '@iinuma0710');
 
 		offsetY = 400;
 		const licenseLabel = new DottedLabel(16, 'This software is licensed under MIT license.<br>Copyright 2018 EEIC 五月祭2018ピ教制作チーム');
