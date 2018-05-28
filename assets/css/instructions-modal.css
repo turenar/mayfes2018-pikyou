@@ -1,13 +1,21 @@
+#modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    z-index: 1000;
+}
+
 #modal-content {
-    width: 50% ;
-    margin: 0 ;
+    margin: 10vh auto 0;
+    width: 50%;
+    height: 80%;
     padding: 10px 20px ;
     border: 2px solid #aaa ;
     background: #fff ;
-    position: fixed ;
-    display: none ;
-    z-index: 2 ;
-    max-height: 80%;
     overflow:auto;
 }
 
