@@ -21,7 +21,7 @@ body {
 	flex-wrap: wrap;
 }
 
-#enchantFakeGameBox {
+#enchant-stage {
 	width: 384px;
 	height: 576px;
 	margin-right: 16px;
