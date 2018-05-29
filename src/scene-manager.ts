@@ -24,8 +24,6 @@ export class SceneManager {
 		this.scoreManager = new ScoreManager();
 		this.mouseController = new MouseController();
 		this.timeKeeper = new TimeKeeper(this);
-
-		this.changeScene('Credit');
 	}
 
 	/**
