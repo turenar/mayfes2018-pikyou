@@ -7,11 +7,11 @@ import { GameOverScene } from './scenes/gameover-scene';
 import ResultScene from './scenes/result-scene';
 import stages from './stages';
 import { ScoreManager } from './score-manager';
-import { code } from './blockly-main';
 import MouseController from './mouse-controller';
 import TimeKeeper from './time-keeper';
 import StopGameScene from './scenes/stop-game-scene';
 import { EndStatus } from './world';
+import CreditScene from './scenes/credit-scene';
 
 export class SceneManager {
 	private timeKeeper: TimeKeeper;
@@ -52,6 +52,10 @@ export class SceneManager {
 				this.currentScene = 'StageSelecting';
 				core.replaceScene(new StageSelectingScene(this, 0));
 				return;
+			}
+			if (sceneKind === 'Credit') {
+				this.currentScene = 'Credit';
+				core.replaceScene(new CreditScene(this));
 			}
 		}
 
@@ -104,6 +108,14 @@ export class SceneManager {
 				core.popScene();
 				console.log(stageNum);
 				core.replaceScene(new StageSelectingScene(this, stageNum));
+				return;
+			}
+		}
+
+		if (this.currentScene === 'Credit') {
+			if (sceneKind === 'Top') {
+				this.currentScene = 'Top';
+				core.replaceScene(new TopScene(this));
 				return;
 			}
 		}
