@@ -819,3 +819,11 @@ h4{
         padding: 5px 10px;
     }
 }
+
+.zip-link {
+    font-size: small;
+}
+
+.zip-link:hover {
+    text-decoration: underline;
+}
