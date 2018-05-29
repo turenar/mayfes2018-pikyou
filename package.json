@@ -40,6 +40,7 @@
     "format": "prettier-eslint '**/*.ts' --write",
     "format-check": "prettier-eslint '**/*.ts' --list-different",
     "lint": "eslint -c .eslintrc.json '**/*.ts'",
+    "package": "tools/package.sh",
     "unite": "mkdir -p united && browserify -o united/main.js dest/main.js",
     "watch": "bash ./tools/watch.sh && bash ./tools/watch_xml.sh ./assets/blocks.xml 'yarn build:xml'"
   }
