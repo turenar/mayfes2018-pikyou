@@ -9,11 +9,15 @@ html {
 }
 
 body{
-    text-align: center;
+    /*text-align: center;*/
     font-size: 1.4rem;
     font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", sans-serif;
     line-height: 1.6;
     min-height: 480px;
+}
+
+.centerize {
+    text-align: center;
 }
 body p{
     margin-top: 20px;
@@ -60,7 +64,18 @@ body p{
     align-items: center;
     box-shadow: 0 0 15px 0 #4262a0;
 }
-.header a{
+.game-header {
+    height: 75px;
+    width: 100vw;
+    background: #ffc33c;
+    color: white;
+
+    padding: 13px 70px 5px 90px;
+    align-items: center;
+    box-shadow: 0 0 15px 0 #4262a0;
+}
+
+.header a, .game-header a {
     color: white;
 }
 

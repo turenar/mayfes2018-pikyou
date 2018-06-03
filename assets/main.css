@@ -17,11 +17,12 @@ body {
 
 .wrapper {
 	margin-bottom: 16px;
+	margin-top: 8px;
 	display: flex;
 	flex-wrap: wrap;
 }
 
-#enchantFakeGameBox {
+#enchant-stage {
 	width: 384px;
 	height: 576px;
 	margin-right: 16px;
