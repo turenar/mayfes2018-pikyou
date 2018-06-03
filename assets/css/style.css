@@ -819,3 +819,11 @@ h4{
         padding: 5px 10px;
     }
 }
+
+.download-paragraph {
+    font-size: small;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
